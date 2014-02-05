@@ -1,0 +1,33 @@
+IT1
+
+Meeting 1 - Tuesday, January 28, 2014
+- where to put log
+
+TODO
+- set up Git - get github accounts and email/FB/Text Bryce username
+- learn to use Git, HSQLDB
+- learn SWT
+- set up Base code - Screen (GUI), classes/objects, readme of all contents for
+  submission
+- Need batch files for testing...
+- Need thorough testing, need stub DB (array list?)
+- one week approx. start gui (Feb. 4th)
+- start today basic class files (Jan 28th)
+- start setting up DB (Feb 4th?)
+
+STUFF TO LEARN
+- SWT (install)
+- JUNIT
+- GIT
+- ECLIPSE
+- Windows Builder (download) drag & drop tool
+
+Meeting 2 - Tuesday, February 4, 2014
+- made sure everyone was on git
+- finalized the folder structure of our project
+- created Eclipse project that hooks into Git
+- played around with Windows Builder creating a sample main window for our
+  CMMS
+- pushed all updates to the repo
+- set next meeting for the Thursday of the same week
+
