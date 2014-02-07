@@ -31,3 +31,9 @@ Meeting 2 - Tuesday, February 4, 2014
 - pushed all updates to the repo
 - set next meeting for the Thursday of the same week
 
+Meeting 3 - Thursday, February 6, 2014
+-Drafted rough outline for required classes.
+-Drafted stub database.
+-Generated GUI design.
+-Set next meeting for next week Tuesday.
+
