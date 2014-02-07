@@ -5,7 +5,7 @@
  *         		      Bryce Pfrimmer
  *                    Cody Edwards
  *                    Darwin  Froese
- *                    Delroy Heibert
+ *                    Delroy Hiebert
  *                    Zac Medeiros
  *                  Copyright (c) 2014
  ****************************************************
