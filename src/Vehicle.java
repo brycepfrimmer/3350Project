@@ -59,6 +59,12 @@ public class Vehicle
 		setData();
 	}//End vehicle()	
 	
+	public void updateKm( int km, double fuelUsed )
+	{
+		this.fuelEcon = fuelUsed * (kmDriven - km);
+		this.kmDriven = km;
+	}
+	
 	public void print()
 	{
 		System.out.println("Vehicle ID number: " + this.getID());
