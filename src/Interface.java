@@ -17,6 +17,12 @@ public class Interface {
 		database.removeVehicle(id);
 	}
 	
+	public void updateKm( String id, int km, double fuel )
+	{
+		Vehicle vehicle = database.getVehicle(id);
+		vehicle.updateKm(km, fuel);
+	}
+	
 	public void printVehicles()
 	{
 		database.printVehicles();

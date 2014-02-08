@@ -28,6 +28,19 @@ public class StubDB {
 		vehicles.add(Vehicle);
 	}
 	
+	public Vehicle getVehicle(String id)
+	{
+		Vehicle targetVehicle = null;
+		for (Vehicle vehicle : vehicles)
+		{
+			if (vehicle.getID().equals(id))
+			{
+				targetVehicle = vehicle;
+			}
+		}
+		return targetVehicle;
+	}
+	
 	public void printVehicles()
 	{
 		System.out.println( "Vehicles currently in system...\n");

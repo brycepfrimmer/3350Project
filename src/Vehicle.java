@@ -61,7 +61,7 @@ public class Vehicle
 	
 	public void updateKm( int km, double fuelUsed )
 	{
-		this.fuelEcon = fuelUsed / (kmDriven - km);
+		this.fuelEcon = ( fuelUsed / (km - kmDriven) ) * 100;
 		this.kmDriven = km;
 	}
 	
@@ -77,7 +77,7 @@ public class Vehicle
 		
 		this.getInsurance().print();
 		
-		System.out.println("\tCurrent fuel economy: " + this.getFuelEcon());
+		System.out.println("\tCurrent fuel economy: " + this.getFuelEcon() + " Liters/100km" );
 		
 		System.out.print("\tVehicle roadworthy: ");
 		if (this.isRoadWorthy()){ 

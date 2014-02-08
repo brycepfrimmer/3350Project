@@ -9,6 +9,10 @@ public class MyTest {
 		Interface myInterface = new Interface();
 		myInterface.addVehicle();
 		myInterface.printVehicles();
+		myInterface.updateKm("asdf", 200, 10.0);
+		myInterface.printVehicles();
+		myInterface.removeVehicle("asdf");
+		myInterface.printVehicles();
 	}
 
 }
