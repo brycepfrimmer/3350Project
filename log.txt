@@ -37,3 +37,9 @@ Meeting 3 - Thursday, February 6, 2014
 -Generated GUI design.
 -Set next meeting for next week Tuesday.
 
+Friday, February 7, 2014
+-Delroy Hiebert 2.5 hours
+-Optimized vehicle class with specific methods
+-Improved reusability
+-Cleaned up code
+
