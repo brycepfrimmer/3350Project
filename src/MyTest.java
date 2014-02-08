@@ -6,9 +6,9 @@ public class MyTest {
 	}
 
 	public static void main(String[] args) {
-		StubDB db = new StubDB();
-		db.addVehicle();
-		db.printVehicles();
+		Interface myInterface = new Interface();
+		myInterface.addVehicle();
+		myInterface.printVehicles();
 	}
 
 }
