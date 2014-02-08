@@ -43,3 +43,10 @@ Friday, February 7, 2014
 -Improved reusability
 -Cleaned up code
 
+Saturday, February 8, 2014
+-Delroy Hiebert 1 hour
+-Added interface class
+	-MyTest (and GUI) talk to database through interface
+-Minor bug fixes
+-Add User Story "Fuel Economy"S
+
