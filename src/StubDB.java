@@ -24,8 +24,8 @@ public class StubDB {
 	
 	public void addVehicle()
 	{
-		Vehicle Vehicle = new Vehicle();
-		vehicles.add(Vehicle);
+		Vehicle vehicle = new Vehicle();
+		vehicles.add(vehicle);
 	}
 	
 	public Vehicle getVehicle(String id)
@@ -33,7 +33,7 @@ public class StubDB {
 		Vehicle targetVehicle = null;
 		for (Vehicle vehicle : vehicles)
 		{
-			if (vehicle.getID().equals(id))
+			if (vehicle != null && vehicle.getID().equals(id))
 			{
 				targetVehicle = vehicle;
 			}
@@ -46,7 +46,7 @@ public class StubDB {
 		System.out.println( "Vehicles currently in system...\n");
 		for( Vehicle vehicle : vehicles)
 		{
-			vehicle.print();
+			if( vehicle != null ){ vehicle.print(); }
 		}
 	}
 
