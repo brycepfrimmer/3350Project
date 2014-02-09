@@ -14,7 +14,7 @@ public class StubDB {
 		Vehicle targetVehicle = null;
 		for( Vehicle vehicle : vehicles )
 		{
-			if( id.equals( vehicle.getID() ))
+			if( vehicle != null && id.equals( vehicle.getID() ))
 			{
 				targetVehicle = vehicle;
 			}
