@@ -20,7 +20,11 @@ public class Interface {
 	public void updateKm( String id, int km, double fuel )
 	{
 		Vehicle vehicle = database.getVehicle(id);
-		vehicle.updateKm(km, fuel);
+		if (vehicle != null)
+		{
+			vehicle.updateKm(km, fuel);
+	
+		}
 	}
 	
 	public void printVehicles()
