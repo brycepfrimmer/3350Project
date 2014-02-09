@@ -29,7 +29,7 @@ public class StubDB {
 	}
 	
 	public Vehicle getVehicle(String id)
-	{
+	{		
 		Vehicle targetVehicle = null;
 		for (Vehicle vehicle : vehicles)
 		{
