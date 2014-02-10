@@ -101,41 +101,48 @@ public class Vehicle
 		int reply;
 		
 		this.setID();
-		this.setType();
-		this.setManufacturer();
-		this.setModel();
-		
-		reply = JOptionPane.showConfirmDialog(null, "Do you wish to enter the kilometers on the vehicle?", "Odometer", JOptionPane.YES_NO_OPTION);
-        if (reply == JOptionPane.YES_OPTION) {
-        	this.setKmDriven();
-        }
-        
-		reply = JOptionPane.showConfirmDialog(null, "Do you wish to enter the kilometers the vehicle was last serviced at?", "Last serviced", JOptionPane.YES_NO_OPTION);
-        if (reply == JOptionPane.YES_OPTION) {
-        	this.setKmLastServiced();
-        }
-        
-        this.setRoadWorthy();
-        this.setInsurance();
-        this.setOperational();
-        
-        reply = JOptionPane.showConfirmDialog(null, "Do you wish to enter the parts list for the vehicle?", "Parts list", JOptionPane.YES_NO_OPTION);
-        if (reply == JOptionPane.YES_OPTION) {
-        	this.setPartsList();
-        }  
+		//Only continue getting information if a valid vehicle ID is entered
+		if (this.getID() != null)
+		{
+			this.setType();
+			this.setManufacturer();
+			this.setModel();
+			
+			reply = JOptionPane.showConfirmDialog(null, "Do you wish to enter the kilometers on the vehicle?", "Odometer", JOptionPane.YES_NO_OPTION);
+	        if (reply == JOptionPane.YES_OPTION) {
+	        	this.setKmDriven();
+	        }
+	        
+			reply = JOptionPane.showConfirmDialog(null, "Do you wish to enter the kilometers the vehicle was last serviced at?", "Last serviced", JOptionPane.YES_NO_OPTION);
+	        if (reply == JOptionPane.YES_OPTION) {
+	        	this.setKmLastServiced();
+	        }
+	        
+	        this.setRoadWorthy();
+	        this.setInsurance();
+	        this.setOperational();
+	        
+	        reply = JOptionPane.showConfirmDialog(null, "Do you wish to enter the parts list for the vehicle?", "Parts list", JOptionPane.YES_NO_OPTION);
+	        if (reply == JOptionPane.YES_OPTION) {
+	        	this.setPartsList();
+	        }  
+		}
 	}//End setData()
 	
 	public void setID() {
 		String input;
 		boolean isValid;
 		input = JOptionPane.showInputDialog("Enter the vehicle ID number.");
-    	isValid = input.matches("[0-9a-zA-Z]+");// 1 or more characters long, only valid characters only
-    	while (!isValid)
-    	{
-    		input = JOptionPane.showInputDialog("Invalid input! Enter a valid vehicle ID number.");
-        	isValid = input.matches("[0-9a-zA-Z]+");
-    	}
-		this.ID = input;
+		if (input != null)
+		{
+	    	isValid = input.matches("[0-9a-zA-Z]+");// 1 or more characters long, only valid characters only
+	    	while (!isValid)
+	    	{
+	    		input = JOptionPane.showInputDialog("Invalid input! Enter a valid vehicle ID number.");
+	        	isValid = input.matches("[0-9a-zA-Z]+");
+	    	}
+			this.ID = input;
+		}
 	}
 
 	public void setType() {
