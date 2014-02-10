@@ -4,7 +4,7 @@
  * Contributions
  * Darwin - 0.5hours - February 8, 2014
  * 5:30am - 
- * Cody - couple minutes - February 9, 2014
+ * Cody -  couple minutes - February 9, 2014
  */
 
 import org.eclipse.swt.SWT;
