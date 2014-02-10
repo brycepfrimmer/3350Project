@@ -53,4 +53,8 @@ Saturday, February 8, 2014
 -> Created a basic user interface for the main window
 -> There is a bug in the adding a vehicle code... If you "X out" of all the prompts
 	it adds a "null object" which breaks in the foreach search.
+	
+-Delroy Hiebert Feb 9, 2014 1 hr
+-Bug fixes
+-Added additional checks
 

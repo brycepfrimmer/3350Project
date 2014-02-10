@@ -149,11 +149,11 @@ public class Vehicle
 		String input;
 		boolean isValid;
 		input = JOptionPane.showInputDialog("Enter the vehicle type. Ex car, truck, forklift, etc." );
-		isValid = input != null && input.matches("[0-9a-zA-Z]+");
+		isValid = input != null && !input.isEmpty() && !input.trim().isEmpty();
 		while (!isValid)
 		{
 			input = JOptionPane.showInputDialog("Invalid input! Please enter a valid vehicle type." );
-			isValid = input != null && input.matches("[0-9a-zA-Z]+");
+			isValid = input != null && !input.isEmpty() && !input.trim().isEmpty();
 		}
 		this.type = input;
 	}
