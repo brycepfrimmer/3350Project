@@ -146,15 +146,42 @@ public class Vehicle
 	}
 
 	public void setType() {
-		this.type = JOptionPane.showInputDialog("Enter the vehicle type. Ex car, truck, forklift, etc." );
+		String input;
+		boolean isValid;
+		input = JOptionPane.showInputDialog("Enter the vehicle type. Ex car, truck, forklift, etc." );
+		isValid = input != null && input.matches("[0-9a-zA-Z]+");
+		while (!isValid)
+		{
+			input = JOptionPane.showInputDialog("Invalid input! Please enter a valid vehicle type." );
+			isValid = input != null && input.matches("[0-9a-zA-Z]+");
+		}
+		this.type = input;
 	}
 
 	public void setManufacturer() {
-		this.manufacturer = JOptionPane.showInputDialog("Please enter the vehicle manufacturer.");
+		String input;
+		boolean isValid;
+		input = JOptionPane.showInputDialog("Please enter the vehicle manufacturer.");
+		isValid = input != null && input.matches("[0-9a-zA-Z]+");
+		while (!isValid )
+		{
+			input = JOptionPane.showInputDialog("Invalid input! Please enter a valid vehicle manufacturer." );
+			isValid = input != null && input.matches("[0-9a-zA-Z]+");
+		}
+		this.manufacturer = input;
 	}
 
 	public void setModel() {
-		this.model = JOptionPane.showInputDialog("Please enter the vehicle model.");
+		String input;
+		boolean isValid;
+		input = JOptionPane.showInputDialog("Please enter the vehicle model.");
+		isValid = input != null && input.matches("[0-9a-zA-Z]+");
+		while( !isValid )
+		{
+			input = JOptionPane.showInputDialog("Please enter the vehicle model.");
+			isValid = input != null && input.matches("[0-9a-zA-Z]+");
+		}
+		this.model = input;
 	}
 
 	public void setRoadWorthy() {
