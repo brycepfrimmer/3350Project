@@ -126,7 +126,16 @@ public class Vehicle
 	}//End setData()
 	
 	public void setID() {
-		this.ID = JOptionPane.showInputDialog( "Please enter the vehicle ID number" );
+		String input;
+		boolean isValid;
+		input = JOptionPane.showInputDialog("Enter the vehicle ID number.");
+    	isValid = input.matches("[0-9a-zA-Z]+");// 1 or more characters long, only valid characters only
+    	while (!isValid)
+    	{
+    		input = JOptionPane.showInputDialog("Invalid input! Enter a valid vehicle ID number.");
+        	isValid = input.matches("[0-9a-zA-Z]+");
+    	}
+		this.ID = input;
 	}
 
 	public void setType() {
