@@ -4,6 +4,7 @@
  * Contributions
  * Darwin - 0.5hours - February 8, 2014
  * 5:30am - 
+ * Cody - couple minutes - February 9, 2014
  */
 
 import org.eclipse.swt.SWT;
@@ -20,6 +21,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.events.SelectionAdapter;
 
 public class CMMS {
 	/* Interface Constants */
@@ -160,6 +162,13 @@ public class CMMS {
 		dataTable.setItemCount(MAX_VEHICLES);
 		
 		addVehicleButton = new Button(mainWindow, SWT.NONE);
+		addVehicleButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				Interface myInterface = new Interface();
+				myInterface.addVehicle();
+			}
+		});
 		gridData = new GridData();
 		gridData.grabExcessVerticalSpace = false;
 		gridData.verticalIndent = 50;
