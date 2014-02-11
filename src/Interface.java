@@ -7,9 +7,9 @@ public class Interface {
 		database = new StubDB();
 	}
 	
-	public void addVehicle()
+	public void addVehicle(Vehicle vehicle)
 	{
-		database.addVehicle();
+		database.addVehicle(vehicle);
 	}
 	
 	public void removeVehicle( String id)

@@ -13,8 +13,6 @@
 
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
-
 public class Vehicle
 {
 	
@@ -54,12 +52,23 @@ public class Vehicle
 		this.roadWorthy = false;
 		this.licensePlate = null;
 		this.operational = false;
-		
-		//Get information from the user
-		setData();
 	}//End vehicle()	
 	
-	public void updateKm( int km, double fuelUsed )
+	public Vehicle(String ID, String type, String man, String model, boolean roadWorthy,
+			String LPN, boolean op, String policyNum, String policyType, int km, int kmLS) {
+		this.ID = ID;
+		this.type = type;
+		this.manufacturer = man;
+		this.model = model;
+		this.roadWorthy = roadWorthy;
+		this.licensePlate = LPN;
+		this.operational = op;
+		setInsurance(policyNum, policyType);
+		this.kmDriven = km;
+		this.kmLastServiced = kmLS;
+	}
+	
+	public void updateKm(int km, double fuelUsed)
 	{
 		this.fuelEcon = ( fuelUsed / (km - kmDriven) ) * 100;
 		this.kmDriven = km;
@@ -92,176 +101,49 @@ public class Vehicle
 		
 		System.out.println();
 	}//End print()
-	
-	//***set data methods***//
-	private void setData()
-	{
-		/*Required method variables
-		 *for temporary data storage*/
-		int reply;
-		
-		this.setID();
-		//Only continue getting information if a valid vehicle ID is entered
-		if (this.getID() != null)
-		{
-			this.setType();
-			this.setManufacturer();
-			this.setModel();
-			
-			reply = JOptionPane.showConfirmDialog(null, "Do you wish to enter the kilometers on the vehicle?", "Odometer", JOptionPane.YES_NO_OPTION);
-	        if (reply == JOptionPane.YES_OPTION) {
-	        	this.setKmDriven();
-	        }
-	        
-			reply = JOptionPane.showConfirmDialog(null, "Do you wish to enter the kilometers the vehicle was last serviced at?", "Last serviced", JOptionPane.YES_NO_OPTION);
-	        if (reply == JOptionPane.YES_OPTION) {
-	        	this.setKmLastServiced();
-	        }
-	        
-	        this.setRoadWorthy();
-	        this.setInsurance();
-	        this.setOperational();
-	        
-	        reply = JOptionPane.showConfirmDialog(null, "Do you wish to enter the parts list for the vehicle?", "Parts list", JOptionPane.YES_NO_OPTION);
-	        if (reply == JOptionPane.YES_OPTION) {
-	        	this.setPartsList();
-	        }  
-		}
-	}//End setData()
-	
-	public void setID() {
-		String input;
-		boolean isValid;
-		input = JOptionPane.showInputDialog("Enter the vehicle ID number.");
-		if (input != null)
-		{
-	    	isValid = input.matches("[0-9a-zA-Z]+");// 1 or more characters long, only valid characters only
-	    	while (!isValid)
-	    	{
-	    		input = JOptionPane.showInputDialog("Invalid input! Enter a valid vehicle ID number.");
-	        	isValid = input.matches("[0-9a-zA-Z]+");
-	    	}
-			this.ID = input;
-		}
+
+	public void setID(String id) {
+		this.ID = id;
 	}
 
-	public void setType() {
-		String input;
-		boolean isValid;
-		input = JOptionPane.showInputDialog("Enter the vehicle type. Ex car, truck, forklift, etc." );
-		isValid = input != null && !input.isEmpty() && !input.trim().isEmpty();
-		while (!isValid)
-		{
-			input = JOptionPane.showInputDialog("Invalid input! Please enter a valid vehicle type." );
-			isValid = input != null && !input.isEmpty() && !input.trim().isEmpty();
-		}
-		this.type = input;
+	public void setType(String type) {
+		this.type = type;
 	}
 
-	public void setManufacturer() {
-		String input;
-		boolean isValid;
-		input = JOptionPane.showInputDialog("Please enter the vehicle manufacturer.");
-		isValid = input != null && input.matches("[0-9a-zA-Z]+");
-		while (!isValid )
-		{
-			input = JOptionPane.showInputDialog("Invalid input! Please enter a valid vehicle manufacturer." );
-			isValid = input != null && input.matches("[0-9a-zA-Z]+");
-		}
-		this.manufacturer = input;
+	public void setManufacturer(String man) {
+		this.manufacturer = man;
 	}
 
-	public void setModel() {
-		String input;
-		boolean isValid;
-		input = JOptionPane.showInputDialog("Please enter the vehicle model.");
-		isValid = input != null && input.matches("[0-9a-zA-Z]+");
-		while( !isValid )
-		{
-			input = JOptionPane.showInputDialog("Please enter the vehicle model.");
-			isValid = input != null && input.matches("[0-9a-zA-Z]+");
-		}
-		this.model = input;
+	public void setModel(String model) {
+		this.model = model;
 	}
 
-	public void setRoadWorthy() {
-		int reply;
-		reply = JOptionPane.showConfirmDialog(null, "Is the vehicle roadworthy?", "Roadworthiness", JOptionPane.YES_NO_OPTION);
-        if (reply == JOptionPane.YES_OPTION) {
-        	this.roadWorthy = true;
-        	this.licensePlate = JOptionPane.showInputDialog("Please enter the vehicle license plate number.");
-        }
-        else
-        {
-        	this.roadWorthy = false;
-        	this.licensePlate = null;
-        }
+	public void setRoadWorthy(boolean rw) {
+        this.roadWorthy = rw;
 	}
 
-	public void setLicensePlate() {
-		this.licensePlate = JOptionPane.showInputDialog("Please enter the vehicle license plate number.");
+	public void setLicensePlate(String LPN) {
+		this.licensePlate = LPN;
 	}
 
-	public void setOperational() {
-		int reply;
-		reply = JOptionPane.showConfirmDialog(null, "Is the vehicle operational?", "Operational", JOptionPane.YES_NO_OPTION);
-        if (reply == JOptionPane.YES_OPTION) {
-        	this.operational = true;
-        }
-        else
-        {
-        	this.operational = false;
-        }
+	public void setOperational(boolean op) {
+        this.operational = op;
 	}
 
-	public void setInsurance() {
-		String policyNum;
-		String type;
-		policyNum = JOptionPane.showInputDialog("Please enter the vehicle insurance policy number.");
-        type = JOptionPane.showInputDialog("Please enter the type of insurance or a type about the insurance.");
-        insurance = new InsurancePolicy( policyNum, type );
+	public void setInsurance(String policyNum, String type) {
+        this.insurance = new InsurancePolicy( policyNum, type );
 	}
 
-	public void setKmDriven() {
-		String input;
-		boolean isNumeric;
-		input = JOptionPane.showInputDialog("Enter the kilometers on the vehicle.");
-    	isNumeric = input.matches("[0-9]+");// 1 or more characters long, numbers only
-    	isNumeric = input.matches("[0-9]*");// 0 or more characters long, numbers only
-    	while (!isNumeric)
-    	{
-    		input = JOptionPane.showInputDialog("Invalid input! Enter the number of kilometers on the vehicle.");
-        	isNumeric = input.matches("[0-9]+");
-        	isNumeric = input.matches("[0-9]*");
-    	}
-    	this.kmDriven = new Integer(input);
+	public void setKmDriven(int km) {
+    	this.kmDriven = km;
 	}
 
-	public void setKmLastServiced() {
-		String input;
-		boolean isNumeric;
-		input = JOptionPane.showInputDialog("Enter the kilometers the vehicle was last serviced at");
-    	isNumeric = input.matches("[0-9]+");// 1 or more characters long, numbers only
-    	isNumeric = input.matches("[0-9]*");// 0 or more characters long, numbers only
-    	while (!isNumeric)
-    	{
-    		input = JOptionPane.showInputDialog("Invalid input! Enter the number of kilometers the vehicle was last serviced at.");
-        	isNumeric = input.matches("[0-9]+");
-        	isNumeric = input.matches("[0-9]*");
-    	}
-    	this.kmLastServiced = new Integer(input);
+	public void setKmLastServiced(int km) {
+    	this.kmLastServiced = km;
 	}
 
 	public void setPartsList() {
-
-		partsList = new PartsList();
-		String input;
-    	input = JOptionPane.showInputDialog("Enter a vehicle part. Enter 'quit' to stop entering parts.");
-    	while ( !input.equals("quit") )
-    	{
-    		partsList.addPart(input);
-    		input = JOptionPane.showInputDialog("Enter a vehicle part. Enter 'quit' to stop entering parts.");
-    	}
+		this.partsList = new PartsList();
 	}
 	//***End of set methods***//
 

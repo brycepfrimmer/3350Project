@@ -33,7 +33,7 @@ public class CMMS {
 	private static Display currDisplay;
 	private static Shell mainWindow;
 	private static GridLayout mainLayout;
-	private static GridData gridData;	
+	private static GridData gridData;
 	
 	private static Menu mainMenu;
 	private static Menu fileMenu;
@@ -165,8 +165,8 @@ public class CMMS {
 		addVehicleButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				Interface myInterface = new Interface();
-				myInterface.addVehicle();
+				AddVehicle addWindow = new AddVehicle();
+				addWindow.open();
 			}
 		});
 		gridData = new GridData();

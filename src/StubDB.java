@@ -22,9 +22,8 @@ public class StubDB {
 		vehicles.remove(targetVehicle);
 	}
 	
-	public void addVehicle()
+	public void addVehicle(Vehicle vehicle)
 	{
-		Vehicle vehicle = new Vehicle();
 		vehicles.add(vehicle);
 	}
 	
