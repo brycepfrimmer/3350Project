@@ -1,3 +1,4 @@
+package CMMS;
 
 public class MyTest {
 

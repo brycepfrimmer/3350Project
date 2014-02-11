@@ -6,6 +6,7 @@
  * 5:30am - 
  * Cody -  couple minutes - February 9, 2014
  */
+package CMMS;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;

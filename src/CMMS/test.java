@@ -1,5 +1,6 @@
-//package window.builder;
 
+//package window.builder;
+package CMMS;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Button;
