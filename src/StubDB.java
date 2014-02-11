@@ -40,6 +40,10 @@ public class StubDB {
 		return targetVehicle;
 	}
 	
+	public ArrayList<Vehicle> getAllVehicles() {
+		return vehicles;
+	}
+	
 	public void printVehicles()
 	{
 		System.out.println( "Vehicles currently in system...\n");

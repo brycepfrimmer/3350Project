@@ -179,7 +179,7 @@ public class AddVehicle {
 		btnCancel.setText("Cancel");
 	}
 	
-	boolean checkFields() {
+	private boolean checkFields() {
 		//perform checks on all the fields to make sure they are good
 		return true;
 	}

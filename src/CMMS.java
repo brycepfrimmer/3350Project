@@ -17,11 +17,13 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.events.SelectionAdapter;
+import java.util.ArrayList;
 
 public class CMMS {
 	/* Interface Constants */
@@ -62,7 +64,10 @@ public class CMMS {
 	
 	private static Table dataTable;
 	
+	private static Interface dbInterface;
+	
 	public static void main(String[] args) {		
+		dbInterface = new Interface();
 		CreateWindow();
 		Open();
 	}
@@ -167,6 +172,15 @@ public class CMMS {
 			public void widgetSelected(SelectionEvent e) {
 				AddVehicle addWindow = new AddVehicle();
 				addWindow.open();
+				//want to know when the add window is done so that we can update the list of vehicles
+				//addWindow.open() will wait until we need it to HOW DO WE ADD TO THE dataTable?!?!?!
+				ArrayList<Vehicle> list = dbInterface.getVehicles();
+				TableItem newItem = null;
+				for (int z = 0; z < list.size(); z++) {
+					newItem = new TableItem(dataTable, 0);
+					newItem.setText(list.get(z).getID());
+				}
+				System.out.println("DONE ADD");
 			}
 		});
 		gridData = new GridData();

@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class Interface {
 	private StubDB database;
@@ -24,6 +25,10 @@ public class Interface {
 			Vehicle vehicle = database.getVehicle(id);
 			vehicle.updateKm(km, fuel);
 		}
+	}
+	
+	public ArrayList<Vehicle> getVehicles() {
+		return database.getAllVehicles();
 	}
 	
 	public void printVehicles()
