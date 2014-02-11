@@ -181,6 +181,73 @@ public class AddVehicle {
 	
 	private boolean checkFields() {
 		//perform checks on all the fields to make sure they are good
-		return true;
+		boolean fieldsOkay = false;
+		fieldsOkay = checkID() && checkType() && checkManufacturer() && checkModel() && checkLPN() && checkInsPolNum()
+				&& checkInsType() && checkKms() && checkKmsLS();
+		return fieldsOkay;
+	}
+	
+	private boolean checkID()
+	{
+		boolean isValid = false;
+		String input = textVehicleID.getText();
+		isValid = input.matches("[0-9a-zA-Z]+");
+		return isValid;
+	}
+	private boolean checkType()
+	{
+		boolean isValid = false;
+		String input = textType.getText();
+		isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+")  && !input.trim().isEmpty();
+		return isValid;
+	}
+	private boolean checkManufacturer()
+	{
+		boolean isValid = false;
+		String input = textManufacturer.getText();
+		isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+")  && !input.trim().isEmpty();
+		return isValid;
+	}
+	private boolean checkModel()
+	{
+		boolean isValid = false;
+		String input = textModel.getText();
+		isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+")  && !input.trim().isEmpty();
+		return isValid;
+	}
+	private boolean checkLPN()
+	{
+		boolean isValid = false;
+		String input = textLPN.getText();
+		isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+")  && !input.trim().isEmpty();
+		return isValid;
+	}
+	private boolean checkInsPolNum()
+	{
+		boolean isValid = false;
+		String input = textInsPolNum.getText();
+		isValid = input.matches("[0-9a-zA-Z]+");
+		return isValid;
+	}
+	private boolean checkInsType()
+	{
+		boolean isValid = false;
+		String input = textInsType.getText();
+		isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+")  && !input.trim().isEmpty();
+		return isValid;
+	}
+	private boolean checkKms()
+	{
+		boolean isValid = false;
+		String input = textKms.getText();
+		isValid = input.matches("[0-9]+") && input.matches("[0-9]*");
+		return isValid;
+	}
+	private boolean checkKmsLS()
+	{
+		boolean isValid = false;
+		String input = textKmsLS.getText();
+		isValid = input.matches("[0-9]+") && input.matches("[0-9]*");
+		return isValid;
 	}
 }

@@ -18,13 +18,16 @@ public class Interface {
 		database.removeVehicle(id);
 	}
 	
-	public void updateKm( String id, int km, double fuel )
+	public double updateKm( String id, int km, double fuel )
 	{
+		double fuelEcon = 0.0;
+		Vehicle vehicle = null;
 		if (database.getVehicle(id) != null )
 		{
-			Vehicle vehicle = database.getVehicle(id);
-			vehicle.updateKm(km, fuel);
+			vehicle = database.getVehicle(id);
+			fuelEcon = vehicle.updateKm(km, fuel);
 		}
+		return fuelEcon;
 	}
 	
 	public ArrayList<Vehicle> getVehicles() {
