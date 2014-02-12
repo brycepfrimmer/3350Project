@@ -22,6 +22,19 @@ STUFF TO LEARN
 - ECLIPSE
 - Windows Builder (download) drag & drop tool
 
+Tasks for this iteration (iteration 1)
+1-Set up object files/classes for project base - 2 days - Delroy/Cody
+2-Create GUI - 3 days - Darwin/Bryce/Zac/Cody/Delroy
+3-Be able to add/remove/view vehicles - 4 days - Darwin/Bryce/Zac
+4-Be able to view vehicle info and then edit it - 4 days - Darwin/Bryce/Zac
+5-Be able to view and modify the parts list - 4 days - Darwin/Bryce/Zac
+6-Be able to track fuel economy of vehicles - 1 day - Delroy/Cody
+7-Have set mandatory fields and checks to ensure requirements are met - 3 days - Delroy/Cody
+8-Be able to input fuel and updated distance driven values - 1 day - Delroy/Cody
+9-Verify fuel economy against set values to catch errors - 1 day - Delroy/Cody
+10-Have notifications to alert when data entered raises an issue - 1 day - Delroy/Cody
+11-Create test classes for project - on going - Darwin/Bryce/Zac/Cody/Delroy
+
 Meeting 2 - Tuesday, February 4, 2014
 - made sure everyone was on git
 - finalized the folder structure of our project
@@ -38,34 +51,38 @@ Meeting 3 - Thursday, February 6, 2014
 -Set next meeting for next week Tuesday.
 
 Friday, February 7, 2014
--Delroy Hiebert 2.5 hours
+-Delroy Hiebert 2.5 hours (Task 1)
+-Set up initial Vehicle class
 -Optimized vehicle class with specific methods
 -Improved reusability
 -Cleaned up code
 
 Saturday, February 8, 2014
--Delroy Hiebert 1 hour
--Added interface class
+-Delroy Hiebert 1 hour 
+-Added interface class (Task 1)
 	-MyTest (and GUI) talk to database through interface
 -Minor bug fixes
+-Added checks for valid data (Task 7)
 -Add User Story "Fuel Economy"S
--> Darwin Froese 1.5 Hours
+
+-> Darwin Froese 1.5 Hours (Task 2)
 -> Created a basic user interface for the main window
 -> There is a bug in the adding a vehicle code... If you "X out" of all the prompts
 	it adds a "null object" which breaks in the foreach search.
 	
--Delroy Hiebert Feb 9, 2014 1 hr
+-Delroy Hiebert Feb 9, 2014 1 hr 
 -Bug fixes
--Added additional checks
+-Added additional checks (Task 7)
 
 -Delroy Hiebert Feb 11, 2014 - 5 hours
--Added vailidity checks for adding new vehicle
--Cloned addVehicle class for editing vehicles
--Updated vehicle methods
--Removed private classes from vehicle class into their own file
--created test classes for all testable files (vehicle, insurance policy, partslist)
--created test suite to run all test classes
+-Added vailidity checks for adding new vehicle (Task 7)
+-Cloned addVehicle class for editing vehicles (Task 4)
+-Updated vehicle methods (Task 1)
+-Removed private classes from vehicle class into their own file (Task 1)
+-created test classes for all testable files (vehicle, insurance policy, partslist) (Task 11)
+-created test suite to run all test classes (Task 11)
 
+<<<<<<< Updated upstream
 -Darwin Froese Feb 11, 2014 - 6 hours
 -Formatted the DataTable properly
 -Modified the interface to the database for allowing adding of vehicles to table
@@ -76,4 +93,17 @@ Saturday, February 8, 2014
 -Added the ability to Edit Vehicles
 -Added the ability to View Vehicles
 
+=======
+END OF ITERATION 1 SUMMARY:
+-Completed Task 1: object files and classes required for project - total 2 days
+-Completed Task 2: Created GUI required for project - total 3 days
+-Partially completed Task 3: Can add and remove vehicles, cannot edit vehicles - total 2 days
+-Not completed Task 4: Cannot view and edit vehicle information; push to next iteration.
+-Not completed Task 5: cannot view and modify parts list; push to next iteration.
+-Not completed Task 6: Cannot track fuel economy; push to next iteration
+Completed Task 7: Only valid data may be entered, object only created when good data is entered - total 1 day
+-Partially completed task 8: Class can update fuel economy, but not linked to GUI - total 1 day
+-Not completed Task 9: Does not verify updated fuel economy; push to next iteration
+-Completed Task 10: GUI prompts when invalid data is entered - total 2 days
+>>>>>>> Stashed changes
 
