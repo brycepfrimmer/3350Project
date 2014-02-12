@@ -80,9 +80,18 @@ public class Vehicle
 	
 	public double updateKm(int km, double fuelUsed)
 	{
-		this.fuelEcon = ( fuelUsed / (km - kmDriven) ) * 100;
-		this.kmDriven = km;
-		return this.fuelEcon;
+		try{
+			if (km > kmDriven &&  km == (int)km && fuelUsed == (double)fuelUsed )
+			{
+				this.fuelEcon = ( fuelUsed / (km - kmDriven) ) * 100;
+				this.kmDriven = km;
+				return this.fuelEcon;
+			}
+		}catch(Exception e){
+			System.out.println("Input not a number!");
+		}
+		return 0.0;
+		
 	}
 	
 	public void print()
@@ -114,48 +123,92 @@ public class Vehicle
 		System.out.println();
 	}//End print()
 
-	public void setID(String id) {
-		this.ID = id;
+	public boolean setID(String id) {
+		boolean isValid = false;
+		isValid = id != null && id.matches("[0-9a-zA-Z]+");
+		if (isValid) { this.ID = id; }
+		return isValid;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public boolean setType(String type) {
+		
+		boolean isValid = false;
+		isValid = type != null && type.matches("[0-9a-zA-Z.*\\s+.*]+")  && !type.trim().isEmpty();
+		if(isValid){ this.type = type; }
+		return isValid;
 	}
 
-	public void setManufacturer(String man) {
-		this.manufacturer = man;
+	public boolean setManufacturer(String man) {
+		
+		boolean isValid = false;
+		isValid = man != null && man.matches("[0-9a-zA-Z.*\\s+.*]+")  && !man.trim().isEmpty();
+		if(isValid){ this.manufacturer = man; }
+		return isValid;
 	}
 
-	public void setModel(String model) {
-		this.model = model;
+	public boolean setModel(String model) {
+		
+		boolean isValid = false;
+		isValid = model != null && model.matches("[0-9a-zA-Z.*\\s+.*]+")  && !model.trim().isEmpty();
+		if(isValid){ this.model = model; }
+		return isValid;
 	}
 	
-	public void setYear(int year){
-		this.year = year;
+	public boolean setYear(int year){
+		
+		boolean isValid = false;
+		try{
+			if ( year == (int)year ){ this.year = year;	isValid = true; }
+		}catch(Exception e){
+			isValid = false;
+		}
+		return isValid;
 	}
 
-	public void setRoadWorthy(boolean rw) {
+	public boolean setRoadWorthy(boolean rw) {
         this.roadWorthy = rw;
+        return this.roadWorthy;
 	}
 
-	public void setLicensePlate(String LPN) {
-		this.licensePlate = LPN;
+	public boolean setLicensePlate(String LPN) {
+		boolean isValid = false;
+		isValid = LPN != null && LPN.matches("[0-9a-zA-Z.*\\s+.*]+")  && !LPN.trim().isEmpty();
+		if(isValid){ this.licensePlate = LPN; }
+		return isValid;
 	}
 
-	public void setOperational(boolean op) {
+	public boolean setOperational(boolean op) {
         this.operational = op;
+        return this.operational;
 	}
 
-	public void setInsurance(String policyNum, String type) {
-        this.insurance = new InsurancePolicy( policyNum, type );
+	public boolean setInsurance(String policyNum, String type) { 
+        boolean isValid = false;
+		isValid = policyNum != null && type != null && policyNum.matches("[0-9a-zA-Z]+") 
+				&& type.matches("[0-9a-zA-Z.*\\s+.*]+")  && !type.trim().isEmpty();
+		if(isValid){ this.insurance = new InsurancePolicy( policyNum, type ); }
+		return isValid;
 	}
 
-	public void setKmDriven(int km) {
-    	this.kmDriven = km;
+	public boolean setKmDriven(int km) {
+    	boolean isValid = false;
+		try{
+			if ( km == (int)km ){ this.kmDriven = km; isValid = true; }
+		}catch(Exception e){
+			isValid = false;
+		}
+		return isValid;
 	}
 
-	public void setKmLastServiced(int km) {
-    	this.kmLastServiced = km;
+	public boolean setKmLastServiced(int km) {
+    	boolean isValid = false;
+		try{
+			if ( km == (int)km ){ this.kmLastServiced = km; isValid = true; }
+		}catch(Exception e){
+			isValid = false;
+		}
+		return isValid;
+    	
 	}
 
 	public void setPartsList() {
@@ -217,54 +270,6 @@ public class Vehicle
 	public double getFuelEcon() {
 		return fuelEcon;
 	}
-	//***End of get data methods***
-	
-	
-	//*******************************************************************************************************
-	//*****Internal private classes*****//
-	private class InsurancePolicy
-	{
-		private String policyNum;
-		private String type;
-		
-		private InsurancePolicy( String pNum, String message )
-		{
-			this.policyNum = pNum;
-			this.type = message;
-		}
-		//Print out the insurance object details
-		private void print()
-		{
-			System.out.println("\tInsurance policy number: " + this.policyNum);
-			System.out.println("\tInsurance type: " + this.type);
-		}
-	}//End InsurancePolicy Class
-	
-	private class PartsList
-	{
-		private ArrayList<String> partsList;
-		
-		private PartsList()
-		{
-			partsList = new ArrayList<String>();
-		}
-		
-		private void addPart(String part)
-		{
-			partsList.add(part);
-		}
-		
-		private void print()
-		{
-			for( String part : partsList)
-			{
-				System.out.println(part);
-			}
-		}
-		
-	}//End PartsList Class
-
-	//*******************************************************************************************************	
 }//End Vehicle Class
 	
 	
