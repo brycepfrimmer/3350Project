@@ -42,4 +42,13 @@ public final class InsurancePolicy
 		//System.out.println("\tInsurance type: " + this.type);
 		return this.policyNum + "\n" + this.type;
 	}
+	
+	public String[] ToStrings() {
+		String[] policy = new String[2];
+		
+		policy[0] = policyNum;
+		policy[1] = type;
+		
+		return policy;
+	}
 }//End InsurancePolicy Class

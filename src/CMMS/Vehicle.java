@@ -72,11 +72,33 @@ public class Vehicle
 		this.year = year;
 	}
 	
-//	public String[] ToString() {
-//		String[] test;
-//		
-//		return test;
-//	}
+	public String[] ToStrings() {
+		String[] vehicle = new String[13];
+		
+		vehicle[0] = ID;
+		vehicle[1] = type;
+		vehicle[2] = manufacturer;
+		vehicle[3] = model;
+		vehicle[4] = Integer.toString(year);
+		vehicle[5] = Integer.toString(kmDriven);
+		vehicle[6] = Integer.toString(kmLastServiced);
+		if(roadWorthy)
+			vehicle[7] = "Yes";
+		else
+			vehicle[7] = "No";
+		vehicle[8] = licensePlate;
+		String[] temp = insurance.ToStrings();
+		vehicle[9] = temp[0]; // Policy Number
+		vehicle[10] = temp[1]; // Policy Type
+		if(operational)
+			vehicle[11] = "Yes";
+		else
+			vehicle[11] = "No";
+		vehicle[12] = Double.toString(fuelEcon);
+		
+		
+		return vehicle;
+	}
 	
 	public double updateKm(int km, double fuelUsed)
 	{

@@ -170,8 +170,8 @@ public class EditVehicle {
 					Vehicle newVehicle = new Vehicle(textVehicleID.getText(), textType.getText(), textManufacturer.getText(),
 							textModel.getText(), new Integer(textYear.getText()), btnRoadworthy.getSelection(), textLPN.getText(), btnOperational.getSelection(),
 							textInsPolNum.getText(), textInsType.getText(), new Integer(textKms.getText()), new Integer(textKmsLS.getText()));
-					Interface temp = new Interface();
-					temp.addVehicle(newVehicle);
+					//Interface temp = new Interface();
+					//temp.addVehicle(newVehicle);
 					shell.close();
 				} else {
 					//display message explaining to user what is wrong with their input
