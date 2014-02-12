@@ -2,26 +2,30 @@ package CMMS;
 
 import java.util.ArrayList;
 
-final class PartsList
+public final class PartsList
 {
 	private ArrayList<String> partsList;
 	
-	protected PartsList()
+	public PartsList()
 	{
 		partsList = new ArrayList<String>();
 	}
 	
-	protected void addPart(String part)
+	public boolean addPart(String part)
 	{
-		partsList.add(part);
+		boolean success = false;
+		success = part != null && !part.trim().isEmpty();
+		if (success) { partsList.add(part); }
+		return success;
 	}
 	
-	protected void print()
+	public boolean print()
 	{
 		for( String part : partsList)
 		{
 			System.out.println(part);
 		}
+		return true;
 	}
 	
 }//End PartsList Class
