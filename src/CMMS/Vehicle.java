@@ -12,7 +12,6 @@ package CMMS;
  ****************************************************
  */
 
-import java.util.ArrayList;
 
 public class Vehicle implements CMMSInterface
 {

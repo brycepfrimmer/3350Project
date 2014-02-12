@@ -61,15 +61,15 @@ public class CMMS implements CMMSInterface {
 	private static MenuItem vehicleViewItem;
 	private static MenuItem helpAboutItem;
 	
-	private static Label searchLabel;
+	//private static Label searchLabel;
 	
-	private static Button searchButton;
+	//private static Button searchButton;
 	private static Button addVehicleButton;
 	private static Button removeVehicleButton;
 	private static Button editVehicleButton;
 	private static Button viewVehicleButton;
 	
-	private static Text searchText;
+	//private static Text searchText;
 	
 	private static Table dataTable;
 	private static TableColumn vehicleIDCol;
@@ -302,6 +302,41 @@ public class CMMS implements CMMSInterface {
 		editVehicleButton.setText("Edit Vehicle");
 		
 		viewVehicleButton = new Button(mainWindow, SWT.NONE);
+		viewVehicleButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				int selected = dataTable.getSelectionCount();
+				if (selected == 0) {
+					// Display no selection error
+					MessageBox mb = new MessageBox(mainWindow, SWT.ICON_ERROR | SWT.OK );
+					mb.setMessage("Error: You have not selected any Vehicles to view.");
+					mb.setText("Viewing Vehicles");
+					mb.open();
+				}
+				else if (selected == 1){
+					// Display EditVehicle form
+					Vehicle v = dbInterface.getVehicle(dataTable.getItem(dataTable.getSelectionIndex()).getText(VEHICLE_FIELDS.ID.ordinal()));
+					ViewVehicle viewWindow = new ViewVehicle();
+					viewWindow.open(v);			
+					
+					// Update list with the new Vehicles
+					UpdateList();
+				}
+				else {
+					// Display multiple vehicles
+					int[] selections = dataTable.getSelectionIndices();
+					Vehicle[] v = new Vehicle[selections.length];
+					
+					for (int i = 0; i < selected; i++)
+						v[i] = dbInterface.getVehicle(dataTable.getItem(selections[i]).getText(VEHICLE_FIELDS.ID.ordinal()));
+					ViewVehicle viewWindow = new ViewVehicle();
+					viewWindow.open(v);
+					
+					// Update list with the new Vehicles
+					UpdateList();
+				}
+			}
+		});
 		gridData = new GridData();
 		gridData.grabExcessVerticalSpace = false;
 		gridData.horizontalAlignment = SWT.FILL;

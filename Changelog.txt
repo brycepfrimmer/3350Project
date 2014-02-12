@@ -8,3 +8,7 @@ February 12, 2014
 	* Updated access to all necessary classes
 	* Removed (commented out) the search controls from the main interface as they
 	aren't functional yet
+	* Can Edit Vehicles by selecting -ONE- vehicle and hitting edit
+		* Selecting None or Multiple will result in a MessageBox
+	* Can View Vehicles by selecting One or Multiple Vehicles and hitting view
+		* Selecting None will result in a MessageBox

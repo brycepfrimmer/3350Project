@@ -66,4 +66,14 @@ Saturday, February 8, 2014
 -created test classes for all testable files (vehicle, insurance policy, partslist)
 -created test suite to run all test classes
 
+-Darwin Froese Feb 11, 2014 - 6 hours
+-Formatted the DataTable properly
+-Modified the interface to the database for allowing adding of vehicles to table
+-Setup adding vehicles to the database
+
+-Darwin Froese Feb 12, 2014 - 2 hours
+-Restructured Interface to StudDB
+-Added the ability to Edit Vehicles
+-Added the ability to View Vehicles
+
 
