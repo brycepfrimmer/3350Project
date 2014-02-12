@@ -82,7 +82,6 @@ Saturday, February 8, 2014
 -created test classes for all testable files (vehicle, insurance policy, partslist) (Task 11)
 -created test suite to run all test classes (Task 11)
 
-<<<<<<< Updated upstream
 -Darwin Froese Feb 11, 2014 - 6 hours
 -Formatted the DataTable properly
 -Modified the interface to the database for allowing adding of vehicles to table
@@ -105,5 +104,4 @@ Completed Task 7: Only valid data may be entered, object only created when good 
 -Partially completed task 8: Class can update fuel economy, but not linked to GUI - total 1 day
 -Not completed Task 9: Does not verify updated fuel economy; push to next iteration
 -Completed Task 10: GUI prompts when invalid data is entered - total 2 days
->>>>>>> Stashed changes
 
