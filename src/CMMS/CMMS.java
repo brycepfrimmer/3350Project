@@ -234,7 +234,7 @@ public class CMMS {
 		dataTable.remove(0, dataTable.getItemCount());
 		for( Vehicle v : list) {
 			ti = new TableItem(dataTable, SWT.NONE);
-			ti.setText(v.ToString());
+			//ti.setText(v.ToString());
 		}
 		
 		dataTable.setRedraw(true);

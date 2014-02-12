@@ -72,11 +72,11 @@ public class Vehicle
 		this.year = year;
 	}
 	
-	public String[] ToString() {
-		String[] test;
-		
-		return test;
-	}
+//	public String[] ToString() {
+//		String[] test;
+//		
+//		return test;
+//	}
 	
 	public double updateKm(int km, double fuelUsed)
 	{
