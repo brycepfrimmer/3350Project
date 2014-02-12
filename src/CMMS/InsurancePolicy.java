@@ -36,10 +36,10 @@ public final class InsurancePolicy
 		return this.type;
 	}
 	//Print out the insurance object details
-	public boolean print()
+	public String toString()
 	{
-		System.out.println("\tInsurance policy number: " + this.policyNum);
-		System.out.println("\tInsurance type: " + this.type);
-		return true;
+		//System.out.println("\tInsurance policy number: " + this.policyNum);
+		//System.out.println("\tInsurance type: " + this.type);
+		return this.policyNum + "\n" + this.type;
 	}
 }//End InsurancePolicy Class

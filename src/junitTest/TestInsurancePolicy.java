@@ -6,7 +6,7 @@ import CMMS.*;
 
 import org.junit.Test;
 
-public class TestInsuranecPolicy {
+public class TestInsurancePolicy {
 	InsurancePolicy policy = new InsurancePolicy("number123", "General");
 	@Test
 	public void testInsurancePolicy() {
@@ -37,8 +37,11 @@ public class TestInsuranecPolicy {
 	}
 
 	@Test
-	public void testPrint() {
-		assertTrue( policy.print() );
+	public void testToString() {
+		String string = policy.toString();
+		assertTrue( string.length() > 0 );
+		assertTrue( string != null );
+		assertTrue( !string.trim().isEmpty() );
 	}
 
 }

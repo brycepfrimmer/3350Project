@@ -105,7 +105,7 @@ public class Vehicle
 		System.out.println("\tCurrent kilometers: " + this.getKmDriven());
 		System.out.println("\tKilometers when the vehicle was last serviced: " + this.getKmLastServiced());
 		
-		this.getInsurance().print();
+		System.out.println(this.getInsurance().toString());
 		
 		System.out.println("\tCurrent fuel economy: " + this.getFuelEcon() + " Liters/100km" );
 		
