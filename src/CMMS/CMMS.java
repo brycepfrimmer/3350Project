@@ -2,9 +2,9 @@
  * Main window for the CMMS
  * 
  * Contributions
- * Darwin - 0.5hours - February 8, 2014
- * 5:30am - 
+ * Darwin - 1.5hours - February 8, 2014
  * Cody -  couple minutes - February 9, 2014
+ * Darwin - 0.5 hours - February 11, 2014
  */
 package CMMS;
 
@@ -23,6 +23,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.events.SelectionAdapter;
 import java.util.ArrayList;
 
@@ -30,8 +31,11 @@ public class CMMS {
 	/* Interface Constants */
 	private static final Point MIN_WINDOW_SIZE = new Point(800,600);
 	private static final String WINDOW_TITLE = "Computerized Maintenance Management System";
-	private static final int COL_COUNT = 3;
+	private static final int LAYOUT_COL_COUNT = 3;
 	private static final int MAX_VEHICLES = 1024;
+	private static final int DEFAULT_TABLE_COL_WIDTH = 100; 
+	
+	private static int currentVehicleCount = 0;
 	
 	private static Display currDisplay;
 	private static Shell mainWindow;
@@ -64,25 +68,42 @@ public class CMMS {
 	private static Text searchText;
 	
 	private static Table dataTable;
+	private static TableColumn vehicleIDCol;
+	private static TableColumn vehicleTypeCol;
+	private static TableColumn vehicleModelCol;
+	private static TableColumn vehicleLicensePlateCol;
+	private static TableColumn vehicleFuelEconCol;
+	private static TableColumn vehicleKMCol;
+	private static TableColumn vehicleInsuranceCol;
+	private static TableColumn vehicleKMLastServiceCol;
+	private static TableColumn vehicleManufacturerCol;
+	private static TableColumn vehicleOperationalCol;
+	private static TableColumn vehicleRoadWorthyCol;
 	
 	private static Interface dbInterface;
 	
-	public static void main(String[] args) {		
+	public static void main(String[] args) {
 		dbInterface = new Interface();
 		CreateWindow();
+		OnLoad();
 		Open();
 	}
 	
+	private static void OnLoad() {
+		// Read existing database vehicles
+	}
+
 	private static void CreateWindow() {
 		mainWindow = new Shell();
 		mainWindow.setText(WINDOW_TITLE);
 		mainWindow.setMinimumSize(MIN_WINDOW_SIZE);
 		
 		mainLayout = new GridLayout();
-		mainLayout.numColumns = COL_COUNT;
+		mainLayout.numColumns = LAYOUT_COL_COUNT;
 		
 		CreateMenus();
 		CreateControls();
+		CreateColumns();
 	}
 	
 	private static void CreateMenus() {
@@ -156,6 +177,9 @@ public class CMMS {
 		searchButton.setText("Search");
 		
 		dataTable = new Table(mainWindow, SWT.BORDER);
+		dataTable.setItemCount(currentVehicleCount);
+		dataTable.setHeaderVisible(true);
+		dataTable.setLinesVisible(true);
 		gridData = new GridData();
 		gridData.horizontalSpan = 2;
 		gridData.verticalSpan = 3;
@@ -165,7 +189,6 @@ public class CMMS {
 		gridData.grabExcessHorizontalSpace = true;
 		gridData.grabExcessVerticalSpace = true;
 		dataTable.setLayoutData(gridData);
-		dataTable.setItemCount(MAX_VEHICLES);
 		
 		addVehicleButton = new Button(mainWindow, SWT.NONE);
 		addVehicleButton.addSelectionListener(new SelectionAdapter() {
@@ -206,9 +229,77 @@ public class CMMS {
 		gridData.horizontalAlignment = SWT.FILL;
 		gridData.verticalAlignment = SWT.TOP;
 		viewVehicleButton.setLayoutData(gridData);
-		viewVehicleButton.setText("View Vehicle");		
+		viewVehicleButton.setText("View Vehicle");	
 	}
 	
+	private static void CreateColumns() {
+		vehicleIDCol = new TableColumn(dataTable, SWT.BORDER);
+		vehicleIDCol.setText("ID");
+		vehicleIDCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
+		vehicleIDCol.setMoveable(true);
+		vehicleIDCol.setResizable(true);
+		
+		vehicleTypeCol = new TableColumn(dataTable, SWT.BORDER);
+		vehicleTypeCol.setText("Type");
+		vehicleTypeCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
+		vehicleTypeCol.setMoveable(true);
+		vehicleTypeCol.setResizable(true);
+		
+		vehicleModelCol = new TableColumn(dataTable, SWT.BORDER);
+		vehicleModelCol.setText("Model");
+		vehicleModelCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
+		vehicleModelCol.setMoveable(true);
+		vehicleModelCol.setResizable(true);
+		
+		vehicleLicensePlateCol = new TableColumn(dataTable, SWT.BORDER);
+		vehicleLicensePlateCol.setText("License Plate");
+		vehicleLicensePlateCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
+		vehicleLicensePlateCol.setMoveable(true);
+		vehicleLicensePlateCol.setResizable(true);
+		
+		vehicleFuelEconCol = new TableColumn(dataTable, SWT.BORDER);
+		vehicleFuelEconCol.setText("Fuel Economy");
+		vehicleFuelEconCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
+		vehicleFuelEconCol.setMoveable(true);
+		vehicleFuelEconCol.setResizable(true);
+		
+		vehicleKMCol = new TableColumn(dataTable, SWT.BORDER);
+		vehicleKMCol.setText("Kilometers");
+		vehicleKMCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
+		vehicleKMCol.setMoveable(true);
+		vehicleKMCol.setResizable(true);
+		
+		vehicleInsuranceCol = new TableColumn(dataTable, SWT.BORDER);
+		vehicleInsuranceCol.setText("Insurance Policy");
+		vehicleInsuranceCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
+		vehicleInsuranceCol.setMoveable(true);
+		vehicleInsuranceCol.setResizable(true);
+		
+		vehicleKMLastServiceCol = new TableColumn(dataTable, SWT.BORDER);
+		vehicleKMLastServiceCol.setText("Last service (KM)");
+		vehicleKMLastServiceCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
+		vehicleKMLastServiceCol.setMoveable(true);
+		vehicleKMLastServiceCol.setResizable(true);
+		
+		vehicleManufacturerCol = new TableColumn(dataTable, SWT.BORDER);
+		vehicleManufacturerCol.setText("Manufacturer");
+		vehicleManufacturerCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
+		vehicleManufacturerCol.setMoveable(true);
+		vehicleManufacturerCol.setResizable(true);
+		
+		vehicleOperationalCol = new TableColumn(dataTable, SWT.BORDER);
+	 	vehicleOperationalCol.setText("Is Operational");
+	 	vehicleOperationalCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
+		vehicleOperationalCol.setMoveable(true);
+		vehicleOperationalCol.setResizable(true);
+		
+		vehicleRoadWorthyCol = new TableColumn(dataTable, SWT.BORDER);
+		vehicleRoadWorthyCol.setText("Is Roadworthy");
+		vehicleRoadWorthyCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
+		vehicleRoadWorthyCol.setMoveable(true);
+		vehicleRoadWorthyCol.setResizable(true);
+	}
+
 	private static void Open() {
 		currDisplay = Display.getDefault();
 		
