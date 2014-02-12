@@ -69,6 +69,12 @@ public class Vehicle
 		this.kmLastServiced = kmLS;
 	}
 	
+	public String[] ToString() {
+		String[] test;
+		
+		return test;
+	}
+	
 	public double updateKm(int km, double fuelUsed)
 	{
 		this.fuelEcon = ( fuelUsed / (km - kmDriven) ) * 100;
