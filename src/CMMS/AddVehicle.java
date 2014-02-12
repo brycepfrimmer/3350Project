@@ -26,16 +26,16 @@ public class AddVehicle {
 	private Text textInsType;
 	private Button btnOperational;
 	private Button btnRoadworthy;
-	private Text textVehicleIDWarning;
-	private Text textTypeWarning;
-	private Text textManufacturerWarning;
-	private Text textModelWarning;
-	private Text textYearWarning;
-	private Text textKmsWarning;
-	private Text textKmsLSWarning;
+	private Label lblVehicleIDWarning;
+	private Label lblTypeWarning;
+	private Label lblManufacturerWarning;
+	private Label lblModelWarning;
+	private Label lblYearWarning;
+	private Label lblKmsWarning;
+	private Label lblKmsLSWarning;
 	private Label lblLPNWarning;
-	private Text textInsPolNumWarning;
-	private Text textInsTypeWarning;
+	private Label lblInsPolNumWarning;
+	private Label lblInsTypeWarning;
 
 	/**
 	 * Launch the application.
@@ -191,54 +191,45 @@ public class AddVehicle {
 		btnCancel.setBounds(271, 357, 75, 25);
 		btnCancel.setText("Cancel");
 		
-		textVehicleIDWarning = new Text(shell, SWT.NONE);
-		textVehicleIDWarning.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
-		textVehicleIDWarning.setEditable(false);
-		textVehicleIDWarning.setBounds(179, 7, 360, 21);
+		lblVehicleIDWarning = new Label(shell, SWT.NONE);
+		lblVehicleIDWarning.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		lblVehicleIDWarning.setBounds(179, 7, 360, 21);
 		
-		textTypeWarning = new Text(shell, SWT.NONE);
-		textTypeWarning.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
-		textTypeWarning.setEditable(false);
-		textTypeWarning.setBounds(312, 35, 280, 21);
+		lblTypeWarning = new Label(shell, SWT.NONE);
+		lblTypeWarning.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		lblTypeWarning.setBounds(312, 35, 280, 21);
 		
-		textManufacturerWarning = new Text(shell, SWT.NONE);
-		textManufacturerWarning.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
-		textManufacturerWarning.setEditable(false);
-		textManufacturerWarning.setBounds(180, 66, 359, 21);
+		lblManufacturerWarning = new Label(shell, SWT.NONE);
+		lblManufacturerWarning.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		lblManufacturerWarning.setBounds(180, 66, 359, 21);
 		
-		textModelWarning = new Text(shell, SWT.NONE);
-		textModelWarning.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
-		textModelWarning.setEditable(false);
-		textModelWarning.setBounds(180, 97, 313, 21);
+		lblModelWarning = new Label(shell, SWT.NONE);
+		lblModelWarning.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		lblModelWarning.setBounds(180, 97, 313, 21);
 		
-		textYearWarning = new Text(shell, SWT.NONE);
-		textYearWarning.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
-		textYearWarning.setEditable(false);
-		textYearWarning.setBounds(180, 128, 388, 21);
+		lblYearWarning = new Label(shell, SWT.NONE);
+		lblYearWarning.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		lblYearWarning.setBounds(180, 128, 388, 21);
 		
-		textKmsWarning = new Text(shell, SWT.NONE);
-		textKmsWarning.setEditable(false);
-		textKmsWarning.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
-		textKmsWarning.setBounds(179, 157, 377, 21);
+		lblKmsWarning = new Label(shell, SWT.NONE);
+		lblKmsWarning.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		lblKmsWarning.setBounds(179, 157, 377, 21);
 		
-		textKmsLSWarning = new Text(shell, SWT.NONE);
-		textKmsLSWarning.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
-		textKmsLSWarning.setEditable(false);
-		textKmsLSWarning.setBounds(180, 193, 313, 21);
+		lblKmsLSWarning = new Label(shell, SWT.NONE);
+		lblKmsLSWarning.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		lblKmsLSWarning.setBounds(180, 193, 313, 21);
 		
 		lblLPNWarning = new Label(shell, SWT.WRAP);
 		lblLPNWarning.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		lblLPNWarning.setBounds(367, 236, 201, 15);
 		
-		textInsPolNumWarning = new Text(shell, SWT.NONE);
-		textInsPolNumWarning.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
-		textInsPolNumWarning.setEditable(false);
-		textInsPolNumWarning.setBounds(129, 309, 189, 21);
+		lblInsPolNumWarning = new Label(shell, SWT.NONE);
+		lblInsPolNumWarning.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		lblInsPolNumWarning.setBounds(129, 309, 189, 21);
 		
-		textInsTypeWarning = new Text(shell, SWT.NONE);
-		textInsTypeWarning.setEditable(false);
-		textInsTypeWarning.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
-		textInsTypeWarning.setBounds(399, 309, 193, 21);
+		lblInsTypeWarning = new Label(shell, SWT.NONE);
+		lblInsTypeWarning.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		lblInsTypeWarning.setBounds(399, 309, 193, 21);
 	}
 	
 	private boolean checkFields() {
@@ -255,11 +246,12 @@ public class AddVehicle {
 		String input = textVehicleID.getText();
 		isValid = input.matches("[0-9a-zA-Z]+");
 		if(!isValid){
-			textVehicleIDWarning.setText("Vehicle ID can only include numbers or letter and no spaces");
+			lblVehicleIDWarning.setText("Vehicle ID can only include numbers or letter and no spaces");
 		}
 		else{
-			textVehicleIDWarning.setText("");
+			lblVehicleIDWarning.setText("");
 		}
+		lblVehicleIDWarning.pack();
 		return isValid;
 	}
 	private boolean checkType()
@@ -268,11 +260,12 @@ public class AddVehicle {
 		String input = textType.getText();
 		isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+")  && !input.trim().isEmpty();
 		if(!isValid){
-			textTypeWarning.setText("Type can only include numbers and letters");
+			lblTypeWarning.setText("Type can only include numbers and letters");
 		}
 		else{
-			textTypeWarning.setText("");
+			lblTypeWarning.setText("");
 		}
+		lblTypeWarning.pack();
 		return isValid;
 	}
 	private boolean checkManufacturer()
@@ -281,11 +274,12 @@ public class AddVehicle {
 		String input = textManufacturer.getText();
 		isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+")  && !input.trim().isEmpty();
 		if(!isValid){
-			textManufacturerWarning.setText("Manufacturer can only include numbers and letters");
+			lblManufacturerWarning.setText("Manufacturer can only include numbers and letters");
 		}
 		else{
-			textManufacturerWarning.setText("");
+			lblManufacturerWarning.setText("");
 		}
+		lblManufacturerWarning.pack();
 		return isValid;
 	}
 	private boolean checkModel()
@@ -294,11 +288,12 @@ public class AddVehicle {
 		String input = textModel.getText();
 		isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+")  && !input.trim().isEmpty();
 		if(!isValid){
-			textModelWarning.setText("Model can only include numbers or letter");
+			lblModelWarning.setText("Model can only include numbers or letter");
 		}
 		else{
-			textModelWarning.setText("");
+			lblModelWarning.setText("");
 		}
+		lblModelWarning.pack();
 		return isValid;
 	}
 	private boolean checkYear()
@@ -307,11 +302,12 @@ public class AddVehicle {
 		String input = textYear.getText();
 		isValid = input.matches("[0-9]+") && input.matches("[0-9]*"); 
 		if(!isValid){
-			textYearWarning.setText("Years only have numbers in them");
+			lblYearWarning.setText("Years only have numbers in them");
 		}
 		else{
-			textYearWarning.setText("");
+			lblYearWarning.setText("");
 		}
+		lblYearWarning.pack();
 		return isValid;
 	}
 	private boolean checkLPN()
@@ -319,12 +315,21 @@ public class AddVehicle {
 		boolean isValid = false;
 		String input = textLPN.getText();
 		isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+")  && !input.trim().isEmpty();
-		if(!isValid){
+		//checks to see if road worthy button is selected, if so LPN must exist
+		if(btnRoadworthy.getSelection() && input == ""){
+			lblLPNWarning.setText("If a vehicle is road worthy, it must also have a license plate #");
+			isValid = false;
+		}
+		else if(!btnRoadworthy.getSelection() && input == ""){
+			isValid = true;
+		}
+		else if(!isValid){
 			lblLPNWarning.setText("License plate number can only include numbers or letter");
 		}
 		else{
 			lblLPNWarning.setText("");
 		}
+		lblLPNWarning.pack();
 		return isValid;
 	}
 	private boolean checkInsPolNum()
@@ -333,11 +338,12 @@ public class AddVehicle {
 		String input = textInsPolNum.getText();
 		isValid = input.matches("[0-9a-zA-Z]+");
 		if(!isValid){
-			textInsPolNumWarning.setText("Insurance policy number can only include numbers or letter");
+			lblInsPolNumWarning.setText("Insurance policy number can only include numbers or letter");
 		}
 		else{
-			textInsPolNumWarning.setText("");
+			lblInsPolNumWarning.setText("");
 		}
+		lblInsPolNumWarning.pack();
 		return isValid;
 	}
 	private boolean checkInsType()
@@ -346,11 +352,12 @@ public class AddVehicle {
 		String input = textInsType.getText();
 		isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+")  && !input.trim().isEmpty();
 		if(!isValid){
-			textInsTypeWarning.setText("Insurance type can only include numbers or letter");
+			lblInsTypeWarning.setText("Insurance type can only include numbers or letter");
 		}
 		else{
-			textInsTypeWarning.setText("");
+			lblInsTypeWarning.setText("");
 		}
+		lblInsTypeWarning.pack();
 		return isValid;
 	}
 	private boolean checkKms()
@@ -359,11 +366,12 @@ public class AddVehicle {
 		String input = textKms.getText();
 		isValid = input.matches("[0-9]+") && input.matches("[0-9]*");
 		if(!isValid){
-			textKmsWarning.setText("Kilometers can only be expressed by numbers");
+			lblKmsWarning.setText("Kilometers can only be expressed by numbers");
 		}
 		else{
-			textKmsWarning.setText("");
+			lblKmsWarning.setText("");
 		}
+		lblKmsWarning.pack();
 		return isValid;
 	}
 	private boolean checkKmsLS()
@@ -372,11 +380,12 @@ public class AddVehicle {
 		String input = textKmsLS.getText();
 		isValid = input.matches("[0-9]+") && input.matches("[0-9]*");
 		if(!isValid){
-			textKmsLSWarning.setText("Kilometers last serviced can only be expressed by numbers");
+			lblKmsLSWarning.setText("Kilometers last serviced can only be expressed by numbers");
 		}
 		else{
-			textKmsLSWarning.setText("");
+			lblKmsLSWarning.setText("");
 		}
+		lblKmsLSWarning.pack();
 		return isValid;
 	}
 }
