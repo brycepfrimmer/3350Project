@@ -32,7 +32,6 @@ public class CMMS {
 	private static final Point MIN_WINDOW_SIZE = new Point(800,600);
 	private static final String WINDOW_TITLE = "Computerized Maintenance Management System";
 	private static final int LAYOUT_COL_COUNT = 3;
-	private static final int MAX_VEHICLES = 1024;
 	private static final int DEFAULT_TABLE_COL_WIDTH = 100; 
 	
 	private static int currentVehicleCount = 0;
@@ -195,16 +194,9 @@ public class CMMS {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				AddVehicle addWindow = new AddVehicle();
-				addWindow.open();
-				//want to know when the add window is done so that we can update the list of vehicles
-				//addWindow.open() will wait until we need it to HOW DO WE ADD TO THE dataTable?!?!?!
-				ArrayList<Vehicle> list = dbInterface.getVehicles();
-				TableItem newItem = null;
-				for (int z = 0; z < list.size(); z++) {
-					newItem = new TableItem(dataTable, 0);
-					newItem.setText(list.get(z).getID());
-				}
-				System.out.println("DONE ADD");
+				addWindow.open();				
+				// Update list with the new Vehicles
+				UpdateList();
 			}
 		});
 		gridData = new GridData();
@@ -232,6 +224,22 @@ public class CMMS {
 		viewVehicleButton.setText("View Vehicle");	
 	}
 	
+	private static void UpdateList() {
+		TableItem ti; // Table item for adding vehicles to the table
+		ArrayList<Vehicle> list = dbInterface.getVehicles();
+		
+		// Stop Drawing Table, Empty Table, Rebuild Table, Start Drawing Table
+		dataTable.setRedraw(false);
+		
+		dataTable.remove(0, dataTable.getItemCount());
+		for( Vehicle v : list) {
+			ti = new TableItem(dataTable, SWT.NONE);
+			ti.setText(v.ToString());
+		}
+		
+		dataTable.setRedraw(true);
+	}
+
 	private static void CreateColumns() {
 		vehicleIDCol = new TableColumn(dataTable, SWT.BORDER);
 		vehicleIDCol.setText("ID");
