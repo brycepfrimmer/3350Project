@@ -246,7 +246,7 @@ public class AddVehicle {
 		String input = textVehicleID.getText();
 		isValid = input.matches("[0-9a-zA-Z]+");
 		if(!isValid){
-			lblVehicleIDWarning.setText("Vehicle ID can only include numbers or letter and no spaces");
+			lblVehicleIDWarning.setText("Vehicle ID can only include numbers and letters and no spaces");
 		}
 		else{
 			lblVehicleIDWarning.setText("");
@@ -288,7 +288,7 @@ public class AddVehicle {
 		String input = textModel.getText();
 		isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+")  && !input.trim().isEmpty();
 		if(!isValid){
-			lblModelWarning.setText("Model can only include numbers or letter");
+			lblModelWarning.setText("Model can only include numbers and letters");
 		}
 		else{
 			lblModelWarning.setText("");
@@ -302,7 +302,7 @@ public class AddVehicle {
 		String input = textYear.getText();
 		isValid = input.matches("[0-9]+") && input.matches("[0-9]*"); 
 		if(!isValid){
-			lblYearWarning.setText("Years only have numbers in them");
+			lblYearWarning.setText("Years can only be represented by a number");
 		}
 		else{
 			lblYearWarning.setText("");
@@ -338,7 +338,7 @@ public class AddVehicle {
 		String input = textInsPolNum.getText();
 		isValid = input.matches("[0-9a-zA-Z]+");
 		if(!isValid){
-			lblInsPolNumWarning.setText("Insurance policy number can only include numbers or letter");
+			lblInsPolNumWarning.setText("Insurance policy number can only include numbers and letters");
 		}
 		else{
 			lblInsPolNumWarning.setText("");
@@ -352,7 +352,7 @@ public class AddVehicle {
 		String input = textInsType.getText();
 		isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+")  && !input.trim().isEmpty();
 		if(!isValid){
-			lblInsTypeWarning.setText("Insurance type can only include numbers or letter");
+			lblInsTypeWarning.setText("Insurance type can only include numbers and letters");
 		}
 		else{
 			lblInsTypeWarning.setText("");
@@ -366,7 +366,7 @@ public class AddVehicle {
 		String input = textKms.getText();
 		isValid = input.matches("[0-9]+") && input.matches("[0-9]*");
 		if(!isValid){
-			lblKmsWarning.setText("Kilometers can only be expressed by numbers");
+			lblKmsWarning.setText("Kilometers can only be represented by numbers");
 		}
 		else{
 			lblKmsWarning.setText("");
@@ -380,7 +380,7 @@ public class AddVehicle {
 		String input = textKmsLS.getText();
 		isValid = input.matches("[0-9]+") && input.matches("[0-9]*");
 		if(!isValid){
-			lblKmsLSWarning.setText("Kilometers last serviced can only be expressed by numbers");
+			lblKmsLSWarning.setText("Kilometers last serviced can only be represented by numbers");
 		}
 		else{
 			lblKmsLSWarning.setText("");
