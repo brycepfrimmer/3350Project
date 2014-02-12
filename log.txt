@@ -58,3 +58,12 @@ Saturday, February 8, 2014
 -Bug fixes
 -Added additional checks
 
+-Delroy Hiebert Feb 11, 2014 - 5 hours
+-Added vailidity checks for adding new vehicle
+-Cloned addVehicle class for editing vehicles
+-Updated vehicle methods
+-Removed private classes from vehicle class into their own file
+-created test classes for all testable files (vehicle, insurance policy, partslist)
+-created test suite to run all test classes
+
+
