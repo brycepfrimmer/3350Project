@@ -231,7 +231,7 @@ public class CMMS {
 		// Stop Drawing Table, Empty Table, Rebuild Table, Start Drawing Table
 		dataTable.setRedraw(false);
 		
-		dataTable.remove(0, dataTable.getItemCount());
+		dataTable.remove(0, dataTable.getItemCount()-1);
 		for( Vehicle v : list) {
 			ti = new TableItem(dataTable, SWT.NONE);
 			//ti.setText(v.ToString());
@@ -316,8 +316,14 @@ public class CMMS {
 		mainWindow.open();
 		
 		while (!mainWindow.isDisposed()) {
-			if (!currDisplay.readAndDispatch()) {
-				currDisplay.sleep();
+			try {
+				if (!currDisplay.readAndDispatch()) {
+					currDisplay.sleep();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println(e.getMessage());
+				System.out.println(e.toString());
 			}
 		}
 	}
