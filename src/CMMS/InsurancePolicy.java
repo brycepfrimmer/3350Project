@@ -1,6 +1,6 @@
 package CMMS;
 
-public final class InsurancePolicy
+public final class InsurancePolicy implements CMMSInterface
 {
 	private String policyNum;
 	private String type;
@@ -44,10 +44,10 @@ public final class InsurancePolicy
 	}
 	
 	public String[] ToStrings() {
-		String[] policy = new String[2];
+		String[] policy = new String[POLICY_FIELD_COUNT];
 		
-		policy[0] = policyNum;
-		policy[1] = type;
+		policy[POLICY_FIELDS.NUMBER.ordinal()] = policyNum;
+		policy[POLICY_FIELDS.TYPE.ordinal()] = type;
 		
 		return policy;
 	}

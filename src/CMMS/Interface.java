@@ -2,9 +2,9 @@ package CMMS;
 
 import java.util.ArrayList;
 
-public interface Interface {
+public class Interface {
 	final StubDB database = new StubDB();
-	/*
+	
 	public void addVehicle(Vehicle vehicle)
 	{
 		database.addVehicle(vehicle);
@@ -35,5 +35,4 @@ public interface Interface {
 	{
 		database.printVehicles();
 	}
-	*/
 }

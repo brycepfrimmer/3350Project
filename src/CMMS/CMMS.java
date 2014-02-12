@@ -29,12 +29,14 @@ import org.eclipse.swt.events.SelectionAdapter;
 
 import java.util.ArrayList;
 
-public class CMMS implements Interface {
+public class CMMS implements CMMSInterface {
 	/* Interface Constants */
 	private static final Point MIN_WINDOW_SIZE = new Point(800,600);
 	private static final String WINDOW_TITLE = "Computerized Maintenance Management System";
 	private static final int LAYOUT_COL_COUNT = 3;
 	private static final int DEFAULT_TABLE_COL_WIDTH = 100; 
+	private static final int TABLE_WIDTH = 2;
+	private static final int TABLE_HEIGHT = 4;
 	
 	private static int currentVehicleCount = 0;
 	
@@ -64,6 +66,7 @@ public class CMMS implements Interface {
 	private static Button searchButton;
 	private static Button addVehicleButton;
 	private static Button removeVehicleButton;
+	private static Button editVehicleButton;
 	private static Button viewVehicleButton;
 	
 	private static Text searchText;
@@ -160,6 +163,7 @@ public class CMMS implements Interface {
 	}
 		
 	private static void CreateControls() {
+		/*
 		searchLabel = new Label(mainWindow, SWT.NONE);
 		searchLabel.setText("Search:");
 		
@@ -175,14 +179,15 @@ public class CMMS implements Interface {
 		gridData.horizontalAlignment = SWT.FILL;
 		searchButton.setLayoutData(gridData);
 		searchButton.setText("Search");
+		*/
 		
 		dataTable = new Table(mainWindow, SWT.FULL_SELECTION | SWT.MULTI | SWT.BORDER);
 		dataTable.setItemCount(currentVehicleCount);
 		dataTable.setHeaderVisible(true);
 		dataTable.setLinesVisible(true);
 		gridData = new GridData();
-		gridData.horizontalSpan = 2;
-		gridData.verticalSpan = 3;
+		gridData.horizontalSpan = TABLE_WIDTH;
+		gridData.verticalSpan = TABLE_HEIGHT;
 		gridData.heightHint = (MIN_WINDOW_SIZE.y / 2);
 		gridData.horizontalAlignment = SWT.FILL;
 		gridData.verticalAlignment = SWT.FILL;
@@ -230,7 +235,7 @@ public class CMMS implements Interface {
 					if (response == SWT.YES) {
 						int[] selections = dataTable.getSelectionIndices();
 						for (int i = 0; i < selected; i++)
-							database.removeVehicle(dataTable.getItem(selections[i]).getText(0));
+							dbInterface.removeVehicle(dataTable.getItem(selections[i]).getText(0));
 					
 						// Update list with the new Vehicles
 						UpdateList();
@@ -245,7 +250,7 @@ public class CMMS implements Interface {
 					
 					if (response == SWT.YES) {
 						// Should only have one item selected
-						database.removeVehicle(dataTable.getItem(dataTable.getSelectionIndex()).getText(0));
+						dbInterface.removeVehicle(dataTable.getItem(dataTable.getSelectionIndex()).getText(0));
 						// Update list with the new Vehicles
 						UpdateList();
 					}
@@ -259,6 +264,14 @@ public class CMMS implements Interface {
 		removeVehicleButton.setLayoutData(gridData);
 		removeVehicleButton.setText("Remove Vehicle");
 		
+		editVehicleButton = new Button(mainWindow, SWT.NONE);
+		gridData = new GridData();
+		gridData.grabExcessVerticalSpace = false;
+		gridData.horizontalAlignment = SWT.FILL;
+		gridData.verticalAlignment = SWT.TOP;
+		editVehicleButton.setLayoutData(gridData);
+		editVehicleButton.setText("Edit Vehicle");
+		
 		viewVehicleButton = new Button(mainWindow, SWT.NONE);
 		gridData = new GridData();
 		gridData.grabExcessVerticalSpace = false;
@@ -271,7 +284,7 @@ public class CMMS implements Interface {
 	private static void UpdateList() {
 		TableItem ti; // Table item for adding vehicles to the table
 		//ArrayList<Vehicle> list = i.getVehicles();
-		ArrayList<Vehicle> list = database.getAllVehicles();
+		ArrayList<Vehicle> list = dbInterface.getVehicles();
 		
 		// Stop Drawing Table, Empty Table, Rebuild Table, Start Drawing Table
 		dataTable.setRedraw(false);

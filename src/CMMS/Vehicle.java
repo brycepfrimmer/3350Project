@@ -14,7 +14,7 @@ package CMMS;
 
 import java.util.ArrayList;
 
-public class Vehicle
+public class Vehicle implements CMMSInterface
 {
 	
 	//Class variables, important information about each object.
@@ -75,26 +75,26 @@ public class Vehicle
 	public String[] ToStrings() {
 		String[] vehicle = new String[13];
 		
-		vehicle[0] = ID;
-		vehicle[1] = type;
-		vehicle[2] = manufacturer;
-		vehicle[3] = model;
-		vehicle[4] = Integer.toString(year);
-		vehicle[5] = Integer.toString(kmDriven);
-		vehicle[6] = Integer.toString(kmLastServiced);
+		vehicle[VEHICLE_FIELDS.ID.ordinal()] = ID;
+		vehicle[VEHICLE_FIELDS.TYPE.ordinal()] = type;
+		vehicle[VEHICLE_FIELDS.MANUFACTURER.ordinal()] = manufacturer;
+		vehicle[VEHICLE_FIELDS.MODEL.ordinal()] = model;
+		vehicle[VEHICLE_FIELDS.YEAR.ordinal()] = Integer.toString(year);
+		vehicle[VEHICLE_FIELDS.KM_DRIVEN.ordinal()] = Integer.toString(kmDriven);
+		vehicle[VEHICLE_FIELDS.KM_LAST_SERVICE.ordinal()] = Integer.toString(kmLastServiced);
 		if(roadWorthy)
-			vehicle[7] = "Yes";
+			vehicle[VEHICLE_FIELDS.ROADWORTHY.ordinal()] = "Yes";
 		else
-			vehicle[7] = "No";
-		vehicle[8] = licensePlate;
+			vehicle[VEHICLE_FIELDS.ROADWORTHY.ordinal()] = "No";
+		vehicle[VEHICLE_FIELDS.LICENSE_PLATE.ordinal()] = licensePlate;
 		String[] temp = insurance.ToStrings();
-		vehicle[9] = temp[0]; // Policy Number
-		vehicle[10] = temp[1]; // Policy Type
+		vehicle[VEHICLE_FIELDS.POLICY_NUMBER.ordinal()] = temp[POLICY_FIELDS.NUMBER.ordinal()]; // Policy Number
+		vehicle[VEHICLE_FIELDS.POLICY_TYPE.ordinal()] = temp[POLICY_FIELDS.NUMBER.ordinal()]; // Policy Type
 		if(operational)
-			vehicle[11] = "Yes";
+			vehicle[VEHICLE_FIELDS.OPERATIONAL.ordinal()] = "Yes";
 		else
-			vehicle[11] = "No";
-		vehicle[12] = Double.toString(fuelEcon);
+			vehicle[VEHICLE_FIELDS.OPERATIONAL.ordinal()] = "No";
+		vehicle[VEHICLE_FIELDS.FUEL_ECON.ordinal()] = Double.toString(fuelEcon);
 		
 		
 		return vehicle;

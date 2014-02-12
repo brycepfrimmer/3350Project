@@ -53,7 +53,7 @@ public class EditVehicle {
 	/**
 	 * Open the window.
 	 */
-	public void open() {
+	public void open(Vehicle v) {
 		Display display = Display.getDefault();
 		createContents();
 		shell.open();

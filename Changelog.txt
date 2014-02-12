@@ -1,0 +1,10 @@
+February 12, 2014
+	-- Darwin Froese --
+	* Reverted back to accessing the database through Interface.java
+	* Created an interface "CMMSInterface.java" that stores an instance of
+	Interface.java that can be accessed by all necessary classes
+	* CMMSInterface.java also has enums to erase the need of a few magic
+	numbers that were consistent between a few classes
+	* Updated access to all necessary classes
+	* Removed (commented out) the search controls from the main interface as they
+	aren't functional yet

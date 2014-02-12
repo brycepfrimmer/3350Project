@@ -11,7 +11,7 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.wb.swt.SWTResourceManager;
 
 
-public class AddVehicle implements Interface {
+public class AddVehicle implements CMMSInterface {
 
 	protected Shell shell;
 	private Text textVehicleID;
@@ -172,7 +172,7 @@ public class AddVehicle implements Interface {
 							textInsPolNum.getText(), textInsType.getText(), new Integer(textKms.getText()), new Integer(textKmsLS.getText()));
 					//Interface temp = new Interface();
 					//temp.addVehicle(newVehicle);
-					database.addVehicle(newVehicle);
+					dbInterface.addVehicle(newVehicle);
 					shell.close();
 				} else {
 					//display message explaining to user what is wrong with their input
