@@ -19,10 +19,4 @@ public interface CMMSInterface {
 		OPERATIONAL,
 		FUEL_ECON
 	}
-	
-	final int POLICY_FIELD_COUNT = 2;
-	enum POLICY_FIELDS {
-		NUMBER,
-		TYPE
-	}
 }

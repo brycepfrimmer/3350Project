@@ -250,7 +250,7 @@ public class CMMS implements CMMSInterface {
 					
 					if (response == SWT.YES) {
 						// Should only have one item selected
-						dbInterface.removeVehicle(dataTable.getItem(dataTable.getSelectionIndex()).getText(0));
+						dbInterface.removeVehicle(dataTable.getItem(dataTable.getSelectionIndex()).getText(VEHICLE_FIELDS.ID.ordinal()));
 						// Update list with the new Vehicles
 						UpdateList();
 					}
@@ -265,6 +265,35 @@ public class CMMS implements CMMSInterface {
 		removeVehicleButton.setText("Remove Vehicle");
 		
 		editVehicleButton = new Button(mainWindow, SWT.NONE);
+		editVehicleButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				int selected = dataTable.getSelectionCount();
+				if (selected == 0) {
+					// Display no selection error
+					MessageBox mb = new MessageBox(mainWindow, SWT.ICON_ERROR | SWT.OK );
+					mb.setMessage("Error: You have not selected a Vehicle to edit.");
+					mb.setText("Editing Vehicles");
+					mb.open();
+				}
+				else if (selected == 1){
+					// Display EditVehicle form
+					Vehicle v = dbInterface.getVehicle(dataTable.getItem(dataTable.getSelectionIndex()).getText(VEHICLE_FIELDS.ID.ordinal()));
+					EditVehicle editWindow = new EditVehicle();
+					editWindow.open(v);			
+					
+					// Update list with the new Vehicles
+					UpdateList();
+				}
+				else {
+					// Display multiple selection error
+					MessageBox mb = new MessageBox(mainWindow, SWT.ICON_ERROR | SWT.OK );
+					mb.setMessage("Error: You have selected too many Vehicles to edit.");
+					mb.setText("Editing Vehicles");
+					mb.open();
+				}
+			}
+		});
 		gridData = new GridData();
 		gridData.grabExcessVerticalSpace = false;
 		gridData.horizontalAlignment = SWT.FILL;

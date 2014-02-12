@@ -37,6 +37,8 @@ public class EditVehicle {
 	private Text textInsPolNumWarning;
 	private Text textInsTypeWarning;
 
+	private Vehicle currVehicle;
+	
 	/**
 	 * Launch the application.
 	 * @param args
@@ -56,6 +58,8 @@ public class EditVehicle {
 	public void open(Vehicle v) {
 		Display display = Display.getDefault();
 		createContents();
+		currVehicle = v;
+		FillFields();
 		shell.open();
 		shell.layout();
 		while (!shell.isDisposed()) {
@@ -63,6 +67,23 @@ public class EditVehicle {
 				display.sleep();
 			}
 		}
+	}
+	
+	// Fill all the controls with the fields from the 
+	// vehicle we were passed in
+	private void FillFields() {
+		textVehicleID.setText(currVehicle.getID());
+		textType.setText(currVehicle.getType());
+		textManufacturer.setText(currVehicle.getManufacturer());
+		textModel.setText(currVehicle.getModel());
+		textYear.setText(Integer.toString(currVehicle.getYear()));
+		textKms.setText(Integer.toString(currVehicle.getKmDriven()));	
+		textKmsLS.setText(Integer.toString(currVehicle.getKmLastServiced()));
+		btnRoadworthy.setSelection(currVehicle.isRoadWorthy());
+		textLPN.setText(currVehicle.getLicensePlate());
+		textInsPolNum.setText(currVehicle.getInsurance().getPolicyNum());		
+		textInsType.setText(currVehicle.getInsurance().getType());
+		btnOperational.setSelection(currVehicle.isOperational());
 	}
 
 	/**
@@ -167,11 +188,8 @@ public class EditVehicle {
 			public void widgetSelected(SelectionEvent e) {
 				boolean good = checkFields();
 				if(good) {
-					Vehicle newVehicle = new Vehicle(textVehicleID.getText(), textType.getText(), textManufacturer.getText(),
-							textModel.getText(), new Integer(textYear.getText()), btnRoadworthy.getSelection(), textLPN.getText(), btnOperational.getSelection(),
-							textInsPolNum.getText(), textInsType.getText(), new Integer(textKms.getText()), new Integer(textKmsLS.getText()));
-					//Interface temp = new Interface();
-					//temp.addVehicle(newVehicle);
+					SetFields();
+					
 					shell.close();
 				} else {
 					//display message explaining to user what is wrong with their input
@@ -241,6 +259,20 @@ public class EditVehicle {
 		textInsTypeWarning.setBounds(399, 309, 193, 21);
 	}
 	
+	private void SetFields() {
+		currVehicle.setID(textVehicleID.getText());
+		currVehicle.setType(textType.getText());
+		currVehicle.setManufacturer(textManufacturer.getText());
+		currVehicle.setModel(textModel.getText()); 
+		currVehicle.setYear(new Integer(textYear.getText())); 
+		currVehicle.setRoadWorthy(btnRoadworthy.getSelection()); 
+		currVehicle.setLicensePlate(textLPN.getText());
+		currVehicle.setOperational(btnOperational.getSelection());
+		currVehicle.setInsurance(textInsPolNum.getText(), textInsType.getText());
+		currVehicle.setKmDriven(new Integer(textKms.getText())); 
+		currVehicle.setKmLastServiced(new Integer(textKmsLS.getText()));
+	}
+
 	private boolean checkFields() {
 		//perform checks on all the fields to make sure they are good
 		boolean fieldsOkay = false;

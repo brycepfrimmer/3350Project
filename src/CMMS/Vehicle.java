@@ -55,7 +55,7 @@ public class Vehicle implements CMMSInterface
 		this.licensePlate = null;
 		this.operational = false;
 		this.year = 0;
-	}//End vehicle()	
+	}//End vehicle()
 	
 	public Vehicle(String ID, String type, String man, String model, int year, boolean roadWorthy,
 			String LPN, boolean op, String policyNum, String policyType, int km, int kmLS) {
@@ -87,9 +87,8 @@ public class Vehicle implements CMMSInterface
 		else
 			vehicle[VEHICLE_FIELDS.ROADWORTHY.ordinal()] = "No";
 		vehicle[VEHICLE_FIELDS.LICENSE_PLATE.ordinal()] = licensePlate;
-		String[] temp = insurance.ToStrings();
-		vehicle[VEHICLE_FIELDS.POLICY_NUMBER.ordinal()] = temp[POLICY_FIELDS.NUMBER.ordinal()]; // Policy Number
-		vehicle[VEHICLE_FIELDS.POLICY_TYPE.ordinal()] = temp[POLICY_FIELDS.NUMBER.ordinal()]; // Policy Type
+		vehicle[VEHICLE_FIELDS.POLICY_NUMBER.ordinal()] = insurance.getPolicyNum(); // Policy Number
+		vehicle[VEHICLE_FIELDS.POLICY_TYPE.ordinal()] = insurance.getType(); // Policy Type
 		if(operational)
 			vehicle[VEHICLE_FIELDS.OPERATIONAL.ordinal()] = "Yes";
 		else

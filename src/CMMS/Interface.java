@@ -15,6 +15,12 @@ public class Interface {
 		database.removeVehicle(id);
 	}
 	
+	public Vehicle getVehicle(String id) {
+		Vehicle temp = database.getVehicle(id);
+		
+		return temp;
+	}
+	
 	public double updateKm( String id, int km, double fuel )
 	{
 		double fuelEcon = 0.0;

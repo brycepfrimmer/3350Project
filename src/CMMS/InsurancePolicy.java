@@ -42,13 +42,4 @@ public final class InsurancePolicy implements CMMSInterface
 		//System.out.println("\tInsurance type: " + this.type);
 		return this.policyNum + "\n" + this.type;
 	}
-	
-	public String[] ToStrings() {
-		String[] policy = new String[POLICY_FIELD_COUNT];
-		
-		policy[POLICY_FIELDS.NUMBER.ordinal()] = policyNum;
-		policy[POLICY_FIELDS.TYPE.ordinal()] = type;
-		
-		return policy;
-	}
 }//End InsurancePolicy Class
