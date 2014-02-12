@@ -27,6 +27,7 @@ public class Vehicle
 	private String licensePlate;
 	private boolean operational;
 	private InsurancePolicy insurance;
+	private int year;
 	
 	/*OptionalFields*/
 	private int kmDriven;
@@ -53,9 +54,10 @@ public class Vehicle
 		this.roadWorthy = false;
 		this.licensePlate = null;
 		this.operational = false;
+		this.year = 0;
 	}//End vehicle()	
 	
-	public Vehicle(String ID, String type, String man, String model, boolean roadWorthy,
+	public Vehicle(String ID, String type, String man, String model, int year, boolean roadWorthy,
 			String LPN, boolean op, String policyNum, String policyType, int km, int kmLS) {
 		this.ID = ID;
 		this.type = type;
@@ -67,6 +69,7 @@ public class Vehicle
 		setInsurance(policyNum, policyType);
 		this.kmDriven = km;
 		this.kmLastServiced = kmLS;
+		this.year = year;
 	}
 	
 	public String[] ToString() {
@@ -88,6 +91,7 @@ public class Vehicle
 		System.out.println("\tType: " + this.getType());
 		System.out.println("\tManufacturer: " + this.getManufacturer());
 		System.out.println("\tModel: " + this.getModel());
+		System.out.println("\tYear: " + this.getYear());
 		
 		System.out.println("\tCurrent kilometers: " + this.getKmDriven());
 		System.out.println("\tKilometers when the vehicle was last serviced: " + this.getKmLastServiced());
@@ -124,6 +128,10 @@ public class Vehicle
 
 	public void setModel(String model) {
 		this.model = model;
+	}
+	
+	public void setYear(int year){
+		this.year = year;
 	}
 
 	public void setRoadWorthy(boolean rw) {
@@ -172,6 +180,10 @@ public class Vehicle
 
 	public String getModel() {
 		return model;
+	}
+	
+	public int getYear(){
+		return year;
 	}
 
 	public int getKmDriven() {
