@@ -1,8 +1,5 @@
-.F
-Time: 0.001
-There was 1 failure:
-1) warning(junit.framework.TestSuite$1)junit.framework.AssertionFailedError: No tests found in junitTest.TestCMMS
+.....................
+Time: 0.003
 
-FAILURES!!!
-Tests run: 1,  Failures: 1,  Errors: 0
+OK (21 tests)
 

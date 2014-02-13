@@ -1,12 +1,11 @@
 package junitTest;
 
-import static org.junit.Assert.*;
 
+import junit.framework.TestCase;
 import CMMS.*;
-
 import org.junit.Test;
 
-public class TestPartsList {
+public class TestPartsList extends TestCase{
 	PartsList list = new PartsList();
 	@Test
 	public void testPartsList() {

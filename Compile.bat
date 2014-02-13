@@ -12,5 +12,5 @@ call SetClassPath
 
 REM @echo off
 javac -d bin\ -cp %classpath% src\org\eclipse\wb\swt\*.java src\cmms\*.java
-REM javac -d bin\ -cp %classpath% src\junitTest\*.java
-
+javac -d bin\ -cp %classpath% src\junitTest\*.java
+PAUSE

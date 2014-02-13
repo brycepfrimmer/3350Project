@@ -4,5 +4,4 @@ call SetClasspath
 
 REM @echo off
 
-java junit.textui.TestRunner junitTest.TestCMMS
-
+java junit.textui.TestRunner junitTest.TestCMMS < AllTests.txt

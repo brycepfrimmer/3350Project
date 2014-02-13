@@ -1,11 +1,12 @@
 package junitTest;
 
 import CMMS.*;
-import static org.junit.Assert.*;
+import junit.framework.TestCase;
+
 
 import org.junit.Test;
 
-public class TestVehicle {
+public class TestVehicle extends TestCase{
 	Vehicle vehicle = new Vehicle("vin236", "car", "Dodge", "Viper", 2004, true, "ADN 518", true, "Policy one", "General", 155000, 1200);
 	
 	@Test

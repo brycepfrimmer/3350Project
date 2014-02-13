@@ -1,2 +1,2 @@
 REM @echo off
-set CLASSPATH=.;bin\;jars\swt.jar;jars\junit.jar;
+set CLASSPATH=.;bin\;lib\swt.jar;lib\junit.jar;lib\org.hamcrest.core_1.1.0.v20090501071000.jar;

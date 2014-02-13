@@ -1,12 +1,10 @@
 package junitTest;
 
-import static org.junit.Assert.*;
-
+import junit.framework.TestCase;
 import CMMS.*;
-
 import org.junit.Test;
 
-public class TestInsurancePolicy {
+public class TestInsurancePolicy extends TestCase {
 	InsurancePolicy policy = new InsurancePolicy("number123", "General");
 	@Test
 	public void testInsurancePolicy() {

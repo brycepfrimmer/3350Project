@@ -1,12 +1,23 @@
 package junitTest;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
 
-@RunWith(Suite.class)
-@SuiteClasses({ TestInsurancePolicy.class, TestPartsList.class,
-		TestVehicle.class })
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 public class TestCMMS {
+	
+	public static TestSuite suite;
+	
+	public static Test suite() {
+		
+		suite = new TestSuite("Tests");
+		suite.addTestSuite(TestInsurancePolicy.class);
+		suite.addTestSuite(TestPartsList.class);
+		suite.addTestSuite(TestVehicle.class);
+		
+		return suite;
+	}
+		
+
 
 }
