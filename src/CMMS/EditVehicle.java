@@ -60,6 +60,7 @@ public class EditVehicle {
 	// vehicle we were passed in
 	private void FillFields() {
 		textVehicleID.setText(currVehicle.getID());
+		shell.setText("Edit " + currVehicle.getID());
 		textType.setText(currVehicle.getType());
 		textManufacturer.setText(currVehicle.getManufacturer());
 		textModel.setText(currVehicle.getModel());
@@ -79,7 +80,6 @@ public class EditVehicle {
 	protected void createContents() {
 		shell = new Shell();
 		shell.setSize(660, 430);
-		shell.setText("SWT Application");
 		
 		Label lblVehicleId = new Label(shell, SWT.NONE);
 		lblVehicleId.setBounds(10, 10, 55, 15);
@@ -137,6 +137,7 @@ public class EditVehicle {
 		btnRoadworthy = new Button(shell, SWT.CHECK);
 		btnRoadworthy.setBounds(10, 236, 113, 16);
 		btnRoadworthy.setText("Roadworthy");
+		
 		
 		Label lblLicensePlateNumber = new Label(shell, SWT.NONE);
 		lblLicensePlateNumber.setBounds(129, 239, 126, 15);

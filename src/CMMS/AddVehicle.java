@@ -73,7 +73,7 @@ public class AddVehicle implements CMMSInterface {
 	protected void createContents() {
 		shell = new Shell();
 		shell.setSize(660, 430);
-		shell.setText("SWT Application");
+		shell.setText("Add Vehicle");
 		
 		Label lblVehicleId = new Label(shell, SWT.NONE);
 		lblVehicleId.setBounds(10, 10, 55, 15);
