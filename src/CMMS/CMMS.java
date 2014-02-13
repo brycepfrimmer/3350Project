@@ -31,7 +31,7 @@ import java.util.ArrayList;
 
 public class CMMS implements CMMSInterface {
 	/* Interface Constants */
-	private static final Point MIN_WINDOW_SIZE = new Point(800,600);
+	private static final Point MIN_WINDOW_SIZE = new Point(600,600);
 	private static final String WINDOW_TITLE = "Computerized Maintenance Management System";
 	private static final int LAYOUT_COL_COUNT = 3;
 	private static final int DEFAULT_TABLE_COL_WIDTH = 100; 
@@ -68,6 +68,7 @@ public class CMMS implements CMMSInterface {
 	private static Button removeVehicleButton;
 	private static Button editVehicleButton;
 	private static Button viewVehicleButton;
+	private static Button quitButton;
 	
 	//private static Text searchText;
 	
@@ -342,7 +343,21 @@ public class CMMS implements CMMSInterface {
 		gridData.horizontalAlignment = SWT.FILL;
 		gridData.verticalAlignment = SWT.TOP;
 		viewVehicleButton.setLayoutData(gridData);
-		viewVehicleButton.setText("View Vehicle");	
+		viewVehicleButton.setText("View Vehicle");
+
+		quitButton = new Button(mainWindow, SWT.NONE);
+		quitButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				System.exit(0);
+			}
+		});
+		gridData = new GridData();
+		gridData.grabExcessVerticalSpace = false;
+		gridData.horizontalAlignment = SWT.FILL;
+		gridData.verticalAlignment = SWT.TOP;
+		quitButton.setLayoutData(gridData);
+		quitButton.setText("Quit");
 	}
 
 	private static void UpdateList() {
@@ -449,6 +464,9 @@ public class CMMS implements CMMSInterface {
 		
 		mainWindow.setLayout(mainLayout);
 		mainWindow.pack();
+		new Label(mainWindow, SWT.NONE);
+		new Label(mainWindow, SWT.NONE);
+
 		mainWindow.open();
 		
 		while (!mainWindow.isDisposed()) {
