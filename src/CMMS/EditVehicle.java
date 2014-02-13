@@ -9,6 +9,8 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.wb.swt.SWTResourceManager;
+import org.eclipse.swt.events.KeyAdapter;
+import org.eclipse.swt.events.KeyEvent;
 
 
 public class EditVehicle {
@@ -137,6 +139,14 @@ public class EditVehicle {
 		btnRoadworthy = new Button(shell, SWT.CHECK);
 		btnRoadworthy.setBounds(10, 236, 113, 16);
 		btnRoadworthy.setText("Roadworthy");
+		btnRoadworthy.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.character == SWT.CR){
+					btnRoadworthy.setSelection(!btnRoadworthy.getSelection());
+				}
+			}
+		});
 		
 		
 		Label lblLicensePlateNumber = new Label(shell, SWT.NONE);
@@ -169,6 +179,14 @@ public class EditVehicle {
 		btnOperational = new Button(shell, SWT.CHECK);
 		btnOperational.setBounds(10, 324, 93, 16);
 		btnOperational.setText("Operational");
+		btnOperational.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.character == SWT.CR){
+					btnOperational.setSelection(!btnOperational.getSelection());
+				}
+			}
+		});
 
 		Button btnUpdate = new Button(shell, SWT.NONE);
 		btnUpdate.addSelectionListener(new SelectionAdapter() {
