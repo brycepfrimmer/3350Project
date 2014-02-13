@@ -9,6 +9,8 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.wb.swt.SWTResourceManager;
+import org.eclipse.swt.events.KeyAdapter;
+import org.eclipse.swt.events.KeyEvent;
 
 
 public class AddVehicle implements CMMSInterface {
@@ -127,6 +129,14 @@ public class AddVehicle implements CMMSInterface {
 		textKmsLS.setBounds(98, 193, 76, 21);
 		
 		btnRoadworthy = new Button(shell, SWT.CHECK);
+		btnRoadworthy.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.character == SWT.CR){
+					btnRoadworthy.setSelection(!btnRoadworthy.getSelection());
+				}
+			}
+		});
 		btnRoadworthy.setBounds(10, 236, 113, 16);
 		btnRoadworthy.setText("Roadworthy");
 		
@@ -158,6 +168,14 @@ public class AddVehicle implements CMMSInterface {
 		label_1.setBounds(10, 220, 558, 2);
 
 		btnOperational = new Button(shell, SWT.CHECK);
+		btnOperational.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.character == SWT.CR){
+					btnOperational.setSelection(!btnOperational.getSelection());
+				}
+			}
+		});
 		btnOperational.setBounds(10, 324, 93, 16);
 		btnOperational.setText("Operational");
 
