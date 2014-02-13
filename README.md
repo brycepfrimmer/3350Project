@@ -19,5 +19,5 @@ Running it with .bat files
 
 	1. Run 'Compile.bat'
 	2. Run 'Run.'bat'
-	3. Run 'RunUnitTests.bat' to run the junit tests
+	3. Run 'RunUnitTests.bat' to run the junit tests (output goes into AllTests.txt)
 
