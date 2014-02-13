@@ -234,6 +234,16 @@ public class Vehicle implements CMMSInterface
 	public void setPartsList() {
 		this.partsList = new PartsList();
 	}
+	
+	public boolean setFuelEcon(double fuelEcon){
+		boolean isValid = false;
+		try{
+			if ( fuelEcon == (double)fuelEcon ){ this.fuelEcon = fuelEcon; isValid = true; }
+		}catch(Exception e){
+			isValid = false;
+		}
+		return isValid;
+	}
 	//***End of set methods***//
 
 

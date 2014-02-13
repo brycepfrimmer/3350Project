@@ -36,7 +36,7 @@ public class CMMS implements CMMSInterface {
 	private static final int LAYOUT_COL_COUNT = 3;
 	private static final int DEFAULT_TABLE_COL_WIDTH = 100; 
 	private static final int TABLE_WIDTH = 2;
-	private static final int TABLE_HEIGHT = 5;
+	private static final int TABLE_HEIGHT = 6;
 	
 	private static int currentVehicleCount = 0;
 	
@@ -68,6 +68,7 @@ public class CMMS implements CMMSInterface {
 	private static Button removeVehicleButton;
 	private static Button editVehicleButton;
 	private static Button viewVehicleButton;
+	private static Button updateKmsButton;
 	private static Button quitButton;
 	
 	//private static Text searchText;
@@ -103,7 +104,7 @@ public class CMMS implements CMMSInterface {
 		mainWindow.setMinimumSize(MIN_WINDOW_SIZE);
 		
 		mainLayout = new GridLayout();
-		mainLayout.numColumns = LAYOUT_COL_COUNT;
+		mainLayout.numColumns = 3;
 		
 		CreateMenus();
 		CreateControls();
@@ -358,21 +359,45 @@ public class CMMS implements CMMSInterface {
 		gridData.verticalAlignment = SWT.TOP;
 		viewVehicleButton.setLayoutData(gridData);
 		viewVehicleButton.setText("View Vehicle");
-
-		quitButton = new Button(mainWindow, SWT.NONE);
-		quitButton.addSelectionListener(new SelectionAdapter() {
+		
+		updateKmsButton = new Button(mainWindow, SWT.NONE);
+		updateKmsButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				mainWindow.close();
-				currDisplay.dispose();
+				int selected = dataTable.getSelectionCount();
+				if (selected == 0) {
+					// Display no selection error
+					MessageBox mb = new MessageBox(mainWindow, SWT.ICON_ERROR | SWT.OK );
+					mb.setMessage("Error: You have not selected a Vehicle to update.");
+					mb.setText("Updating Kilometers");
+					mb.open();
+				}
+				else if (selected == 1){
+					// Display UpdateKilometers form
+					Vehicle v = dbInterface.getVehicle(dataTable.getItem(dataTable.getSelectionIndex()).getText(VEHICLE_FIELDS.ID.ordinal()));
+					UpdateKilometers updateKms = new UpdateKilometers();
+					updateKms.open(v);			
+					
+					// Update list with the new Vehicles
+					UpdateList();
+				}
+				else {
+					// Display multiple selection error
+					MessageBox mb = new MessageBox(mainWindow, SWT.ICON_ERROR | SWT.OK );
+					mb.setMessage("Error: You have selected too many Vehicles to update.");
+					mb.setText("Updating Vehicles");
+					mb.open();
+				}
+				
 			}
 		});
 		gridData = new GridData();
 		gridData.grabExcessVerticalSpace = false;
 		gridData.horizontalAlignment = SWT.FILL;
-		gridData.verticalAlignment = SWT.BOTTOM;
-		quitButton.setLayoutData(gridData);
-		quitButton.setText("Quit");
+		gridData.verticalAlignment = SWT.TOP;
+		updateKmsButton.setLayoutData(gridData);
+		updateKmsButton.setText("Update Kilometers");
+		
 	}
 
 	private static void UpdateList() {
@@ -479,6 +504,22 @@ public class CMMS implements CMMSInterface {
 		
 		mainWindow.setLayout(mainLayout);
 		mainWindow.pack();
+		
+
+		quitButton = new Button(mainWindow, SWT.NONE);
+		quitButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				mainWindow.close();
+				currDisplay.dispose();
+			}
+		});
+		gridData = new GridData();
+		gridData.grabExcessVerticalSpace = false;
+		gridData.horizontalAlignment = SWT.FILL;
+		gridData.verticalAlignment = SWT.BOTTOM;
+		quitButton.setLayoutData(gridData);
+		quitButton.setText("Quit");
 
 		mainWindow.open();
 		
