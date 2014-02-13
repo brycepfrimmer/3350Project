@@ -6,12 +6,17 @@ Little program that outputs a intro message stating the program, designers/devel
 Folder structure:
 
 	-> src is for *.java files
-	-> obj is for *.class files
-	
-This structure let's us seperate java from class files. Class files are compiled into the obj folder 
-by running 
+	-> bin is for *.class files
+	-> lib is fot *.jar files
 
-	javac -d {path/to/folder} {*.java files}
 
-and the program is run by running (currently) CMMS from
-the obj folder.
+Running with .bat files:
+========================
+
+**java must be in your PATH
+
+
+	1. Run 'Compile.bat'
+	2. Run 'Run.'bat'
+	3. Run 'RunUnitTests.bat' to run the junit tests
+
