@@ -36,7 +36,7 @@ public class CMMS implements CMMSInterface {
 	private static final int LAYOUT_COL_COUNT = 3;
 	private static final int DEFAULT_TABLE_COL_WIDTH = 100; 
 	private static final int TABLE_WIDTH = 2;
-	private static final int TABLE_HEIGHT = 4;
+	private static final int TABLE_HEIGHT = 5;
 	
 	private static int currentVehicleCount = 0;
 	
@@ -163,6 +163,20 @@ public class CMMS implements CMMSInterface {
 		helpAboutItem.setText("A&bout");
 	}
 		
+	/***************************************
+	 * Controls are added into a grid layout
+	 * that keeps them structured and in place
+	 * nicely.
+	 * 
+	 * Controls span columns and rows as part
+	 * of the formatting. The table spans 5 rows
+	 * and 2 columns. This leaves one column
+	 * for the buttons on the right and 5 cells
+	 * in the last column for buttons. If we 
+	 * were to use any number less for the row
+	 * spanning, "extra" buttons would start
+	 * in the next row.
+	 ***************************************/
 	private static void CreateControls() {
 		/*
 		searchLabel = new Label(mainWindow, SWT.NONE);
@@ -349,13 +363,14 @@ public class CMMS implements CMMSInterface {
 		quitButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				System.exit(0);
+				mainWindow.close();
+				currDisplay.dispose();
 			}
 		});
 		gridData = new GridData();
 		gridData.grabExcessVerticalSpace = false;
 		gridData.horizontalAlignment = SWT.FILL;
-		gridData.verticalAlignment = SWT.TOP;
+		gridData.verticalAlignment = SWT.BOTTOM;
 		quitButton.setLayoutData(gridData);
 		quitButton.setText("Quit");
 	}
