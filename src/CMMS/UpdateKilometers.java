@@ -51,7 +51,7 @@ public class UpdateKilometers {
 	protected void createContents() {
 		shlUpdateKms = new Shell();
 		shlUpdateKms.setText("Update Kilometers");
-		shlUpdateKms.setSize(462, 168);
+		shlUpdateKms.setSize(508, 168);
 		
 		Label lblKilometers = new Label(shlUpdateKms, SWT.NONE);
 		lblKilometers.setBounds(10, 10, 55, 15);
