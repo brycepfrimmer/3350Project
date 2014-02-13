@@ -10,10 +10,11 @@ Folder structure:
 	-> lib is fot *.jar files
 
 
-Running with .bat files:
-========================
+Running it with .bat files
+-------------------------------------------------------------------------------
 
-**java must be in your PATH
+
+**Note:**java must be in your PATH
 
 
 	1. Run 'Compile.bat'
