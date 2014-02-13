@@ -14,7 +14,7 @@ Running it with .bat files
 -------------------------------------------------------------------------------
 
 
-**Note:**java must be in your PATH
+**Note:** java must be in your PATH
 
 
 	1. Run 'Compile.bat'
