@@ -338,12 +338,21 @@ public class EditVehicle {
 		boolean isValid = false;
 		String input = textLPN.getText();
 		isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+")  && !input.trim().isEmpty();
-		if(!isValid){
+		//checks to see if road worthy button is selected, if so LPN must exist
+		if(btnRoadworthy.getSelection() && input == ""){
+			lblLPNWarning.setText("If a vehicle is road worthy, it must also have a license plate #");
+			isValid = false;
+		}
+		else if(!btnRoadworthy.getSelection() && input == ""){
+			isValid = true;
+		}
+		else if(!isValid){
 			lblLPNWarning.setText("License plate number can only include numbers or letter");
 		}
 		else{
 			lblLPNWarning.setText("");
 		}
+		lblLPNWarning.pack();
 		return isValid;
 	}
 	private boolean checkInsPolNum()
