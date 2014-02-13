@@ -78,6 +78,7 @@ public class EditVehicle {
 
 	/**
 	 * Create contents of the window.
+	 * @wbp.parser.entryPoint
 	 */
 	protected void createContents() {
 		shell = new Shell();
@@ -275,9 +276,6 @@ public class EditVehicle {
 		currVehicle.setLicensePlate(textLPN.getText());
 		currVehicle.setOperational(btnOperational.getSelection());
 		currVehicle.setInsurance(textInsPolNum.getText(), textInsType.getText());
-		if(new Integer(textKms.getText()) != currVehicle.getKmDriven()){
-			currVehicle.setFuelEcon(0.0);
-		}
 		currVehicle.setKmDriven(new Integer(textKms.getText())); 
 		currVehicle.setKmLastServiced(new Integer(textKmsLS.getText()));
 	}
