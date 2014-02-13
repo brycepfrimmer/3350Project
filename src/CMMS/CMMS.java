@@ -68,6 +68,7 @@ public class CMMS implements CMMSInterface {
 	private static Button removeVehicleButton;
 	private static Button editVehicleButton;
 	private static Button viewVehicleButton;
+	private static Button quitButton;
 	
 	//private static Text searchText;
 	
@@ -342,7 +343,21 @@ public class CMMS implements CMMSInterface {
 		gridData.horizontalAlignment = SWT.FILL;
 		gridData.verticalAlignment = SWT.TOP;
 		viewVehicleButton.setLayoutData(gridData);
-		viewVehicleButton.setText("View Vehicle");	
+		viewVehicleButton.setText("View Vehicle");
+
+		quitButton = new Button(mainWindow, SWT.NONE);
+		quitButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				System.exit(0);
+			}
+		});
+		gridData = new GridData();
+		gridData.grabExcessVerticalSpace = false;
+		gridData.horizontalAlignment = SWT.FILL;
+		gridData.verticalAlignment = SWT.TOP;
+		quitButton.setLayoutData(gridData);
+		quitButton.setText("Quit");
 	}
 
 	private static void UpdateList() {
@@ -449,6 +464,7 @@ public class CMMS implements CMMSInterface {
 		
 		mainWindow.setLayout(mainLayout);
 		mainWindow.pack();
+
 		mainWindow.open();
 		
 		while (!mainWindow.isDisposed()) {
