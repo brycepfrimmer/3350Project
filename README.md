@@ -1,8 +1,8 @@
 3350Project
 ===========
 
-Computerized Maintenance Management System application. Allows for companys with fleets of vehicles to input,
-	edit, track and remove vehicles in order to increase productivity and decrease vehicle downtime.
+Computerized Maintenance Management System application. Allows for companies with fleets of vehicles to input,
+	edit, track, and remove vehicles in order to increase productivity and decrease vehicle downtime.
 
 Folder structure:
 
