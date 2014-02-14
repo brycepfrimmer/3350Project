@@ -18,6 +18,7 @@ public class AddPart {
 	private Vehicle currVehicle;
 	private Button btnCancel;
 	private Label lblPart;
+	private Label lblAddWarning;
 
 	/**
 	 * Open the window.
@@ -42,7 +43,7 @@ public class AddPart {
 	protected void createContents() {
 		shlAddPart = new Shell();
 		shlAddPart.setText("Add Part");
-		shlAddPart.setSize(271, 168);
+		shlAddPart.setSize(313, 168);
 		
 		textPart = new Text(shlAddPart, SWT.BORDER);
 		textPart.setBounds(72, 31, 161, 21);
@@ -51,9 +52,13 @@ public class AddPart {
 		btnAddPart.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				SetFields();
-					
-				shlAddPart.close();
+				if(SetFields()){
+					shlAddPart.close();
+				}
+				else{
+					lblAddWarning.setText("That part already exists in the parts list");
+					lblAddWarning.pack();
+				}
 			}
 		});
 		btnAddPart.setBounds(22, 86, 58, 25);
@@ -72,10 +77,15 @@ public class AddPart {
 		lblPart = new Label(shlAddPart, SWT.NONE);
 		lblPart.setBounds(10, 34, 56, 15);
 		lblPart.setText("Part Name");
+		
+		lblAddWarning = new Label(shlAddPart, SWT.NONE);
+		lblAddWarning.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		lblAddWarning.setBounds(72, 58, 161, 15);
 	}
 	
-	private void SetFields() {
-		currVehicle.getPartsList().addPart(textPart.getText());
+	private boolean SetFields() {
+		return currVehicle.getPartsList().addPart(textPart.getText());
+		
 	}
 
 }
