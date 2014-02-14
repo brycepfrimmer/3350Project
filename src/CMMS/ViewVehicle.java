@@ -92,14 +92,13 @@ public class ViewVehicle implements CMMSInterface {
 					  "\n\tInsurance Policy Number: " + info[VEHICLE_FIELDS.POLICY_NUMBER.ordinal()] +
 					  "\n\tInsurance Policy Type: " + info[VEHICLE_FIELDS.POLICY_TYPE.ordinal()] +
 					  "\n\tOperational: " + info[VEHICLE_FIELDS.OPERATIONAL.ordinal()] +
-					  "\n\tFuel Economy: " + info[VEHICLE_FIELDS.FUEL_ECON.ordinal()] +
-					  "\n\n";
+					  "\n\tFuel Economy: " + info[VEHICLE_FIELDS.FUEL_ECON.ordinal()];
 		
-		int boldRange = hdr.length();
+		int hdrBoldRange = hdr.length();		
 				
 		StyleRange textStyle = new StyleRange();
 		textStyle.start = currTextLocation;
-		textStyle.length = boldRange;
+		textStyle.length = hdrBoldRange;
 		textStyle.fontStyle = SWT.BOLD;
 		
 		textDisplay.append(hdr);
@@ -107,6 +106,22 @@ public class ViewVehicle implements CMMSInterface {
 		textDisplay.setStyleRange(textStyle);
 		
 		currTextLocation += hdr.length() + body.length();
+		
+		String partsHdr = "\n\t\tPARTS";
+		int partsBoldRange = partsHdr.length();
+		
+		String parts = vehicleList[vehicleSel].getPartsList().toString() + "\n\n";
+		
+		textStyle = new StyleRange();
+		textStyle.start = currTextLocation;
+		textStyle.length = partsBoldRange;
+		textStyle.fontStyle = SWT.BOLD;
+		
+		textDisplay.append(partsHdr);
+		textDisplay.append(parts);
+		textDisplay.setStyleRange(textStyle);
+		
+		currTextLocation += partsHdr.length() + parts.length();
 	}
 
 	private void CreateControls() {

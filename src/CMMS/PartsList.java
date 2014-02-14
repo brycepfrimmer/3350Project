@@ -15,6 +15,9 @@ public final class PartsList
 	{
 		boolean success = false;
 		success = part != null && !part.trim().isEmpty();
+		if(partsList.contains(part)){
+			success = false;
+		}
 		if (success) { partsList.add(part); }
 		return success;
 	}
@@ -45,7 +48,7 @@ public final class PartsList
 
 		for (String s : partsList)
 		{
-		    listString += s + "\t";
+		    listString += "\n\t\t\t" + s;
 		}
 		
 		return listString;
