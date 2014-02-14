@@ -87,10 +87,20 @@ Saturday, February 8, 2014
 -Modified the interface to the database for allowing adding of vehicles to table
 -Setup adding vehicles to the database
 
+Cody Edwards Feb 11, 2014 - 3 hours
+-Added warning messages to Add Vehicles
+-Cleaned code up
+
 -Darwin Froese Feb 12, 2014 - 2 hours
 -Restructured Interface to StudDB
 -Added the ability to Edit Vehicles
 -Added the ability to View Vehicles
+
+Cody Edwards Feb 13, 2014 - 7 hours
+-Added fuel economy tracking
+-Linked fuel economy to gui
+-Added parts list
+-Parts list now modifiable
 
 =======
 END OF ITERATION 1 SUMMARY:
@@ -98,10 +108,10 @@ END OF ITERATION 1 SUMMARY:
 -Completed Task 2: Created GUI required for project - total 3 days
 -Partially completed Task 3: Can add and remove vehicles, cannot edit vehicles - total 2 days
 -Not completed Task 4: Cannot view and edit vehicle information; push to next iteration.
--Not completed Task 5: cannot view and modify parts list; push to next iteration.
--Not completed Task 6: Cannot track fuel economy; push to next iteration
-Completed Task 7: Only valid data may be entered, object only created when good data is entered - total 1 day
--Partially completed task 8: Class can update fuel economy, but not linked to GUI - total 1 day
--Not completed Task 9: Does not verify updated fuel economy; push to next iteration
+-Completed Task 5: Can view and modify parts list.
+-Completed Task 6: Can track fuel economy. - total 1 day
+-Completed Task 7: Only valid data may be entered, object only created when good data is entered - total 1 day
+-Completed task 8: Class can update fuel economy and linked to GUI - total 2 days
+-Completed Task 9: Does verify updated fuel economy. - total 1 day
 -Completed Task 10: GUI prompts when invalid data is entered - total 2 days
 

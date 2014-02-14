@@ -4,7 +4,6 @@ package CMMS;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Button;
@@ -22,7 +21,6 @@ public class EditPartsList {
 	private Button btnRemove;
 	private Table partsListTable;
 	private PartsList list;
-	private static TableColumn partCol;
 
 	/**
 	 * Open the window.
@@ -128,8 +126,6 @@ public class EditPartsList {
 		partsListTable.setBounds(10, 10, 568, 416);
 		partsListTable.setHeaderVisible(true);
 		partsListTable.setLinesVisible(true);
-//		partCol = new TableColumn(partsListTable, SWT.BORDER);
-//		partCol.setWidth(partsListTable.getGridLineWidth());
 	}
 	
 	private void updateList() {
