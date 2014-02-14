@@ -26,7 +26,6 @@ public class AddPart {
 		Display display = Display.getDefault();
 		createContents();
 		currVehicle = v;
-		FillFields();
 		shlAddPart.open();
 		shlAddPart.layout();
 		while (!shlAddPart.isDisposed()) {
@@ -36,12 +35,6 @@ public class AddPart {
 		}
 	}
 	
-	// Fill all the controls with the fields from the 
-	// vehicle we were passed in
-	private void FillFields() {
-		textPart.setText(Integer.toString(currVehicle.getKmDriven()));	
-	}
-
 	/**
 	 * Create contents of the window.
 	 * @wbp.parser.entryPoint
