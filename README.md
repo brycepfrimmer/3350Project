@@ -41,7 +41,7 @@ Folder structure:
 	-> AllTests.txt is the output from running the tests (see Building and Running with .bat files section below)
 	-> RepoLocation.txt simply contains the URL location of our Github repository
 	-> log.txt is the Project Log File where meeting summaries, the work log, and the Developer Task list is kept.
-	-> Sketch is the current sketch of the software architecture
+	-> Sketch.pdf is the current sketch of the software architecture
 	-> UserStories.pdf - our list of Big user stories followed by a the refined smaller user stories
 
 

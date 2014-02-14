@@ -13,3 +13,7 @@ Repository Location
 
 https://github.com/brycepfrimmer/3350Project
 
+To get source code:
+	1) Navigate to this page
+	2) Copy the HTTPS link on the right hand side of the screen (down a little bit from the top)
+	3) git clone <HTTPS link> into the folder of your choice

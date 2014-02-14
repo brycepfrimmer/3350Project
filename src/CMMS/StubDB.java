@@ -17,7 +17,7 @@ public class StubDB {
             newPL.addPart("BreatheRight A29 Air Filter");
             
             Vehicle temp;
-            temp = new Vehicle("3692481", "Truck", "Ford", "F-150", 2009, true, "ABC 123", true, "abcd1234", "Commuter", 44444, 33333);
+            temp = new Vehicle("3692481", "Truck", "Ford", "F150", 2009, true, "ABC 123", true, "abcd1234", "Commuter", 44444, 33333);
             temp.setPartsList(newPL);
             addVehicle(temp);
             temp = new Vehicle("3692482", "Car", "Fiat", "500", 2012, true, "DEF 456", true, "efgh5678", "BusinessCommercial", 22222, 11111);

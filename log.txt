@@ -9,6 +9,13 @@
                 Zac Medeiros
 ****************************************************
 
+**NOTE: Please see RepoLocation.txt for the location of the repository and instructions on how to get the source files.
+
+ITERATION 0
+
+Summary: Through 3 meeting times we were able to work as a group to complete the Vision Statement and User Stories
+required for the iteration.
+
 ITERATION 1
 
 Meeting 1 - Tuesday, January 28, 2014
@@ -157,6 +164,12 @@ END OF ITERATION 1 SUMMARY:
 - Completed Task 9: Does verify updated fuel economy. - total 1 day
 - Completed Task 10: GUI prompts when invalid data is entered - total 2 days
 - Completed Task 11: Create test classes for project - on going
+
+No detected bugs. Room for improvement in error checking in business classes and interface, and how they communicate and 
+complement each other. In addition:
+	- On main screen, disable buttons when there is no selection instead of throwing a notification error when they do select it
+	- Fix sizing along the top of the list view in the main window to show all of the text in each column
+	- Add a "Quit" or "Close" button on the view vehicle screen
 =======
 "Big" User Stories for Iteration 2:
 Time or Usage based tracking - 5 days
