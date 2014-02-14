@@ -86,7 +86,12 @@ Delroy Hiebert - 1 hour
 	- Bug fixes
 	- Added additional checks (Task 7)
 
-Tuesday February 11, 2014
+Monday, February 10, 2014
+Bryce Pfrimmer - 2 hours
+	- set up add/view screen for vehicles
+	- put in hooks for the vehicles to be printed to the list
+
+Tuesday, February 11, 2014
 Delroy Hiebert - 5 hours
 	- Added vailidity checks for adding new vehicle (Task 7)
 	- Cloned addVehicle class for editing vehicles (Task 4)
@@ -102,13 +107,19 @@ Cody Edwards - 3 hours
 	- Added warning messages to Add Vehicles
 	- Cleaned code up
 
-Wednesday February 12, 2014
+Wednesday, February 12, 2014
 Darwin Froese - 2 hours
 	- Restructured Interface to StudDB
 	- Added the ability to Edit Vehicles
 	- Added the ability to View Vehicles
+Bryce Pfrimmer - 1 hour
+	- bug fix
 
-Thursday February 13, 2014
+Thursday, February 13, 2014
+Zac Medeiros - 5 hours
+	- batch files
+	- testing on windows 64 platform
+	- adjusting test cases to work with bat's
 Cody Edwards Feb 13, 2014 - 7 hours
 	- Cleaned code up
 	- Added overlooked things ie. toggling check boxes with the enter key
@@ -116,6 +127,12 @@ Cody Edwards Feb 13, 2014 - 7 hours
 	- Linked fuel economy to gui
 	- Separate parts list class out of vehicle
 	- Parts list now modifiable
+
+Friday, February 14, 2014
+Zac Medeiros - 4 hours
+	- getting project ready for submission (sketch, formatting code and log/readme files, folder structure, win64 testing)
+Bryce Pfrimmer - 4 hours
+	- getting project ready for submission (sketch, formatting code and log/readme files, folder structure, win64 testing)
 
 =======
 END OF ITERATION 1 SUMMARY:
