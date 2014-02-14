@@ -1,54 +1,68 @@
-IT1
+ITERATION 1
 
 Meeting 1 - Tuesday, January 28, 2014
-- where to put log
-
+Discussed where to put log... Determined our TODO list through discussion. We decided that there were a few things we
+needed to do right away in order for project work later on to go smoothly. These are the items nearer the top of the list.
+We tried to organize the list roughly by importance/what we needed to do first. We also set dates to have the base of our
+code done so that further work could be continued by all. Below are the notes taken during the meeting on what was
+discussed and required. We also set up our Developer task list for the work to be done after the base code was in place.
+This included a rough shot at who was to be in charge of what. Our task list was comprised entirely of smaller parts of
+our user stories and assumed that the project was already set up on Git and was at a place that work could be contributed.
 TODO
-- set up Git - get github accounts and email/FB/Text Bryce username
-- learn to use Git, HSQLDB
-- learn SWT
-- set up Base code - Screen (GUI), classes/objects, readme of all contents for
-  submission
-- Need batch files for testing...
+- set up Git - get Github accounts and email/FB/Text Bryce username
+- learn to use Git
+- learn to use SWT & Windows Builder
+- set up base code - Main Screen (GUI), classes/objects, readme of all contents for submission
 - Need thorough testing, need stub DB (array list?)
-- one week approx. start gui (Feb. 4th)
+- one week approx. start GUI (Feb. 4th)
 - start today basic class files (Jan 28th)
 - start setting up DB (Feb 4th?)
-
+- Need batch files for testing...
 STUFF TO LEARN
+- GIT!
 - SWT (install)
 - JUNIT
-- GIT
-- ECLIPSE
 - Windows Builder (download) drag & drop tool
 
-Tasks for this iteration (iteration 1)
-1-Set up object files/classes for project base - 2 days - Delroy/Cody
+Developer Task List - Iteration 1
+1-Set up object files/classes for project base - 3 days - Delroy/Cody
 2-Create GUI - 3 days - Darwin/Bryce/Zac/Cody/Delroy
-3-Be able to add/remove/view vehicles - 4 days - Darwin/Bryce/Zac
-4-Be able to view vehicle info and then edit it - 4 days - Darwin/Bryce/Zac
-5-Be able to view and modify the parts list - 4 days - Darwin/Bryce/Zac
+3-Be able to add/remove/view vehicles - 2 days - Darwin/Bryce/Zac
+4-Be able to view vehicle info and then edit it GUI - 1 days - Darwin/Bryce/Zac
+5-Be able to view and modify the parts list GUI - 1 days - Darwin/Bryce/Zac
 6-Be able to track fuel economy of vehicles - 1 day - Delroy/Cody
-7-Have set mandatory fields and checks to ensure requirements are met - 3 days - Delroy/Cody
+7-Have set mandatory fields and checks to ensure requirements are met - 1 days - Delroy/Cody
 8-Be able to input fuel and updated distance driven values - 1 day - Delroy/Cody
+/* Not 100% sure if these are going to make it for iteration 1 */
 9-Verify fuel economy against set values to catch errors - 1 day - Delroy/Cody
 10-Have notifications to alert when data entered raises an issue - 1 day - Delroy/Cody
-11-Create test classes for project - on going - Darwin/Bryce/Zac/Cody/Delroy
+/* On-going */
+11-Create test classes for project - on going - ALL
 
 Meeting 2 - Tuesday, February 4, 2014
-- made sure everyone was on git
-- finalized the folder structure of our project
-- created Eclipse project that hooks into Git
-- played around with Windows Builder creating a sample main window for our
-  CMMS
-- pushed all updates to the repo
-- set next meeting for the Thursday of the same week
+We started off by making sure everyone was on git and reasonably comfortable enough to commit and push
+changes to the project. We finalized the folder structure of our project and created Eclipse .project
+and .classpath files so that everyone would be on the same page. We rationalized that aside from the GUI
+portion of the project, we would need a Vehicle, Parts List, and Insurance Policy classes. These were
+decided upon while we brainstormed what exactly would need to be included information wise for each vehicle.
+In our vehicle class, what we ended up deciding upon is included. This changed slightly as we were initially
+building our project but solidified once we ready to integrate the vehicle information into the GUI portion.
+At this point in the meeting we naturally began to break off into a couple of groups to begin working.
+One group began implementing the class structure we would need while the other played around with Windows
+Builder to create the start of our CMMS GUI. After approximately two hours we pushed all updates to the
+Git repository and set our next meeting for the Thursday of the same week.
 
 Meeting 3 - Thursday, February 6, 2014
--Drafted rough outline for required classes.
--Drafted stub database.
--Generated GUI design.
--Set next meeting for next week Tuesday.
+Met and continue to work on our class structure. To clarify ideas we drafted a rough outline for the required
+classes. Breaking off into a few smaller groups we then also began working on creating a stub database and
+continued our work on the main GUI. At this point we needed to decide exactly how our GUI was going to tie into
+the structure our Vehicles. We considered a few different ways of displaying the information (Blocks in a grid,
+labeled by ID) but decided upon a list view where each aspect of the vehicle was listed horizontally beside the
+vehicle ID. After about 2 hours we called the meeting for the night and set the next meeting for next week Tuesday.
+NOTE: between people's scheduling and the state that our project was at we decided that a meeting wouldn't be
+required. We continued to work communicating through our group chat.
+
+Individual Time Log - Iteration 1
 
 Friday, February 7, 2014
 -Delroy Hiebert 2.5 hours (Task 1)
