@@ -40,5 +40,16 @@ public final class PartsList
 		return partsList.isEmpty();
 	}
 	
+	public String toString(){
+		String listString = "";
+
+		for (String s : partsList)
+		{
+		    listString += s + "\t";
+		}
+		
+		return listString;
+	}
+	
 }//End PartsList Class
 
