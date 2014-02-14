@@ -3,13 +3,13 @@ package CMMS;
 /*
  ****************************************************
  *     Computerized Maintenance Management System 
- * 				Designed and Developed By:
- *         		      Bryce Pfrimmer
- *                    Cody Edwards
- *                    Darwin  Froese
- *                    Delroy Hiebert
- *                    Zac Medeiros
- *                  Copyright (c) 2014
+ * 			   Designed and Developed By:
+ *         		    Bryce Pfrimmer
+ *                  Cody Edwards
+ *                  Darwin  Froese
+ *                  Delroy Hiebert
+ *                  Zac Medeiros
+ *              Copyright (c) 2014
  ****************************************************
  */
 
@@ -64,7 +64,8 @@ public class Vehicle implements CMMSInterface {
         this.roadWorthy = roadWorthy;
         this.licensePlate = LPN;
         this.operational = op;
-        setInsurance(policyNum, policyType);
+        boolean ret = setInsurance(policyNum, policyType);
+        if(!ret) { /*System.err.println("INVALID INSURANCE POLICY NUMBER OR TYPE.");*/ }
         this.kmDriven = km;
         this.kmLastServiced = kmLS;
         this.year = year;
@@ -79,24 +80,22 @@ public class Vehicle implements CMMSInterface {
         vehicle[VEHICLE_FIELDS.MANUFACTURER.ordinal()] = manufacturer;
         vehicle[VEHICLE_FIELDS.MODEL.ordinal()] = model;
         vehicle[VEHICLE_FIELDS.YEAR.ordinal()] = Integer.toString(year);
-        vehicle[VEHICLE_FIELDS.KM_DRIVEN.ordinal()] = Integer
-                .toString(kmDriven);
-        vehicle[VEHICLE_FIELDS.KM_LAST_SERVICE.ordinal()] = Integer
-                .toString(kmLastServiced);
-        if (roadWorthy)
+        vehicle[VEHICLE_FIELDS.KM_DRIVEN.ordinal()] = Integer.toString(kmDriven);
+        vehicle[VEHICLE_FIELDS.KM_LAST_SERVICE.ordinal()] = Integer.toString(kmLastServiced);
+        if (roadWorthy) {
             vehicle[VEHICLE_FIELDS.ROADWORTHY.ordinal()] = "Yes";
-        else
+        } else {
             vehicle[VEHICLE_FIELDS.ROADWORTHY.ordinal()] = "No";
+        }
         vehicle[VEHICLE_FIELDS.LICENSE_PLATE.ordinal()] = licensePlate;
-        vehicle[VEHICLE_FIELDS.POLICY_NUMBER.ordinal()] = insurance
-                .getPolicyNum(); // Policy Number
-        vehicle[VEHICLE_FIELDS.POLICY_TYPE.ordinal()] = insurance.getType(); // Policy
-                                                                             // Type
-        if (operational)
+        vehicle[VEHICLE_FIELDS.POLICY_NUMBER.ordinal()] = insurance.getPolicyNum(); // Policy Number
+        vehicle[VEHICLE_FIELDS.POLICY_TYPE.ordinal()] = insurance.getType(); // Policy Type
+        if (operational) {
             vehicle[VEHICLE_FIELDS.OPERATIONAL.ordinal()] = "Yes";
-        else
+        } else {
             vehicle[VEHICLE_FIELDS.OPERATIONAL.ordinal()] = "No";
-        vehicle[VEHICLE_FIELDS.FUEL_ECON.ordinal()] = Double.toString(fuelEcon);
+        }
+        vehicle[VEHICLE_FIELDS.FUEL_ECON.ordinal()] = Integer.toString((int)Math.round(fuelEcon));
 
         return vehicle;
     }
@@ -265,10 +264,14 @@ public class Vehicle implements CMMSInterface {
 
     }
 
-    public void setPartsList() {
+    private void setPartsList() {
         this.partsList = new PartsList();
     }
 
+    public void setPartsList(PartsList newPL) {
+        this.partsList = newPL;
+    }
+    
     // ***End of set methods***//
 
     // ***get data methods***//

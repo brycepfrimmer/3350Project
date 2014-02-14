@@ -3,7 +3,7 @@ package CMMS;
 import java.util.ArrayList;
 
 public class Interface {
-    final private StubDB database = new StubDB();
+    final static private StubDB database = new StubDB();
 
     public void addVehicle(Vehicle vehicle) {
         database.addVehicle(vehicle);

@@ -89,6 +89,7 @@ public class CMMS implements CMMSInterface {
 
     private static void OnLoad() {
         // Read existing database vehicles
+        UpdateList();
     }
 
     private static void CreateWindow() {
@@ -490,7 +491,7 @@ public class CMMS implements CMMSInterface {
         vehicleOperationalCol.setResizable(true);
 
         vehicleFuelEconCol = new TableColumn(dataTable, SWT.BORDER);
-        vehicleFuelEconCol.setText("Fuel Economy");
+        vehicleFuelEconCol.setText("Fuel Economy (L/100km)");
         vehicleFuelEconCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
         vehicleFuelEconCol.setMoveable(true);
         vehicleFuelEconCol.setResizable(true);

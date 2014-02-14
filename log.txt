@@ -1,3 +1,14 @@
+****************************************************
+			Comp 3350 - Term Project
+    Computerized Maintenance Management System 
+ 			Designed and Developed By:
+                Bryce Pfrimmer
+                Cody Edwards
+                Darwin  Froese
+                Delroy Hiebert
+                Zac Medeiros
+****************************************************
+
 ITERATION 1
 
 Meeting 1 - Tuesday, January 28, 2014
@@ -25,18 +36,17 @@ STUFF TO LEARN
 - Windows Builder (download) drag & drop tool
 
 Developer Task List - Iteration 1
-1-Set up object files/classes for project base - 3 days - Delroy/Cody
-2-Create GUI - 3 days - Darwin/Bryce/Zac/Cody/Delroy
-3-Be able to add/remove/view vehicles - 2 days - Darwin/Bryce/Zac
-4-Be able to view vehicle info and then edit it GUI - 1 days - Darwin/Bryce/Zac
-5-Be able to view and modify the parts list GUI - 1 days - Darwin/Bryce/Zac
-6-Be able to track fuel economy of vehicles - 1 day - Delroy/Cody
-7-Have set mandatory fields and checks to ensure requirements are met - 1 days - Delroy/Cody
-8-Be able to input fuel and updated distance driven values - 1 day - Delroy/Cody
-9-Verify fuel economy against set values to catch errors - 1 day - Delroy/Cody
-10-Have notifications to alert when data entered raises an issue - 1 day - Delroy/Cody
-/* On-going */
-11-Create test classes for project - on going - ALL
+1 - Set up object files/classes for project base - 3 days - Delroy/Cody
+2 - Create GUI - 3 days - Darwin/Bryce/Zac/Cody/Delroy
+3 - Be able to add/remove/view vehicles - 2 days - Darwin/Bryce/Zac
+4 - Be able to view vehicle info and then edit it GUI - 1 days - Darwin/Bryce/Zac
+5 - Be able to view and modify the parts list GUI - 1 days - Darwin/Bryce/Zac
+6 - Be able to track fuel economy of vehicles - 1 day - Delroy/Cody
+7 - Have set mandatory fields and checks to ensure requirements are met - 1 days - Delroy/Cody
+8 - Be able to input fuel and updated distance driven values - 1 day - Delroy/Cody
+9 - Verify fuel economy against set values to catch errors - 1 day - Delroy/Cody
+10- Have notifications to alert when data entered raises an issue - 1 day - Delroy/Cody
+11- Create test classes for project - on going - ALL
 
 Meeting 2 - Tuesday, February 4, 2014
 We started off by making sure everyone was on git and reasonably comfortable enough to commit and push
@@ -136,25 +146,29 @@ Bryce Pfrimmer - 4 hours
 
 =======
 END OF ITERATION 1 SUMMARY:
--Completed Task 1: object files and classes required for project - total 2 days
--Completed Task 2: Created GUI required for project - total 3 days
--Completed Task 3: Can add/remove vehicles and can edit vehicles - total 2 days
--Completed Task 4: Can view and edit vehicle information.
--Completed Task 5: Can view and modify parts list.
--Completed Task 6: Can track fuel economy. - total 1 day
--Completed Task 7: Only valid data may be entered, object only created when good data is entered - total 1 day
--Completed task 8: Class can update fuel economy and linked to GUI - total 2 days
--Completed Task 9: Does verify updated fuel economy. - total 1 day
--Completed Task 10: GUI prompts when invalid data is entered - total 2 days
+- Completed Task 1: object files and classes required for project - total 2 days
+- Completed Task 2: Created GUI required for project - total 3 days
+- Completed Task 3: Can add/remove vehicles and can edit vehicles - total 2 days
+- Completed Task 4: Can view and edit vehicle information. - total .5 day
+- Completed Task 5: Can view and modify parts list. - total .5 day
+- Completed Task 6: Can track fuel economy. - total 1 day
+- Completed Task 7: Only valid data may be entered, object only created when good data is entered - total 1 day
+- Completed task 8: Class can update fuel economy and linked to GUI - total 2 days
+- Completed Task 9: Does verify updated fuel economy. - total 1 day
+- Completed Task 10: GUI prompts when invalid data is entered - total 2 days
+- Completed Task 11: Create test classes for project - on going
 =======
+"Big" User Stories for Iteration 2:
+Time or Usage based tracking - 5 days
+Searching - 3 days
+Modifying Vehicle adding criteria - 5 days
+Daily Tasks - 3 days
+For more detail please see "User Stories.pdf"
 
-Tasks (& user stories) for Iteration 2:
--Implement SQL database - 3 days
--Ability to view and edit vehicle information (from last iteration)  - 1 day
--Implement integration tests
--(Major User Story)Ability to see when a vehicle requires servicing and what consequences are to not servicing
-	as well as	possible issues after a certain amount of use- 5 days
--Implement searching for vehicles - 3 day
--Implement ability to modify what information is necessary when adding a vehicle - 5 days
--Ability to add and modify a list of tasks (checklist) that needs to be completed daily - 3 days
+Other Tasks for Iteration 2:
+- Implement SQL database - 3 days
+- Implement integration tests
+
+The four Big user stories listed above are the next four in our list and are the four that we intended to implement in iteration 2.
+As of right now our initial plan hasn't changed at all. This might be different over this next iteration.
 =======

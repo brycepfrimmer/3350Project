@@ -1,0 +1,15 @@
+****************************************************
+			Comp 3350 - Term Project
+    Computerized Maintenance Management System 
+ 			Designed and Developed By:
+                Bryce Pfrimmer
+                Cody Edwards
+                Darwin  Froese
+                Delroy Hiebert
+                Zac Medeiros
+****************************************************
+
+Repository Location
+
+https://github.com/brycepfrimmer/3350Project
+
