@@ -92,7 +92,7 @@ public class ViewVehicle implements CMMSInterface {
 					  "\n\tInsurance Policy Number: " + info[VEHICLE_FIELDS.POLICY_NUMBER.ordinal()] +
 					  "\n\tInsurance Policy Type: " + info[VEHICLE_FIELDS.POLICY_TYPE.ordinal()] +
 					  "\n\tOperational: " + info[VEHICLE_FIELDS.OPERATIONAL.ordinal()] +
-					  "\n\tFuel Economy: " + info[VEHICLE_FIELDS.FUEL_ECON.ordinal()];
+					  "\n\tFuel Economy: " + info[VEHICLE_FIELDS.FUEL_ECON.ordinal()] + " L/100Km";
 		
 		int hdrBoldRange = hdr.length();		
 				
