@@ -1,10 +1,5 @@
-/****
+/*
  * Main window for the CMMS
- * 
- * Contributions
- * Darwin - 1.5hours - February 8, 2014
- * Cody -  couple minutes - February 9, 2014
- * Darwin - 0.5 hours - February 11, 2014
  */
 package CMMS;
 
@@ -18,9 +13,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.TableItem;
-import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Table;
@@ -104,7 +97,7 @@ public class CMMS implements CMMSInterface {
 		mainWindow.setMinimumSize(MIN_WINDOW_SIZE);
 		
 		mainLayout = new GridLayout();
-		mainLayout.numColumns = 3;
+		mainLayout.numColumns = LAYOUT_COL_COUNT;
 		
 		CreateMenus();
 		CreateControls();

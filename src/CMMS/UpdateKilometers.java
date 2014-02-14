@@ -113,8 +113,7 @@ public class UpdateKilometers {
 		fieldsOkay = checkKms() && checkFuelUsage();
 		return fieldsOkay;
 	}
-	
-	
+		
 	private boolean checkKms()
 	{
 		boolean isValid = false;
@@ -132,6 +131,7 @@ public class UpdateKilometers {
 		lblKmsWarning.pack();
 		return isValid;
 	}
+
 	private boolean checkFuelUsage()
 	{
 		boolean isValid = false;

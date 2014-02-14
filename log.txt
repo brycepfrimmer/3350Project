@@ -24,7 +24,6 @@ STUFF TO LEARN
 - JUNIT
 - Windows Builder (download) drag & drop tool
 
-<<<<<<< Updated upstream
 Developer Task List - Iteration 1
 1-Set up object files/classes for project base - 3 days - Delroy/Cody
 2-Create GUI - 3 days - Darwin/Bryce/Zac/Cody/Delroy
@@ -34,12 +33,10 @@ Developer Task List - Iteration 1
 6-Be able to track fuel economy of vehicles - 1 day - Delroy/Cody
 7-Have set mandatory fields and checks to ensure requirements are met - 1 days - Delroy/Cody
 8-Be able to input fuel and updated distance driven values - 1 day - Delroy/Cody
-/* Not 100% sure if these are going to make it for iteration 1 */
 9-Verify fuel economy against set values to catch errors - 1 day - Delroy/Cody
 10-Have notifications to alert when data entered raises an issue - 1 day - Delroy/Cody
 /* On-going */
 11-Create test classes for project - on going - ALL
-=======
 
 Meeting 2 - Tuesday, February 4, 2014
 We started off by making sure everyone was on git and reasonably comfortable enough to commit and push
@@ -67,59 +64,58 @@ required. We continued to work communicating through our group chat.
 Individual Time Log - Iteration 1
 
 Friday, February 7, 2014
--Delroy Hiebert 2.5 hours (Task 1)
--Set up initial Vehicle class
--Optimized vehicle class with specific methods
--Improved reusability
--Cleaned up code
+Delroy Hiebert - 2.5 hours
+	- Set up initial Vehicle class (Task 1)
+	- Optimized vehicle class with specific methods
+	- Improved reusability
+	- Cleaned up code
 
 Saturday, February 8, 2014
--Delroy Hiebert 1 hour 
--Added interface class (Task 1)
-	-MyTest (and GUI) talk to database through interface
--Minor bug fixes
--Added checks for valid data (Task 7)
--Add User Story "Fuel Economy"S
+Delroy Hiebert - 1 hour 
+	- Added interface class (Task 1)
+	- MyTest (and GUI) talk to database through interface
+	- Minor bug fixes
+	- Added checks for valid data (Task 7)
+	- Add User Story "Fuel Economy" to task list
+Darwin Froese - 1.5 hours
+	- Created a basic user interface for the main window (Task 2)
+	- There is a bug in the adding a vehicle code... If you "X out" of all the prompts it adds a "null object" which breaks in the foreach search. FIXED
 
--> Darwin Froese 1.5 Hours (Task 2)
--> Created a basic user interface for the main window
--> There is a bug in the adding a vehicle code... If you "X out" of all the prompts
-	it adds a "null object" which breaks in the foreach search.
-	
--Delroy Hiebert Feb 9, 2014 1 hr 
--Bug fixes
--Added additional checks (Task 7)
+Sunday, February 9, 2014
+Delroy Hiebert - 1 hour
+	- Bug fixes
+	- Added additional checks (Task 7)
 
--Delroy Hiebert Feb 11, 2014 - 5 hours
--Added vailidity checks for adding new vehicle (Task 7)
--Cloned addVehicle class for editing vehicles (Task 4)
--Updated vehicle methods (Task 1)
--Removed private classes from vehicle class into their own file (Task 1)
--created test classes for all testable files (vehicle, insurance policy, partslist) (Task 11)
--created test suite to run all test classes (Task 11)
-<<<<<<< Updated upstream
+Tuesday February 11, 2014
+Delroy Hiebert - 5 hours
+	- Added vailidity checks for adding new vehicle (Task 7)
+	- Cloned addVehicle class for editing vehicles (Task 4)
+	- Updated vehicle methods (Task 1)
+	- Removed private classes from vehicle class into their own file (Task 1)
+	- created test classes for all testable files (vehicle, insurance policy, partslist) (Task 11)
+	- created test suite to run all test classes (Task 11)
+Darwin Froese - 6 hours
+	- Formatted the DataTable properly
+	- Modified the interface to the database for allowing adding of vehicles to table
+	- Set-up adding vehicles to the database
+Cody Edwards - 3 hours
+	- Added warning messages to Add Vehicles
+	- Cleaned code up
 
--Darwin Froese Feb 11, 2014 - 6 hours
--Formatted the DataTable properly
--Modified the interface to the database for allowing adding of vehicles to table
--Setup adding vehicles to the database
+Wednesday February 12, 2014
+Darwin Froese - 2 hours
+	- Restructured Interface to StudDB
+	- Added the ability to Edit Vehicles
+	- Added the ability to View Vehicles
 
-Cody Edwards Feb 11, 2014 - 3 hours
--Added warning messages to Add Vehicles
--Cleaned code up
-
--Darwin Froese Feb 12, 2014 - 2 hours
--Restructured Interface to StudDB
--Added the ability to Edit Vehicles
--Added the ability to View Vehicles
-
+Thursday February 13, 2014
 Cody Edwards Feb 13, 2014 - 7 hours
--Cleaned code up
--Added overlooked things ie. toggling check boxes with the enter key
--Added fuel economy tracking
--Linked fuel economy to gui
--Added parts list
--Parts list now modifiable
+	- Cleaned code up
+	- Added overlooked things ie. toggling check boxes with the enter key
+	- Added fuel economy tracking
+	- Linked fuel economy to gui
+	- Separate parts list class out of vehicle
+	- Parts list now modifiable
 
 =======
 END OF ITERATION 1 SUMMARY:
@@ -134,6 +130,7 @@ END OF ITERATION 1 SUMMARY:
 -Completed Task 9: Does verify updated fuel economy. - total 1 day
 -Completed Task 10: GUI prompts when invalid data is entered - total 2 days
 =======
+
 Tasks (& user stories) for Iteration 2:
 -Implement SQL database - 3 days
 -Ability to view and edit vehicle information (from last iteration)  - 1 day

@@ -406,7 +406,7 @@ public class EditVehicle {
 		String input = textInsType.getText();
 		isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+")  && !input.trim().isEmpty();
 		if(!isValid){
-			textInsTypeWarning.setText("Insurance type can only include numbers or letter");
+			textInsTypeWarning.setText("Insurance type can only include numbers or letters");
 		}
 		else{
 			textInsTypeWarning.setText("");

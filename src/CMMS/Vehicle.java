@@ -1,4 +1,5 @@
 package CMMS;
+
 /*
  ****************************************************
  *     Computerized Maintenance Management System 
@@ -11,7 +12,6 @@ package CMMS;
  *                  Copyright (c) 2014
  ****************************************************
  */
-
 
 public class Vehicle implements CMMSInterface
 {
@@ -294,9 +294,3 @@ public class Vehicle implements CMMSInterface
 		return fuelEcon;
 	}
 }//End Vehicle Class
-	
-	
-	
-	
-	
-	

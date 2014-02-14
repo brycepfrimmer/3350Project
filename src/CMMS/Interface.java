@@ -3,15 +3,13 @@ package CMMS;
 import java.util.ArrayList;
 
 public class Interface {
-	final StubDB database = new StubDB();
+	final private StubDB database = new StubDB();
 	
-	public void addVehicle(Vehicle vehicle)
-	{
+	public void addVehicle(Vehicle vehicle) {
 		database.addVehicle(vehicle);
 	}
 	
-	public void removeVehicle( String id)
-	{
+	public void removeVehicle( String id) {
 		database.removeVehicle(id);
 	}
 	
@@ -21,12 +19,10 @@ public class Interface {
 		return temp;
 	}
 	
-	public double updateKm( String id, int km, double fuel )
-	{
+	public double updateKm( String id, int km, double fuel ) {
 		double fuelEcon = 0.0;
 		Vehicle vehicle = null;
-		if (database.getVehicle(id) != null )
-		{
+		if (database.getVehicle(id) != null ) {
 			vehicle = database.getVehicle(id);
 			fuelEcon = vehicle.updateKm(km, fuel);
 		}
@@ -37,8 +33,7 @@ public class Interface {
 		return database.getAllVehicles();
 	}
 	
-	public void printVehicles()
-	{
+	public void printVehicles() {
 		database.printVehicles();
 	}
 }

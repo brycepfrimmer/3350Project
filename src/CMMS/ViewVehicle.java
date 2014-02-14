@@ -12,16 +12,15 @@ public class ViewVehicle implements CMMSInterface {
 	private final int WINDOW_HEIGHT = 600;
 	private final int MIN_WINDOW_WIDTH = 200;
 	private final int MIN_WINDOW_HEIGHT = 200;
-	
+
 	private Display currDisplay;
 	private Shell viewWindow;
 	private FillLayout mainLayout;
-	
+
 	private StyledText textDisplay;
-	
+
 	private int currTextLocation = 0;
-	
-	private Vehicle currVehicle = null;
+
 	private Vehicle[] vehicleList = null;
 	
 	/* Passing in one vehicle */

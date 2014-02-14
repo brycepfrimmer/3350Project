@@ -54,5 +54,4 @@ public class StubDB {
 			if( vehicle != null ){ vehicle.print(); }
 		}
 	}
-
 }
