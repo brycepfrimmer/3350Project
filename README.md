@@ -10,8 +10,8 @@ Folder structure:
 		src folder contains three packages:
 			1) CMMS
 				-CMMS class is the main program class, from this class everything else gets run
-				-CMMSInterface, AddVehicle, EditVehicle, ViewVehicle are java classes for generating
-					and running the GUI
+				-CMMSInterface, AddVehicle, EditVehicle, ViewVehicle, Addpart, EditPartsList, UpdateKilometers
+					are java classes for generating	and running the GUI
 				-InsurancePolicy, PartsList, Vehicle are object classes for items created by the system
 				-StubDB is the stub database that will be replaced in the next iteration with a 
 					SQL database
