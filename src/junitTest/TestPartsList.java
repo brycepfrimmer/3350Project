@@ -22,12 +22,36 @@ public class TestPartsList extends TestCase{
 		success = list.addPart(null);
 		assertFalse(success);
 		success = list.addPart("part");
+		assertFalse(success);
+	}
+	
+	@Test
+	public void testRemovePart()
+	{
+		list.addPart("part");
+		boolean success = list.removePart("part");
 		assertTrue(success);
-		success = list.addPart("part");
+	}
+	
+	@Test
+	public void testToString()
+	{
+		boolean success = ( list.toString() != null );
 		assertTrue(success);
-		success = list.addPart("part");
+	}
+	
+	@Test
+	public void testIsEmpty()
+	{
+		PartsList newList = new PartsList();
+		boolean success = newList.isEmpty();
 		assertTrue(success);
-		success = list.addPart("part");
+	}
+	
+	@Test
+	public void testGetPartsList()
+	{
+		boolean success = list.getPartsList() != null;
 		assertTrue(success);
 	}
 
