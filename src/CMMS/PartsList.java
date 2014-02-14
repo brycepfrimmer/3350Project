@@ -45,7 +45,7 @@ public final class PartsList
 
 		for (String s : partsList)
 		{
-		    listString += s + "\t";
+		    listString += "\n\t\t\t" + s;
 		}
 		
 		return listString;
