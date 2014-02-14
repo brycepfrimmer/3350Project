@@ -19,6 +19,10 @@ public final class PartsList
 		return success;
 	}
 	
+	public boolean removePart(String part){
+		return partsList.remove(part);
+	}
+	
 	public boolean print()
 	{
 		for( String part : partsList)
@@ -26,6 +30,14 @@ public final class PartsList
 			System.out.println(part);
 		}
 		return true;
+	}
+	
+	public ArrayList<String> getPartsList(){
+		return partsList;
+	}
+	
+	public boolean isEmpty(){
+		return partsList.isEmpty();
 	}
 	
 }//End PartsList Class

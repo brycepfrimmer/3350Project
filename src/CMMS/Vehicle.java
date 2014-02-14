@@ -54,6 +54,7 @@ public class Vehicle implements CMMSInterface
 		this.licensePlate = null;
 		this.operational = false;
 		this.year = 0;
+		setPartsList();
 	}//End vehicle()
 	
 	public Vehicle(String ID, String type, String man, String model, int year, boolean roadWorthy,
@@ -69,6 +70,7 @@ public class Vehicle implements CMMSInterface
 		this.kmDriven = km;
 		this.kmLastServiced = kmLS;
 		this.year = year;
+		setPartsList();
 	}
 	
 	public String[] ToStrings() {
