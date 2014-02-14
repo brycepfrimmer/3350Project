@@ -13,8 +13,30 @@
 
 ITERATION 0
 
-Summary: Through 3 meeting times we were able to work as a group to complete the Vision Statement and User Stories
-required for the iteration.
+Meeting 1: ~1.5 hours Brainstorming project ideas. Decided upon a Vehicle management system.
+Meeting 2: ~2 hours Began to come up with some possible user stories.
+
+Zac Medeiros - 1 hour
+	- wrote up the inital draft of the Vision statement
+Bryce Pfrimmer - 1 hour
+	- kept track of the initial draft of the user stories
+
+Meeting 3: ~1.5 hours Collectively went over the User Stories and Vision statement. Broke up into two groups to do an initial edit of each.
+
+Darwin Froese - 1 hour
+	- put the final touches on the User Stories before submission
+Delroy Hiebert - 1 hour
+	- did the final edit on the Vision statement
+Cody Edwards - 1 hour
+	- put together the final submission and made sure everything was good to go before hand in
+	
+Note: Outside of meetings there was little time involved as much of work was done during the meetings.
+*Missing dates due to late addition to the log
+
+END OF ITERATION 0 SUMMARY:
+- Completed Vision Statement
+- Completed set of initial 12 Big User Stories with 10 smaller user stories for Iteration 1
+For more detail on the User Stories please see "User Stories.pdf"
 
 ITERATION 1
 
