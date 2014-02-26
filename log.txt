@@ -187,17 +187,20 @@ END OF ITERATION 1 SUMMARY:
 - Completed Task 10: GUI prompts when invalid data is entered - total 2 days
 - Completed Task 11: Create test classes for project - on going
 
+BUGS
 No detected bugs. Room for improvement in error checking in business classes and interface, and how they communicate and 
 complement each other. In addition:
 	- On main screen, disable buttons when there is no selection instead of throwing a notification error when they do select it
 	- Fix sizing along the top of the list view in the main window to show all of the text in each column
 	- Add a "Quit" or "Close" button on the view vehicle screen
+	- layout to add/edit vehicle & possible combine them??
 =======
 "Big" User Stories for Iteration 2:
 Time or Usage based tracking - 5 days
 Searching - 3 days
 Modifying Vehicle adding criteria - 5 days
 Daily Tasks - 3 days
+
 For more detail please see "User Stories.pdf"
 
 Other Tasks for Iteration 2:
@@ -207,3 +210,28 @@ Other Tasks for Iteration 2:
 The four Big user stories listed above are the next four in our list and are the four that we intended to implement in iteration 2.
 As of right now our initial plan hasn't changed at all. This might be different over this next iteration.
 =======
+
+ITERATION 2
+
+Meeting 1 - Tuesday, February 25, 2014
+Met up for 30 minutes, discussed the small issues in Iteration 1 (see above BUGS) & determined who was going to work on what for the current
+iteration. Set the next meeting for next Tuesday with the goal of having most of the code working by then. Discussed possibly moving
+some of the Stories from Iteration 3 up to this iteration but decided that we would finish the Stories for Iteration 2 before doing so.
+Set the task list.
+
+Developer Task List - Iteration 2
+1 - Implement HSQLDB - 3 days - Zac
+2 - Implement integration tests and expanding unit tests - 4 days - Delroy
+3 - Add in time or usage based tracking - 5 days - Bryce
+4 - Add in search functionality - 3 days - Darwin
+5 - Include modification of vehicle addition criteria - 5 days - Cody
+6 - Fix small issues from Iteration 1 (see BUGS section in Iteration 1 Summary) - 1 day - Darwin
+7 - Look into hiding/displaying certain columns in the main GUI list view - 1 day - Darwin
+8 - 
+9 - 
+10- 
+11- Create test classes for project - on going - ALL
+
+****NOTE: this task list is merely a start. Other than a couple of them they are "Big" user stories and will need to be broken down into smaller
+tasks. Please perform this breakdown as you see fit as you are working on that section of the program. By no means is this set in stone. Do what
+you can, whatever is left we can handle as a group.
