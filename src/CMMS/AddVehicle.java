@@ -187,16 +187,28 @@ public class AddVehicle implements CMMSInterface {
             @Override
             public void widgetSelected(SelectionEvent e) {
                 boolean good = checkFields();
+                String year = textYear.getText();
+                String kms = textKms.getText();
+                String kmsLS = textKmsLS.getText();
                 if (good) {
-                    Vehicle newVehicle = new Vehicle(textVehicleID.getText(),
-                            textType.getText(), textManufacturer.getText(),
-                            textModel.getText(),
-                            new Integer(textYear.getText()), btnRoadworthy
-                                    .getSelection(), textLPN.getText(),
-                            btnOperational.getSelection(), textInsPolNum
-                                    .getText(), textInsType.getText(),
-                            new Integer(textKms.getText()), new Integer(
-                                    textKmsLS.getText()));
+                    Vehicle newVehicle = new Vehicle();
+                    newVehicle.setID(textVehicleID.getText());
+                    newVehicle.setType(textType.getText()); 
+                    newVehicle.setManufacturer(textManufacturer.getText());
+                    newVehicle.setModel(textModel.getText());
+                    if(year != ""){
+                    	newVehicle.setYear(new Integer(year));
+                    }
+                    newVehicle.setRoadWorthy(btnRoadworthy.getSelection());
+                    newVehicle.setLicensePlate(textLPN.getText());
+                    newVehicle.setOperational(btnOperational.getSelection()); 
+                    newVehicle.setInsurance(textInsPolNum.getText(), textInsType.getText());
+                    if(kms != ""){
+                    	newVehicle.setKmDriven(new Integer(textKms.getText()));
+                    }
+                    if(kmsLS != ""){
+                    	newVehicle.setKmLastServiced(new Integer(textKmsLS.getText()));
+                    }
                     // Interface temp = new Interface();
                     // temp.addVehicle(newVehicle);
                     dbInterface.addVehicle(newVehicle);
@@ -281,9 +293,15 @@ public class AddVehicle implements CMMSInterface {
 
     private boolean checkID() {
         boolean isValid = false;
+        boolean mand = manFields.getId();
         String input = textVehicleID.getText();
-        isValid = input.matches("[0-9a-zA-Z]+");
-        if (manFields.getId() && input == ""){
+        if(mand){
+        	isValid = input.matches("[0-9a-zA-Z]+");
+        }
+        else{
+        	isValid = true;
+        }
+        if (mand && input == ""){
         	lblVehicleIDWarning.setText("Vehicle ID is a required field");
         }
         else if (!isValid) {
@@ -297,9 +315,15 @@ public class AddVehicle implements CMMSInterface {
 
     private boolean checkType() {
         boolean isValid = false;
+        boolean mand = manFields.getType();
         String input = textType.getText();
-        isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+") && !input.trim().isEmpty();
-        if(manFields.getType() && input == ""){
+        if(mand){
+        	isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+") && !input.trim().isEmpty();
+        }
+        else{
+        	isValid = true;
+        }
+        if(mand && input == ""){
         	lblTypeWarning.setText("Vehicle type is a required field");
         }
         else if (!isValid) {
@@ -314,9 +338,15 @@ public class AddVehicle implements CMMSInterface {
 
     private boolean checkManufacturer() {
         boolean isValid = false;
+        boolean mand = manFields.getManufacturer();
         String input = textManufacturer.getText();
-        isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+") && !input.trim().isEmpty();
-        if(manFields.getManufacturer() && input == ""){
+        if(mand){
+        	isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+") && !input.trim().isEmpty();
+        }
+        else{
+        	isValid = true;
+        }
+        if(mand && input == ""){
         	lblManufacturerWarning.setText("Manufacturer is a required field");
         }
         else if (!isValid) {
@@ -331,9 +361,15 @@ public class AddVehicle implements CMMSInterface {
 
     private boolean checkModel() {
         boolean isValid = false;
+        boolean mand = manFields.getModel();
         String input = textModel.getText();
-        isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+") && !input.trim().isEmpty();
-        if (manFields.getModel() && input == ""){
+        if(mand){
+        	isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+") && !input.trim().isEmpty();
+        }
+        else{
+        	isValid = true;
+        }
+        if (mand && input == ""){
         	lblModelWarning.setText("Vehicle Model is a required field");
         }
         else if (!isValid) {
@@ -348,9 +384,15 @@ public class AddVehicle implements CMMSInterface {
 
     private boolean checkYear() {
         boolean isValid = false;
+        boolean mand = manFields.getYear();
         String input = textYear.getText();
-        isValid = input.matches("[0-9]+") && input.matches("[0-9]*");
-        if(manFields.getYear() && input == ""){
+        if(mand){
+        	isValid = input.matches("[0-9]+") && input.matches("[0-9]*");
+        }
+        else{
+        	isValid = true;
+        }
+        if(mand && input == ""){
         	lblYearWarning.setText("Year is a required field");
         }
         else if (!isValid) {
@@ -386,9 +428,15 @@ public class AddVehicle implements CMMSInterface {
 
     private boolean checkInsPolNum() {
         boolean isValid = false;
+        boolean mand = manFields.getInsInfo();
         String input = textInsPolNum.getText();
-        isValid = input.matches("[0-9a-zA-Z]+");
-        if(manFields.getInsInfo() && input == "")
+        if(mand){
+        	isValid = input.matches("[0-9a-zA-Z]+");
+        }
+        else{
+        	isValid = true;
+        }
+        if(mand && input == "")
         {
         	lblInsPolNumWarning.setText("Insurance policy number is a required field");
         }
@@ -404,9 +452,15 @@ public class AddVehicle implements CMMSInterface {
 
     private boolean checkInsType() {
         boolean isValid = false;
+        boolean mand = manFields.getInsInfo();
         String input = textInsType.getText();
-        isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+") && !input.trim().isEmpty();
-        if(manFields.getInsInfo() && input == ""){
+        if(mand){
+        	isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+") && !input.trim().isEmpty();
+        }
+        else{
+        	isValid = true;
+        }
+        if(mand && input == ""){
         	lblInsTypeWarning.setText("Insurance type is a required field");
         }
         else if (!isValid) {
@@ -420,9 +474,15 @@ public class AddVehicle implements CMMSInterface {
 
     private boolean checkKms() {
         boolean isValid = false;
+        boolean mand = manFields.getKmsDriven();
         String input = textKms.getText();
-        isValid = input.matches("[0-9]+") && input.matches("[0-9]*");
-        if (manFields.getKmsDriven() && input == ""){
+        if(mand){
+        	isValid = input.matches("[0-9]+") && input.matches("[0-9]*");
+        }
+        else{
+        	isValid = true;
+        }
+        if (mand && input == ""){
         	lblKmsWarning.setText("Kilometers is a required field");
         }
         else if (!isValid) {
@@ -436,12 +496,18 @@ public class AddVehicle implements CMMSInterface {
 
     private boolean checkKmsLS() {
         boolean isValid = false;
+        boolean mand = manFields.getKmsLastServiced();
         String input = textKmsLS.getText();
-        isValid = input.matches("[0-9]+") && input.matches("[0-9]*");
-        if(manFields.getKmsLastServiced() && input == ""){
+        if(mand){
+        	isValid = input.matches("[0-9]+") && input.matches("[0-9]*");
+        }
+        else{
+        	isValid = true;
+        }
+        if(mand && input == ""){
         	lblKmsLSWarning.setText("Kilometers last serviced is a required field");
         }
-        if (!isValid) {
+        else if (!isValid) {
             lblKmsLSWarning
                     .setText("Kilometers last serviced can only be represented by numbers");
         } else {

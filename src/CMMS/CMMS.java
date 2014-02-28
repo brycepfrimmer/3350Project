@@ -41,10 +41,12 @@ public class CMMS implements CMMSInterface {
     private static Menu mainMenu;
     private static Menu fileMenu;
     private static Menu vehicleMenu;
+    private static Menu optionsMenu;
     private static Menu helpMenu;
-
+    
     private static MenuItem fileMenuHdr;
     private static MenuItem vehicleMenuHdr;
+    private static MenuItem mntmOptions;
     private static MenuItem helpMenuHdr;
 
     private static MenuItem filePrintItem;
@@ -52,6 +54,7 @@ public class CMMS implements CMMSInterface {
     private static MenuItem vehicleAddItem;
     private static MenuItem vehicleRemoveItem;
     private static MenuItem vehicleViewItem;
+    private static MenuItem optionsChangeManFields;
     private static MenuItem helpAboutItem;
 
     // private static Label searchLabel;
@@ -110,6 +113,7 @@ public class CMMS implements CMMSInterface {
 
         CreateFileMenu();
         CreateVehicleMenu();
+        CreateOptionsMenu();
         CreateHelpMenu();
 
         mainWindow.setMenuBar(mainMenu);
@@ -146,17 +150,26 @@ public class CMMS implements CMMSInterface {
         vehicleRemoveItem = new MenuItem(vehicleMenu, SWT.PUSH);
         vehicleRemoveItem.setText("&Remove");
     }
-
-    private static void CreateHelpMenu() {
-        
-        MenuItem mntmOptions = new MenuItem(mainMenu, SWT.CASCADE);
+    
+    private static void CreateOptionsMenu(){
+        mntmOptions = new MenuItem(mainMenu, SWT.CASCADE);
         mntmOptions.setText("Options");
         
-        Menu optionsMenu = new Menu(mntmOptions);
+        optionsMenu = new Menu(mntmOptions);
         mntmOptions.setMenu(optionsMenu);
         
-        MenuItem changeManFields = new MenuItem(optionsMenu, SWT.NONE);
-        changeManFields.setText("Change Mandatory Fields");
+    	optionsChangeManFields = new MenuItem(optionsMenu, SWT.NONE);
+    	optionsChangeManFields.addSelectionListener(new SelectionAdapter() {
+    		@Override
+    		public void widgetSelected(SelectionEvent e) {
+    			ChangeManFields manWindow = new ChangeManFields();
+    			manWindow.open();
+    		}
+    	});
+    	optionsChangeManFields.setText("Change Mandatory Fields");
+    }
+
+    private static void CreateHelpMenu() {
         helpMenuHdr = new MenuItem(mainMenu, SWT.CASCADE);
         helpMenuHdr.setText("&Help");
 

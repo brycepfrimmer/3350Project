@@ -38,17 +38,17 @@ public class Vehicle implements CMMSInterface {
     // ******Vehicle constructor******//
     public Vehicle() {
         // Initially set everything to null
-        this.ID = null;
-        this.type = null;
-        this.manufacturer = null;
-        this.model = null;
+        this.ID = " ";
+        this.type = " ";
+        this.manufacturer = " ";
+        this.model = " ";
         this.kmDriven = 0;
         this.kmLastServiced = 0;
         this.partsList = null;
-        this.insurance = null;
+        insurance = new InsurancePolicy();
         this.fuelEcon = 0.0;
         this.roadWorthy = false;
-        this.licensePlate = null;
+        this.licensePlate = " ";
         this.operational = false;
         this.year = 0;
         setPartsList();
@@ -79,9 +79,24 @@ public class Vehicle implements CMMSInterface {
         vehicle[VEHICLE_FIELDS.TYPE.ordinal()] = type;
         vehicle[VEHICLE_FIELDS.MANUFACTURER.ordinal()] = manufacturer;
         vehicle[VEHICLE_FIELDS.MODEL.ordinal()] = model;
-        vehicle[VEHICLE_FIELDS.YEAR.ordinal()] = Integer.toString(year);
-        vehicle[VEHICLE_FIELDS.KM_DRIVEN.ordinal()] = Integer.toString(kmDriven);
-        vehicle[VEHICLE_FIELDS.KM_LAST_SERVICE.ordinal()] = Integer.toString(kmLastServiced);
+        if(year == 0){
+        	vehicle[VEHICLE_FIELDS.YEAR.ordinal()] = " ";
+        }
+        else{
+        	vehicle[VEHICLE_FIELDS.YEAR.ordinal()] = Integer.toString(year);
+        }
+        if(kmDriven == 0){
+        	vehicle[VEHICLE_FIELDS.KM_DRIVEN.ordinal()] = " ";
+        }
+        else{
+        	vehicle[VEHICLE_FIELDS.KM_DRIVEN.ordinal()] = Integer.toString(kmDriven);
+        }
+        if(kmLastServiced == 0){
+        	vehicle[VEHICLE_FIELDS.KM_LAST_SERVICE.ordinal()] = " ";
+        }
+        else{
+        	vehicle[VEHICLE_FIELDS.KM_LAST_SERVICE.ordinal()] = Integer.toString(kmLastServiced);
+        }
         if (roadWorthy) {
             vehicle[VEHICLE_FIELDS.ROADWORTHY.ordinal()] = "Yes";
         } else {
@@ -151,7 +166,7 @@ public class Vehicle implements CMMSInterface {
 
     public boolean setID(String id) {
         boolean isValid = false;
-        isValid = id != null && id.matches("[0-9a-zA-Z]+");
+        isValid = id != null && id != "" && id.matches("[0-9a-zA-Z]+");
         if (isValid) {
             this.ID = id;
         }
@@ -161,7 +176,7 @@ public class Vehicle implements CMMSInterface {
     public boolean setType(String type) {
 
         boolean isValid = false;
-        isValid = type != null && type.matches("[0-9a-zA-Z.*\\s+.*]+")
+        isValid = type != null && type != "" && type.matches("[0-9a-zA-Z.*\\s+.*]+")
                 && !type.trim().isEmpty();
         if (isValid) {
             this.type = type;
@@ -172,7 +187,7 @@ public class Vehicle implements CMMSInterface {
     public boolean setManufacturer(String man) {
 
         boolean isValid = false;
-        isValid = man != null && man.matches("[0-9a-zA-Z.*\\s+.*]+")
+        isValid = man != null && man != "" && man.matches("[0-9a-zA-Z.*\\s+.*]+")
                 && !man.trim().isEmpty();
         if (isValid) {
             this.manufacturer = man;
@@ -183,7 +198,7 @@ public class Vehicle implements CMMSInterface {
     public boolean setModel(String model) {
 
         boolean isValid = false;
-        isValid = model != null && model.matches("[0-9a-zA-Z.*\\s+.*]+")
+        isValid = model != null && model != "" && model.matches("[0-9a-zA-Z.*\\s+.*]+")
                 && !model.trim().isEmpty();
         if (isValid) {
             this.model = model;
@@ -212,7 +227,7 @@ public class Vehicle implements CMMSInterface {
 
     public boolean setLicensePlate(String LPN) {
         boolean isValid = false;
-        isValid = LPN != null && LPN.matches("[0-9a-zA-Z.*\\s+.*]+")
+        isValid = LPN != null && LPN != "" && LPN.matches("[0-9a-zA-Z.*\\s+.*]+")
                 && !LPN.trim().isEmpty();
         if (isValid) {
             this.licensePlate = LPN;
@@ -227,7 +242,7 @@ public class Vehicle implements CMMSInterface {
 
     public boolean setInsurance(String policyNum, String type) {
         boolean isValid = false;
-        isValid = policyNum != null && type != null
+        isValid = policyNum != null && policyNum != "" && type != null && type != ""
                 && policyNum.matches("[0-9a-zA-Z]+")
                 && type.matches("[0-9a-zA-Z.*\\s+.*]+")
                 && !type.trim().isEmpty();

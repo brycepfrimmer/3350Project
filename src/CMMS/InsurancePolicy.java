@@ -4,6 +4,11 @@ public final class InsurancePolicy implements CMMSInterface {
     private String policyNum;
     private String type;
 
+    public InsurancePolicy(){
+    	this.policyNum = " ";
+    	this.type = " ";
+    }
+    
     public InsurancePolicy(String pNum, String message) {
         this.policyNum = pNum;
         this.type = message;
