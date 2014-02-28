@@ -6,6 +6,7 @@ public class StubDB {
 
     private ArrayList<Vehicle> vehicles;
     private static int countNew = 0;
+    private ManFields manFields;
 
     public StubDB() {
         if (countNew == 0) {
@@ -31,6 +32,7 @@ public class StubDB {
             addVehicle(temp);
             countNew++;
         }
+        manFields = new ManFields();
     }
 
     public void removeVehicle(String id) {
@@ -69,4 +71,9 @@ public class StubDB {
             }
         }
     }
+
+	public ManFields getManFields() {
+		return manFields;
+	}
+	
 }

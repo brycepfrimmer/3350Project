@@ -37,6 +37,8 @@ public class AddVehicle implements CMMSInterface {
     private Label lblLPNWarning;
     private Label lblInsPolNumWarning;
     private Label lblInsTypeWarning;
+    
+    private ManFields manFields;
 
     /**
      * Launch the application.
@@ -57,6 +59,7 @@ public class AddVehicle implements CMMSInterface {
      */
     public void open() {
         Display display = Display.getDefault();
+        manFields = dbInterface.getManFields();
         createContents();
         shell.open();
         shell.layout();
@@ -280,9 +283,11 @@ public class AddVehicle implements CMMSInterface {
         boolean isValid = false;
         String input = textVehicleID.getText();
         isValid = input.matches("[0-9a-zA-Z]+");
-        if (!isValid) {
-            lblVehicleIDWarning
-                    .setText("Vehicle ID can only include numbers and letters and no spaces");
+        if (manFields.getId() && input == ""){
+        	lblVehicleIDWarning.setText("Vehicle ID is a required field");
+        }
+        else if (!isValid) {
+            lblVehicleIDWarning.setText("Vehicle ID can only include numbers and letters and no spaces");
         } else {
             lblVehicleIDWarning.setText("");
         }
@@ -293,11 +298,14 @@ public class AddVehicle implements CMMSInterface {
     private boolean checkType() {
         boolean isValid = false;
         String input = textType.getText();
-        isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+")
-                && !input.trim().isEmpty();
-        if (!isValid) {
+        isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+") && !input.trim().isEmpty();
+        if(manFields.getType() && input == ""){
+        	lblTypeWarning.setText("Vehicle type is a required field");
+        }
+        else if (!isValid) {
             lblTypeWarning.setText("Type can only include numbers and letters");
-        } else {
+        } 
+        else {
             lblTypeWarning.setText("");
         }
         lblTypeWarning.pack();
@@ -307,12 +315,14 @@ public class AddVehicle implements CMMSInterface {
     private boolean checkManufacturer() {
         boolean isValid = false;
         String input = textManufacturer.getText();
-        isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+")
-                && !input.trim().isEmpty();
-        if (!isValid) {
-            lblManufacturerWarning
-                    .setText("Manufacturer can only include numbers and letters");
-        } else {
+        isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+") && !input.trim().isEmpty();
+        if(manFields.getManufacturer() && input == ""){
+        	lblManufacturerWarning.setText("Manufacturer is a required field");
+        }
+        else if (!isValid) {
+            lblManufacturerWarning.setText("Manufacturer can only include numbers and letters");
+        } 
+        else {
             lblManufacturerWarning.setText("");
         }
         lblManufacturerWarning.pack();
@@ -322,9 +332,11 @@ public class AddVehicle implements CMMSInterface {
     private boolean checkModel() {
         boolean isValid = false;
         String input = textModel.getText();
-        isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+")
-                && !input.trim().isEmpty();
-        if (!isValid) {
+        isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+") && !input.trim().isEmpty();
+        if (manFields.getModel() && input == ""){
+        	lblModelWarning.setText("Vehicle Model is a required field");
+        }
+        else if (!isValid) {
             lblModelWarning
                     .setText("Model can only include numbers and letters");
         } else {
@@ -338,7 +350,10 @@ public class AddVehicle implements CMMSInterface {
         boolean isValid = false;
         String input = textYear.getText();
         isValid = input.matches("[0-9]+") && input.matches("[0-9]*");
-        if (!isValid) {
+        if(manFields.getYear() && input == ""){
+        	lblYearWarning.setText("Year is a required field");
+        }
+        else if (!isValid) {
             lblYearWarning.setText("Years can only be represented by a number");
         } else {
             lblYearWarning.setText("");
@@ -373,10 +388,14 @@ public class AddVehicle implements CMMSInterface {
         boolean isValid = false;
         String input = textInsPolNum.getText();
         isValid = input.matches("[0-9a-zA-Z]+");
-        if (!isValid) {
-            lblInsPolNumWarning
-                    .setText("Insurance policy number can only include numbers and letters");
-        } else {
+        if(manFields.getInsInfo() && input == "")
+        {
+        	lblInsPolNumWarning.setText("Insurance policy number is a required field");
+        }
+        else if (!isValid) {
+            lblInsPolNumWarning.setText("Insurance policy number can only include numbers and letters");
+        } 
+        else {
             lblInsPolNumWarning.setText("");
         }
         lblInsPolNumWarning.pack();
@@ -386,11 +405,12 @@ public class AddVehicle implements CMMSInterface {
     private boolean checkInsType() {
         boolean isValid = false;
         String input = textInsType.getText();
-        isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+")
-                && !input.trim().isEmpty();
-        if (!isValid) {
-            lblInsTypeWarning
-                    .setText("Insurance type can only include numbers and letters");
+        isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+") && !input.trim().isEmpty();
+        if(manFields.getInsInfo() && input == ""){
+        	lblInsTypeWarning.setText("Insurance type is a required field");
+        }
+        else if (!isValid) {
+            lblInsTypeWarning.setText("Insurance type can only include numbers and letters");
         } else {
             lblInsTypeWarning.setText("");
         }
@@ -402,9 +422,11 @@ public class AddVehicle implements CMMSInterface {
         boolean isValid = false;
         String input = textKms.getText();
         isValid = input.matches("[0-9]+") && input.matches("[0-9]*");
-        if (!isValid) {
-            lblKmsWarning
-                    .setText("Kilometers can only be represented by numbers");
+        if (manFields.getKmsDriven() && input == ""){
+        	lblKmsWarning.setText("Kilometers is a required field");
+        }
+        else if (!isValid) {
+            lblKmsWarning.setText("Kilometers can only be represented by numbers");
         } else {
             lblKmsWarning.setText("");
         }
@@ -416,6 +438,9 @@ public class AddVehicle implements CMMSInterface {
         boolean isValid = false;
         String input = textKmsLS.getText();
         isValid = input.matches("[0-9]+") && input.matches("[0-9]*");
+        if(manFields.getKmsLastServiced() && input == ""){
+        	lblKmsLSWarning.setText("Kilometers last serviced is a required field");
+        }
         if (!isValid) {
             lblKmsLSWarning
                     .setText("Kilometers last serviced can only be represented by numbers");

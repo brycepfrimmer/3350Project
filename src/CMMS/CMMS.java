@@ -148,6 +148,15 @@ public class CMMS implements CMMSInterface {
     }
 
     private static void CreateHelpMenu() {
+        
+        MenuItem mntmOptions = new MenuItem(mainMenu, SWT.CASCADE);
+        mntmOptions.setText("Options");
+        
+        Menu optionsMenu = new Menu(mntmOptions);
+        mntmOptions.setMenu(optionsMenu);
+        
+        MenuItem changeManFields = new MenuItem(optionsMenu, SWT.NONE);
+        changeManFields.setText("Change Mandatory Fields");
         helpMenuHdr = new MenuItem(mainMenu, SWT.CASCADE);
         helpMenuHdr.setText("&Help");
 

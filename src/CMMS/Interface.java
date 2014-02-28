@@ -18,6 +18,10 @@ public class Interface {
 
         return temp;
     }
+    
+    public ManFields getManFields(){
+    	return database.getManFields();
+    }
 
     public double updateKm(String id, int km, double fuel) {
         double fuelEcon = 0.0;
