@@ -1,6 +1,10 @@
-package CMMS;
+package databaseInterface;
 
 import java.util.ArrayList;
+
+import objects.ManFields;
+import objects.StubDB;
+import objects.Vehicle;
 
 public class Interface {
     final static private StubDB database = new StubDB();

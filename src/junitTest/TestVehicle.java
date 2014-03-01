@@ -1,7 +1,7 @@
 package junitTest;
 
-import CMMS.*;
 import junit.framework.TestCase;
+import objects.Vehicle;
 
 import org.junit.Test;
 

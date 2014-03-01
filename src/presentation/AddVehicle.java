@@ -1,4 +1,7 @@
-package CMMS;
+package presentation;
+
+import objects.ManFields;
+import objects.Vehicle;
 
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
@@ -11,6 +14,8 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
+
+import businessLogic.CMMSInterface;
 
 public class AddVehicle implements CMMSInterface {
 

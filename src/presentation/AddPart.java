@@ -1,4 +1,6 @@
-package CMMS;
+package presentation;
+
+import objects.Vehicle;
 
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;

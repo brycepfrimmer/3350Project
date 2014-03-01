@@ -1,4 +1,7 @@
-package CMMS;
+package presentation;
+
+import objects.PartsList;
+import objects.Vehicle;
 
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.MessageBox;

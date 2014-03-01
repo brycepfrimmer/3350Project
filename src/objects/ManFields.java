@@ -1,4 +1,4 @@
-package CMMS;
+package objects;
 
 public class ManFields {
 	private boolean id;

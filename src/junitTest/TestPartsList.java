@@ -1,7 +1,8 @@
 package junitTest;
 
 import junit.framework.TestCase;
-import CMMS.*;
+import objects.PartsList;
+
 import org.junit.Test;
 
 public class TestPartsList extends TestCase {

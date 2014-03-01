@@ -1,7 +1,9 @@
 /*
  * Main window for the CMMS
  */
-package CMMS;
+package presentation;
+
+import objects.Vehicle;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
@@ -19,6 +21,9 @@ import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.events.SelectionAdapter;
+
+import businessLogic.CMMSInterface;
+import businessLogic.CMMSInterface.VEHICLE_FIELDS;
 
 import java.util.ArrayList;
 

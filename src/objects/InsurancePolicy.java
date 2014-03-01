@@ -1,4 +1,6 @@
-package CMMS;
+package objects;
+
+import businessLogic.CMMSInterface;
 
 public final class InsurancePolicy implements CMMSInterface {
     private String policyNum;

@@ -1,4 +1,7 @@
-package CMMS;
+package objects;
+
+import businessLogic.CMMSInterface;
+import businessLogic.CMMSInterface.VEHICLE_FIELDS;
 
 /*
  ****************************************************

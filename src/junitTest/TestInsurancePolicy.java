@@ -1,7 +1,8 @@
 package junitTest;
 
 import junit.framework.TestCase;
-import CMMS.*;
+import objects.InsurancePolicy;
+
 import org.junit.Test;
 
 public class TestInsurancePolicy extends TestCase {

@@ -1,4 +1,6 @@
-package CMMS;
+package presentation;
+
+import objects.Vehicle;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyleRange;
@@ -6,6 +8,9 @@ import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+
+import businessLogic.CMMSInterface;
+import businessLogic.CMMSInterface.VEHICLE_FIELDS;
 
 public class ViewVehicle implements CMMSInterface {
     private final int WINDOW_WIDTH = 800;
