@@ -6,6 +6,10 @@ package presentation;
 import objects.Vehicle;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.FocusAdapter;
+import org.eclipse.swt.events.FocusEvent;
+import org.eclipse.swt.events.KeyAdapter;
+import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Point;
@@ -13,6 +17,9 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.TableItem;
@@ -23,7 +30,6 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.events.SelectionAdapter;
 
 import businessLogic.CMMSInterface;
-import businessLogic.CMMSInterface.VEHICLE_FIELDS;
 
 import java.util.ArrayList;
 
@@ -31,12 +37,14 @@ public class CMMS implements CMMSInterface {
     /* Interface Constants */
     private static final Point MIN_WINDOW_SIZE = new Point(800, 600);
     private static final String WINDOW_TITLE = "Computerized Maintenance Management System";
-    private static final int LAYOUT_COL_COUNT = 3;
+    private static final String SEARCH_TEXT_DEFAULT = "Search For...";
+    private static final int LAYOUT_COL_COUNT = 4;
     private static final int DEFAULT_TABLE_COL_WIDTH = 100;
-    private static final int TABLE_WIDTH = 2;
+    private static final int TABLE_WIDTH = 3;
     private static final int TABLE_HEIGHT = 6;
 
     private static int currentVehicleCount = 0;
+    private static boolean searching = false;
 
     private static Display currDisplay;
     private static Shell mainWindow;
@@ -62,9 +70,9 @@ public class CMMS implements CMMSInterface {
     private static MenuItem optionsChangeManFields;
     private static MenuItem helpAboutItem;
 
-    // private static Label searchLabel;
+    private static Label searchLabel;
 
-    // private static Button searchButton;
+    private static Button searchButton;
     private static Button addVehicleButton;
     private static Button removeVehicleButton;
     private static Button editVehicleButton;
@@ -72,7 +80,8 @@ public class CMMS implements CMMSInterface {
     private static Button updateKmsButton;
     private static Button quitButton;
 
-    // private static Text searchText;
+    private static Text searchText;
+    private static Combo searchCombo;
 
     private static Table dataTable;
     private static TableColumn vehicleIDCol;
@@ -88,6 +97,22 @@ public class CMMS implements CMMSInterface {
     private static TableColumn vehicleOperationalCol;
     private static TableColumn vehicleRoadWorthyCol;
     private static TableColumn vehicleYearCol;
+    
+    private static String[] columnHeaders = {
+    	"ID",
+        "Type",
+        "Manufacturer",
+        "Model",
+        "Year",
+        "Kilometers",
+        "Last service (KM)",
+        "Is Roadworthy",
+        "License Plate",
+        "Insurance Policy Number",
+        "Insurance Policy Type",
+        "Is Operational",
+        "Fuel Economy (L/100km)"
+    };
 
     public static void main(String[] args) {
         CreateWindow();
@@ -104,10 +129,13 @@ public class CMMS implements CMMSInterface {
         mainWindow = new Shell();
         mainWindow.setText(WINDOW_TITLE);
         mainWindow.setMinimumSize(MIN_WINDOW_SIZE);
+        mainWindow.setFocus();      
 
         mainLayout = new GridLayout();
         mainLayout.numColumns = LAYOUT_COL_COUNT;
 
+        currDisplay = Display.getDefault();
+        
         CreateMenus();
         CreateControls();
         CreateColumns();
@@ -195,20 +223,63 @@ public class CMMS implements CMMSInterface {
      * less for the row spanning, "extra" buttons would start in the next row.
      ***************************************/
     private static void CreateControls() {
-        /*
-         * searchLabel = new Label(mainWindow, SWT.NONE);
-         * searchLabel.setText("Search:");
-         * 
-         * searchText = new Text(mainWindow, SWT.BORDER); gridData = new
-         * GridData(); gridData.horizontalAlignment = SWT.FILL;
-         * gridData.grabExcessHorizontalSpace = true;
-         * searchText.setLayoutData(gridData);
-         * searchText.setText("Search For...");
-         * 
-         * searchButton = new Button(mainWindow, SWT.NONE); gridData = new
-         * GridData(); gridData.horizontalAlignment = SWT.FILL;
-         * searchButton.setLayoutData(gridData); searchButton.setText("Search");
-         */
+        searchLabel = new Label(mainWindow, SWT.NONE);
+        searchLabel.setText("Search:");
+        
+        searchCombo = new Combo(mainWindow, SWT.NONE);
+        for (String s : columnHeaders)
+        	searchCombo.add(s);
+        
+        searchText = new Text(mainWindow, SWT.BORDER); 
+        searchText.addFocusListener(new FocusAdapter() {
+        	@Override
+        	public void focusGained(FocusEvent e) {
+        		searchText.setText("");
+        		searching = true;
+        	}
+        	@Override
+        	public void focusLost(FocusEvent e) {
+        		if (searchText.getText().compareTo("") == 0 || 
+        			searchText.getText().compareTo("\t") == 0)
+        			searchText.setText(SEARCH_TEXT_DEFAULT);
+        		searching = false;
+        	}
+        });
+        searchText.addKeyListener(new KeyAdapter() {
+        	@Override
+        	public void keyPressed(KeyEvent e) {
+        		if (e.keyCode == SWT.CR) {
+        			if (searching && searchText.getText().compareTo("") != 0) {
+        				searchButton.notifyListeners(SWT.Selection, null);
+        			}
+        		}
+    			else {
+    				if (searchText.getText().compareTo(SEARCH_TEXT_DEFAULT) == 0)
+    					searchText.setText("");
+    			}
+        	}
+        });
+        gridData = new GridData();
+        gridData.horizontalAlignment = SWT.FILL;
+        gridData.grabExcessHorizontalSpace = true;
+        searchText.setLayoutData(gridData);
+        searchText.setText(SEARCH_TEXT_DEFAULT);
+        
+        searchButton = new Button(mainWindow, SWT.NONE); 
+        searchButton.addSelectionListener(new SelectionAdapter() {
+        	@Override
+        	public void widgetSelected(SelectionEvent e) {
+        		// Search for Stuff
+        		Vehicle[] v = dbInterface.search(searchCombo.getText(), searchText.getText());
+                ViewVehicle viewWindow = new ViewVehicle();
+                viewWindow.open(v);
+        		// Display Search Results
+            	searchText.setText(SEARCH_TEXT_DEFAULT);
+        	}
+        });
+        gridData = new GridData();
+        gridData.horizontalAlignment = SWT.FILL;
+        searchButton.setLayoutData(gridData); searchButton.setText("Search");
 
         dataTable = new Table(mainWindow, SWT.FULL_SELECTION | SWT.MULTI
                 | SWT.BORDER);
@@ -350,17 +421,12 @@ public class CMMS implements CMMSInterface {
                     mb.setText("Viewing Vehicles");
                     mb.open();
                 } else if (selected == 1) {
-                    // Display EditVehicle form
                     Vehicle v = dbInterface.getVehicle(dataTable.getItem(
                             dataTable.getSelectionIndex()).getText(
                             VEHICLE_FIELDS.ID.ordinal()));
                     ViewVehicle viewWindow = new ViewVehicle();
                     viewWindow.open(v);
-
-                    // Update list with the new Vehicles
-                    UpdateList();
                 } else {
-                    // Display multiple vehicles
                     int[] selections = dataTable.getSelectionIndices();
                     Vehicle[] v = new Vehicle[selections.length];
 
@@ -370,9 +436,6 @@ public class CMMS implements CMMSInterface {
                                 VEHICLE_FIELDS.ID.ordinal()));
                     ViewVehicle viewWindow = new ViewVehicle();
                     viewWindow.open(v);
-
-                    // Update list with the new Vehicles
-                    UpdateList();
                 }
             }
         });
@@ -422,9 +485,23 @@ public class CMMS implements CMMSInterface {
         gridData.verticalAlignment = SWT.TOP;
         updateKmsButton.setLayoutData(gridData);
         updateKmsButton.setText("Update Kilometers");
-
+        
+        quitButton = new Button(mainWindow, SWT.NONE);
+        quitButton.addSelectionListener(new SelectionAdapter() {
+            @Override
+            public void widgetSelected(SelectionEvent e) {
+                mainWindow.close();
+                currDisplay.dispose();
+            }
+        });
+        gridData = new GridData();
+        gridData.grabExcessVerticalSpace = false;
+        gridData.horizontalAlignment = SWT.FILL;
+        gridData.verticalAlignment = SWT.BOTTOM;
+        quitButton.setLayoutData(gridData);
+        quitButton.setText("Quit");
     }
-
+    
     private static void UpdateList() {
         TableItem ti; // Table item for adding vehicles to the table
         // ArrayList<Vehicle> list = i.getVehicles();
@@ -442,108 +519,112 @@ public class CMMS implements CMMSInterface {
             ti = new TableItem(dataTable, SWT.NONE);
             ti.setText(v.ToStrings());
         }
+        
+        PackColumns();
+        dataTable.select(0);
     }
-
+    
+    private static void PackColumns() {
+        vehicleIDCol.pack();
+        vehicleTypeCol.pack();
+        vehicleManufacturerCol.pack();
+        vehicleModelCol.pack();
+        vehicleYearCol.pack();
+        vehicleKMCol.pack();
+        vehicleKMLastServiceCol.pack();
+        vehicleRoadWorthyCol.pack();
+        vehicleLicensePlateCol.pack();
+        vehiclePolicyCol.pack();
+        vehicleInsTypeCol.pack();
+        vehicleOperationalCol.pack();
+        vehicleFuelEconCol.pack();
+    }
+    
     private static void CreateColumns() {
         vehicleIDCol = new TableColumn(dataTable, SWT.BORDER);
-        vehicleIDCol.setText("ID");
+        vehicleIDCol.setText(columnHeaders[0]);
         vehicleIDCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
         vehicleIDCol.setMoveable(true);
         vehicleIDCol.setResizable(true);
 
         vehicleTypeCol = new TableColumn(dataTable, SWT.BORDER);
-        vehicleTypeCol.setText("Type");
+        vehicleTypeCol.setText(columnHeaders[1]);
         vehicleTypeCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
         vehicleTypeCol.setMoveable(true);
         vehicleTypeCol.setResizable(true);
 
         vehicleManufacturerCol = new TableColumn(dataTable, SWT.BORDER);
-        vehicleManufacturerCol.setText("Manufacturer");
+        vehicleManufacturerCol.setText(columnHeaders[2]);
         vehicleManufacturerCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
         vehicleManufacturerCol.setMoveable(true);
         vehicleManufacturerCol.setResizable(true);
 
         vehicleModelCol = new TableColumn(dataTable, SWT.BORDER);
-        vehicleModelCol.setText("Model");
+        vehicleModelCol.setText(columnHeaders[3]);
         vehicleModelCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
         vehicleModelCol.setMoveable(true);
         vehicleModelCol.setResizable(true);
 
         vehicleYearCol = new TableColumn(dataTable, SWT.BORDER);
-        vehicleYearCol.setText("Year");
+        vehicleYearCol.setText(columnHeaders[4]);
         vehicleYearCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
         vehicleYearCol.setMoveable(true);
         vehicleYearCol.setResizable(true);
 
         vehicleKMCol = new TableColumn(dataTable, SWT.BORDER);
-        vehicleKMCol.setText("Kilometers");
+        vehicleKMCol.setText(columnHeaders[5]);
         vehicleKMCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
         vehicleKMCol.setMoveable(true);
         vehicleKMCol.setResizable(true);
 
         vehicleKMLastServiceCol = new TableColumn(dataTable, SWT.BORDER);
-        vehicleKMLastServiceCol.setText("Last service (KM)");
+        vehicleKMLastServiceCol.setText(columnHeaders[6]);
         vehicleKMLastServiceCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
         vehicleKMLastServiceCol.setMoveable(true);
         vehicleKMLastServiceCol.setResizable(true);
 
         vehicleRoadWorthyCol = new TableColumn(dataTable, SWT.BORDER);
-        vehicleRoadWorthyCol.setText("Is Roadworthy");
+        vehicleRoadWorthyCol.setText(columnHeaders[7]);
         vehicleRoadWorthyCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
         vehicleRoadWorthyCol.setMoveable(true);
         vehicleRoadWorthyCol.setResizable(true);
 
         vehicleLicensePlateCol = new TableColumn(dataTable, SWT.BORDER);
-        vehicleLicensePlateCol.setText("License Plate");
+        vehicleLicensePlateCol.setText(columnHeaders[8]);
         vehicleLicensePlateCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
         vehicleLicensePlateCol.setMoveable(true);
         vehicleLicensePlateCol.setResizable(true);
 
         vehiclePolicyCol = new TableColumn(dataTable, SWT.BORDER);
-        vehiclePolicyCol.setText("Insurance Policy Number");
+        vehiclePolicyCol.setText(columnHeaders[9]);
         vehiclePolicyCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
         vehiclePolicyCol.setMoveable(true);
         vehiclePolicyCol.setResizable(true);
 
         vehicleInsTypeCol = new TableColumn(dataTable, SWT.BORDER);
-        vehicleInsTypeCol.setText("Insurance Policy Type");
+        vehicleInsTypeCol.setText(columnHeaders[10]);
         vehicleInsTypeCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
         vehicleInsTypeCol.setMoveable(true);
         vehicleInsTypeCol.setResizable(true);
 
         vehicleOperationalCol = new TableColumn(dataTable, SWT.BORDER);
-        vehicleOperationalCol.setText("Is Operational");
+        vehicleOperationalCol.setText(columnHeaders[11]);
         vehicleOperationalCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
         vehicleOperationalCol.setMoveable(true);
         vehicleOperationalCol.setResizable(true);
 
         vehicleFuelEconCol = new TableColumn(dataTable, SWT.BORDER);
-        vehicleFuelEconCol.setText("Fuel Economy (L/100km)");
+        vehicleFuelEconCol.setText(columnHeaders[12]);
         vehicleFuelEconCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
         vehicleFuelEconCol.setMoveable(true);
         vehicleFuelEconCol.setResizable(true);
-    }
+        
+        PackColumns();
+    }    
 
     private static void Open() {
-        currDisplay = Display.getDefault();
-
         mainWindow.setLayout(mainLayout);
         mainWindow.pack();
-
-        quitButton = new Button(mainWindow, SWT.NONE);
-        quitButton.addSelectionListener(new SelectionAdapter() {
-            @Override
-            public void widgetSelected(SelectionEvent e) {
-                mainWindow.close();
-                currDisplay.dispose();
-            }
-        });
-        gridData = new GridData();
-        gridData.grabExcessVerticalSpace = false;
-        gridData.horizontalAlignment = SWT.FILL;
-        gridData.verticalAlignment = SWT.BOTTOM;
-        quitButton.setLayoutData(gridData);
-        quitButton.setText("Quit");
 
         mainWindow.open();
 

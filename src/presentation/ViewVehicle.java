@@ -5,12 +5,15 @@ import objects.Vehicle;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;
-import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
 import businessLogic.CMMSInterface;
-import businessLogic.CMMSInterface.VEHICLE_FIELDS;
 
 public class ViewVehicle implements CMMSInterface {
     private final int WINDOW_WIDTH = 800;
@@ -20,7 +23,8 @@ public class ViewVehicle implements CMMSInterface {
 
     private Display currDisplay;
     private Shell viewWindow;
-    private FillLayout mainLayout;
+    private GridLayout mainLayout;
+    private Button closeButton;
 
     private StyledText textDisplay;
 
@@ -138,14 +142,32 @@ public class ViewVehicle implements CMMSInterface {
     }
 
     private void CreateControls() {
-        mainLayout = new FillLayout();
+        mainLayout = new GridLayout();
 
         viewWindow = new Shell();
         viewWindow.setLayout(mainLayout);
         viewWindow.setMinimumSize(MIN_WINDOW_WIDTH, MIN_WINDOW_HEIGHT);
         viewWindow.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-
+        
         textDisplay = new StyledText(viewWindow, SWT.BORDER | SWT.V_SCROLL
                 | SWT.H_SCROLL | SWT.READ_ONLY);
+        GridData gd = new GridData();
+        gd.horizontalAlignment = SWT.FILL;
+        gd.verticalAlignment = SWT.FILL;
+        gd.grabExcessHorizontalSpace = true;
+        gd.grabExcessVerticalSpace = true;
+        textDisplay.setLayoutData(gd);
+        
+        closeButton = new Button(viewWindow,SWT.NONE);
+        closeButton.addSelectionListener(new SelectionAdapter() {
+        	@Override
+        	public void widgetSelected(SelectionEvent e) {
+        		viewWindow.close();
+        	}
+        });
+        gd = new GridData();
+        gd.horizontalAlignment = SWT.RIGHT;
+        closeButton.setText("Close");
+        closeButton.setLayoutData(gd);
     }
 }

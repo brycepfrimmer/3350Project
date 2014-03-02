@@ -49,16 +49,96 @@ public class StubDB {
         vehicles.add(vehicle);
     }
 
-    public Vehicle getVehicle(String id) {
-        Vehicle targetVehicle = null;
-        for (Vehicle vehicle : vehicles) {
-            if (vehicle != null && vehicle.getID().equals(id)) {
-                targetVehicle = vehicle;
-            }
-        }
-        return targetVehicle;
+    public Vehicle searchByID(String id) {
+    	Vehicle temp = null;
+    	
+    	for (Vehicle v : vehicles) {
+    		if (v != null && id.equals(v.getID()))
+    			temp = v;
+    	}
+    	
+    	return temp;
     }
-
+    
+    public Vehicle[] search(String field, String key) {
+    	ArrayList<Vehicle> found = new ArrayList<Vehicle>();
+    	
+    	for (Vehicle v : vehicles) {
+    		if (v != null) {
+    			if (field.equals("ID")) {
+    				if (v.getID().startsWith(key)) {
+    					found.add(v);
+    				}
+    			}
+	        	else if (field.equals("Type")) {
+	    			if (v.getType().startsWith(key)) {
+	    				found.add(v);
+	    			}
+	        	}
+		    	else if (field.equals("Manufacturer")) {
+	    			if (v.getManufacturer().startsWith(key)) {
+	    				found.add(v);
+	    			}
+		    	}
+	        	else if (field.equals("Model")) {
+	        		if (v.getModel().startsWith(key)) {
+	        			found.add(v);
+	        		}
+	        	}
+	        	else if (field.equals("Year")) {
+	        		if (new Integer(v.getYear()).toString().startsWith(key)) {
+	        			found.add(v);
+	        		}
+	        	}
+	        	else if (field.equals("Kilometers")) {
+	        		if (new Integer(v.getKmDriven()).toString().startsWith(key)) {
+	        			found.add(v);
+	        		}
+	        	}
+	        	else if (field.equals("Last service (KM)")) {
+	        		if (new Integer(v.getKmLastServiced()).toString().startsWith(key)) {
+	        			found.add(v);
+	        		}
+	        	}
+	        	else if (field.equals("Is Roadworthy")) {
+	        		if (new Boolean(v.isRoadWorthy()).toString().startsWith(key)) {
+	        			found.add(v);
+	        		}
+	        	}
+	        	else if (field.equals("License Plate")) {
+	        		if (v.getLicensePlate().startsWith(key)) {
+	        			found.add(v);
+	        		}
+	        	}
+	        	else if (field.equals("Insurance Policy Number")) {
+	        		if (v.getInsurance().getPolicyNum().startsWith(key)) {
+	        			found.add(v);
+	        		}
+	        	}
+	        	else if (field.equals("Insurance Policy Type")) {
+	        		if (v.getInsurance().getType().startsWith(key)) {
+	        			found.add(v);
+	        		}
+	        	}
+	        	else if (field.equals("Is Operational")) {
+	        		if (new Boolean(v.isOperational()).toString().startsWith(key)) {
+	        			found.add(v);
+	        		}
+	        	}
+	        	else if (field.equals("Fuel Economy (L/100km)")) {
+	        		if (new Double(v.getFuelEcon()).toString().startsWith(key)) {
+	        			found.add(v);
+	        		}
+	        	}
+    		}
+    	}
+    	
+    	Vehicle[] returnList = new Vehicle[found.size()];
+    	found.toArray(returnList);
+    	
+    	return returnList;
+    }
+    
     public ArrayList<Vehicle> getAllVehicles() {
         return vehicles;
     }
