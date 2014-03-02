@@ -232,6 +232,10 @@ Developer Task List - Iteration 2
 10- 
 11- Create test classes for project - on going - ALL
 
+Saturday, March 1st, 2014
+Darwin Froese
+	4 Hours - Added searching, tweaked View Window UI, and added a few bug fixes to main UI. Tweaked StubDB and interface to handle searching
+		  in a manner that flows with how it is done from the main UI.
 ****NOTE: this task list is merely a start. Other than a couple of them they are "Big" user stories and will need to be broken down into smaller
 tasks. Please perform this breakdown as you see fit as you are working on that section of the program. By no means is this set in stone. Do what
 you can, whatever is left we can handle as a group.
