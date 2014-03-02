@@ -232,6 +232,11 @@ Developer Task List - Iteration 2
 10- 
 11- Create test classes for project - on going - ALL
 
+Friday, Februrary 28th, 2014
+Cody Edwards
+	4.5 Hours - Added modification of vehicle addition criteria. Tweaked Vehicle class default values and input validation so that empty fields would print
+		in the main window. 
+
 Saturday, March 1st, 2014
 Darwin Froese
 	4 Hours - Added searching, tweaked View Window UI, and added a few bug fixes to main UI. Tweaked StubDB and interface to handle searching
