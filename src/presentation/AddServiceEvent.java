@@ -1,5 +1,8 @@
 package presentation;
 
+import java.util.ArrayList;
+
+import objects.Part;
 import objects.ServiceItem;
 import objects.Vehicle;
 
@@ -19,6 +22,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.wb.swt.SWTResourceManager;
+import org.eclipse.swt.widgets.Combo;
 
 public class AddServiceEvent implements CMMSInterface {
 
@@ -27,6 +31,8 @@ public class AddServiceEvent implements CMMSInterface {
     private Text serviceTime;
     private Text serviceKm;
     private Label errorLabel;
+    private Combo partsComboBox;
+    private ArrayList<Part> partsList;
 
     /**
      * Open the window.
@@ -50,7 +56,7 @@ public class AddServiceEvent implements CMMSInterface {
      */
     protected void createContents(final Vehicle v) {
         shell = new Shell();
-        shell.setSize(660, 309);
+        shell.setSize(440, 340);
         shell.setText("Add Service Event");
         GridLayout windowLayout = new GridLayout();
         windowLayout.numColumns = 2;
@@ -59,8 +65,15 @@ public class AddServiceEvent implements CMMSInterface {
         Label infoLabel = new Label(shell, SWT.NONE);
         infoLabel.setText("ID: "+v.getID()+" -- "+Integer.toString(v.getYear())+" "+v.getManufacturer()+" "+v.getModel());
         new Label(shell, SWT.NONE);
+        
+        partsComboBox = new Combo(shell, SWT.NONE);
+        partsComboBox.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
         new Label(shell, SWT.NONE);
-        new Label(shell, SWT.NONE);
+        partsList = v.getPartsList();
+        for (int i = 0; i < partsList.size(); i++) {
+            partsComboBox.add(partsList.get(i).getPartDesc());
+        }
+        partsComboBox.setText("Select a part to add a service event to");
         
         Label eventDescLabel = new Label(shell, SWT.NONE);
         eventDescLabel.setText("Enter service event description:");
@@ -125,14 +138,23 @@ public class AddServiceEvent implements CMMSInterface {
         addButton.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
-                if (checkTime()) {
-                    v.addServiceEvent(new ServiceItem(eventDesc.getMessage(), Long.parseLong(serviceTime.getMessage())));
+                if (checkPartSelection() && checkDesc() && checkTime()) {
+                    v.addServiceEvent(new ServiceItem(eventDesc.getText(), Long.parseLong(serviceTime.getText())),
+                                      new Part(partsComboBox.getItem(partsComboBox.getSelectionIndex())));
                     shell.close();
-                } else if (checkKilos()) {
-                    v.addServiceEvent(new ServiceItem(eventDesc.getMessage(), Integer.parseInt(serviceKm.getMessage())));
+                } else if (checkPartSelection() && checkDesc() && checkKilos()) {
+                    v.addServiceEvent(new ServiceItem(eventDesc.getText(), Integer.parseInt(serviceKm.getText())),
+                                      new Part(partsComboBox.getItem(partsComboBox.getSelectionIndex())));
                     shell.close();
+                } else if (checkPartSelection() && checkDesc()) {
+                    errorLabel.setText("Please enter a valid time or kilometer service indicator.");
+                    errorLabel.pack();
+                } else if (checkPartSelection()) {
+                    errorLabel.setText("Please enter an event description.");
+                    errorLabel.pack();
                 } else {
-                    errorLabel.setText("Please fill out a time or kilometer service indicator.");
+                    errorLabel.setText("Please select a part from the parts list.");
+                    errorLabel.pack();
                 }
             }
         });
@@ -147,8 +169,28 @@ public class AddServiceEvent implements CMMSInterface {
         });
     }
     
+    private boolean checkPartSelection() {
+        if (partsComboBox.getSelectionIndex() >= 0) {
+            if (partsList.contains(new Part(partsComboBox.getItem(partsComboBox.getSelectionIndex())))) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+    
+    private boolean checkDesc() {
+        if (eventDesc.getCharCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
     private boolean checkTime() {
-        if (serviceTime.getCharCount() > 0) {
+        if (serviceTime.getCharCount() > 0 && serviceTime.getText().matches("[0-9]+") && serviceTime.getText().matches("[0-9]*")) {
             return true;
         } else {
             return false;
@@ -156,7 +198,7 @@ public class AddServiceEvent implements CMMSInterface {
     }
     
     private boolean checkKilos() {
-        if (serviceKm.getCharCount() > 0) {
+        if (serviceKm.getCharCount() > 0 && serviceKm.getText().matches("[0-9]+") && serviceKm.getText().matches("[0-9]*")) {
             return true;
         } else {
             return false;

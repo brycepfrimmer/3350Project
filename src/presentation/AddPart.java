@@ -1,5 +1,6 @@
 package presentation;
 
+import objects.Part;
 import objects.Vehicle;
 
 import org.eclipse.swt.widgets.Display;
@@ -87,7 +88,7 @@ public class AddPart {
     }
 
     private boolean SetFields() {
-        return currVehicle.getPartsList().addPart(textPart.getText());
+        return currVehicle.getPartsList().add(new Part(textPart.getText()));
 
     }
 

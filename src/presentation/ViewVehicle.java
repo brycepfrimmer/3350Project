@@ -1,5 +1,8 @@
 package presentation;
 
+import java.util.ArrayList;
+
+import objects.Part;
 import objects.Vehicle;
 
 import org.eclipse.swt.SWT;
@@ -126,8 +129,12 @@ public class ViewVehicle implements CMMSInterface {
         String partsHdr = "\n\t\tPARTS";
         int partsBoldRange = partsHdr.length();
 
-        String parts = vehicleList[vehicleSel].getPartsList().toString()
-                + "\n\n";
+        String parts = "";
+        ArrayList<Part> pList = vehicleList[vehicleSel].getPartsList();
+        for (int i = 0; i < pList.size(); i++) {
+            parts += pList.get(i).toString();
+        }
+        parts += "\n\n";
 
         textStyle = new StyleRange();
         textStyle.start = currTextLocation;

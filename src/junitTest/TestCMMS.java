@@ -11,7 +11,7 @@ public class TestCMMS {
 
         suite = new TestSuite("Tests");
         suite.addTestSuite(TestInsurancePolicy.class);
-        suite.addTestSuite(TestPartsList.class);
+        suite.addTestSuite(TestPart.class);
         suite.addTestSuite(TestVehicle.class);
 
         return suite;

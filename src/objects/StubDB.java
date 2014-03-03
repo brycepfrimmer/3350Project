@@ -13,10 +13,10 @@ public class StubDB {
         if (countNew == 0) {
             this.vehicles = new ArrayList<Vehicle>();
 
-            PartsList newPL = new PartsList();
-            newPL.addPart("PA-149B Oil Filter");
-            newPL.addPart("PL-0-170 Fuel Filter");
-            newPL.addPart("BreatheRight A29 Air Filter");
+            ArrayList<Part> newPL = new ArrayList<Part>();
+            newPL.add(new Part("PA-149B Oil Filter"));
+            newPL.add(new Part("PL-0-170 Fuel Filter"));
+            newPL.add(new Part("BreatheRight A29 Air Filter"));
             
             Vehicle temp;
             temp = new Vehicle("3692481", "Truck", "Ford", "F150", 2009, true, "ABC 123", true, "abcd1234", "Commuter", 44444, 33333, Date.valueOf("2014-01-23"));

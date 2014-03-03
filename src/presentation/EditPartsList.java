@@ -1,6 +1,8 @@
 package presentation;
 
-import objects.PartsList;
+import java.util.ArrayList;
+
+import objects.Part;
 import objects.Vehicle;
 
 import org.eclipse.swt.widgets.Display;
@@ -22,7 +24,7 @@ public class EditPartsList {
     private Button btnAdd;
     private Button btnRemove;
     private Table partsListTable;
-    private PartsList list;
+    private ArrayList<Part> list;
 
     /**
      * Open the window.
@@ -98,9 +100,10 @@ public class EditPartsList {
 
                     if (response == SWT.YES) {
                         int[] selections = partsListTable.getSelectionIndices();
-                        for (int i = 0; i < selected; i++)
-                            list.removePart(partsListTable.getItem(
-                                    selections[i]).getText(0));
+                        for (int i = 0; i < selected; i++) {
+                            list.remove(new Part(partsListTable.getItem(
+                                    selections[i]).getText(0)));
+                        }
 
                         // Update list with the new Vehicles
                         updateList();
@@ -115,8 +118,8 @@ public class EditPartsList {
 
                     if (response == SWT.YES) {
                         // Should only have one item selected
-                        list.removePart(partsListTable.getItem(
-                                partsListTable.getSelectionIndex()).getText());
+                        list.remove(new Part(partsListTable.getItem(
+                                partsListTable.getSelectionIndex()).getText()));
                         // Update list with the new Vehicles
                         updateList();
                     }
@@ -145,9 +148,9 @@ public class EditPartsList {
 
         partsListTable.setRedraw(true);
 
-        for (String part : list.getPartsList()) {
+        for (Part part : list) {
             ti = new TableItem(partsListTable, SWT.NONE);
-            ti.setText(part);
+            ti.setText(part.toString());
         }
     }
 

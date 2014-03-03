@@ -36,8 +36,7 @@ public class Vehicle implements CMMSInterface {
     private int kmDriven;
     private int kmLastServiced;
     private Date dateLastServiced;
-    private PartsList partsList;
-    private ArrayList<ServiceItem> serviceEvents;
+    private ArrayList<Part> partsList;
 
     /* Calculated fields */
     private double fuelEcon;
@@ -60,7 +59,6 @@ public class Vehicle implements CMMSInterface {
         this.operational = false;
         this.year = 0;
         setPartsList();
-        serviceEvents = new ArrayList<ServiceItem>();
     }// End vehicle()
 
     public Vehicle(String ID, String type, String man, String model, int year,
@@ -80,7 +78,6 @@ public class Vehicle implements CMMSInterface {
         this.dateLastServiced = dls;
         this.year = year;
         setPartsList();
-        serviceEvents = new ArrayList<ServiceItem>();
     }
 
     public String[] ToStrings() {
@@ -140,8 +137,14 @@ public class Vehicle implements CMMSInterface {
         return 0.0;
     }
 
-    public void addServiceEvent(ServiceItem i) {
-        serviceEvents.add(i);
+    public void addServiceEvent(ServiceItem i, Part p) {
+        int index = partsList.indexOf(p);
+        if (index >= 0) {
+            Part temp = partsList.get(index);
+            temp.addServiceItem(i);
+        } else {
+            System.err.println("Invalid part to add service event to. Part not in Vehicle parts list.");
+        }
     }
     
     public void print() {
@@ -306,10 +309,10 @@ public class Vehicle implements CMMSInterface {
     }
     
     private void setPartsList() {
-        this.partsList = new PartsList();
+        this.partsList = new ArrayList<Part>();
     }
 
-    public void setPartsList(PartsList newPL) {
+    public void setPartsList(ArrayList<Part> newPL) {
         this.partsList = newPL;
     }
     
@@ -344,6 +347,10 @@ public class Vehicle implements CMMSInterface {
         return kmLastServiced;
     }
 
+    public Date getDateLastServiced() {
+        return dateLastServiced;
+    }
+    
     public String getLicensePlate() {
         return licensePlate;
     }
@@ -352,7 +359,7 @@ public class Vehicle implements CMMSInterface {
         return insurance;
     }
 
-    public PartsList getPartsList() {
+    public ArrayList<Part> getPartsList() {
         return partsList;
     }
 
