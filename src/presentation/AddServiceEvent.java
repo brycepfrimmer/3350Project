@@ -25,7 +25,8 @@ public class AddServiceEvent implements CMMSInterface {
     protected Shell shell;
     private Text eventDesc;
     private Text serviceTime;
-    private Text serviceKilos;
+    private Text serviceKm;
+    private Label errorLabel;
 
     /**
      * Open the window.
@@ -49,35 +50,20 @@ public class AddServiceEvent implements CMMSInterface {
      */
     protected void createContents(final Vehicle v) {
         shell = new Shell();
-        shell.setSize(660, 430);
+        shell.setSize(660, 309);
         shell.setText("Add Service Event");
-        shell.setLayout(new GridLayout(5, false));
+        GridLayout windowLayout = new GridLayout();
+        windowLayout.numColumns = 2;
+        shell.setLayout(windowLayout);
         
-        Label lblNewLabel_4 = new Label(shell, SWT.NONE);
-        lblNewLabel_4.setText("ID: ");
-        
-        Label lblNewLabel = new Label(shell, SWT.NONE);
-        lblNewLabel.setText(v.getID());
-        
-        Label lblNewLabel_1 = new Label(shell, SWT.NONE);
-        lblNewLabel_1.setText(Integer.toString(v.getYear()));
-        
-        Label lblNewLabel_2 = new Label(shell, SWT.NONE);
-        lblNewLabel_2.setText(v.getManufacturer());
-        
-        Label lblNewLabel_3 = new Label(shell, SWT.NONE);
-        lblNewLabel_3.setText(v.getModel());
-        new Label(shell, SWT.NONE);
-        new Label(shell, SWT.NONE);
+        Label infoLabel = new Label(shell, SWT.NONE);
+        infoLabel.setText("ID: "+v.getID()+" -- "+Integer.toString(v.getYear())+" "+v.getManufacturer()+" "+v.getModel());
         new Label(shell, SWT.NONE);
         new Label(shell, SWT.NONE);
         new Label(shell, SWT.NONE);
         
-        Label lblNewLabel_5 = new Label(shell, SWT.NONE);
-        lblNewLabel_5.setText("Enter service event description:");
-        new Label(shell, SWT.NONE);
-        new Label(shell, SWT.NONE);
-        new Label(shell, SWT.NONE);
+        Label eventDescLabel = new Label(shell, SWT.NONE);
+        eventDescLabel.setText("Enter service event description:");
         new Label(shell, SWT.NONE);
         
         eventDesc = new Text(shell, SWT.BORDER);
@@ -85,56 +71,38 @@ public class AddServiceEvent implements CMMSInterface {
         new Label(shell, SWT.NONE);
         new Label(shell, SWT.NONE);
         new Label(shell, SWT.NONE);
-        new Label(shell, SWT.NONE);
-        new Label(shell, SWT.NONE);
-        new Label(shell, SWT.NONE);
-        new Label(shell, SWT.NONE);
-        new Label(shell, SWT.NONE);
-        new Label(shell, SWT.NONE);
         
-        Label lblNewLabel_6 = new Label(shell, SWT.NONE);
-        lblNewLabel_6.setText("Service every X amount of days:");
-        new Label(shell, SWT.NONE);
-        new Label(shell, SWT.NONE);
-        new Label(shell, SWT.NONE);
+        Label serviceTimeLabel = new Label(shell, SWT.NONE);
+        serviceTimeLabel.setText("Service every X amount of days:");
         new Label(shell, SWT.NONE);
         
         serviceTime = new Text(shell, SWT.BORDER);
         serviceTime.addModifyListener(new ModifyListener() {
             public void modifyText(ModifyEvent arg0) {
                 if (serviceTime.getCharCount() <= 0) {
-                    serviceKilos.setEnabled(true);
-                    serviceKilos.setEditable(true);
+                    serviceKm.setEnabled(true);
+                    serviceKm.setEditable(true);
                 } else {
-                    serviceKilos.setEnabled(false);
-                    serviceKilos.setEditable(false);
+                    serviceKm.setEnabled(false);
+                    serviceKm.setEditable(false);
                 }
             }
         });
         serviceTime.setLayoutData(new GridData(SWT.FILL, SWT.LEFT, true, false, 1, 1));
         new Label(shell, SWT.NONE);
-        new Label(shell, SWT.NONE);
-        new Label(shell, SWT.NONE);
+        
+        Label orLabel = new Label(shell, SWT.NONE);
+        orLabel.setText("OR");
         new Label(shell, SWT.NONE);
         
-        Label lblNewLabel_7 = new Label(shell, SWT.NONE);
-        lblNewLabel_7.setText("OR");
-        new Label(shell, SWT.NONE);
-        new Label(shell, SWT.NONE);
-        new Label(shell, SWT.NONE);
+        Label serviceKmLabel = new Label(shell, SWT.NONE);
+        serviceKmLabel.setText("Service every X kilometers:");
         new Label(shell, SWT.NONE);
         
-        Label lblServiceEveryX = new Label(shell, SWT.NONE);
-        lblServiceEveryX.setText("Service every X kilometers:");
-        new Label(shell, SWT.NONE);
-        new Label(shell, SWT.NONE);
-        new Label(shell, SWT.NONE);
-        new Label(shell, SWT.NONE);
-        
-        serviceKilos = new Text(shell, SWT.BORDER);
-        serviceKilos.addModifyListener(new ModifyListener() {
+        serviceKm = new Text(shell, SWT.BORDER);
+        serviceKm.addModifyListener(new ModifyListener() {
             public void modifyText(ModifyEvent arg0) {
-                if (serviceKilos.getCharCount() <= 0) {
+                if (serviceKm.getCharCount() <= 0) {
                     serviceTime.setEnabled(true);
                     serviceTime.setEditable(true);
                 } else {
@@ -143,54 +111,40 @@ public class AddServiceEvent implements CMMSInterface {
                 }
             }
         });
-        serviceKilos.setLayoutData(new GridData(SWT.FILL, SWT.LEFT, true, false, 1, 1));
-        new Label(shell, SWT.NONE);
-        new Label(shell, SWT.NONE);
-        new Label(shell, SWT.NONE);
-        new Label(shell, SWT.NONE);
-        new Label(shell, SWT.NONE);
-        new Label(shell, SWT.NONE);
-        new Label(shell, SWT.NONE);
-        new Label(shell, SWT.NONE);
+        serviceKm.setLayoutData(new GridData(SWT.FILL, SWT.LEFT, true, false, 1, 1));
         new Label(shell, SWT.NONE);
         
-        final Label lblNewLabel_8 = new Label(shell, SWT.NONE);
-        lblNewLabel_8.setForeground(SWTResourceManager
+        errorLabel = new Label(shell, SWT.NONE);
+        errorLabel.setForeground(SWTResourceManager
                 .getColor(SWT.COLOR_RED));
-        lblNewLabel_8.setText("");
-        new Label(shell, SWT.NONE);
-        new Label(shell, SWT.NONE);
-        new Label(shell, SWT.NONE);
+        errorLabel.setText("");
         new Label(shell, SWT.NONE);
         
-        Button btnNewButton = new Button(shell, SWT.NONE);
-        btnNewButton.setText("Add Event");
-        btnNewButton.addSelectionListener(new SelectionAdapter() {
+        Button addButton = new Button(shell, SWT.NONE);
+        addButton.setText("Add Event");
+        addButton.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
                 if (checkTime()) {
                     v.addServiceEvent(new ServiceItem(eventDesc.getMessage(), Long.parseLong(serviceTime.getMessage())));
                     shell.close();
                 } else if (checkKilos()) {
-                    v.addServiceEvent(new ServiceItem(eventDesc.getMessage(), Integer.parseInt(serviceKilos.getMessage())));
+                    v.addServiceEvent(new ServiceItem(eventDesc.getMessage(), Integer.parseInt(serviceKm.getMessage())));
                     shell.close();
                 } else {
-                    lblNewLabel_8.setText("Please fill out a time or kilometer service indicator.");
+                    errorLabel.setText("Please fill out a time or kilometer service indicator.");
                 }
             }
         });
         
-        Button btnNewButton_1 = new Button(shell, SWT.NONE);
-        btnNewButton_1.setText("Cancel");
-        btnNewButton_1.addSelectionListener(new SelectionAdapter() {
+        Button cancelButton = new Button(shell, SWT.NONE);
+        cancelButton.setText("Cancel");
+        cancelButton.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
                 shell.close();
             }
         });
-        new Label(shell, SWT.NONE);
-        new Label(shell, SWT.NONE);
-        new Label(shell, SWT.NONE);
     }
     
     private boolean checkTime() {
@@ -202,7 +156,7 @@ public class AddServiceEvent implements CMMSInterface {
     }
     
     private boolean checkKilos() {
-        if (serviceKilos.getCharCount() > 0) {
+        if (serviceKm.getCharCount() > 0) {
             return true;
         } else {
             return false;
