@@ -41,7 +41,7 @@ public class CMMS implements CMMSInterface {
     private static final int LAYOUT_COL_COUNT = 4;
     private static final int DEFAULT_TABLE_COL_WIDTH = 100;
     private static final int TABLE_WIDTH = 3;
-    private static final int TABLE_HEIGHT = 6;
+    private static final int TABLE_HEIGHT = 7;
 
     private static int currentVehicleCount = 0;
     private static boolean searching = false;
@@ -78,6 +78,7 @@ public class CMMS implements CMMSInterface {
     private static Button editVehicleButton;
     private static Button viewVehicleButton;
     private static Button updateKmsButton;
+    private static Button addServiceButton;
     private static Button quitButton;
 
     private static Text searchText;
@@ -476,7 +477,6 @@ public class CMMS implements CMMSInterface {
                     mb.setText("Updating Vehicles");
                     mb.open();
                 }
-
             }
         });
         gridData = new GridData();
@@ -485,6 +485,46 @@ public class CMMS implements CMMSInterface {
         gridData.verticalAlignment = SWT.TOP;
         updateKmsButton.setLayoutData(gridData);
         updateKmsButton.setText("Update Kilometers");
+        
+        addServiceButton = new Button(mainWindow, SWT.NONE);
+        addServiceButton.addSelectionListener(new SelectionAdapter() {
+            @Override
+            public void widgetSelected(SelectionEvent e) {
+                int selected = dataTable.getSelectionCount();
+                if (selected == 0) {
+                    // Display no selection error
+                    MessageBox mb = new MessageBox(mainWindow, SWT.ICON_ERROR
+                            | SWT.OK);
+                    mb.setMessage("Error: You have not selected a Vehicle to update.");
+                    mb.setText("Add Service Event");
+                    mb.open();
+                } else if (selected == 1) {
+                    // Display UpdateKilometers form
+                    Vehicle v = dbInterface.getVehicle(dataTable.getItem(
+                            dataTable.getSelectionIndex()).getText(
+                            VEHICLE_FIELDS.ID.ordinal()));
+                    AddServiceEvent addse = new AddServiceEvent();
+                    addse.open(v);
+
+                    // Update list with the new Vehicles
+                    UpdateList();
+                } else {
+                    // Display multiple selection error
+                    MessageBox mb = new MessageBox(mainWindow, SWT.ICON_ERROR
+                            | SWT.OK);
+                    mb.setMessage("Error: You have selected too many Vehicles to update.");
+                    mb.setText("Add Service Event");
+                    mb.open();
+                }
+            }
+        });
+        gridData = new GridData();
+        gridData.grabExcessVerticalSpace = false;
+        gridData.horizontalAlignment = SWT.FILL;
+        gridData.verticalAlignment = SWT.BOTTOM;
+        addServiceButton.setLayoutData(gridData);
+        addServiceButton.setText("Add Service Event");
+        
         
         quitButton = new Button(mainWindow, SWT.NONE);
         quitButton.addSelectionListener(new SelectionAdapter() {

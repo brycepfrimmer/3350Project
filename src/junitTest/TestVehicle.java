@@ -1,5 +1,7 @@
 package junitTest;
 
+import java.sql.Date;
+
 import junit.framework.TestCase;
 import objects.Vehicle;
 
@@ -7,7 +9,7 @@ import org.junit.Test;
 
 public class TestVehicle extends TestCase {
     Vehicle vehicle = new Vehicle("vin236", "car", "Dodge", "Viper", 2004,
-            true, "ADN 518", true, "Policy one", "General", 155000, 1200);
+            true, "ADN 518", true, "Policy one", "General", 155000, 1200, Date.valueOf("2014-01-23"));
 
     @Test
     public void testVehicle() {
@@ -19,7 +21,7 @@ public class TestVehicle extends TestCase {
     public void testVehicleParams() {
         Vehicle vehicle1 = new Vehicle("vin278", "truck", "Chev", "Colorado",
                 2003, false, "GSL 269", true, "Policy two", "Rec", 150000,
-                120000);
+                120000, Date.valueOf("2014-01-23"));
         assertTrue(vehicle1 != null);
     }
 

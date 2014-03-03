@@ -1,5 +1,8 @@
 package objects;
 
+import java.util.ArrayList;
+import java.sql.Date;
+
 import businessLogic.CMMSInterface;
 
 /*
@@ -32,7 +35,9 @@ public class Vehicle implements CMMSInterface {
     /* OptionalFields */
     private int kmDriven;
     private int kmLastServiced;
+    private Date dateLastServiced;
     private PartsList partsList;
+    private ArrayList<ServiceItem> serviceEvents;
 
     /* Calculated fields */
     private double fuelEcon;
@@ -46,6 +51,7 @@ public class Vehicle implements CMMSInterface {
         this.model = " ";
         this.kmDriven = 0;
         this.kmLastServiced = 0;
+        this.dateLastServiced = null;
         this.partsList = null;
         insurance = new InsurancePolicy();
         this.fuelEcon = 0.0;
@@ -54,11 +60,12 @@ public class Vehicle implements CMMSInterface {
         this.operational = false;
         this.year = 0;
         setPartsList();
+        serviceEvents = new ArrayList<ServiceItem>();
     }// End vehicle()
 
     public Vehicle(String ID, String type, String man, String model, int year,
             boolean roadWorthy, String LPN, boolean op, String policyNum,
-            String policyType, int km, int kmLS) {
+            String policyType, int km, int kmLS, Date dls) {
         this.ID = ID;
         this.type = type;
         this.manufacturer = man;
@@ -70,8 +77,10 @@ public class Vehicle implements CMMSInterface {
         if(!ret) { /*System.err.println("INVALID INSURANCE POLICY NUMBER OR TYPE.");*/ }
         this.kmDriven = km;
         this.kmLastServiced = kmLS;
+        this.dateLastServiced = dls;
         this.year = year;
         setPartsList();
+        serviceEvents = new ArrayList<ServiceItem>();
     }
 
     public String[] ToStrings() {
@@ -129,9 +138,12 @@ public class Vehicle implements CMMSInterface {
             System.out.println("Input not a number!");
         }
         return 0.0;
-
     }
 
+    public void addServiceEvent(ServiceItem i) {
+        serviceEvents.add(i);
+    }
+    
     public void print() {
         System.out.println("Vehicle ID number: " + this.getID());
         System.out.println("\tType: " + this.getType());
@@ -278,9 +290,21 @@ public class Vehicle implements CMMSInterface {
             isValid = false;
         }
         return isValid;
-
     }
 
+    public boolean setDateLastServiced(Date dls) {
+        boolean isValid = false;
+        try {
+            if (dls == (Date) dls) {
+                this.dateLastServiced = dls;
+                isValid = true;
+            }
+        } catch (Exception e) {
+            isValid = false;
+        }
+        return isValid;
+    }
+    
     private void setPartsList() {
         this.partsList = new PartsList();
     }
