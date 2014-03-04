@@ -37,6 +37,17 @@ public final class Part {
         return returnString;
     }
     
+    public boolean checkNeedsService(int currentKm) {
+        boolean retVal = false;
+        for(ServiceItem i : serviceIList) {
+            if (i.checkNeedsService(currentKm)) {
+                retVal = true;
+                break;
+            }
+        }
+        return retVal;
+    }
+    
     @Override
     public boolean equals(Object obj) {
         if (obj == this) {

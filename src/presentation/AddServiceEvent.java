@@ -143,7 +143,7 @@ public class AddServiceEvent implements CMMSInterface {
                                       new Part(partsComboBox.getItem(partsComboBox.getSelectionIndex())));
                     shell.close();
                 } else if (checkPartSelection() && checkDesc() && checkKilos()) {
-                    v.addServiceEvent(new ServiceItem(eventDesc.getText(), Integer.parseInt(serviceKm.getText())),
+                    v.addServiceEvent(new ServiceItem(eventDesc.getText(), Integer.parseInt(serviceKm.getText()), v.getKmLastServiced()),
                                       new Part(partsComboBox.getItem(partsComboBox.getSelectionIndex())));
                     shell.close();
                 } else if (checkPartSelection() && checkDesc()) {

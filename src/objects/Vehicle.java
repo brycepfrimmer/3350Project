@@ -35,7 +35,6 @@ public class Vehicle implements CMMSInterface {
     /* OptionalFields */
     private int kmDriven;
     private int kmLastServiced;
-    private Date dateLastServiced;
     private ArrayList<Part> partsList;
 
     /* Calculated fields */
@@ -50,7 +49,6 @@ public class Vehicle implements CMMSInterface {
         this.model = " ";
         this.kmDriven = 0;
         this.kmLastServiced = 0;
-        this.dateLastServiced = null;
         this.partsList = null;
         insurance = new InsurancePolicy();
         this.fuelEcon = 0.0;
@@ -75,7 +73,6 @@ public class Vehicle implements CMMSInterface {
         if(!ret) { /*System.err.println("INVALID INSURANCE POLICY NUMBER OR TYPE.");*/ }
         this.kmDriven = km;
         this.kmLastServiced = kmLS;
-        this.dateLastServiced = dls;
         this.year = year;
         setPartsList();
     }
@@ -257,6 +254,17 @@ public class Vehicle implements CMMSInterface {
         return this.operational;
     }
 
+    public boolean checkRequiresService() {
+        boolean retVal = false;
+        for(Part p : partsList) {
+            if(p.checkNeedsService(kmDriven)) {
+                retVal = true;
+                break;
+            }
+        }
+        return retVal;
+    }
+    
     public boolean setInsurance(String policyNum, String type) {
         boolean isValid = false;
         isValid = policyNum != null && policyNum != "" && type != null && type != ""
@@ -287,19 +295,6 @@ public class Vehicle implements CMMSInterface {
         try {
             if (km == (int) km) {
                 this.kmLastServiced = km;
-                isValid = true;
-            }
-        } catch (Exception e) {
-            isValid = false;
-        }
-        return isValid;
-    }
-
-    public boolean setDateLastServiced(Date dls) {
-        boolean isValid = false;
-        try {
-            if (dls == (Date) dls) {
-                this.dateLastServiced = dls;
                 isValid = true;
             }
         } catch (Exception e) {
@@ -345,10 +340,6 @@ public class Vehicle implements CMMSInterface {
 
     public int getKmLastServiced() {
         return kmLastServiced;
-    }
-
-    public Date getDateLastServiced() {
-        return dateLastServiced;
     }
     
     public String getLicensePlate() {

@@ -28,6 +28,7 @@ import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.wb.swt.SWTResourceManager;
 
 import businessLogic.CMMSInterface;
 
@@ -557,6 +558,9 @@ public class CMMS implements CMMSInterface {
 
         for (Vehicle v : list) {
             ti = new TableItem(dataTable, SWT.NONE);
+            if (v.checkRequiresService()) {
+                ti.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+            }
             ti.setText(v.ToStrings());
         }
         
