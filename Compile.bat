@@ -11,5 +11,12 @@ call SetClassPath
 
 
 REM @echo off
-javac -d bin\ -cp %classpath% src\org\eclipse\wb\swt\*.java src\cmms\*.java
-javac -d bin\ -cp %classpath% src\junitTest\*.java
+javac -d bin\ -cp %classpath% src\cmmsObjects\*.java
+javac -d bin\ -cp %classpath% src\cmmsBusiness\*.java
+javac -d bin\ -cp %classpath% src\cmmsPersistence\*.java
+javac -d bin\ -cp %classpath% src\cmmsPresentation\*.java
+
+javac -d bin\ -cp %classpath% src\org\eclipse\wb\swt\*.java
+
+javac -d bin\ -cp %classpath% src\testsObjects\*.java
+javac -d bin\ -cp %classpath% src\tests\*.java

@@ -1,4 +1,4 @@
-package objects;
+package cmmsObjects;
 
 import java.util.Date;
 

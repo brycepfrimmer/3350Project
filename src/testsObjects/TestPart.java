@@ -1,8 +1,9 @@
-package junitTest;
+package testsObjects;
 
 import junit.framework.TestCase;
-import objects.Part;
 import org.junit.Test;
+
+import cmmsObjects.Part;
 
 public class TestPart extends TestCase {
 

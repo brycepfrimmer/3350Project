@@ -1,15 +1,11 @@
-package presentation;
+package cmmsPresentation;
 
 import java.util.ArrayList;
 
-import objects.Part;
-import objects.ServiceItem;
-import objects.Vehicle;
 
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
-import businessLogic.CMMSInterface;
 
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -23,6 +19,11 @@ import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.widgets.Combo;
+
+import cmmsBusiness.CMMSInterface;
+import cmmsObjects.Part;
+import cmmsObjects.ServiceItem;
+import cmmsObjects.Vehicle;
 
 public class AddServiceEvent implements CMMSInterface {
 

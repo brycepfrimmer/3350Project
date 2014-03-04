@@ -1,5 +1,12 @@
-.........................
-Time: 0.004
+.....F..............
+Time: 0.044
+There was 1 failure:
+1) testNewPart(testsObjects.TestPart)junit.framework.AssertionFailedError: null
+	at testsObjects.TestPart.testNewPart(TestPart.java:15)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 
-OK (25 tests)
+FAILURES!!!
+Tests run: 19,  Failures: 1,  Errors: 0
 
