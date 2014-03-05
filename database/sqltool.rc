@@ -1,5 +1,0 @@
-# A personal Memory-Only database.
-urlid CMMS
-url jdbc:hsqldb:CMMS
-username sa
-password 
