@@ -4,15 +4,21 @@ import java.sql.Date;
 
 import junit.framework.TestCase;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import cmmsObjects.Vehicle;
 
 
 public class TestVehicle extends TestCase {
-    Vehicle vehicle = new Vehicle("vin236", "car", "Dodge", "Viper", 2004,
-            true, "ADN 518", true, "Policy one", "General", 155000, 1200, Date.valueOf("2014-01-23"));
-
+    private Vehicle vehicle;
+    
+    @Before
+	public void setUp() throws Exception {
+    	vehicle = new Vehicle("vin236", "car", "Dodge", "Viper", 2004,
+                true, "ADN 518", true, "Policy one", "General", 155000, 1200, Date.valueOf("2014-01-23"));
+	}
+    
     @Test
     public void testVehicle() {
         Vehicle vehicle = new Vehicle();

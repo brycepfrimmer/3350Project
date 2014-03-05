@@ -11,8 +11,9 @@ public final class Part {
         serviceIList = new ArrayList<ServiceItem>();
     }
 
-    public void addServiceItem(ServiceItem s) {
+    public boolean addServiceItem(ServiceItem s) {
         this.serviceIList.add(s);
+        return true;
     }
     
     public String getPartDesc() {
@@ -65,5 +66,5 @@ public final class Part {
         }
     }
 
-}// End PartsList Class
+}// End Part Class
 

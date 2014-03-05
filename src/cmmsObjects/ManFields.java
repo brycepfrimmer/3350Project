@@ -24,8 +24,9 @@ public class ManFields {
 	public boolean getId() {
 		return id;
 	}
-	public void setId(boolean id) {
+	public boolean setId(boolean id) {
 		this.id = id;
+		return this.id;
 	}
 	public boolean getType() {
 		return type;

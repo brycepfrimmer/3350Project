@@ -2,12 +2,18 @@ package testsObjects;
 
 import junit.framework.TestCase;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import cmmsObjects.InsurancePolicy;
 
 public class TestInsurancePolicy extends TestCase {
-    InsurancePolicy policy = new InsurancePolicy("number123", "General");
+	private InsurancePolicy policy;
+	
+    @Before
+	public void setUp() throws Exception {
+    	policy = new InsurancePolicy("number123", "General");
+	}
 
     @Test
     public void testInsurancePolicy() {

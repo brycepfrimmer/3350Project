@@ -42,18 +42,22 @@ public class StubDB {
         manFields = new ManFields();
     }
 
-    public void removeVehicle(String id) {
+    public boolean removeVehicle(String id) {
         Vehicle targetVehicle = null;
+        boolean success = false;
         for (Vehicle vehicle : vehicles) {
             if (vehicle != null && id.equals(vehicle.getID())) {
                 targetVehicle = vehicle;
+                success = true;
             }
         }
         vehicles.remove(targetVehicle);
+        return success;
     }
 
-    public void addVehicle(Vehicle vehicle) {
+    public boolean addVehicle(Vehicle vehicle) {
         vehicles.add(vehicle);
+        return true;
     }
 
     public Vehicle searchByID(String id) {

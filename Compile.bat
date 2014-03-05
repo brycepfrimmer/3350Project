@@ -19,4 +19,5 @@ javac -d bin\ -cp %classpath% src\cmmsPresentation\*.java
 javac -d bin\ -cp %classpath% src\org\eclipse\wb\swt\*.java
 
 javac -d bin\ -cp %classpath% src\testsObjects\*.java
+javac -d bin\ -cp %classpath% src\testsPersistence\*.java
 javac -d bin\ -cp %classpath% src\tests\*.java

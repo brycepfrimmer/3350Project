@@ -5,17 +5,15 @@ import java.util.ArrayList;
 import cmmsObjects.ManFields;
 import cmmsObjects.Vehicle;
 
-
-
 public class Interface {
     final static private StubDB database = new StubDB();
 
-    public void addVehicle(Vehicle vehicle) {
-        database.addVehicle(vehicle);
+    public boolean addVehicle(Vehicle vehicle) {
+        return database.addVehicle(vehicle);
     }
 
-    public void removeVehicle(String id) {
-        database.removeVehicle(id);
+    public boolean removeVehicle(String id) {
+        return database.removeVehicle(id);
     }
 
     public Vehicle getVehicle(String id) {
