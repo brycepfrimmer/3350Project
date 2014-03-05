@@ -1,5 +1,5 @@
 .....F..............
-Time: 0.044
+Time: 0.005
 There was 1 failure:
 1) testNewPart(testsObjects.TestPart)junit.framework.AssertionFailedError: null
 	at testsObjects.TestPart.testNewPart(TestPart.java:15)
