@@ -7,6 +7,7 @@ public class ManFields {
 	private boolean model;
 	private boolean kmsDriven;
 	private boolean kmsLastServiced;
+	private boolean dateLastServiced;
 	private boolean insInfo;
 	private boolean year;
 	
@@ -17,6 +18,7 @@ public class ManFields {
 		this.model = true;
 		this.kmsDriven = true;
 		this.kmsLastServiced = true;
+		this.dateLastServiced = true;
 		this.insInfo = true;
 		this.year = true;
 	}
@@ -70,6 +72,14 @@ public class ManFields {
 	public void setYear(boolean year) {
 		this.year = year;
 	}
+
+    public boolean getDateLastServiced() {
+        return dateLastServiced;
+    }
+
+    public void setDateLastServiced(boolean dateLastServiced) {
+        this.dateLastServiced = dateLastServiced;
+    }
 	
 	
 }

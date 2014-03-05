@@ -82,7 +82,7 @@ public class Vehicle implements CMMSInterface {
     }
 
     public String[] ToStrings() {
-        String[] vehicle = new String[13];
+        String[] vehicle = new String[14];
 
         vehicle[VEHICLE_FIELDS.ID.ordinal()] = ID;
         vehicle[VEHICLE_FIELDS.TYPE.ordinal()] = type;
@@ -105,6 +105,11 @@ public class Vehicle implements CMMSInterface {
         }
         else{
         	vehicle[VEHICLE_FIELDS.KM_LAST_SERVICE.ordinal()] = Integer.toString(kmLastServiced);
+        }
+        if (dateLastServiced == null) {
+            vehicle[VEHICLE_FIELDS.DATE_LAST_SERVICE.ordinal()] = " ";
+        } else {
+            vehicle[VEHICLE_FIELDS.DATE_LAST_SERVICE.ordinal()] = dateLastServiced.toString();
         }
         if (roadWorthy) {
             vehicle[VEHICLE_FIELDS.ROADWORTHY.ordinal()] = "Yes";

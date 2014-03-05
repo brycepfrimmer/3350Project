@@ -15,13 +15,13 @@ public class TestServiceItem extends TestCase{
 	
 	@Before
 	public void setUp() throws Exception {
-		item1 = new ServiceItem("one", (long) 1.0 );
+		item1 = new ServiceItem("one", (long) 1.0, new Date() );
 		item2 = new ServiceItem("two", 10, 5 );
 	}
 	
 	@Test
 	public void testServiceItem1() {
-		ServiceItem item = new ServiceItem("item", (long)1.0);
+		ServiceItem item = new ServiceItem("item", (long)1.0, new Date());
 		assertTrue( item != null );
 	}
 

@@ -12,10 +12,13 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.widgets.DateTime;
 
 import cmmsBusiness.CMMSInterface;
 import cmmsObjects.ManFields;
 import cmmsObjects.Vehicle;
+
+import java.sql.Date;
 
 
 public class AddVehicle implements CMMSInterface {
@@ -43,8 +46,10 @@ public class AddVehicle implements CMMSInterface {
     private Label lblLPNWarning;
     private Label lblInsPolNumWarning;
     private Label lblInsTypeWarning;
+    private DateTime dateTime;
     
     private ManFields manFields;
+    private Label lblDateTimeWarning;
 
     /**
      * Launch the application.
@@ -81,7 +86,7 @@ public class AddVehicle implements CMMSInterface {
      */
     protected void createContents() {
         shell = new Shell();
-        shell.setSize(660, 430);
+        shell.setSize(660, 485);
         shell.setText("Add Vehicle");
 
         Label lblVehicleId = new Label(shell, SWT.NONE);
@@ -136,6 +141,13 @@ public class AddVehicle implements CMMSInterface {
 
         textKmsLS = new Text(shell, SWT.BORDER);
         textKmsLS.setBounds(98, 193, 76, 21);
+        
+        Label lblDateLastServiced = new Label(shell, SWT.NONE);
+        lblDateLastServiced.setBounds(10, 236, 76, 46);
+        lblDateLastServiced.setText("Date Last\nServiced");
+        
+        dateTime = new DateTime(shell, SWT.BORDER);
+        dateTime.setBounds(98, 236, 80, 24);
 
         btnRoadworthy = new Button(shell, SWT.CHECK);
         btnRoadworthy.addKeyListener(new KeyAdapter() {
@@ -146,35 +158,35 @@ public class AddVehicle implements CMMSInterface {
                 }
             }
         });
-        btnRoadworthy.setBounds(10, 236, 113, 16);
+        btnRoadworthy.setBounds(10, 306, 113, 16);
         btnRoadworthy.setText("Roadworthy");
 
         Label lblLicensePlateNumber = new Label(shell, SWT.NONE);
-        lblLicensePlateNumber.setBounds(129, 239, 126, 15);
+        lblLicensePlateNumber.setBounds(129, 307, 126, 15);
         lblLicensePlateNumber.setText("License Plate Number");
 
         textLPN = new Text(shell, SWT.BORDER);
-        textLPN.setBounds(258, 236, 103, 21);
+        textLPN.setBounds(261, 304, 103, 21);
 
         Label lblInsurancePolicyNumber = new Label(shell, SWT.NONE);
-        lblInsurancePolicyNumber.setBounds(10, 288, 140, 15);
+        lblInsurancePolicyNumber.setBounds(10, 357, 140, 15);
         lblInsurancePolicyNumber.setText("Insurance Policy Number");
 
         textInsPolNum = new Text(shell, SWT.BORDER);
-        textInsPolNum.setBounds(156, 282, 150, 21);
+        textInsPolNum.setBounds(156, 354, 150, 21);
 
         Label lblInsuranceType = new Label(shell, SWT.NONE);
-        lblInsuranceType.setBounds(323, 288, 89, 15);
+        lblInsuranceType.setBounds(322, 357, 89, 15);
         lblInsuranceType.setText("Insurance Type");
 
         textInsType = new Text(shell, SWT.BORDER);
-        textInsType.setBounds(418, 282, 150, 21);
+        textInsType.setBounds(418, 354, 150, 21);
 
         Label label = new Label(shell, SWT.SEPARATOR | SWT.HORIZONTAL);
-        label.setBounds(10, 269, 558, 2);
+        label.setBounds(10, 342, 625, 2);
 
         Label label_1 = new Label(shell, SWT.SEPARATOR | SWT.HORIZONTAL);
-        label_1.setBounds(10, 220, 558, 2);
+        label_1.setBounds(10, 288, 625, 2);
 
         btnOperational = new Button(shell, SWT.CHECK);
         btnOperational.addKeyListener(new KeyAdapter() {
@@ -185,7 +197,7 @@ public class AddVehicle implements CMMSInterface {
                 }
             }
         });
-        btnOperational.setBounds(10, 324, 93, 16);
+        btnOperational.setBounds(10, 378, 93, 16);
         btnOperational.setText("Operational");
 
         Button btnCreate = new Button(shell, SWT.NONE);
@@ -215,6 +227,7 @@ public class AddVehicle implements CMMSInterface {
                     if(kmsLS != ""){
                     	newVehicle.setKmLastServiced(new Integer(textKmsLS.getText()));
                     }
+                    newVehicle.setDateLastServiced(Date.valueOf(dateTime.getYear() + "-" + (dateTime.getMonth()+1) + "-" + dateTime.getDay()));
                     // Interface temp = new Interface();
                     // temp.addVehicle(newVehicle);
                     dbInterface.addVehicle(newVehicle);
@@ -225,7 +238,7 @@ public class AddVehicle implements CMMSInterface {
                 }
             }
         });
-        btnCreate.setBounds(180, 357, 75, 25);
+        btnCreate.setBounds(10, 412, 75, 25);
         btnCreate.setText("Create");
 
         Button btnCancel = new Button(shell, SWT.NONE);
@@ -235,7 +248,7 @@ public class AddVehicle implements CMMSInterface {
                 shell.close();
             }
         });
-        btnCancel.setBounds(271, 357, 75, 25);
+        btnCancel.setBounds(99, 412, 75, 25);
         btnCancel.setText("Cancel");
 
         lblVehicleIDWarning = new Label(shell, SWT.NONE);
@@ -279,12 +292,17 @@ public class AddVehicle implements CMMSInterface {
         lblInsPolNumWarning = new Label(shell, SWT.NONE);
         lblInsPolNumWarning.setForeground(SWTResourceManager
                 .getColor(SWT.COLOR_RED));
-        lblInsPolNumWarning.setBounds(129, 309, 189, 21);
+        lblInsPolNumWarning.setBounds(209, 412, 189, 21);
 
         lblInsTypeWarning = new Label(shell, SWT.NONE);
         lblInsTypeWarning.setForeground(SWTResourceManager
                 .getColor(SWT.COLOR_RED));
-        lblInsTypeWarning.setBounds(399, 309, 193, 21);
+        lblInsTypeWarning.setBounds(399, 412, 193, 21);
+        
+        lblDateTimeWarning = new Label(shell, SWT.NONE);
+        lblDateTimeWarning.setForeground(SWTResourceManager
+                .getColor(SWT.COLOR_RED));
+        lblDateTimeWarning.setBounds(189, 236, 388, 24);
     }
 
     private boolean checkFields() {
@@ -293,8 +311,33 @@ public class AddVehicle implements CMMSInterface {
         fieldsOkay = checkID() && checkType() && checkManufacturer()
                 && checkModel() && checkYear() && checkLPN()
                 && checkInsPolNum() && checkInsType() && checkKms()
-                && checkKmsLS();
+                && checkKmsLS() && checkDateTime();
         return fieldsOkay;
+    }
+
+    private boolean checkDateTime() {
+        boolean isValid = false;
+        boolean mand = manFields.getDateLastServiced();
+        String input = dateTime.getYear() + "-" + (dateTime.getMonth()+1) + "-" + dateTime.getDay();
+        lblDateTimeWarning.setText("");
+        if(mand){
+            try {
+                @SuppressWarnings("unused")
+                Date temp = Date.valueOf(input);
+                isValid = true;
+            } catch (IllegalArgumentException e) {
+                lblDateTimeWarning.setText("Date Last Serviced is of improper format.");
+            }
+        } else {
+            isValid = true;
+        }
+        
+        if (mand && input == ""){
+            lblDateTimeWarning.setText("Date Last Serviced is a required field.");
+        }
+        
+        lblDateTimeWarning.pack();
+        return isValid;
     }
 
     private boolean checkID() {

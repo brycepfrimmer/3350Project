@@ -232,7 +232,7 @@ Developer Task List - Iteration 2
 10- 
 11- Create test classes for project - on going - ALL
 
-Friday, Februrary 28th, 2014
+Friday, February 28th, 2014
 Cody Edwards
 	4.5 Hours - Added modification of vehicle addition criteria. Tweaked Vehicle class default values and input validation so that empty fields would print
 		in the main window. 
@@ -250,8 +250,4 @@ Bryce Pfrimmer
 Monday, March 3rd, 2014
 Bryce Pfrimmer
 	4 Hours - Restructuring for the implementation of time/usage based tracking. (Vehicle ID's should be all be different && addServiceEvent shouldn't work
-	if there are no parts on the vehicle && get date last serviced when a vehicle is created)
-	
-****NOTE: this task list is merely a start. Other than a couple of them they are "Big" user stories and will need to be broken down into smaller
-tasks. Please perform this breakdown as you see fit as you are working on that section of the program. By no means is this set in stone. Do what
-you can, whatever is left we can handle as a group.
+	if there are no parts on the vehicle && get date last serviced when a vehicle is created && edit and view vehicle needs date last serviced)

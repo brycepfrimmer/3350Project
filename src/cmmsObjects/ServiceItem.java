@@ -9,10 +9,10 @@ public class ServiceItem {
     private Date dateLastServiced;
     private int kmLastServiced;
     
-    public ServiceItem(String d, long serviceTime) {
+    public ServiceItem(String d, long serviceTime, Date dateLastServiced) {
         this.description = d;
         this.serviceTime = serviceTime;
-        this.setDateLastServiced(new Date());
+        this.setDateLastServiced(dateLastServiced);
         this.serviceKm = 0;
         this.setKmLastServiced(0);
     }

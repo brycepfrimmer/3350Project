@@ -140,7 +140,7 @@ public class AddServiceEvent implements CMMSInterface {
             @Override
             public void widgetSelected(SelectionEvent e) {
                 if (checkPartSelection() && checkDesc() && checkTime()) {
-                    v.addServiceEvent(new ServiceItem(eventDesc.getText(), Long.parseLong(serviceTime.getText())),
+                    v.addServiceEvent(new ServiceItem(eventDesc.getText(), Long.parseLong(serviceTime.getText()), v.getDateLastServiced()),
                                       new Part(partsComboBox.getItem(partsComboBox.getSelectionIndex())));
                     shell.close();
                 } else if (checkPartSelection() && checkDesc() && checkKilos()) {

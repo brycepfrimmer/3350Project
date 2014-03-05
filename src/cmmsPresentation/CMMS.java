@@ -96,6 +96,7 @@ public class CMMS implements CMMSInterface {
     private static TableColumn vehiclePolicyCol;
     private static TableColumn vehicleInsTypeCol;
     private static TableColumn vehicleKMLastServiceCol;
+    private static TableColumn vehicleDateLastServicedCol;
     private static TableColumn vehicleManufacturerCol;
     private static TableColumn vehicleOperationalCol;
     private static TableColumn vehicleRoadWorthyCol;
@@ -109,6 +110,7 @@ public class CMMS implements CMMSInterface {
         "Year",
         "Kilometers",
         "Last service (KM)",
+        "Date Last Serviced",
         "Is Roadworthy",
         "License Plate",
         "Insurance Policy Number",
@@ -628,38 +630,44 @@ public class CMMS implements CMMSInterface {
         vehicleKMLastServiceCol.setMoveable(true);
         vehicleKMLastServiceCol.setResizable(true);
 
+        vehicleDateLastServicedCol = new TableColumn(dataTable, SWT.BORDER);
+        vehicleDateLastServicedCol.setText(columnHeaders[7]);
+        vehicleDateLastServicedCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
+        vehicleDateLastServicedCol.setMoveable(true);
+        vehicleDateLastServicedCol.setResizable(true);
+        
         vehicleRoadWorthyCol = new TableColumn(dataTable, SWT.BORDER);
-        vehicleRoadWorthyCol.setText(columnHeaders[7]);
+        vehicleRoadWorthyCol.setText(columnHeaders[8]);
         vehicleRoadWorthyCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
         vehicleRoadWorthyCol.setMoveable(true);
         vehicleRoadWorthyCol.setResizable(true);
 
         vehicleLicensePlateCol = new TableColumn(dataTable, SWT.BORDER);
-        vehicleLicensePlateCol.setText(columnHeaders[8]);
+        vehicleLicensePlateCol.setText(columnHeaders[9]);
         vehicleLicensePlateCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
         vehicleLicensePlateCol.setMoveable(true);
         vehicleLicensePlateCol.setResizable(true);
 
         vehiclePolicyCol = new TableColumn(dataTable, SWT.BORDER);
-        vehiclePolicyCol.setText(columnHeaders[9]);
+        vehiclePolicyCol.setText(columnHeaders[10]);
         vehiclePolicyCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
         vehiclePolicyCol.setMoveable(true);
         vehiclePolicyCol.setResizable(true);
 
         vehicleInsTypeCol = new TableColumn(dataTable, SWT.BORDER);
-        vehicleInsTypeCol.setText(columnHeaders[10]);
+        vehicleInsTypeCol.setText(columnHeaders[11]);
         vehicleInsTypeCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
         vehicleInsTypeCol.setMoveable(true);
         vehicleInsTypeCol.setResizable(true);
 
         vehicleOperationalCol = new TableColumn(dataTable, SWT.BORDER);
-        vehicleOperationalCol.setText(columnHeaders[11]);
+        vehicleOperationalCol.setText(columnHeaders[12]);
         vehicleOperationalCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
         vehicleOperationalCol.setMoveable(true);
         vehicleOperationalCol.setResizable(true);
 
         vehicleFuelEconCol = new TableColumn(dataTable, SWT.BORDER);
-        vehicleFuelEconCol.setText(columnHeaders[12]);
+        vehicleFuelEconCol.setText(columnHeaders[13]);
         vehicleFuelEconCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
         vehicleFuelEconCol.setMoveable(true);
         vehicleFuelEconCol.setResizable(true);
