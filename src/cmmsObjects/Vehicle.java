@@ -36,6 +36,7 @@ public class Vehicle implements CMMSInterface {
     /* OptionalFields */
     private int kmDriven;
     private int kmLastServiced;
+    private Date dateLastServiced;
     private ArrayList<Part> partsList;
 
     /* Calculated fields */
@@ -50,6 +51,7 @@ public class Vehicle implements CMMSInterface {
         this.model = " ";
         this.kmDriven = 0;
         this.kmLastServiced = 0;
+        this.setDateLastServiced(null);
         this.partsList = null;
         insurance = new InsurancePolicy();
         this.fuelEcon = 0.0;
@@ -74,6 +76,7 @@ public class Vehicle implements CMMSInterface {
         if(!ret) { /*System.err.println("INVALID INSURANCE POLICY NUMBER OR TYPE.");*/ }
         this.kmDriven = km;
         this.kmLastServiced = kmLS;
+        this.setDateLastServiced(dls);
         this.year = year;
         setPartsList();
     }
@@ -365,5 +368,13 @@ public class Vehicle implements CMMSInterface {
 
     public double getFuelEcon() {
         return fuelEcon;
+    }
+
+    public Date getDateLastServiced() {
+        return dateLastServiced;
+    }
+
+    public void setDateLastServiced(Date dateLastServiced) {
+        this.dateLastServiced = dateLastServiced;
     }
 }// End Vehicle Class

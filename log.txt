@@ -245,8 +245,13 @@ Darwin Froese
 Sunday, March 2nd, 2014
 Bryce Pfrimmer
 	3.5 Hours - worked on adding time/usage based tracking (BUG - UpdateList() called from CMMS main GUI makes the list "shake" && we shouldn't
-	be able to add duplicate parts to the "PartsList" && Delroy check out TestPart.java needs some tests for Part.java && kmLastServiced 2 places)
+	be able to add duplicate parts to the "PartsList" && kmLastServiced 2 places)
 
+Monday, March 3rd, 2014
+Bryce Pfrimmer
+	4 Hours - Restructuring for the implementation of time/usage based tracking. (Vehicle ID's should be all be different && addServiceEvent shouldn't work
+	if there are no parts on the vehicle && get date last serviced when a vehicle is created)
+	
 ****NOTE: this task list is merely a start. Other than a couple of them they are "Big" user stories and will need to be broken down into smaller
 tasks. Please perform this breakdown as you see fit as you are working on that section of the program. By no means is this set in stone. Do what
 you can, whatever is left we can handle as a group.

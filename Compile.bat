@@ -11,6 +11,7 @@ call SetClassPath
 
 
 REM @echo off
+javac -d bin\ -cp %classpath% src\cmmsObjects\*.java
 javac -d bin\ -cp %classpath% src\cmmsBusiness\*.java
 javac -d bin\ -cp %classpath% src\cmmsPersistence\*.java
 javac -d bin\ -cp %classpath% src\cmmsPresentation\*.java
