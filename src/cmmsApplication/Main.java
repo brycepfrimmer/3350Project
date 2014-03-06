@@ -4,23 +4,23 @@ import cmmsPresentation.CMMS;
 
 public class Main
 {
-	public static final String dbName="Main";
+	public static final String dbName="Stub";
 
 	public static void main(String[] args)
 	{
-		//startUp();
+		startUp();
 		new CMMS();
 		shutDown();
-		//System.out.println("All done");
+		System.out.println("All done");
 	}
 
 	public static void startUp()
 	{
-		//Services.createDataAccess(dbName);
+		Services.createDataAccess(dbName);
 	}
 
 	public static void shutDown()
 	{
-		//Services.closeDataAccess();
+		Services.closeDataAccess();
 	}
 }

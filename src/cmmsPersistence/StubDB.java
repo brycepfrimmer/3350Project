@@ -7,15 +7,29 @@ import cmmsObjects.ManFields;
 import cmmsObjects.Part;
 import cmmsObjects.Vehicle;
 
-
+import cmmsApplication.Main;
 
 public class StubDB {
+
+    private String dbName;
+    private String dbType = "stub";
 
     private ArrayList<Vehicle> vehicles;
     private static int countNew = 0;
     private ManFields manFields;
 
-    public StubDB() {
+    public StubDB(String dbName)
+    {
+        this.dbName = dbName;
+    }
+
+    public StubDB()
+    {
+        this(Main.dbName);
+    }
+
+    public void open(String dbName)
+    {
         if (countNew == 0) {
             this.vehicles = new ArrayList<Vehicle>();
 
@@ -40,6 +54,13 @@ public class StubDB {
             countNew++;
         }
         manFields = new ManFields();
+
+        System.out.println("Opened " +dbType +" database " +dbName);
+    }
+
+    public void close()
+    {
+        System.out.println("Closed " +dbType +" database " +dbName);
     }
 
     public boolean removeVehicle(String id) {

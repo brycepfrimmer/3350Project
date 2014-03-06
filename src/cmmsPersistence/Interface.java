@@ -4,9 +4,16 @@ import java.util.ArrayList;
 
 import cmmsObjects.ManFields;
 import cmmsObjects.Vehicle;
+import cmmsApplication.Services;
+import cmmsApplication.Main;
 
 public class Interface {
-    final static private StubDB database = new StubDB();
+    /*final static*/ private StubDB database;
+
+    public Interface()
+    {
+        database = (StubDB) Services.getDataAccess(Main.dbName);
+    }
 
     public boolean addVehicle(Vehicle vehicle) {
         return database.addVehicle(vehicle);
