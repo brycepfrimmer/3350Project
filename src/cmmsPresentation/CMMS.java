@@ -119,11 +119,26 @@ public class CMMS implements CMMSInterface {
         "Fuel Economy (L/100km)"
     };
 
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
+        try{
+            CreateWindow();
+            OnLoad();
+            Open();
+            //vehicles = null;
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }*/
+
+    public CMMS()
+    {
         CreateWindow();
         OnLoad();
         Open();
+        //vechicles = null;
     }
+
 
     private static void OnLoad() {
         // Read existing database vehicles

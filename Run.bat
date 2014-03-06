@@ -2,4 +2,4 @@ REM @echo off
 call SetClassPath
 
 REM @echo off
-java cmmsPresentation.CMMS
+java cmmsApplication.Main
