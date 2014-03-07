@@ -256,3 +256,7 @@ Thursday, March 6th, 2014
 Cody Edwards
 	3 Hours - Duplicate Vehicle ID's are no longer allowed, neither are duplicate parts.  There was also a bug that
 		didn't allow you to remove parts. This has now been fixed.
+		
+Friday, March 7th, 2014
+Cody Edwards
+	2 Hours - addServiceEvent now doesn't work if there are no parts on the vehicle, edit window now has dateLastServiced

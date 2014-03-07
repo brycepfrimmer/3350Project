@@ -46,7 +46,6 @@ public class EditVehicle {
     private Text textKmsWarning;
     private Text textKmsLSWarning;
     private Label lblLPNWarning;
-    private Label lblDateTimeWarning;
     private Text textInsPolNumWarning;
     private Text textInsTypeWarning;
 
