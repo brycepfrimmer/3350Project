@@ -103,8 +103,8 @@ public class EditPartsList {
                     if (response == SWT.YES) {
                         int[] selections = partsListTable.getSelectionIndices();
                         for (int i = 0; i < selected; i++) {
-                            list.remove(new Part(partsListTable.getItem(
-                                    selections[i]).getText(0)));
+                        	currVehicle.removePart(partsListTable.getItem(
+                                    selections[i]).getText(0));
                         }
 
                         // Update list with the new Vehicles
@@ -120,8 +120,8 @@ public class EditPartsList {
 
                     if (response == SWT.YES) {
                         // Should only have one item selected
-                        list.remove(new Part(partsListTable.getItem(
-                                partsListTable.getSelectionIndex()).getText()));
+                        currVehicle.removePart(partsListTable.getItem(
+                                partsListTable.getSelectionIndex()).getText());
                         // Update list with the new Vehicles
                         updateList();
                     }

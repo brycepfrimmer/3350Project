@@ -41,6 +41,7 @@ public class Vehicle implements CMMSInterface {
 
     /* Calculated fields */
     private double fuelEcon;
+    private int currPartIndex;
 
     // ******Vehicle constructor******//
     public Vehicle() {
@@ -145,9 +146,11 @@ public class Vehicle implements CMMSInterface {
     
     public boolean searchPartsList(String part){
     	boolean found = false;
+    	part = part.replaceAll("\\s", "");
     	for(int i = 0; i < partsList.size(); i++){
-    		if(part.equals(partsList.get(i).getPartDesc())){
+    		if(part.equals(partsList.get(i).getPartDesc().replaceAll("\\s", ""))){
     			found = true;
+    			currPartIndex = i;
     			i = partsList.size();
     		}
     	}
@@ -329,6 +332,13 @@ public class Vehicle implements CMMSInterface {
 
     public void setPartsList(ArrayList<Part> newPL) {
         this.partsList = newPL;
+    }
+    
+    public void removePart(String part){
+    	if(searchPartsList(part)){
+    		partsList.remove(currPartIndex);
+    	}
+    	
     }
   
     
