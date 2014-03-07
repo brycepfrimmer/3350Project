@@ -14,9 +14,11 @@ import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.widgets.DateTime;
 
+import cmmsBusiness.AccessVehicle;
 import cmmsBusiness.CMMSInterface;
 import cmmsObjects.ManFields;
 import cmmsObjects.Vehicle;
+import cmmsObjects.VehicleInfo;
 
 import java.sql.Date;
 
@@ -50,6 +52,9 @@ public class AddVehicle implements CMMSInterface {
     
     private ManFields manFields;
     private Label lblDateTimeWarning;
+    
+    private AccessVehicle accessVehicle;
+    private VehicleInfo infoObject;
 
     /**
      * Launch the application.
@@ -209,6 +214,30 @@ public class AddVehicle implements CMMSInterface {
                 String kms = textKms.getText();
                 String kmsLS = textKmsLS.getText();
                 if (good) {
+                /*
+                	accessVehicle = new AccessVehicle();
+                	infoObject = new VehicleInfo();
+                	infoObject.setID(textVehicleID.getText());
+                	infoObject.setType(textType.getText());
+                	infoObject.setManufacturer(textManufacturer.getText());
+                	infoObject.setModel(textModel.getText());
+                	if(year != ""){
+                    	infoObject.setYear(new Integer(year));
+                    }
+                	infoObject.setRoadWorthy(btnRoadworthy.getSelection());
+                    infoObject.setLicensePlate(textLPN.getText());
+                    infoObject.setOperational(btnOperational.getSelection()); 
+                    infoObject.setInsurance(textInsPolNum.getText(), textInsType.getText());
+                    if(kms != ""){
+                    	infoObject.setKmDriven(new Integer(textKms.getText()));
+                    }
+                    if(kmsLS != ""){
+                    	infoObject.setKmLastServiced(new Integer(textKmsLS.getText()));
+                    }
+                    infoObject.setDateLastServiced(Date.valueOf(dateTime.getYear() + "-" + (dateTime.getMonth()+1) + "-" + dateTime.getDay()));
+                    
+                	accessVehicle.addVehicle(infoObject);
+                */
                     Vehicle newVehicle = new Vehicle();
                     newVehicle.setID(textVehicleID.getText());
                     newVehicle.setType(textType.getText()); 

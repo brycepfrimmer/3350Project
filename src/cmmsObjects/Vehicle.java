@@ -285,6 +285,12 @@ public class Vehicle implements CMMSInterface {
         }
         return isValid;
     }
+    
+    public boolean setInsurance( InsurancePolicy policy )
+    {
+    	this.insurance = policy;
+    	return true;
+    }
 
     public boolean setKmDriven(int km) {
         boolean isValid = false;

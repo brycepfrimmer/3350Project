@@ -3,6 +3,7 @@ package cmmsPresentation;
 import java.util.ArrayList;
 
 
+
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
@@ -13,6 +14,7 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Table;
 
+import cmmsBusiness.AccessVehicle;
 import cmmsObjects.Part;
 import cmmsObjects.Vehicle;
 
@@ -27,14 +29,17 @@ public class EditPartsList {
     private Button btnRemove;
     private Table partsListTable;
     private ArrayList<Part> list;
-
+    
+    private AccessVehicle access;
     /**
      * Open the window.
      */
     public void open(Vehicle v) {
         Display display = Display.getDefault();
         createContents();
+        access = new AccessVehicle();
         currVehicle = v;
+        //list = access.getPartsList(v.getID());
         list = currVehicle.getPartsList();
         if (!list.isEmpty()) {
             updateList();
@@ -141,6 +146,8 @@ public class EditPartsList {
 
     private void updateList() {
         TableItem ti; // Table item for adding parts to the table
+        
+        //access.setPartsList(currVehicle.getID(), list);
 
         // Stop Drawing Table, Empty Table, Rebuild Table, Start Drawing Table
         partsListTable.setRedraw(false);

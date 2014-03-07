@@ -3,6 +3,7 @@ package cmmsPresentation;
 import java.util.ArrayList;
 
 
+
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
@@ -20,6 +21,7 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.widgets.Combo;
 
+import cmmsBusiness.AccessVehicle;
 import cmmsBusiness.CMMSInterface;
 import cmmsObjects.Part;
 import cmmsObjects.ServiceItem;
@@ -34,6 +36,8 @@ public class AddServiceEvent implements CMMSInterface {
     private Label errorLabel;
     private Combo partsComboBox;
     private ArrayList<Part> partsList;
+    
+    private AccessVehicle access;
 
     /**
      * Open the window.
@@ -142,10 +146,12 @@ public class AddServiceEvent implements CMMSInterface {
                 if (checkPartSelection() && checkDesc() && checkTime()) {
                     v.addServiceEvent(new ServiceItem(eventDesc.getText(), Long.parseLong(serviceTime.getText()), v.getDateLastServiced()),
                                       new Part(partsComboBox.getItem(partsComboBox.getSelectionIndex())));
+                    //access.updateVehicle();
                     shell.close();
                 } else if (checkPartSelection() && checkDesc() && checkKilos()) {
                     v.addServiceEvent(new ServiceItem(eventDesc.getText(), Integer.parseInt(serviceKm.getText()), v.getKmLastServiced()),
                                       new Part(partsComboBox.getItem(partsComboBox.getSelectionIndex())));
+                    //access.updateVehicle();
                     shell.close();
                 } else if (checkPartSelection() && checkDesc()) {
                     errorLabel.setText("Please enter a valid time or kilometer service indicator.");

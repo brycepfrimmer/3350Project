@@ -11,6 +11,7 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.wb.swt.SWTResourceManager;
 
+import cmmsBusiness.AccessVehicle;
 import cmmsObjects.Vehicle;
 
 
@@ -24,6 +25,8 @@ public class UpdateKilometers {
     private Text textFuelUsage;
     private Label lblFuelUsageWarning;
     private Button btnCancel;
+    
+    private AccessVehicle access;
 
     /**
      * Open the window.
@@ -111,6 +114,8 @@ public class UpdateKilometers {
     }
 
     private void SetFields() {
+    	//access.updateKm( currVehicle, new Integer(textKms.getText()), new Double(
+        //        textFuelUsage.getText()) );
         currVehicle.updateKm(new Integer(textKms.getText()), new Double(
                 textFuelUsage.getText()));
     }

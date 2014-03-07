@@ -11,6 +11,7 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.wb.swt.SWTResourceManager;
 
+import cmmsBusiness.AccessVehicle;
 import cmmsObjects.Part;
 import cmmsObjects.Vehicle;
 
@@ -24,6 +25,8 @@ public class AddPart {
     private Button btnCancel;
     private Label lblPart;
     private Label lblAddWarning;
+    
+    private AccessVehicle access;
 
     /**
      * Open the window.
@@ -90,7 +93,10 @@ public class AddPart {
     }
 
     private boolean SetFields() {
-        return currVehicle.getPartsList().add(new Part(textPart.getText()));
+    	access = new AccessVehicle();
+    	access.addPart( currVehicle.getID(), textPart.getText() );
+        return true;
+    	//return currVehicle.getPartsList().add(new Part(textPart.getText()));
 
     }
 

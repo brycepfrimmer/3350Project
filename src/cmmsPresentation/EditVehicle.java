@@ -13,7 +13,9 @@ import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
 
+import cmmsBusiness.AccessVehicle;
 import cmmsObjects.Vehicle;
+import cmmsObjects.VehicleInfo;
 
 
 public class EditVehicle {
@@ -44,6 +46,9 @@ public class EditVehicle {
 
     private Vehicle currVehicle;
     private Button btnEditPartsList;
+    
+    private VehicleInfo info;
+    private AccessVehicle access;
 
     /**
      * Open the window.
@@ -293,6 +298,22 @@ public class EditVehicle {
     }
 
     private void SetFields() {
+    	/*
+    	info = new VehicleInfo();
+    	info.setID(textVehicleID.getText());
+        info.setType(textType.getText());
+        info.setManufacturer(textManufacturer.getText());
+        info.setModel(textModel.getText());
+        info.setYear(new Integer(textYear.getText()));
+        info.setRoadWorthy(btnRoadworthy.getSelection());
+        info.setLicensePlate(textLPN.getText());
+        info.setOperational(btnOperational.getSelection());
+        info
+                .setInsurance(textInsPolNum.getText(), textInsType.getText());
+        info.setKmDriven(new Integer(textKms.getText()));
+        info.setKmLastServiced(new Integer(textKmsLS.getText()));
+        access.updateVehicle( currVehicle.getID(), info );
+        */
         currVehicle.setID(textVehicleID.getText());
         currVehicle.setType(textType.getText());
         currVehicle.setManufacturer(textManufacturer.getText());
