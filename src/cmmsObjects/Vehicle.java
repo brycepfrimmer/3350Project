@@ -408,4 +408,8 @@ public class Vehicle implements VehicleInterface {
     public void setDateLastServiced(Date dateLastServiced) {
         this.dateLastServiced = dateLastServiced;
     }
+    
+    public boolean partsListIsEmpty() {
+    	return partsList.isEmpty();
+    }
 }// End Vehicle Class

@@ -549,8 +549,16 @@ public class CMMS implements VehicleInterface{
                     //Vehicle v = dbInterface.getVehicle(dataTable.getItem(
                     //        dataTable.getSelectionIndex()).getText(
                     //        VEHICLE_FIELDS.ID.ordinal()));
-                    AddServiceEvent addse = new AddServiceEvent();
-                    addse.open(v);
+                	if(v.partsListIsEmpty()) {
+                		MessageBox mb = new MessageBox(mainWindow, SWT.ICON_ERROR | SWT.OK);
+                		mb.setMessage("Error: " + v.getID() + " does not have any parts");
+                		mb.setText("Add Service Event");
+                		mb.open();
+                	}
+                	else {
+                		AddServiceEvent addse = new AddServiceEvent();
+                		addse.open(v);
+                	}
 
                     // Update list with the new Vehicles
                     UpdateList();
