@@ -93,18 +93,24 @@ public class AddPart {
     }
 
     private boolean SetFields() {
-    	access = new AccessVehicle();
-    	access.addPart( currVehicle.getID(), textPart.getText() );
-        return true;
-    	//return currVehicle.getPartsList().add(new Part(textPart.getText()));
+    	// This is what Bryce had here after he fixed the tree, don't know what's going on here
+//    	access = new AccessVehicle();
+//    	access.addPart( currVehicle.getID(), textPart.getText() );
+//
+//        String part = textPart.getText();
+//        boolean isValid = !currVehicle.searchPartsList(part);
+//        if(isValid) {
+//            currVehicle.getPartsList().add(new Part(part));
+//        }
+//        return isValid;
+    	
+    	String part = textPart.getText();
+    	boolean isValid = !currVehicle.searchPartsList(part);
+    	if(isValid) {
+    		currVehicle.getPartsList().add(new Part(part));
+    	}
+        return isValid;
 
-        //CODY'S CHANGES
-        //String part = textPart.getText();
-        //boolean isValid = !currVehicle.searchPartsList(part);
-        //if(isValid) {
-            //currVehicle.getPartsList().add(new Part(part));
-        //}
-        //return isValid;
     }
 
 }

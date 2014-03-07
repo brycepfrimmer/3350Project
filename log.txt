@@ -251,3 +251,8 @@ Monday, March 3rd, 2014
 Bryce Pfrimmer
 	4 Hours - Restructuring for the implementation of time/usage based tracking. (Vehicle ID's should be all be different && addServiceEvent shouldn't work
 	if there are no parts on the vehicle && get date last serviced when a vehicle is created && edit and view vehicle needs date last serviced)
+	
+Thursday, March 6th, 2014
+Cody Edwards
+	3 Hours - Duplicate Vehicle ID's are no longer allowed, neither are duplicate parts.  There was also a bug that
+		didn't allow you to remove parts. This has now been fixed.
