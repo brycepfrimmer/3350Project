@@ -20,6 +20,7 @@ public final class Part {
         return partDesc;
     }
     
+    
     public String toString() {
         String returnString = "\n\t\t\t" + partDesc;
         if (serviceIList != null && !serviceIList.isEmpty()) {

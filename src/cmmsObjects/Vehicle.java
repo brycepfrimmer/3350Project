@@ -142,6 +142,17 @@ public class Vehicle implements CMMSInterface {
         }
         return 0.0;
     }
+    
+    public boolean searchPartsList(String part){
+    	boolean found = false;
+    	for(int i = 0; i < partsList.size(); i++){
+    		if(part.equals(partsList.get(i).getPartDesc())){
+    			found = true;
+    			i = partsList.size();
+    		}
+    	}
+    	return found;
+    }
 
     public void addServiceEvent(ServiceItem i, Part p) {
         int index = partsList.indexOf(p);
@@ -319,6 +330,7 @@ public class Vehicle implements CMMSInterface {
     public void setPartsList(ArrayList<Part> newPL) {
         this.partsList = newPL;
     }
+  
     
     // ***End of set methods***//
 
