@@ -98,6 +98,13 @@ public class AddPart {
         return true;
     	//return currVehicle.getPartsList().add(new Part(textPart.getText()));
 
+        //CODY'S CHANGES
+        //String part = textPart.getText();
+        //boolean isValid = !currVehicle.searchPartsList(part);
+        //if(isValid) {
+            //currVehicle.getPartsList().add(new Part(part));
+        //}
+        //return isValid;
     }
 
 }

@@ -373,20 +373,23 @@ public class AddVehicle implements CMMSInterface {
         boolean isValid = false;
         boolean mand = manFields.getId();
         String input = textVehicleID.getText();
-        if(mand){
+        if (mand) {
         	isValid = input.matches("[0-9a-zA-Z]+");
-        }
-        else{
+        } else {
         	isValid = true;
         }
+
         if (mand && input == ""){
         	lblVehicleIDWarning.setText("Vehicle ID is a required field");
-        }
-        else if (!isValid) {
+        } else if (!isValid) {
             lblVehicleIDWarning.setText("Vehicle ID can only include numbers and letters and no spaces");
+        } else if(input.equals(dbInterface.searchByID(input))) {
+            lblVehicleIDWarning.setText("This vehicle already exists");
+            isValid = false;
         } else {
             lblVehicleIDWarning.setText("");
         }
+
         lblVehicleIDWarning.pack();
         return isValid;
     }

@@ -41,6 +41,7 @@ public class Vehicle implements CMMSInterface {
 
     /* Calculated fields */
     private double fuelEcon;
+    private int currPartIndex;
 
     // ******Vehicle constructor******//
     public Vehicle() {
@@ -141,6 +142,19 @@ public class Vehicle implements CMMSInterface {
             System.out.println("Input not a number!");
         }
         return 0.0;
+    }
+    
+    public boolean searchPartsList(String part){
+    	boolean found = false;
+    	part = part.replaceAll("\\s", "");
+    	for(int i = 0; i < partsList.size(); i++){
+    		if(part.equals(partsList.get(i).getPartDesc().replaceAll("\\s", ""))){
+    			found = true;
+    			currPartIndex = i;
+    			i = partsList.size();
+    		}
+    	}
+    	return found;
     }
 
     public void addServiceEvent(ServiceItem i, Part p) {
@@ -285,11 +299,11 @@ public class Vehicle implements CMMSInterface {
         }
         return isValid;
     }
-    
+
     public boolean setInsurance( InsurancePolicy policy )
     {
-    	this.insurance = policy;
-    	return true;
+        this.insurance = policy;
+        return true;
     }
 
     public boolean setKmDriven(int km) {
@@ -325,6 +339,14 @@ public class Vehicle implements CMMSInterface {
     public void setPartsList(ArrayList<Part> newPL) {
         this.partsList = newPL;
     }
+    
+    public void removePart(String part){
+    	if(searchPartsList(part)){
+    		partsList.remove(currPartIndex);
+    	}
+    	
+    }
+  
     
     // ***End of set methods***//
 
