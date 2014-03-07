@@ -38,6 +38,18 @@ public class Interface {
     	}
     }
     
+    public String searchByID(String id){
+    	Vehicle currVehicle = database.searchByID(id);
+    	String ID;
+    	if(currVehicle == null){
+    		ID = " ";
+    	}
+    	else{
+    		ID = currVehicle.getID();
+    	}
+    	return ID;
+    }
+    
     public ManFields getManFields(){
     	return database.getManFields();
     }
