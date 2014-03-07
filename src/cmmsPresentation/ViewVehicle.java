@@ -15,12 +15,12 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
-import cmmsBusiness.CMMSInterface;
+import cmmsBusiness.VehicleInterface;
 import cmmsObjects.Part;
 import cmmsObjects.Vehicle;
 
 
-public class ViewVehicle implements CMMSInterface {
+public class ViewVehicle implements VehicleInterface {
     private final int WINDOW_WIDTH = 800;
     private final int WINDOW_HEIGHT = 600;
     private final int MIN_WINDOW_WIDTH = 200;

@@ -48,7 +48,7 @@ public class EditVehicle {
     private Button btnEditPartsList;
     
     private VehicleInfo info;
-    private AccessVehicle access;
+    private AccessVehicle accessVehicle;
 
     /**
      * Open the window.
@@ -298,8 +298,9 @@ public class EditVehicle {
     }
 
     private void SetFields() {
-    	/*
+    	
     	info = new VehicleInfo();
+    	accessVehicle = new AccessVehicle();
     	info.setID(textVehicleID.getText());
         info.setType(textType.getText());
         info.setManufacturer(textManufacturer.getText());
@@ -312,8 +313,9 @@ public class EditVehicle {
                 .setInsurance(textInsPolNum.getText(), textInsType.getText());
         info.setKmDriven(new Integer(textKms.getText()));
         info.setKmLastServiced(new Integer(textKmsLS.getText()));
-        access.updateVehicle( currVehicle.getID(), info );
-        */
+        accessVehicle.updateVehicle( currVehicle.getID(), info );
+        currVehicle = accessVehicle.getVehicle( textVehicleID.getText());
+        /*
         currVehicle.setID(textVehicleID.getText());
         currVehicle.setType(textType.getText());
         currVehicle.setManufacturer(textManufacturer.getText());
@@ -326,6 +328,7 @@ public class EditVehicle {
                 .setInsurance(textInsPolNum.getText(), textInsType.getText());
         currVehicle.setKmDriven(new Integer(textKms.getText()));
         currVehicle.setKmLastServiced(new Integer(textKmsLS.getText()));
+        */
     }
 
     private boolean checkFields() {

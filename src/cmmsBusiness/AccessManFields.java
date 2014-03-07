@@ -1,22 +1,19 @@
 package cmmsBusiness;
 
 import cmmsObjects.ManFields;
+import cmmsPersistence.DataAccessObject;
 
 public class AccessManFields {
 	
-	public void addManFields()
-	{
-		//db.addmanFields();
-	}
+	private DataAccessObject accessObject;
+	
+	public AccessManFields()
+	{accessObject = new DataAccessObject();}
 
-	public ManFields getManFields() {
-		//db.getManFields
-		return null;
-	}
+	public ManFields getManFields()
+	{return accessObject.getManFields();}
 	
 	public void updateManFields( ManFields fields)
-	{
-		//db.updateManFields(fields);
-	}
+	{accessObject.updateManFields( fields );}
 
-}
+}//End AccessManFields Class

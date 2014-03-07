@@ -25,7 +25,22 @@ public class VehicleInfo {
     private double fuelEcon;
     
     public VehicleInfo()
-    {}
+    {
+    	this.ID = null;
+    	this.type = null;
+    	this.manufacturer = null;
+    	this.model = null;
+    	this.roadWorthy = false;
+    	this.licensePlate = null;
+    	this.operational = false;
+    	this.insurance = null;
+    	this.year = 0;
+    	this.kmDriven = 0;
+    	this.kmLastServiced = 0;
+    	this.dateLastServiced = null;
+    	this.partsList = null;
+    	this.fuelEcon = 0;
+    }
 
 	public void setID(String iD) {
 		this.ID = iD;

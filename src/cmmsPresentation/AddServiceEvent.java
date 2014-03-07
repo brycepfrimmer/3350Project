@@ -22,12 +22,12 @@ import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.widgets.Combo;
 
 import cmmsBusiness.AccessVehicle;
-import cmmsBusiness.CMMSInterface;
+import cmmsBusiness.VehicleInterface;
 import cmmsObjects.Part;
 import cmmsObjects.ServiceItem;
 import cmmsObjects.Vehicle;
 
-public class AddServiceEvent implements CMMSInterface {
+public class AddServiceEvent implements VehicleInterface {
 
     protected Shell shell;
     private Text eventDesc;
@@ -37,7 +37,7 @@ public class AddServiceEvent implements CMMSInterface {
     private Combo partsComboBox;
     private ArrayList<Part> partsList;
     
-    private AccessVehicle access;
+    private AccessVehicle accessVehicle;
 
     /**
      * Open the window.
@@ -63,6 +63,7 @@ public class AddServiceEvent implements CMMSInterface {
         shell = new Shell();
         shell.setSize(440, 340);
         shell.setText("Add Service Event");
+        accessVehicle = new AccessVehicle();
         GridLayout windowLayout = new GridLayout();
         windowLayout.numColumns = 2;
         shell.setLayout(windowLayout);
@@ -74,7 +75,8 @@ public class AddServiceEvent implements CMMSInterface {
         partsComboBox = new Combo(shell, SWT.NONE);
         partsComboBox.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
         new Label(shell, SWT.NONE);
-        partsList = v.getPartsList();
+        partsList = accessVehicle.getPartsList( v.getID() );
+        //partsList = v.getPartsList();
         for (int i = 0; i < partsList.size(); i++) {
             partsComboBox.add(partsList.get(i).getPartDesc());
         }
@@ -143,14 +145,19 @@ public class AddServiceEvent implements CMMSInterface {
         addButton.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
+            	accessVehicle = new AccessVehicle();
                 if (checkPartSelection() && checkDesc() && checkTime()) {
-                    v.addServiceEvent(new ServiceItem(eventDesc.getText(), Long.parseLong(serviceTime.getText()), v.getDateLastServiced()),
+                	accessVehicle.addServiceEvent( v, new ServiceItem(eventDesc.getText(), Long.parseLong(serviceTime.getText()), v.getDateLastServiced()),
                                       new Part(partsComboBox.getItem(partsComboBox.getSelectionIndex())));
+                    //v.addServiceEvent(new ServiceItem(eventDesc.getText(), Long.parseLong(serviceTime.getText()), v.getDateLastServiced()),
+                    //                  new Part(partsComboBox.getItem(partsComboBox.getSelectionIndex())));
                     //access.updateVehicle();
                     shell.close();
                 } else if (checkPartSelection() && checkDesc() && checkKilos()) {
-                    v.addServiceEvent(new ServiceItem(eventDesc.getText(), Integer.parseInt(serviceKm.getText()), v.getKmLastServiced()),
+                	accessVehicle.addServiceEvent( v, new ServiceItem(eventDesc.getText(), Integer.parseInt(serviceKm.getText()), v.getKmLastServiced()),
                                       new Part(partsComboBox.getItem(partsComboBox.getSelectionIndex())));
+                    //v.addServiceEvent(new ServiceItem(eventDesc.getText(), Integer.parseInt(serviceKm.getText()), v.getKmLastServiced()),
+                    //                  new Part(partsComboBox.getItem(partsComboBox.getSelectionIndex())));
                     //access.updateVehicle();
                     shell.close();
                 } else if (checkPartSelection() && checkDesc()) {

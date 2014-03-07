@@ -9,11 +9,10 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 
 import cmmsBusiness.AccessManFields;
-import cmmsBusiness.CMMSInterface;
 import cmmsObjects.ManFields;
 
 
-public class ChangeManFields implements CMMSInterface {
+public class ChangeManFields {
 	protected Shell shlChangeManFields;
 	private Button btnCheckID;
 	private Button btnCheckType;
@@ -28,7 +27,7 @@ public class ChangeManFields implements CMMSInterface {
 	
 	private ManFields manFields;
 	
-	private AccessManFields access;
+	private AccessManFields accessFields;
 	
 	/**
 	 * Open the window
@@ -36,8 +35,9 @@ public class ChangeManFields implements CMMSInterface {
 	 */
 	public void open(){
 		Display display = Display.getDefault();
-		//manFields = access.getManFields();
-		manFields = dbInterface.getManFields();
+		accessFields = new AccessManFields();
+		manFields = accessFields.getManFields();
+		//manFields = dbInterface.getManFields();
 		createContents();
 		shlChangeManFields.open();
 		shlChangeManFields.layout();
@@ -110,7 +110,7 @@ public class ChangeManFields implements CMMSInterface {
 				manFields.setKmsLastServiced(btnCheckKmsLastServiced.getSelection());
 				manFields.setInsInfo(btnCheckInsInfo.getSelection());
 				manFields.setYear(btnCheckYear.getSelection());
-				//access.updateManFields(manFields);
+				accessFields.updateManFields(manFields);
 				shlChangeManFields.close();
 			}
 		});

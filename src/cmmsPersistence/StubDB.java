@@ -53,7 +53,7 @@ public class StubDB {
             addVehicle(temp);
             countNew++;
         }
-        manFields = new ManFields();
+        this.manFields = new ManFields();
 
         System.out.println("Opened " +dbType +" database " +dbName);
     }
@@ -185,7 +185,12 @@ public class StubDB {
     }
 
 	public ManFields getManFields() {
-		return manFields;
+		return this.manFields;
+	}
+	
+	public void setManFields( ManFields fields )
+	{
+		this.manFields = fields;
 	}
 	
 }

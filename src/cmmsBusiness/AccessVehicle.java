@@ -1,9 +1,9 @@
 package cmmsBusiness;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import cmmsObjects.Part;
+import cmmsObjects.ServiceItem;
 import cmmsObjects.Vehicle;
 import cmmsObjects.VehicleInfo;
 import cmmsPersistence.DataAccessObject;
@@ -12,22 +12,14 @@ public class AccessVehicle {
 	
 	private Vehicle vehicle;
 	private DataAccessObject dataAccess;
-	private List<Vehicle> vehicles;
 	
 	public AccessVehicle()
 	{
 		vehicle = null;
 		dataAccess = new DataAccessObject();
-		vehicles = null;
 	}
 	
-	public Vehicle[] getAllVehicles()
-	{
-		//db.getAllVehicles();
-		return null;
-	}
-	
-	public boolean addVehicle(VehicleInfo info)
+	public String addVehicle(VehicleInfo info)
 	{
 		vehicle = new Vehicle();
 		vehicle.setID( info.getID() );
@@ -42,39 +34,73 @@ public class AccessVehicle {
 		vehicle.setKmDriven( info.getKmDriven() );
 		vehicle.setKmLastServiced( info.getKmLastServiced() );
 		vehicle.setDateLastServiced( info.getDateLastServiced() );
-		vehicle.setPartsList( info.getPartsList() );
-		//dataAccess.addVehicle(vehicle);
-		return true;
+		dataAccess.addVehicle(vehicle);
+		return null;
 	}
 	
-	public boolean addPart( String ID, String part )
+	public Vehicle getVehicle(String ID )
+	{return dataAccess.getVehicle(ID);}
+	
+	public String addPart( String ID, String part )
 	{
 		vehicle = dataAccess.getVehicle( ID );
 		vehicle.getPartsList().add(new Part(part));
-		//dataAccess.updateVehicle(vehicle);
-		return true;
+		dataAccess.updateVehicle(vehicle);
+		return null;
 	}
 	
-	public boolean updateVehicle( String ID, VehicleInfo info )
+	public String updateVehicle( String ID, VehicleInfo info )
 	{
-		//dataAccess.updateVehicle()
-		return true;
+		dataAccess.removeVehicle(ID);
+		addVehicle(info);
+		return null;
 	}
 	
-	public boolean removeVehicle()
+	public String searchByID( String ID )
 	{
-		return true;
+		return dataAccess.searchByID( ID );
+	}
+	
+	public ArrayList<Vehicle> getAllVehicles()
+	{return dataAccess.getAllVehicles();}
+	
+	public Vehicle[] getVehicles(String field, String key)
+	{return dataAccess.getVehicles(field, key);}
+	
+	public String removeVehicle(String id)
+	{
+		dataAccess.removeVehicle(id);
+		return null;
 	}
 
-	public void setPartsList(String id, ArrayList<Part> list) {
+	public String setPartsList(String id, ArrayList<Part> list) {
 		vehicle = dataAccess.getVehicle( id );
 		vehicle.setPartsList( list );
-		//dataAccess.updateVehicle(vehicle);	
+		dataAccess.updateVehicle(vehicle);
+		return null;
 	}
 
-	public void updateKm(Vehicle vehicle, Integer km, Double fuel) {
-		//vehicle.updateKm(km, fuel)
-		//db.updateVehicle(vehicle);
-		
+	public String updateKm(String ID, Integer km, Double fuel)
+	{
+		vehicle = dataAccess.getVehicle(ID);
+		vehicle.updateKm(km, fuel);
+		dataAccess.updateVehicle(vehicle);
+		return null;
 	}
-}
+	
+	public ArrayList<Part> getPartsList( String ID )
+	{return dataAccess.getVehicle(ID).getPartsList();}
+	
+	public void removePart(Vehicle vehicle, String part)
+	{
+		vehicle.removePart(part);
+		dataAccess.updateVehicle(vehicle);
+	}
+	
+	public String addServiceEvent( Vehicle vehicle, ServiceItem i, Part p )
+	{
+		vehicle.addServiceEvent(i, p);
+		dataAccess.updateVehicle( vehicle );
+		return null;
+	}
+}//End AccessVehicle Class

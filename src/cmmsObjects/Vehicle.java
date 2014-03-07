@@ -3,7 +3,7 @@ package cmmsObjects;
 import java.util.ArrayList;
 import java.sql.Date;
 
-import cmmsBusiness.CMMSInterface;
+import cmmsBusiness.VehicleInterface;
 
 
 /*
@@ -19,7 +19,7 @@ import cmmsBusiness.CMMSInterface;
  ****************************************************
  */
 
-public class Vehicle implements CMMSInterface {
+public class Vehicle implements VehicleInterface {
 
     // Class variables, important information about each object.
     /* Mandatory Fields */
@@ -129,19 +129,11 @@ public class Vehicle implements CMMSInterface {
 
         return vehicle;
     }
-
-    public double updateKm(int km, double fuelUsed) {
-        try {
-            if (km > kmDriven && km == (int) km
-                    && fuelUsed == (double) fuelUsed) {
-                this.fuelEcon = (fuelUsed / (km - kmDriven)) * 100;
-                this.kmDriven = km;
-                return this.fuelEcon;
-            }
-        } catch (Exception e) {
-            System.out.println("Input not a number!");
-        }
-        return 0.0;
+    
+    public void removePart(String part){
+    	if(searchPartsList(part)){
+    		partsList.remove(currPartIndex);
+    	}	
     }
     
     public boolean searchPartsList(String part){
@@ -155,6 +147,20 @@ public class Vehicle implements CMMSInterface {
     		}
     	}
     	return found;
+    }
+
+    public double updateKm(int km, double fuelUsed) {
+        try {
+            if (km > kmDriven && km == (int) km
+                    && fuelUsed == (double) fuelUsed) {
+                this.fuelEcon = (fuelUsed / (km - kmDriven)) * 100;
+                this.kmDriven = km;
+                return this.fuelEcon;
+            }
+        } catch (Exception e) {
+            System.out.println("Input not a number!");
+        }
+        return 0.0;
     }
 
     public void addServiceEvent(ServiceItem i, Part p) {
@@ -299,11 +305,11 @@ public class Vehicle implements CMMSInterface {
         }
         return isValid;
     }
-
+    
     public boolean setInsurance( InsurancePolicy policy )
     {
-        this.insurance = policy;
-        return true;
+    	this.insurance = policy;
+    	return true;
     }
 
     public boolean setKmDriven(int km) {
@@ -339,14 +345,6 @@ public class Vehicle implements CMMSInterface {
     public void setPartsList(ArrayList<Part> newPL) {
         this.partsList = newPL;
     }
-    
-    public void removePart(String part){
-    	if(searchPartsList(part)){
-    		partsList.remove(currPartIndex);
-    	}
-    	
-    }
-  
     
     // ***End of set methods***//
 

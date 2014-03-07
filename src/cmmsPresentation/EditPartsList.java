@@ -28,17 +28,17 @@ public class EditPartsList {
     private Table partsListTable;
     private ArrayList<Part> list;
     
-    private AccessVehicle access;
+    private AccessVehicle accessVehicle;
     /**
      * Open the window.
      */
     public void open(Vehicle v) {
         Display display = Display.getDefault();
         createContents();
-        access = new AccessVehicle();
+        accessVehicle = new AccessVehicle();
         currVehicle = v;
-        //list = access.getPartsList(v.getID());
-        list = currVehicle.getPartsList();
+        list = accessVehicle.getPartsList(v.getID());
+        //list = currVehicle.getPartsList();
         if (!list.isEmpty()) {
             updateList();
         }
@@ -88,6 +88,7 @@ public class EditPartsList {
             @Override
             public void widgetSelected(SelectionEvent e) {
                 int selected = partsListTable.getSelectionCount();
+                accessVehicle = new AccessVehicle();
                 if (selected == 0) {
                     // Display no selection error
                     MessageBox mb = new MessageBox(shlEditPartsList,
@@ -110,8 +111,10 @@ public class EditPartsList {
                             //list.remove(new Part(partsListTable.getItem(
                             //we want below for ensurance on duplicate or non-existent parts I assume
                             //discuss with cody
-                            currVehicle.removePart(partsListTable.getItem(
-                                    selections[i]).getText(0));
+                            //currVehicle.removePart(partsListTable.getItem(
+                            //        selections[i]).getText(0));
+                            accessVehicle.removePart( currVehicle, partsListTable.getItem(
+                                    selections[i]).getText(0) );
                         }
 
                         // Update list with the new Vehicles
@@ -129,8 +132,10 @@ public class EditPartsList {
                         // Should only have one item selected
                         //list.remove(new Part(partsListTable.getItem(
                         //see comment above <same situation>
-                        currVehicle.removePart(partsListTable.getItem(
-                                partsListTable.getSelectionIndex()).getText());
+                        //currVehicle.removePart(partsListTable.getItem(
+                        //        partsListTable.getSelectionIndex()).getText());
+                        accessVehicle.removePart( currVehicle, partsListTable.getItem(
+                                 partsListTable.getSelectionIndex()).getText() );
                         // Update list with the new Vehicles
                         updateList();
                     }
@@ -150,8 +155,6 @@ public class EditPartsList {
 
     private void updateList() {
         TableItem ti; // Table item for adding parts to the table
-        
-        //access.setPartsList(currVehicle.getID(), list);
 
         // Stop Drawing Table, Empty Table, Rebuild Table, Start Drawing Table
         partsListTable.setRedraw(false);

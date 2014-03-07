@@ -25,7 +25,6 @@ public class Interface {
 
     public Vehicle getVehicle(String id) {
         Vehicle temp = database.searchByID(id);
-
         return temp;
     }
     
@@ -52,6 +51,11 @@ public class Interface {
     
     public ManFields getManFields(){
     	return database.getManFields();
+    }
+    
+    public void updateManFields( ManFields fields )
+    {
+    	database.setManFields( fields );
     }
 
     public double updateKm(String id, int km, double fuel) {

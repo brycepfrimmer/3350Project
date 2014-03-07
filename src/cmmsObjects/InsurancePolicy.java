@@ -1,8 +1,8 @@
 package cmmsObjects;
 
-import cmmsBusiness.CMMSInterface;
+import cmmsBusiness.VehicleInterface;
 
-public final class InsurancePolicy implements CMMSInterface {
+public final class InsurancePolicy implements VehicleInterface {
     private String policyNum;
     private String type;
 

@@ -26,7 +26,7 @@ public class AddPart {
     private Label lblPart;
     private Label lblAddWarning;
     
-    private AccessVehicle access;
+    private AccessVehicle accessVehicle;
 
     /**
      * Open the window.
@@ -34,6 +34,7 @@ public class AddPart {
     public void open(Vehicle v) {
         Display display = Display.getDefault();
         createContents();
+        accessVehicle = new AccessVehicle();
         currVehicle = v;
         shlAddPart.open();
         shlAddPart.layout();
@@ -94,22 +95,27 @@ public class AddPart {
 
     private boolean SetFields() {
     	// This is what Bryce had here after he fixed the tree, don't know what's going on here
-//    	access = new AccessVehicle();
-//    	access.addPart( currVehicle.getID(), textPart.getText() );
-//
-//        String part = textPart.getText();
-//        boolean isValid = !currVehicle.searchPartsList(part);
-//        if(isValid) {
-//            currVehicle.getPartsList().add(new Part(part));
-//        }
-//        return isValid;
+    	accessVehicle = new AccessVehicle();
     	
+        String part = textPart.getText();
+        //**REMINDER FOR DELROY CHANGE THIS  V **
+        boolean isValid = !currVehicle.searchPartsList(part);
+        if(isValid) {
+            //currVehicle.getPartsList().add(new Part(part));
+        	accessVehicle.addPart( currVehicle.getID(), textPart.getText() );
+        }
+        return isValid;
+/*    	
     	String part = textPart.getText();
     	boolean isValid = !currVehicle.searchPartsList(part);
     	if(isValid) {
     		currVehicle.getPartsList().add(new Part(part));
     	}
-        return isValid;
+        return isValid;*/
+    	//accessVehicle = new AccessVehicle();
+    	//accessVehicle.addPart( currVehicle.getID(), textPart.getText() );
+        //return true;
+    	//return currVehicle.getPartsList().add(new Part(textPart.getText()));
 
     }
 

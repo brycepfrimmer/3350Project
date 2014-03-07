@@ -26,7 +26,7 @@ public class UpdateKilometers {
     private Label lblFuelUsageWarning;
     private Button btnCancel;
     
-    private AccessVehicle access;
+    private AccessVehicle accessVehicle;
 
     /**
      * Open the window.
@@ -114,10 +114,11 @@ public class UpdateKilometers {
     }
 
     private void SetFields() {
-    	//access.updateKm( currVehicle, new Integer(textKms.getText()), new Double(
-        //        textFuelUsage.getText()) );
-        currVehicle.updateKm(new Integer(textKms.getText()), new Double(
-                textFuelUsage.getText()));
+    	accessVehicle = new AccessVehicle();
+    	accessVehicle.updateKm( currVehicle.getID(), new Integer(textKms.getText()), new Double(
+                textFuelUsage.getText()) );
+        //currVehicle.updateKm(new Integer(textKms.getText()), new Double(
+        //        textFuelUsage.getText()));
     }
 
     private boolean checkFields() {

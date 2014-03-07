@@ -2,13 +2,12 @@ package tests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
-
 import testsObjects.TestInsurancePolicy;
 import testsObjects.TestPart;
 import testsObjects.TestVehicle;
 import testsObjects.TestServiceItem;
 import testsObjects.TestManFields;
-
+import testsObjects.TestVehicleInfo;
 import testsPersistence.TestInterface;
 
 public class TestCMMS {
@@ -23,8 +22,9 @@ public class TestCMMS {
         suite.addTestSuite(TestPart.class);
         suite.addTestSuite(TestServiceItem.class);
         suite.addTestSuite(TestManFields.class);
+        suite.addTestSuite(TestVehicleInfo.class);
         
-        suite.addTestSuite(TestInterface.class);
+        //suite.addTestSuite(TestInterface.class);
 
         return suite;
     }

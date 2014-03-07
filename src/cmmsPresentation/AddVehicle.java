@@ -14,16 +14,15 @@ import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.widgets.DateTime;
 
+import cmmsBusiness.AccessManFields;
 import cmmsBusiness.AccessVehicle;
-import cmmsBusiness.CMMSInterface;
 import cmmsObjects.ManFields;
-import cmmsObjects.Vehicle;
 import cmmsObjects.VehicleInfo;
 
 import java.sql.Date;
 
 
-public class AddVehicle implements CMMSInterface {
+public class AddVehicle {
 
     protected Shell shell;
     private Text textVehicleID;
@@ -55,6 +54,7 @@ public class AddVehicle implements CMMSInterface {
     
     private AccessVehicle accessVehicle;
     private VehicleInfo infoObject;
+    private AccessManFields accessFields;
 
     /**
      * Launch the application.
@@ -75,7 +75,9 @@ public class AddVehicle implements CMMSInterface {
      */
     public void open() {
         Display display = Display.getDefault();
-        manFields = dbInterface.getManFields();
+        accessFields = new AccessManFields();
+        manFields = accessFields.getManFields();
+        //manFields = dbInterface.getManFields();
         createContents();
         shell.open();
         shell.layout();
@@ -214,7 +216,7 @@ public class AddVehicle implements CMMSInterface {
                 String kms = textKms.getText();
                 String kmsLS = textKmsLS.getText();
                 if (good) {
-                /*
+                	
                 	accessVehicle = new AccessVehicle();
                 	infoObject = new VehicleInfo();
                 	infoObject.setID(textVehicleID.getText());
@@ -237,7 +239,7 @@ public class AddVehicle implements CMMSInterface {
                     infoObject.setDateLastServiced(Date.valueOf(dateTime.getYear() + "-" + (dateTime.getMonth()+1) + "-" + dateTime.getDay()));
                     
                 	accessVehicle.addVehicle(infoObject);
-                */
+               /*
                     Vehicle newVehicle = new Vehicle();
                     newVehicle.setID(textVehicleID.getText());
                     newVehicle.setType(textType.getText()); 
@@ -259,7 +261,7 @@ public class AddVehicle implements CMMSInterface {
                     newVehicle.setDateLastServiced(Date.valueOf(dateTime.getYear() + "-" + (dateTime.getMonth()+1) + "-" + dateTime.getDay()));
                     // Interface temp = new Interface();
                     // temp.addVehicle(newVehicle);
-                    dbInterface.addVehicle(newVehicle);
+                    dbInterface.addVehicle(newVehicle);*/
                     shell.close();
                 } else {
                     // display message explaining to user what is wrong with
@@ -372,6 +374,7 @@ public class AddVehicle implements CMMSInterface {
     private boolean checkID() {
         boolean isValid = false;
         boolean mand = manFields.getId();
+        accessVehicle = new AccessVehicle();
         String input = textVehicleID.getText();
         if (mand) {
         	isValid = input.matches("[0-9a-zA-Z]+");
@@ -383,7 +386,8 @@ public class AddVehicle implements CMMSInterface {
         	lblVehicleIDWarning.setText("Vehicle ID is a required field");
         } else if (!isValid) {
             lblVehicleIDWarning.setText("Vehicle ID can only include numbers and letters and no spaces");
-        } else if(input.equals(dbInterface.searchByID(input))) {
+        //} else if(input.equals(dbInterface.searchByID(input))) {
+        } else if( input.equals(accessVehicle.searchByID(input))) {
             lblVehicleIDWarning.setText("This vehicle already exists");
             isValid = false;
         } else {
