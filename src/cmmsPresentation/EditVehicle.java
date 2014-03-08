@@ -313,23 +313,23 @@ public class EditVehicle {
 
     private void SetFields() {
     	
-    	info = new VehicleInfo();
-    	accessVehicle = new AccessVehicle();
-    	info.setID(textVehicleID.getText());
-        info.setType(textType.getText());
-        info.setManufacturer(textManufacturer.getText());
-        info.setModel(textModel.getText());
-        info.setYear(new Integer(textYear.getText()));
-        info.setRoadWorthy(btnRoadworthy.getSelection());
-        info.setLicensePlate(textLPN.getText());
-        info.setOperational(btnOperational.getSelection());
-        info.setInsurance(textInsPolNum.getText(), textInsType.getText());
-        info.setKmDriven(new Integer(textKms.getText()));
-        info.setKmLastServiced(new Integer(textKmsLS.getText()));
-        info.setDateLastServiced(Date.valueOf(dateTime.getYear() + "-" + (dateTime.getMonth()+1) + "-" + dateTime.getDay()));
-        accessVehicle.updateVehicle( currVehicle.getID(), info );
-        currVehicle = accessVehicle.getVehicle( textVehicleID.getText());
-        /*
+//    	info = new VehicleInfo();
+//    	accessVehicle = new AccessVehicle();
+//    	info.setID(textVehicleID.getText());
+//        info.setType(textType.getText());
+//        info.setManufacturer(textManufacturer.getText());
+//        info.setModel(textModel.getText());
+//        info.setYear(new Integer(textYear.getText()));
+//        info.setRoadWorthy(btnRoadworthy.getSelection());
+//        info.setLicensePlate(textLPN.getText());
+//        info.setOperational(btnOperational.getSelection());
+//        info.setInsurance(textInsPolNum.getText(), textInsType.getText());
+//        info.setKmDriven(new Integer(textKms.getText()));
+//        info.setKmLastServiced(new Integer(textKmsLS.getText()));
+//        info.setDateLastServiced(Date.valueOf(dateTime.getYear() + "-" + (dateTime.getMonth()+1) + "-" + dateTime.getDay()));
+//        accessVehicle.updateVehicle( currVehicle.getID(), info );
+//        currVehicle = accessVehicle.getVehicle( textVehicleID.getText());
+    	
         currVehicle.setID(textVehicleID.getText());
         currVehicle.setType(textType.getText());
         currVehicle.setManufacturer(textManufacturer.getText());
@@ -338,11 +338,9 @@ public class EditVehicle {
         currVehicle.setRoadWorthy(btnRoadworthy.getSelection());
         currVehicle.setLicensePlate(textLPN.getText());
         currVehicle.setOperational(btnOperational.getSelection());
-        currVehicle
-                .setInsurance(textInsPolNum.getText(), textInsType.getText());
+        currVehicle.setInsurance(textInsPolNum.getText(), textInsType.getText());
         currVehicle.setKmDriven(new Integer(textKms.getText()));
         currVehicle.setKmLastServiced(new Integer(textKmsLS.getText()));
-        */
     }
 
     private boolean checkFields() {

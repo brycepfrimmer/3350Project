@@ -560,8 +560,6 @@ public class CMMS{
                 		addse.open(v);
                 	}
                     //        VehicleFields.ID.ordinal()));
-                    AddServiceEvent addse = new AddServiceEvent();
-                    addse.open(v);
                     // Update list with the new Vehicles
                     UpdateList();
                 } else {
