@@ -103,4 +103,8 @@ public class AccessVehicle {
 		dataAccess.updateVehicle( vehicle );
 		return null;
 	}
+
+	public Vehicle getVehicle() {
+		return dataAccess.getVehicle();
+	}
 }//End AccessVehicle Class

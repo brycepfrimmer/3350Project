@@ -192,5 +192,9 @@ public class StubDB {
 	{
 		this.manFields = fields;
 	}
+
+	public Vehicle getVehicle() {
+		return this.vehicles.get(0);
+	}
 	
 }

@@ -31,7 +31,7 @@ import org.eclipse.wb.swt.SWTResourceManager;
 
 
 import cmmsBusiness.AccessVehicle;
-import cmmsBusiness.VehicleInterface;
+import cmmsBusiness.VehicleFields;
 import cmmsObjects.Vehicle;
 
 
@@ -39,7 +39,7 @@ import cmmsObjects.Vehicle;
 
 import java.util.ArrayList;
 
-public class CMMS implements VehicleInterface{
+public class CMMS{
     /* Interface Constants */
     private static final Point MIN_WINDOW_SIZE = new Point(800, 600);
     private static final String WINDOW_TITLE = "Computerized Maintenance Management System";
@@ -384,10 +384,10 @@ public class CMMS implements VehicleInterface{
                     if (response == SWT.YES) {
                         // Should only have one item selected
                     	accessVehicle.removeVehicle(dataTable.getItem(
-                    			dataTable.getSelectionIndex()).getText(VEHICLE_FIELDS.ID.ordinal()));
+                    			dataTable.getSelectionIndex()).getText(VehicleFields.ID.ordinal()));
                         //dbInterface.removeVehicle(dataTable.getItem(
                         //        dataTable.getSelectionIndex()).getText(
-                        //        VEHICLE_FIELDS.ID.ordinal()));
+                        //        VehicleFields.ID.ordinal()));
                         // Update list with the new Vehicles
                         UpdateList();
                     }
@@ -417,10 +417,10 @@ public class CMMS implements VehicleInterface{
                     // Display EditVehicle form
                 	Vehicle v = accessVehicle.getVehicle(dataTable.getItem(
                 			dataTable.getSelectionIndex()).getText(
-                    		VEHICLE_FIELDS.ID.ordinal()));
+                    		VehicleFields.ID.ordinal()));
                     //Vehicle v = dbInterface.getVehicle(dataTable.getItem(
                     //        dataTable.getSelectionIndex()).getText(
-                    //        VEHICLE_FIELDS.ID.ordinal()));
+                    //        VehicleFields.ID.ordinal()));
                     EditVehicle editWindow = new EditVehicle();
                     editWindow.open(v);
 
@@ -458,10 +458,10 @@ public class CMMS implements VehicleInterface{
                 } else if (selected == 1) {
                 	Vehicle v = accessVehicle.getVehicle(dataTable.getItem(
                 			dataTable.getSelectionIndex()).getText(
-                			VEHICLE_FIELDS.ID.ordinal()));
+                			VehicleFields.ID.ordinal()));
                     //Vehicle v = dbInterface.getVehicle(dataTable.getItem(
                     //        dataTable.getSelectionIndex()).getText(
-                    //        VEHICLE_FIELDS.ID.ordinal()));
+                    //        VehicleFields.ID.ordinal()));
                     ViewVehicle viewWindow = new ViewVehicle();
                     viewWindow.open(v);
                 } else {
@@ -471,10 +471,10 @@ public class CMMS implements VehicleInterface{
                     for (int i = 0; i < selected; i++)
                     	v[i] = accessVehicle.getVehicle(dataTable.getItem(
                     			selections[i]).getText(
-                    					VEHICLE_FIELDS.ID.ordinal()));
+                    					VehicleFields.ID.ordinal()));
                         //v[i] = dbInterface.getVehicle(dataTable.getItem(
                          //       selections[i]).getText(
-                         //       VEHICLE_FIELDS.ID.ordinal()));
+                         //       VehicleFields.ID.ordinal()));
                     ViewVehicle viewWindow = new ViewVehicle();
                     viewWindow.open(v);
                 }
@@ -503,10 +503,10 @@ public class CMMS implements VehicleInterface{
                     // Display UpdateKilometers form
                 	Vehicle v = accessVehicle.getVehicle(dataTable.getItem(
                 			dataTable.getSelectionIndex()).getText(
-                    		VEHICLE_FIELDS.ID.ordinal()));
+                    		VehicleFields.ID.ordinal()));
                     //Vehicle v = dbInterface.getVehicle(dataTable.getItem(
                     //        dataTable.getSelectionIndex()).getText(
-                    //        VEHICLE_FIELDS.ID.ordinal()));
+                    //        VehicleFields.ID.ordinal()));
                     UpdateKilometers updateKms = new UpdateKilometers();
                     updateKms.open(v);
 
@@ -545,7 +545,7 @@ public class CMMS implements VehicleInterface{
                     // Display UpdateKilometers form
                 	Vehicle v = accessVehicle.getVehicle(dataTable.getItem(
                 			dataTable.getSelectionIndex()).getText(
-                					VEHICLE_FIELDS.ID.ordinal()));
+                					VehicleFields.ID.ordinal()));
                     //Vehicle v = dbInterface.getVehicle(dataTable.getItem(
                     //        dataTable.getSelectionIndex()).getText(
                     //        VEHICLE_FIELDS.ID.ordinal()));
@@ -559,7 +559,9 @@ public class CMMS implements VehicleInterface{
                 		AddServiceEvent addse = new AddServiceEvent();
                 		addse.open(v);
                 	}
-
+                    //        VehicleFields.ID.ordinal()));
+                    AddServiceEvent addse = new AddServiceEvent();
+                    addse.open(v);
                     // Update list with the new Vehicles
                     UpdateList();
                 } else {

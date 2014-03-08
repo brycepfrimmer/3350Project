@@ -75,4 +75,8 @@ public class Interface {
     public void printVehicles() {
         database.printVehicles();
     }
+
+	public Vehicle getVehicle() {
+		return database.getVehicle();
+	}
 }

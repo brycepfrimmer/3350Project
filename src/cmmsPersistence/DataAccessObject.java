@@ -235,4 +235,7 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
 	public ManFields getManFields()
 	{return dbInterface.getManFields();}
 
+	public Vehicle getVehicle() {
+		return dbInterface.getVehicle();
+	}
 }//End DataAccessObject Class

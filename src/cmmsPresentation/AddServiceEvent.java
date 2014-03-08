@@ -22,12 +22,11 @@ import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.widgets.Combo;
 
 import cmmsBusiness.AccessVehicle;
-import cmmsBusiness.VehicleInterface;
 import cmmsObjects.Part;
 import cmmsObjects.ServiceItem;
 import cmmsObjects.Vehicle;
 
-public class AddServiceEvent implements VehicleInterface {
+public class AddServiceEvent {
 
     protected Shell shell;
     private Text eventDesc;

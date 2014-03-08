@@ -15,12 +15,12 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
-import cmmsBusiness.VehicleInterface;
+import cmmsBusiness.VehicleFields;
 import cmmsObjects.Part;
 import cmmsObjects.Vehicle;
 
 
-public class ViewVehicle implements VehicleInterface {
+public class ViewVehicle {
     private final int WINDOW_WIDTH = 800;
     private final int WINDOW_HEIGHT = 600;
     private final int MIN_WINDOW_WIDTH = 200;
@@ -92,28 +92,28 @@ public class ViewVehicle implements VehicleInterface {
     private void FillText(int vehicleSel) {
         String[] info = vehicleList[vehicleSel].ToStrings();
 
-        String hdr = info[VEHICLE_FIELDS.ID.ordinal()] + ": "
-                + info[VEHICLE_FIELDS.MANUFACTURER.ordinal()] + " "
-                + info[VEHICLE_FIELDS.MODEL.ordinal()];
+        String hdr = info[VehicleFields.ID.ordinal()] + ": "
+                + info[VehicleFields.MANUFACTURER.ordinal()] + " "
+                + info[VehicleFields.MODEL.ordinal()];
 
-        String body = "\n\tType: " + info[VEHICLE_FIELDS.TYPE.ordinal()]
-                + "\n\tYear: " + info[VEHICLE_FIELDS.YEAR.ordinal()]
+        String body = "\n\tType: " + info[VehicleFields.TYPE.ordinal()]
+                + "\n\tYear: " + info[VehicleFields.YEAR.ordinal()]
                 + "\n\tKilometers Driven: "
-                + info[VEHICLE_FIELDS.KM_DRIVEN.ordinal()]
+                + info[VehicleFields.KM_DRIVEN.ordinal()]
                 + "\n\tLast Service (KM): "
-                + info[VEHICLE_FIELDS.KM_LAST_SERVICE.ordinal()]
+                + info[VehicleFields.KM_LAST_SERVICE.ordinal()]
                 + "\n\tRoad Worthy: "
-                + info[VEHICLE_FIELDS.ROADWORTHY.ordinal()]
+                + info[VehicleFields.ROADWORTHY.ordinal()]
                 + "\n\tLicense Plate Number: "
-                + info[VEHICLE_FIELDS.LICENSE_PLATE.ordinal()]
+                + info[VehicleFields.LICENSE_PLATE.ordinal()]
                 + "\n\tInsurance Policy Number: "
-                + info[VEHICLE_FIELDS.POLICY_NUMBER.ordinal()]
+                + info[VehicleFields.POLICY_NUMBER.ordinal()]
                 + "\n\tInsurance Policy Type: "
-                + info[VEHICLE_FIELDS.POLICY_TYPE.ordinal()]
+                + info[VehicleFields.POLICY_TYPE.ordinal()]
                 + "\n\tOperational: "
-                + info[VEHICLE_FIELDS.OPERATIONAL.ordinal()]
+                + info[VehicleFields.OPERATIONAL.ordinal()]
                 + "\n\tFuel Economy: "
-                + info[VEHICLE_FIELDS.FUEL_ECON.ordinal()] + " L/100Km";
+                + info[VehicleFields.FUEL_ECON.ordinal()] + " L/100Km";
 
         int hdrBoldRange = hdr.length();
 

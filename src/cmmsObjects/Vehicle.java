@@ -3,7 +3,7 @@ package cmmsObjects;
 import java.util.ArrayList;
 import java.sql.Date;
 
-import cmmsBusiness.VehicleInterface;
+import cmmsBusiness.VehicleFields;
 
 
 /*
@@ -19,7 +19,7 @@ import cmmsBusiness.VehicleInterface;
  ****************************************************
  */
 
-public class Vehicle implements VehicleInterface {
+public class Vehicle {
 
     // Class variables, important information about each object.
     /* Mandatory Fields */
@@ -85,47 +85,47 @@ public class Vehicle implements VehicleInterface {
     public String[] ToStrings() {
         String[] vehicle = new String[14];
 
-        vehicle[VEHICLE_FIELDS.ID.ordinal()] = ID;
-        vehicle[VEHICLE_FIELDS.TYPE.ordinal()] = type;
-        vehicle[VEHICLE_FIELDS.MANUFACTURER.ordinal()] = manufacturer;
-        vehicle[VEHICLE_FIELDS.MODEL.ordinal()] = model;
+        vehicle[VehicleFields.ID.ordinal()] = ID;
+        vehicle[VehicleFields.TYPE.ordinal()] = type;
+        vehicle[VehicleFields.MANUFACTURER.ordinal()] = manufacturer;
+        vehicle[VehicleFields.MODEL.ordinal()] = model;
         if(year == 0){
-        	vehicle[VEHICLE_FIELDS.YEAR.ordinal()] = " ";
+        	vehicle[VehicleFields.YEAR.ordinal()] = " ";
         }
         else{
-        	vehicle[VEHICLE_FIELDS.YEAR.ordinal()] = Integer.toString(year);
+        	vehicle[VehicleFields.YEAR.ordinal()] = Integer.toString(year);
         }
         if(kmDriven == 0){
-        	vehicle[VEHICLE_FIELDS.KM_DRIVEN.ordinal()] = " ";
+        	vehicle[VehicleFields.KM_DRIVEN.ordinal()] = " ";
         }
         else{
-        	vehicle[VEHICLE_FIELDS.KM_DRIVEN.ordinal()] = Integer.toString(kmDriven);
+        	vehicle[VehicleFields.KM_DRIVEN.ordinal()] = Integer.toString(kmDriven);
         }
         if(kmLastServiced == 0){
-        	vehicle[VEHICLE_FIELDS.KM_LAST_SERVICE.ordinal()] = " ";
+        	vehicle[VehicleFields.KM_LAST_SERVICE.ordinal()] = " ";
         }
         else{
-        	vehicle[VEHICLE_FIELDS.KM_LAST_SERVICE.ordinal()] = Integer.toString(kmLastServiced);
+        	vehicle[VehicleFields.KM_LAST_SERVICE.ordinal()] = Integer.toString(kmLastServiced);
         }
         if (dateLastServiced == null) {
-            vehicle[VEHICLE_FIELDS.DATE_LAST_SERVICE.ordinal()] = " ";
+            vehicle[VehicleFields.DATE_LAST_SERVICE.ordinal()] = " ";
         } else {
-            vehicle[VEHICLE_FIELDS.DATE_LAST_SERVICE.ordinal()] = dateLastServiced.toString();
+            vehicle[VehicleFields.DATE_LAST_SERVICE.ordinal()] = dateLastServiced.toString();
         }
         if (roadWorthy) {
-            vehicle[VEHICLE_FIELDS.ROADWORTHY.ordinal()] = "Yes";
+            vehicle[VehicleFields.ROADWORTHY.ordinal()] = "Yes";
         } else {
-            vehicle[VEHICLE_FIELDS.ROADWORTHY.ordinal()] = "No";
+            vehicle[VehicleFields.ROADWORTHY.ordinal()] = "No";
         }
-        vehicle[VEHICLE_FIELDS.LICENSE_PLATE.ordinal()] = licensePlate;
-        vehicle[VEHICLE_FIELDS.POLICY_NUMBER.ordinal()] = insurance.getPolicyNum(); // Policy Number
-        vehicle[VEHICLE_FIELDS.POLICY_TYPE.ordinal()] = insurance.getType(); // Policy Type
+        vehicle[VehicleFields.LICENSE_PLATE.ordinal()] = licensePlate;
+        vehicle[VehicleFields.POLICY_NUMBER.ordinal()] = insurance.getPolicyNum(); // Policy Number
+        vehicle[VehicleFields.POLICY_TYPE.ordinal()] = insurance.getType(); // Policy Type
         if (operational) {
-            vehicle[VEHICLE_FIELDS.OPERATIONAL.ordinal()] = "Yes";
+            vehicle[VehicleFields.OPERATIONAL.ordinal()] = "Yes";
         } else {
-            vehicle[VEHICLE_FIELDS.OPERATIONAL.ordinal()] = "No";
+            vehicle[VehicleFields.OPERATIONAL.ordinal()] = "No";
         }
-        vehicle[VEHICLE_FIELDS.FUEL_ECON.ordinal()] = Integer.toString((int)Math.round(fuelEcon));
+        vehicle[VehicleFields.FUEL_ECON.ordinal()] = Integer.toString((int)Math.round(fuelEcon));
 
         return vehicle;
     }

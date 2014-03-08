@@ -20,6 +20,7 @@ javac -d bin\ -cp %classpath% src\cmmsApplication\*.java
 javac -d bin\ -cp %classpath% src\org\eclipse\wb\swt\*.java
 
 javac -d bin\ -cp %classpath% src\testsObjects\*.java
+javac -d bin\ -cp %classpath% src\testsBusiness\*.java
 javac -d bin\ -cp %classpath% src\testsPersistence\*.java
 javac -d bin\ -cp %classpath% src\tests\*.java
 pause
