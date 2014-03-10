@@ -37,7 +37,7 @@ public final class Part {
         String returnString = "\n\t\t\t" + partDesc;
         if (serviceIList != null && !serviceIList.isEmpty()) {
             for (int i = 0; i < serviceIList.size(); i++) {
-                returnString = returnString + "\n\t\t\t - " + serviceIList.get(i).getDescription();
+                returnString = returnString + "\n\t\t\t | " + serviceIList.get(i).getDescription();
                 if (serviceIList.get(i).getServiceTime() != 0) {
                     returnString = returnString + " every " + serviceIList.get(i).getServiceTime() + " days";
                 } else if (serviceIList.get(i).getServiceKm() != 0) {

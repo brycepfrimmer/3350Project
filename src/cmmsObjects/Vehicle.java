@@ -138,9 +138,21 @@ public class Vehicle {
     
     public boolean searchPartsList(String part){
     	boolean found = false;
+    	String searchPart = "";
+    	
     	part = part.replaceAll("\\s", "");
+    	
+    	for(int i = 0; i < part.length(); i++) {
+    		if(part.charAt(i) != '|') {
+    			searchPart += part.charAt(i);
+    		}
+    		else {
+    			i = part.length();
+    		}
+    	}
+    	
     	for(int i = 0; i < partsList.size(); i++){
-    		if(part.equals(partsList.get(i).getPartDesc().replaceAll("\\s", ""))){
+    		if(searchPart.equals(partsList.get(i).getPartDesc().replaceAll("\\s", ""))){
     			found = true;
     			currPartIndex = i;
     			i = partsList.size();

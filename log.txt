@@ -284,4 +284,6 @@ Delroy Hiebert
 	
 Sunday, March 9th/10th, 2014
 Cody Edwards
-	4 hours - Added Daily Tasks
+	5 hours - Added Daily Tasks and now appropriate buttons are disabled when not selected
+		- Fixed bug where it wouldn't remove parts with service items
+		
