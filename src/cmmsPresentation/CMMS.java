@@ -332,9 +332,11 @@ public class CMMS{
         addVehicleButton = new Button(mainWindow, SWT.NONE);
         addVehicleButton.addSelectionListener(new SelectionAdapter() {
             @Override
-            public void widgetSelected(SelectionEvent e) {
+            public void widgetSelected(SelectionEvent e) {            	
                 AddVehicle addWindow = new AddVehicle();
                 addWindow.open();
+                
+            	clearButton.notifyListeners(SWT.Selection, null);
                 // Update list with the new Vehicles
                 UpdateList();
             }
@@ -601,7 +603,7 @@ public class CMMS{
         for (Vehicle v : list) {
             ti = new TableItem(dataTable, SWT.NONE);
             if (v.checkRequiresService()) {
-                ti.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+            	ti.setBackground(SWTResourceManager.getColor(SWT.COLOR_RED));
             }
             ti.setText(v.ToStrings());
         }
