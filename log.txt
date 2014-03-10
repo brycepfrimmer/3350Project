@@ -258,5 +258,15 @@ Cody Edwards
 		didn't allow you to remove parts. This has now been fixed.
 		
 Friday, March 7th, 2014
+Delroy Hiebert
+	6 hours - switched entire project over to follow three tier architecture.
+			-added business and persistence classes
+			-added tests for new classes
+		
+Friday, March 7th, 2014
 Cody Edwards
 	2 Hours - addServiceEvent now doesn't work if there are no parts on the vehicle, edit window now has dateLastServiced
+	
+Saturday, March 8th, 2014
+Delroy Hiebert
+	1 hour - refactored some parts of project. Eliminated vehicle interface and replaced it with enum
