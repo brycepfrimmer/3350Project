@@ -277,3 +277,7 @@ Darwin Froese
 		- Searching updates main table and resets upon adding vehicle or clear button being clicked
 		- Changed searching backend to compare lower case search key and lower case data
 		- Table headers can be shown or hidden using the view menu
+		
+Sunday, March 9th, 2014
+Delroy Hiebert
+	1 hour - Added integration test for HSQLDB
