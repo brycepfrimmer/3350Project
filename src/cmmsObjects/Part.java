@@ -16,6 +16,18 @@ public final class Part {
         return true;
     }
     
+    public String getTodaysTasks(int kmDriven) {
+    	String tasks = "";
+    	
+    	for(int i = 0; i < serviceIList.size(); i++) {
+    		if(checkNeedsService(kmDriven)) {
+    			tasks = tasks.concat("\n\t" + serviceIList.get(i).getDescription() + " " + partDesc);
+    		}
+    	}
+    		
+    	return tasks;
+    }
+    
     public String getPartDesc() {
         return partDesc;
     }
@@ -29,7 +41,7 @@ public final class Part {
                 if (serviceIList.get(i).getServiceTime() != 0) {
                     returnString = returnString + " every " + serviceIList.get(i).getServiceTime() + " days";
                 } else if (serviceIList.get(i).getServiceKm() != 0) {
-                    returnString = returnString + " every " + serviceIList.get(i).getServiceTime() + " kilometers";
+                    returnString = returnString + " every " + serviceIList.get(i).getServiceKm() + " kilometers";
                 } else {
                     System.err.println("IMPROPERLY ASSIGNED ServiceItem.");
                 }

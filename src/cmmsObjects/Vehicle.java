@@ -413,11 +413,9 @@ public class Vehicle {
     	String tasks = "";
     	
     	for(int i = 0; i < partsList.size(); i++) {
-    		if(partsList.get(i).checkNeedsService(kmDriven)) {
-    			tasks.concat(partsList.get(i).getPartDesc() + " \n");
-    		}
+    			tasks = tasks.concat(partsList.get(i).getTodaysTasks(kmDriven));
     	}
-    	return tasks;
+    	return tasks.concat("\n");
     }
     
     public boolean partsListIsEmpty() {

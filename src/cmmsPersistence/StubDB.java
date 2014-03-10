@@ -37,7 +37,7 @@ public class StubDB {
             newPL.add(new Part("PA-149B Oil Filter"));
             newPL.add(new Part("PL-0-170 Fuel Filter"));
             newPL.add(new Part("BreatheRight A29 Air Filter"));
-            ServiceItem serviceKm = new ServiceItem("Change", 44444, 333);
+            ServiceItem serviceKm = new ServiceItem("Change", 11111, 33333);
             newPL.get(0).addServiceItem(serviceKm);
             //ServiceItem serviceDate = new ServiceItem("Change", 0, );
             
