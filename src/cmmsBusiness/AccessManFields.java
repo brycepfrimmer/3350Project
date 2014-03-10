@@ -8,10 +8,12 @@ public class AccessManFields {
 	private DataAccessObject accessObject;
 	
 	public AccessManFields()
-	{accessObject = new DataAccessObject();}
+	{accessObject = new DataAccessObject("Vehicles");}
 
 	public ManFields getManFields()
-	{return accessObject.getManFields();}
+	{//return accessObject.getManFields();}
+		return null;
+	}
 	
 	public void updateManFields( ManFields fields)
 	{accessObject.updateManFields( fields );}

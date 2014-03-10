@@ -31,10 +31,11 @@ private static String dbName = cmmsApplication.Main.dbName;
 
 		access = new AccessVehicle();
 
-		vehicle = access.getVehicle();
+		//vehicle = access.getVehicle();
 		assertNotNull(vehicle);
 		assertTrue( "3692481".equals(vehicle.getID() ) );
 		
+		/*
 		VehicleInfo info = new VehicleInfo();
 		info.setID("ABC");
 		String oldID = vehicle.getID();
@@ -42,7 +43,7 @@ private static String dbName = cmmsApplication.Main.dbName;
 		assertTrue( access.getVehicle(oldID) == null );
 		assertTrue( access.getVehicle("ABC") != null );
 		assertTrue( access.getVehicle("ABC").getID() == "ABC" );
-		
+		*/
 
 		Services.closeDataAccess();
 

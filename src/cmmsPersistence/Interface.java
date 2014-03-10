@@ -1,5 +1,6 @@
 package cmmsPersistence;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import cmmsObjects.ManFields;
@@ -8,15 +9,19 @@ import cmmsApplication.Services;
 import cmmsApplication.Main;
 
 public class Interface {
-    /*final static*/ private StubDB database;
+    /*final static*/ private DataAccessObject database;
 
     public Interface()
     {
-        database = (StubDB) Services.getDataAccess(Main.dbName);
+        database = Services.getDataAccess(Main.dbName);
     }
 
-    public boolean addVehicle(Vehicle vehicle) {
-        return database.addVehicle(vehicle);
+    public void addVehicle(Vehicle vehicle) {
+        try {
+			database.addVehicle(vehicle);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
     }
 
     public boolean removeVehicle(String id) {

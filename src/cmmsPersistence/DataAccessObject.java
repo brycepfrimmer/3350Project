@@ -1,11 +1,12 @@
 package cmmsPersistence;
 
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.DriverManager;
 import java.sql.SQLWarning;
-
 import java.util.ArrayList;
 
 import cmmsBusiness.DBInterface;
@@ -13,190 +14,260 @@ import cmmsObjects.ManFields;
 import cmmsObjects.Vehicle;
 
 public class DataAccessObject implements DBInterface/*DataAccess*/ {
+	String dbName;
+	private Connection conn;
 	
-
-	/**********************************************
-	private Statement st1, st2, st3;
-	private Connection c1;
-	private ResultSet rs2, rs3, rs4, rs5;
-
-	private String dbName;
-	private String dbType;
-
-	private String cmdString;
-	private int updateCount;
-	private String result;
-	private static String EOF = "  ";
-
-	public DataAccessObject(String dbName)
-	{
+	private static String[] columns = {
+    	"ID",
+        "Type",
+        "Manufacturer",
+        "Model",
+        "Year",
+        "Kilometers",
+        "LastServiceKM",
+        "DateLastServiced",
+        "IsRoadworthy",
+        "LicensePlate",
+        "InsurancePolicyNumber",
+        "InsurancePolicyType",
+        "IsOperational",
+        "FuelEconomy"
+    };
+	
+	public DataAccessObject(String dbName) {
 		this.dbName = dbName;
 	}
-
+	
+	public void create(String dbName) throws SQLException
+	{		
+		// Setup for HSQLDB
+		try {
+			Class.forName("org.hsqldb.jdbcDriver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			return;
+		}
+		String url = "jdbc:hsqldb:Vehicles"; // stored on disk mode
+		conn = DriverManager.getConnection(url, "SA", "");
+		
+		Statement create = null;
+		create = conn.createStatement();
+		
+		String createTable = "CREATE TABLE Vehicles ( "
+				+ columns[0] + " VARCHAR(1024), "
+				+ columns[1] + " VARCHAR(1024), "
+				+ columns[2] + " VARCHAR(1024), "
+				+ columns[3] + " VARCHAR(1024), "
+				+ columns[4] + " VARCHAR(1024), "
+				+ columns[5] + " VARCHAR(1024), "
+				+ columns[6] + " VARCHAR(1024), "
+				+ columns[7] + " VARCHAR(1024), "
+				+ columns[8] + " VARCHAR(1024), "
+				+ columns[9] + " VARCHAR(1024), "
+				+ columns[10] + " VARCHAR(1024), "
+				+ columns[11] + " VARCHAR(1024), "
+				+ columns[12] + " VARCHAR(1024), "
+				+ columns[13] + " VARCHAR(1024) "
+				+ " )";
+		
+		try {
+			int i = create.executeUpdate(createTable);
+			
+			if (i == -1) {
+				System.out.println("Error creating Database");
+				System.exit(-1);
+			}
+		}
+		catch (SQLException e) {
+			
+		}
+	}
+	
 	public void open(String dbName)
 	{
 		String url;
 		try
 		{
-			// Setup for HSQL
-			dbType = "HSQL";
+			// Setup for HSQLDB
 			Class.forName("org.hsqldb.jdbcDriver").newInstance();
-			url = "jdbc:hsqldb:database/" + dbName; // stored on disk mode
-			c1 = DriverManager.getConnection(url, "SA", "");
-			st1 = c1.createStatement();
-			st2 = c1.createStatement();
-			st3 = c1.createStatement();
+			url = "jdbc:hsqldb:Vehicles;ifexists=true"; // stored on disk mode
+			conn = DriverManager.getConnection(url, "SA", "");
 		}
 		catch (Exception e)
 		{
-			processSQLError(e);
+			
 		}
-		System.out.println("Opened " +dbType +" database " +dbName);
 	}
 
 	public void close()
 	{
 		try
-		{	// commit all changes to the database
-			cmdString = "shutdown compact";
-			rs2 = st1.executeQuery(cmdString);
-			c1.close();
+		{
+			Statement shutdown = conn.createStatement();
+			shutdown.execute("SHUTDOWN");
+			conn.close();
 		}
 		catch (Exception e)
 		{
-			processSQLError(e);
-		}
-		System.out.println("Closed " +dbType +" database " +dbName);
-	}
-	public Vehicle getVehicle( String ID )
-	{
-		Vehicle v;
-		String vID , type, man, model, lpn , insurPolicy, dls, roadWorthy, op;
-		int year, km , kmls;
-		Date dls;
-		try
-		{
-			cmdString = "Select * from Vehicles where VehicleID = " + ID;
-			rs2 = st1.executeQuery(cmdString);
-
-			vID = rs2.getString("VehicleID");
-			type = rs2.getString("Type");
-			man = rs2.getString("Manufacturer");
-			model = rs2.getString("Model");
-			lpn = rs2.getString("LicensePlate");
-			insurPolicy = rs2.getString("Insurance Policy");
-			year = rs2.getInt("Year");
-			km = rs2.getInt("KM");
-			kmls = rs2.getInt("KMLS");
-			dls = rs2.getDate("DLS");
-			roadWorthy = rs2.getBoolean("RoadWorthy");
-			op = rs2.getBoolean("Operational");
-
-
-			String[] policies = insurPolicy.split("\n");
-			String policyNum = policies[0];
-			String policyType = policies[1];
 			
-
-			v = new Vehicle(vID, type, man, model, yr, roadWorthy, lpn, op, policyNum, policyType, kilom, kilomLS, dls);
-
-			//ResultSetMetaData md2 = rs2.getMetaData();
-		}
-		catch (Exception e)
-		{
-			processSQLError(e);
 		}
 	}
-	public String addVehicle(Vehicle vehicle)
+	
+	public Vehicle[] getVehicles(String field, String key) throws SQLException {
+		Vehicle[] v = null;
+		
+		Statement query = null;
+		ResultSet searchResult = null;
+		String fieldMod = "";
+		
+		if (field.equals("Last Service (KM)"))
+			fieldMod = "LastServiceKM";
+		else if (field.equals("Date Last Serviced"))
+			fieldMod = "DateLastServiced";
+		else if (field.equals("Is Roadworthy"))
+			fieldMod = "IsRoadworthy";
+		else if (field.equals("License Plate"))
+			fieldMod = "LicensePlate";
+		else if (field.equals("Insurance Policy Number"))
+			fieldMod = "InsurancePolicyNumber";
+		else if (field.equals("Insurance Policy Type"))
+			fieldMod = "InsurancePolicyType";
+		else if (field.equals("Is Operational"))
+			fieldMod = "IsOperational";
+		else if (field.equals("Fuel Economy (L/100km)"))
+			fieldMod = "FuelEconomy";
+		else
+			fieldMod = field;
+			
+		
+		query = conn.createStatement();
+		searchResult = query.executeQuery("SELECT * FROM Vehicles WHERE " + fieldMod + "='" + key + "'");
+		
+		Object[] objects = ProcessSearch(searchResult);
+		v = new Vehicle[objects.length];
+		
+		for (int i = 0; i < objects.length; i++) {
+			v[i] = (Vehicle)objects[i];
+		}
+		
+		return v;
+	}
+	
+	public Vehicle[] getAllVehicles() throws SQLException
 	{
-		String values;
-
-		result = null;
-
-		try{
-			values = vehicle.getID()
-					+", '"+vehicle.getType()
-					+"', '"+vehicle.getManufacturer()
-					+"', '"+vehicle.getModel()
-					+"', '"+Integer.toString(vehicle.getYear())
-					+"', '"+String.valueOf(vehicle.isRoadWorthy())
-					+"', '"+vehicle.getLicensePlate()
-					+"', '"+String.valueOf(vehicle.isOperational())
-					+"', '"+vehicle.getInsurance().toString()
-					+"', '"+Integer.toString(vehicle.getKmDriven())
-					+"', '"+Integer.toString(vehicle.getKmLastServiced())
-					+"', '"+ vehicle.getDateLastServiced()
-					+"'";
-			cmdString = "Insert into Vehicles " + " Values(" + values +")";
-			updateCount = st1.executeUpdate(cmdString);
-			result = checkWarning(st1, updateCount);
-		}catch (Exception e){
-			result = processSQLError(e);
+		Vehicle[] vehicles = null;
+		
+		Statement query = null;
+		ResultSet searchResult = null;
+		
+		query = conn.createStatement();
+		searchResult = query.executeQuery("SELECT * FROM Vehicles");
+		
+		Object[] objects = ProcessSearch(searchResult);
+		vehicles = new Vehicle[objects.length];
+		
+		for (int i = 0; i < objects.length; i++) {
+			vehicles[i] = (Vehicle)objects[i];
 		}
-
-		return result;
+		
+		query.close();
+		
+		return vehicles;
 	}
-
-	public String updateVehicle(Vechicle v)
+	
+	private Object[] ProcessSearch(ResultSet rs) throws SQLException {
+		ResultSetMetaData meta = rs.getMetaData();
+		int numColumns = meta.getColumnCount();
+		Object[] objects = new Object[numColumns];		
+		
+		for (; rs.next(); ) {
+			for (int i = 1; i <= numColumns; i++) {
+				objects[i-1] = rs.getObject(i);
+			}
+		}
+		
+		return objects;
+	}
+	
+	public void addVehicle(Vehicle vehicle) throws SQLException
 	{
-		String values, where;
-
-		result = null;
-
-		try
-		{
-			//should check for empty values and not update them?
-
-			values = "Type='" +vehicle.getType()
-					+"', Manufacturer='" +vehicle.getManufacturer()
-					+"', Model='" +vehicle.getModel()
-					+"', LicensePlate='" +vehicle.getLicensePlate()
-					+"', Year='" +Integer.toString(vehicle.getYear())
-					+"', RoadWorthy='" +String.valueOf(vehicle.isRoadWorthy())
-					+"', InsurancePolicy='" +vehicle.getInsurance().toString()
-					+"', Year='" +Integer.toString(vehicle.getYear())
-					+"', KM='" +Integer.toString(vehicle.getKmDriven())
-					+"', KMLS='" +Integer.toString(vehicle.getKmLastServiced())
-					+"', DLS='" +vehicle.getDateLastServiced()
-					+"', Operational='" +String.valueOf(vehicle.isOperational())
-					+"'";
-
-			where = "where VehicleID=" + v.getID();
-			cmdString = "Update Vehicles " +" Set " +values +" " +where;
-			updateCount = st1.executeUpdate(cmdString);
-			result = checkWarning(st1, updateCount);
-		}catch(Exception e) {
-			result = processSQLError(e);
+		Statement add = null;
+		add = conn.createStatement();
+		
+		String addCommand = "INSERT INTO Vehicles("
+				+ columns[0] + columns[1] + columns[2]
+				+ columns[3] + columns[4] + columns[5]
+				+ columns[6] + columns[7] + columns[8]
+				+ columns[9] + columns[10] + columns[11]
+				+ columns[12] + columns[13] + ") VALUES('"
+				+ vehicle.getID() + ", '"
+				+ vehicle.getType() + "', '" + vehicle.getManufacturer() + "', '"
+		        + vehicle.getModel() + "', '" + new Integer(vehicle.getYear()).toString() + "', '"
+		        + new Integer(vehicle.getKmDriven()).toString() + "', '" 
+		        + new Integer(vehicle.getKmLastServiced()).toString() + "', '"
+		        + vehicle.getDateLastServiced().toString() + "', '"
+		        + new Boolean(vehicle.isRoadWorthy()).toString() + "', '"
+		        + vehicle.getLicensePlate() + "', '" + vehicle.getInsurance().getPolicyNum() + "', '" 
+		        + vehicle.getInsurance().getType() + "', '" 
+		        + new Boolean(vehicle.isOperational()).toString() + "', '"
+		        + new Double(vehicle.getFuelEcon()).toString()
+				+ "')";
+		
+		int i = add.executeUpdate(addCommand);
+		
+		if (i == -1) {
+			System.out.println("Error inserting into Database");
 		}
-
-		return result;
 	}
-	public String removeVehicle(Vehicle v)
+
+	public void updateVehicle(Vehicle vehicle) throws SQLException
 	{
-		String values;
-
-		result = null;
-		try
-		{
-			values = v.getID();
-			cmdString = "Delete from Vehicles where VehicleID=" +values;
-			//System.out.println(cmdString);
-			updateCount = st1.executeUpdate(cmdString);
-			result = checkWarning(st1, updateCount);
+		Statement update = null;
+		update = conn.createStatement();
+		
+		String updateCommand = "UPDATE Vehicles SET "
+				+ columns[1] + "='" + vehicle.getType() + "', "
+				+ columns[2] + "='" + vehicle.getManufacturer() + "', "
+		        + columns[3] + "='" + vehicle.getModel() + "', "
+				+ columns[4] + "=" + vehicle.getYear() + ", "
+				+ columns[5] + "=" + vehicle.getKmDriven() + ", " 
+				+ columns[6] + "=" + vehicle.getKmLastServiced() + ", "
+		        + columns[7] + "='" + vehicle.getDateLastServiced().toString() + "', "
+		        + columns[8] + "='" + new Boolean(vehicle.isRoadWorthy()).toString() + "', "
+		        + columns[9] + "='" + vehicle.getLicensePlate() + "', "
+		        + columns[10] + "='" + vehicle.getInsurance().getPolicyNum() + "', " 
+		        + columns[11] + "='" + vehicle.getInsurance().getType() + "', " 
+		        + columns[12] + "='" + new Boolean(vehicle.isOperational()).toString() + "', "
+		        + columns[13] + "+'" + new Double(vehicle.getFuelEcon()).toString()
+				+ "' WHERE " + columns[0] + "='" + vehicle.getID() + "'";
+		
+		int i = update.executeUpdate(updateCommand);
+		
+		if (i == -1) {
+			System.out.println("Error updating database entry " + vehicle.getID());
 		}
-		catch (Exception e)
-		{
-			result = processSQLError(e);
-		}
-		return result;
 	}
-
-	public String updateManFields(ManFields m)
+	
+	public void removeVehicle(Vehicle v) throws SQLException
 	{
-
+		Statement delete = null;
+		delete = conn.createStatement();
+		
+		String deleteCommand = "DELETE from Vehicles WHERE " + columns[0] + "='" + v.getID() + "'";
+		
+		int i = delete.executeUpdate(deleteCommand);
+		
+		if (i == -1) {
+			System.out.println("Error removing database entry " + v.getID());
+		}
 	}
 
-	*****************************************************************/
+	public void updateManFields(ManFields m)
+	{
+		
+	}
+
+	/*****************************************************************
 	//Stub data access class
 	
 	//done
@@ -238,4 +309,5 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
 	public Vehicle getVehicle() {
 		return dbInterface.getVehicle();
 	}
+	*****************************************************************/
 }//End DataAccessObject Class

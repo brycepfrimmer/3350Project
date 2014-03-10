@@ -4,7 +4,7 @@ import cmmsPresentation.CMMS;
 
 public class Main
 {
-	public static final String dbName="Stub";
+	public static final String dbName="Vehicles";
 
 	public static void main(String[] args)
 	{

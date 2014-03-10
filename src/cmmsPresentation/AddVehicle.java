@@ -387,9 +387,9 @@ public class AddVehicle {
         } else if (!isValid) {
             lblVehicleIDWarning.setText("Vehicle ID can only include numbers and letters and no spaces");
         //} else if(input.equals(dbInterface.searchByID(input))) {
-        } else if( input.equals(accessVehicle.searchByID(input))) {
-            lblVehicleIDWarning.setText("This vehicle already exists");
-            isValid = false;
+//        } else if( input.equals(accessVehicle.searchByID(input))) {
+//            lblVehicleIDWarning.setText("This vehicle already exists");
+//            isValid = false;
         } else {
             lblVehicleIDWarning.setText("");
         }

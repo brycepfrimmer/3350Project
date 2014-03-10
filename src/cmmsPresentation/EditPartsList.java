@@ -37,7 +37,7 @@ public class EditPartsList {
         createContents();
         accessVehicle = new AccessVehicle();
         currVehicle = v;
-        list = accessVehicle.getPartsList(v.getID());
+//        list = accessVehicle.getPartsList(v.getID());
         //list = currVehicle.getPartsList();
         if (!list.isEmpty()) {
             updateList();
@@ -113,8 +113,8 @@ public class EditPartsList {
                             //discuss with cody
                             //currVehicle.removePart(partsListTable.getItem(
                             //        selections[i]).getText(0));
-                            accessVehicle.removePart( currVehicle, partsListTable.getItem(
-                                    selections[i]).getText(0) );
+//                            accessVehicle.removePart( currVehicle, partsListTable.getItem(
+//                                    selections[i]).getText(0) );
                         }
 
                         // Update list with the new Vehicles
@@ -134,8 +134,8 @@ public class EditPartsList {
                         //see comment above <same situation>
                         //currVehicle.removePart(partsListTable.getItem(
                         //        partsListTable.getSelectionIndex()).getText());
-                        accessVehicle.removePart( currVehicle, partsListTable.getItem(
-                                 partsListTable.getSelectionIndex()).getText() );
+//                        accessVehicle.removePart( currVehicle, partsListTable.getItem(
+//                                 partsListTable.getSelectionIndex()).getText() );
                         // Update list with the new Vehicles
                         updateList();
                     }
