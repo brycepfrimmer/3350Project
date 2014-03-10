@@ -415,7 +415,7 @@ public class Vehicle {
     	for(int i = 0; i < partsList.size(); i++) {
     			tasks = tasks.concat(partsList.get(i).getTodaysTasks(kmDriven));
     	}
-    	return tasks.concat("\n");
+    	return tasks;
     }
     
     public boolean partsListIsEmpty() {

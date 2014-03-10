@@ -39,7 +39,6 @@ public class StubDB {
             newPL.add(new Part("BreatheRight A29 Air Filter"));
             ServiceItem serviceKm = new ServiceItem("Change", 11111, 33333);
             newPL.get(0).addServiceItem(serviceKm);
-            //ServiceItem serviceDate = new ServiceItem("Change", 0, );
             
             Vehicle temp;
             temp = new Vehicle("3692481", "Truck", "Ford", "F150", 2009, true, "ABC 123", true, "abcd1234", "Commuter", 44444, 33333, Date.valueOf("2014-01-23"));

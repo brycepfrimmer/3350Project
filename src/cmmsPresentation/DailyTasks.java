@@ -78,10 +78,15 @@ public class DailyTasks {
         	hdr = "";
         	count++;
         }
-        else {
+        else if(vehicleSel == 0){
             hdr = info.getID() + ": "
                     + info.getManufacturer() + " "
                     + info.getModel();
+        }
+        else {
+        	 hdr = "\n" + info.getID() + ": "
+                     + info.getManufacturer() + " "
+                     + info.getModel();
         }
         
         if(count == vehicleList.size()) {

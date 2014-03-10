@@ -281,3 +281,7 @@ Darwin Froese
 Sunday, March 9th, 2014
 Delroy Hiebert
 	1 hour - Added integration test for HSQLDB
+	
+Sunday, March 9th/10th, 2014
+Cody Edwards
+	4 hours - Added Daily Tasks
