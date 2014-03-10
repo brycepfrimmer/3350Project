@@ -270,3 +270,10 @@ Cody Edwards
 Saturday, March 8th, 2014
 Delroy Hiebert
 	1 hour - refactored some parts of project. Eliminated vehicle interface and replaced it with enum
+
+Sunday, March 9th, 2014
+Darwin Froese
+	3 Hours - Time based tracking changes background color instead of foreground color
+		- Searching updates main table and resets upon adding vehicle or clear button being clicked
+		- Changed searching backend to compare lower case search key and lower case data
+		- Table headers can be shown or hidden using the view menu

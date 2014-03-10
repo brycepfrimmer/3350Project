@@ -48,6 +48,7 @@ public class CMMS{
     private static final int DEFAULT_TABLE_COL_WIDTH = 100;
     private static final int TABLE_WIDTH = 3;
     private static final int TABLE_HEIGHT = 7;
+    private static final int TABLE_COL_COUNT = 14;
 
     private static int currentVehicleCount = 0;
     private static boolean searching = false;
@@ -61,11 +62,14 @@ public class CMMS{
     private static Menu fileMenu;
     private static Menu vehicleMenu;
     private static Menu optionsMenu;
+    private static Menu	viewMenu;
+    private static Menu tableHdrsMenu;
     private static Menu helpMenu;
     
     private static MenuItem fileMenuHdr;
     private static MenuItem vehicleMenuHdr;
     private static MenuItem mntmOptions;
+    private static MenuItem viewMenuHdr;
     private static MenuItem helpMenuHdr;
 
     private static MenuItem filePrintItem;
@@ -74,7 +78,23 @@ public class CMMS{
     private static MenuItem vehicleRemoveItem;
     private static MenuItem vehicleViewItem;
     private static MenuItem optionsChangeManFields;
+    private static MenuItem tableColsItem;
     private static MenuItem helpAboutItem;
+    
+    private static MenuItem vehicleIDColItem;
+    private static MenuItem vehicleTypeColItem;
+    private static MenuItem vehicleModelColItem;
+    private static MenuItem vehicleLicensePlateColItem;
+    private static MenuItem vehicleFuelEconColItem;
+    private static MenuItem vehicleKMColItem;
+    private static MenuItem vehiclePolicyColItem;
+    private static MenuItem vehicleInsTypeColItem;
+    private static MenuItem vehicleKMLastServiceColItem;
+    private static MenuItem vehicleDateLastServicedColItem;
+    private static MenuItem vehicleManufacturerColItem;
+    private static MenuItem vehicleOperationalColItem;
+    private static MenuItem vehicleRoadWorthyColItem;
+    private static MenuItem vehicleYearColItem;
 
     private static Label searchLabel;
 
@@ -126,7 +146,26 @@ public class CMMS{
         "Is Operational",
         "Fuel Economy (L/100km)"
     };
+    
+    private static boolean[] columnVisibility = {
+    	true,
+    	true,
+    	true,
+    	true,
+    	true,
+    	true,
+    	true,
+    	true,
+    	true,
+    	true,
+    	true,
+    	true,
+    	true,
+    	true
+    };
 
+    private static TableColumn[] tableCols = new TableColumn[TABLE_COL_COUNT];
+    
     public CMMS()
     {
         CreateWindow();
@@ -137,6 +176,23 @@ public class CMMS{
     private static void OnLoad() {
         // Read existing database vehicles
         UpdateList();
+    }
+    
+    private static void FillColArray() {
+    	tableCols[0] = vehicleIDCol;
+        tableCols[1] = vehicleTypeCol;
+        tableCols[2] = vehicleModelCol;
+        tableCols[3] = vehicleLicensePlateCol;
+        tableCols[4] = vehicleFuelEconCol;
+        tableCols[5] = vehicleKMCol;
+        tableCols[6] = vehiclePolicyCol;
+        tableCols[7] = vehicleInsTypeCol;
+        tableCols[8] = vehicleKMLastServiceCol;
+        tableCols[9] = vehicleDateLastServicedCol;
+        tableCols[10] = vehicleManufacturerCol;
+        tableCols[11] = vehicleOperationalCol;
+        tableCols[12] = vehicleRoadWorthyCol;
+        tableCols[13] = vehicleYearCol;
     }
 
     private static void CreateWindow() {
@@ -161,6 +217,7 @@ public class CMMS{
         CreateFileMenu();
         CreateVehicleMenu();
         CreateOptionsMenu();
+        CreateViewMenu();
         CreateHelpMenu();
 
         mainWindow.setMenuBar(mainMenu);
@@ -217,6 +274,160 @@ public class CMMS{
     	optionsChangeManFields.setText("Change Mandatory Fields");
     }
 
+    private static void CreateViewMenu() {
+    	viewMenuHdr = new MenuItem(mainMenu, SWT.CASCADE);
+    	viewMenuHdr.setText("View");
+    	
+    	viewMenu = new Menu(viewMenuHdr);
+    	viewMenuHdr.setMenu(viewMenu);
+    	
+    	tableColsItem = new MenuItem(viewMenu, SWT.CASCADE);
+    	tableColsItem.setText("Table Columns");
+    	
+    	tableHdrsMenu = new Menu(tableColsItem);
+    	tableColsItem.setMenu(tableHdrsMenu);
+    
+    	vehicleIDColItem = new MenuItem(tableHdrsMenu, SWT.CHECK);
+    	vehicleIDColItem.setSelection(true);
+    	vehicleIDColItem.addSelectionListener(new SelectionAdapter() {
+    		@Override
+    		public void widgetSelected(SelectionEvent e) {
+    			PackColumns();
+    		}
+    	});
+    	vehicleIDColItem.setText("Vehicle ID");
+    	
+        vehicleTypeColItem = new MenuItem(tableHdrsMenu, SWT.CHECK);
+        vehicleTypeColItem.setSelection(true);
+        vehicleTypeColItem.addSelectionListener(new SelectionAdapter() {
+    		@Override
+    		public void widgetSelected(SelectionEvent e) {
+    			PackColumns();
+    		}
+    	});
+        vehicleTypeColItem.setText("Vehicle Type");
+        
+        vehicleModelColItem = new MenuItem(tableHdrsMenu, SWT.CHECK);
+        vehicleModelColItem.setSelection(true);
+        vehicleModelColItem.addSelectionListener(new SelectionAdapter() {
+    		@Override
+    		public void widgetSelected(SelectionEvent e) {
+    			PackColumns();
+    		}
+    	});
+        vehicleModelColItem.setText("Vehicle Model");
+        
+        vehicleLicensePlateColItem = new MenuItem(tableHdrsMenu, SWT.CHECK);
+        vehicleLicensePlateColItem.setSelection(true);
+        vehicleLicensePlateColItem.addSelectionListener(new SelectionAdapter() {
+    		@Override
+    		public void widgetSelected(SelectionEvent e) {
+    			PackColumns();
+    		}
+    	});
+        vehicleLicensePlateColItem.setText("License Plate");
+        
+        vehicleFuelEconColItem = new MenuItem(tableHdrsMenu, SWT.CHECK);
+        vehicleFuelEconColItem.setSelection(true);
+        vehicleFuelEconColItem.addSelectionListener(new SelectionAdapter() {
+    		@Override
+    		public void widgetSelected(SelectionEvent e) {
+    			PackColumns();
+    		}
+    	});
+        vehicleFuelEconColItem.setText("Fuel Economy");
+
+        vehicleKMColItem = new MenuItem(tableHdrsMenu, SWT.CHECK);
+        vehicleKMColItem.setSelection(true);
+        vehicleKMColItem.addSelectionListener(new SelectionAdapter() {
+    		@Override
+    		public void widgetSelected(SelectionEvent e) {
+    			PackColumns();
+    		}
+    	});
+        vehicleKMColItem.setText("Kilometers");
+        
+        vehiclePolicyColItem = new MenuItem(tableHdrsMenu, SWT.CHECK);
+        vehiclePolicyColItem.setSelection(true);
+        vehiclePolicyColItem.addSelectionListener(new SelectionAdapter() {
+    		@Override
+    		public void widgetSelected(SelectionEvent e) {
+    			PackColumns();
+    		}
+    	});
+        vehiclePolicyColItem.setText("Insurance Policy");
+        
+        vehicleInsTypeColItem = new MenuItem(tableHdrsMenu, SWT.CHECK);
+        vehicleInsTypeColItem.setSelection(true);
+        vehicleInsTypeColItem.addSelectionListener(new SelectionAdapter() {
+    		@Override
+    		public void widgetSelected(SelectionEvent e) {
+    			PackColumns();
+    		}
+    	});
+        vehicleInsTypeColItem.setText("Insurance Type");
+        
+        vehicleKMLastServiceColItem = new MenuItem(tableHdrsMenu, SWT.CHECK);
+        vehicleKMLastServiceColItem.setSelection(true);
+        vehicleKMLastServiceColItem.addSelectionListener(new SelectionAdapter() {
+    		@Override
+    		public void widgetSelected(SelectionEvent e) {
+    			PackColumns();
+    		}
+    	});
+        vehicleKMLastServiceColItem.setText("Last Service (KM)");
+        
+        vehicleDateLastServicedColItem = new MenuItem(tableHdrsMenu, SWT.CHECK);
+        vehicleDateLastServicedColItem.setSelection(true);
+        vehicleDateLastServicedColItem.addSelectionListener(new SelectionAdapter() {
+    		@Override
+    		public void widgetSelected(SelectionEvent e) {
+    			PackColumns();
+    		}
+    	});
+        vehicleDateLastServicedColItem.setText("Date Last Serviced");
+        
+        vehicleManufacturerColItem = new MenuItem(tableHdrsMenu, SWT.CHECK);
+        vehicleManufacturerColItem.setSelection(true);
+        vehicleManufacturerColItem.addSelectionListener(new SelectionAdapter() {
+    		@Override
+    		public void widgetSelected(SelectionEvent e) {
+    			PackColumns();
+    		}
+    	});
+        vehicleManufacturerColItem.setText("Manufacturer");
+        
+        vehicleOperationalColItem = new MenuItem(tableHdrsMenu, SWT.CHECK);
+        vehicleOperationalColItem.setSelection(true);
+        vehicleOperationalColItem.addSelectionListener(new SelectionAdapter() {
+    		@Override
+    		public void widgetSelected(SelectionEvent e) {
+    			PackColumns();
+    		}
+    	});
+        vehicleOperationalColItem.setText("Operational");
+        
+        vehicleRoadWorthyColItem = new MenuItem(tableHdrsMenu, SWT.CHECK);
+        vehicleRoadWorthyColItem.setSelection(true);
+        vehicleRoadWorthyColItem.addSelectionListener(new SelectionAdapter() {
+    		@Override
+    		public void widgetSelected(SelectionEvent e) {
+    			PackColumns();
+    		}
+    	});
+        vehicleRoadWorthyColItem.setText("Roadworthy");
+        
+        vehicleYearColItem = new MenuItem(tableHdrsMenu, SWT.CHECK);
+        vehicleYearColItem.setSelection(true);
+        vehicleYearColItem.addSelectionListener(new SelectionAdapter() {
+    		@Override
+    		public void widgetSelected(SelectionEvent e) {
+    			PackColumns();
+    		}
+    	});
+        vehicleYearColItem.setText("Year");
+    }
+    
     private static void CreateHelpMenu() {
         helpMenuHdr = new MenuItem(mainMenu, SWT.CASCADE);
         helpMenuHdr.setText("&Help");
@@ -612,20 +823,36 @@ public class CMMS{
         dataTable.select(0);
     }
     
+    private static void UpdateVisibility() {
+    	columnVisibility[0] = vehicleIDColItem.getSelection();
+    	columnVisibility[1] = vehicleTypeColItem.getSelection();
+    	columnVisibility[2] = vehicleModelColItem.getSelection();
+    	columnVisibility[3] = vehicleLicensePlateColItem.getSelection();
+    	columnVisibility[4] = vehicleFuelEconColItem.getSelection();
+    	columnVisibility[5] = vehicleKMColItem.getSelection();
+    	columnVisibility[6] = vehiclePolicyColItem.getSelection();
+    	columnVisibility[7] = vehicleInsTypeColItem.getSelection();
+    	columnVisibility[8] = vehicleKMLastServiceColItem.getSelection();
+    	columnVisibility[9] = vehicleDateLastServicedColItem.getSelection();
+    	columnVisibility[10] = vehicleManufacturerColItem.getSelection();
+    	columnVisibility[11] = vehicleOperationalColItem.getSelection();
+    	columnVisibility[12] = vehicleRoadWorthyColItem.getSelection();
+    	columnVisibility[13] = vehicleYearColItem.getSelection();
+    }
+    
     private static void PackColumns() {
-        vehicleIDCol.pack();
-        vehicleTypeCol.pack();
-        vehicleManufacturerCol.pack();
-        vehicleModelCol.pack();
-        vehicleYearCol.pack();
-        vehicleKMCol.pack();
-        vehicleKMLastServiceCol.pack();
-        vehicleRoadWorthyCol.pack();
-        vehicleLicensePlateCol.pack();
-        vehiclePolicyCol.pack();
-        vehicleInsTypeCol.pack();
-        vehicleOperationalCol.pack();
-        vehicleFuelEconCol.pack();
+    	UpdateVisibility();
+    	
+        for (int i = 0; i < TABLE_COL_COUNT; i++) {
+        	if (columnVisibility[i]) {
+        		tableCols[i].pack();
+        		tableCols[i].setResizable(true);
+        	}
+        	else {
+        		tableCols[i].setWidth(0);
+        		tableCols[i].setResizable(false);
+        	}
+        }
     }
     
     private static void CreateColumns() {
@@ -713,6 +940,10 @@ public class CMMS{
         vehicleFuelEconCol.setMoveable(true);
         vehicleFuelEconCol.setResizable(true);
         
+    	// avoids null pointer exceptions in packing
+    	FillColArray();
+    	
+    	// resize the columns to fit the header text
         PackColumns();
     }    
 
@@ -745,6 +976,5 @@ public class CMMS{
             mainWindow.close();
             currDisplay.dispose();
         }
-
     }
 }
