@@ -145,18 +145,18 @@ public class AddServiceEvent {
             @Override
             public void widgetSelected(SelectionEvent e) {
             	accessVehicle = new AccessVehicle();
-                if (checkPartSelection() && checkDesc() && checkTime()) {
-                	accessVehicle.addServiceEvent( v, new ServiceItem(eventDesc.getText(), Long.parseLong(serviceTime.getText()), v.getDateLastServiced()),
+                if (serviceTime.getText() != "" && checkPartSelection() && checkDesc() && checkTime()) {
+//                	accessVehicle.addServiceEvent( v, new ServiceItem(eventDesc.getText(), Long.parseLong(serviceTime.getText()), v.getDateLastServiced()),
+//                                      new Part(partsComboBox.getItem(partsComboBox.getSelectionIndex())));
+                    v.addServiceEvent(new ServiceItem(eventDesc.getText(), Long.parseLong(serviceTime.getText()), v.getDateLastServiced()),
                                       new Part(partsComboBox.getItem(partsComboBox.getSelectionIndex())));
-                    //v.addServiceEvent(new ServiceItem(eventDesc.getText(), Long.parseLong(serviceTime.getText()), v.getDateLastServiced()),
-                    //                  new Part(partsComboBox.getItem(partsComboBox.getSelectionIndex())));
                     //access.updateVehicle();
                     shell.close();
-                } else if (checkPartSelection() && checkDesc() && checkKilos()) {
-                	accessVehicle.addServiceEvent( v, new ServiceItem(eventDesc.getText(), Integer.parseInt(serviceKm.getText()), v.getKmLastServiced()),
+                } else if (serviceKm.getText() != "" && checkPartSelection() && checkDesc() && checkKilos()) {
+//                	accessVehicle.addServiceEvent( v, new ServiceItem(eventDesc.getText(), Integer.parseInt(serviceKm.getText()), v.getKmLastServiced()),
+//                                      new Part(partsComboBox.getItem(partsComboBox.getSelectionIndex())));
+                    v.addServiceEvent(new ServiceItem(eventDesc.getText(), Integer.parseInt(serviceKm.getText()), v.getKmLastServiced()),
                                       new Part(partsComboBox.getItem(partsComboBox.getSelectionIndex())));
-                    //v.addServiceEvent(new ServiceItem(eventDesc.getText(), Integer.parseInt(serviceKm.getText()), v.getKmLastServiced()),
-                    //                  new Part(partsComboBox.getItem(partsComboBox.getSelectionIndex())));
                     //access.updateVehicle();
                     shell.close();
                 } else if (checkPartSelection() && checkDesc()) {

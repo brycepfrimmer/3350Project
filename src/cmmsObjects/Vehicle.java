@@ -409,6 +409,17 @@ public class Vehicle {
         this.dateLastServiced = dateLastServiced;
     }
     
+    public String getTodaysTasks(){
+    	String tasks = "";
+    	
+    	for(int i = 0; i < partsList.size(); i++) {
+    		if(partsList.get(i).checkNeedsService(kmDriven)) {
+    			tasks.concat(partsList.get(i).getPartDesc() + " \n");
+    		}
+    	}
+    	return tasks;
+    }
+    
     public boolean partsListIsEmpty() {
     	return partsList.isEmpty();
     }

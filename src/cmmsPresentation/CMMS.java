@@ -105,6 +105,7 @@ public class CMMS{
     private static Button viewVehicleButton;
     private static Button updateKmsButton;
     private static Button addServiceButton;
+    private static Button btnTodaysTasks;
     private static Button quitButton;
 
     private static Text searchText;
@@ -202,7 +203,7 @@ public class CMMS{
         mainWindow.setFocus();      
 
         mainLayout = new GridLayout();
-        mainLayout.numColumns = LAYOUT_COL_COUNT;
+        mainLayout.numColumns = 4;
 
         currDisplay = Display.getDefault();
         
@@ -530,9 +531,28 @@ public class CMMS{
         dataTable.setItemCount(currentVehicleCount);
         dataTable.setHeaderVisible(true);
         dataTable.setLinesVisible(true);
+        dataTable.addSelectionListener(new SelectionAdapter() {
+        	@Override
+        	public void widgetSelected(SelectionEvent e) {
+        		if(dataTable.getSelectionCount() == 0) {
+        			removeVehicleButton.setEnabled(false);
+	        		editVehicleButton.setEnabled(false);
+	        		viewVehicleButton.setEnabled(false);
+	        		updateKmsButton.setEnabled(false);
+	        		addServiceButton.setEnabled(false);
+        		}
+        		else {
+	        		removeVehicleButton.setEnabled(true);
+	        		editVehicleButton.setEnabled(true);
+	        		viewVehicleButton.setEnabled(true);
+	        		updateKmsButton.setEnabled(true);
+	        		addServiceButton.setEnabled(true);
+        		}
+        	}
+        });
         gridData = new GridData();
         gridData.horizontalSpan = TABLE_WIDTH;
-        gridData.verticalSpan = TABLE_HEIGHT;
+        gridData.verticalSpan = 8;
         gridData.heightHint = (MIN_WINDOW_SIZE.y / 2);
         gridData.horizontalAlignment = SWT.FILL;
         gridData.verticalAlignment = SWT.FILL;
@@ -776,6 +796,16 @@ public class CMMS{
         addServiceButton.setLayoutData(gridData);
         addServiceButton.setText("Add Service Event");
         
+        btnTodaysTasks = new Button(mainWindow, SWT.NONE);
+        btnTodaysTasks.addSelectionListener(new SelectionAdapter() {
+        	@Override
+        	public void widgetSelected(SelectionEvent arg0) {
+        		openDailyTasks();
+        	}
+        });
+        btnTodaysTasks.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+        btnTodaysTasks.setText("Today's Tasks");
+        
         
         quitButton = new Button(mainWindow, SWT.NONE);
         quitButton.addSelectionListener(new SelectionAdapter() {
@@ -786,25 +816,7 @@ public class CMMS{
             }
         });
         
-        dataTable.addSelectionListener(new SelectionAdapter() {
-        	@Override
-        	public void widgetSelected(SelectionEvent e) {
-        		if(dataTable.getSelectionCount() == 0) {
-        			removeVehicleButton.setEnabled(false);
-	        		editVehicleButton.setEnabled(false);
-	        		viewVehicleButton.setEnabled(false);
-	        		updateKmsButton.setEnabled(false);
-	        		addServiceButton.setEnabled(false);
-        		}
-        		else {
-	        		removeVehicleButton.setEnabled(true);
-	        		editVehicleButton.setEnabled(true);
-	        		viewVehicleButton.setEnabled(true);
-	        		updateKmsButton.setEnabled(true);
-	        		addServiceButton.setEnabled(true);
-        		}
-        	}
-        });
+
         gridData = new GridData();
         gridData.grabExcessVerticalSpace = false;
         gridData.horizontalAlignment = SWT.FILL;
@@ -965,13 +977,24 @@ public class CMMS{
     	
     	// resize the columns to fit the header text
         PackColumns();
-    }    
+    } 
+    
+    private static void openDailyTasks(){
+    	accessVehicle = new AccessVehicle();
+        
+        ArrayList<Vehicle> list;
+        list = accessVehicle.getAllVehicles();
+        DailyTasks tasks = new DailyTasks();
+        tasks.open(list);
+    }
 
     private static void Open() {
         mainWindow.setLayout(mainLayout);
         mainWindow.pack();
 
         mainWindow.open();
+        
+        openDailyTasks();
 
         while (!mainWindow.isDisposed()) {
             try {
