@@ -189,7 +189,7 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
 		return objects;
 	}
 	
-	public void addVehicle(Vehicle vehicle) throws SQLException
+	public boolean addVehicle(Vehicle vehicle) throws SQLException
 	{
 		Statement add = null;
 		add = conn.createStatement();
@@ -217,6 +217,9 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
 		
 		if (i == -1) {
 			System.out.println("Error inserting into Database");
+			return false;
+		} else {
+		    return true;
 		}
 	}
 
@@ -248,7 +251,7 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
 		}
 	}
 	
-	public void removeVehicle(Vehicle v) throws SQLException
+	public boolean removeVehicle(Vehicle v) throws SQLException
 	{
 		Statement delete = null;
 		delete = conn.createStatement();
@@ -259,7 +262,10 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
 		
 		if (i == -1) {
 			System.out.println("Error removing database entry " + v.getID());
+			return false;
 		}
+		
+		return true;
 	}
 
 	public void updateManFields(ManFields m)

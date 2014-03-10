@@ -27,7 +27,7 @@ public class TestInterface extends TestCase {
 	@Test
 	public void testRemoveVehicle() {
 		testInterface.addVehicle(vehicle);
-		boolean success = testInterface.removeVehicle(vehicle.getID());
+		boolean success = testInterface.removeVehicle(vehicle);
 		assertTrue( success );
 	}
 
@@ -37,34 +37,35 @@ public class TestInterface extends TestCase {
 		Vehicle tempVehicle = testInterface.getVehicle( vehicle.getID() );
 		assertTrue( tempVehicle != null );
 		assert( tempVehicle == vehicle );
-		testInterface.removeVehicle( vehicle.getID() );
+		testInterface.removeVehicle( vehicle );
 	}
 
 	@Test
 	public void testSearch() {
 		testInterface.addVehicle(vehicle);
 		assertTrue( testInterface.search( "id", vehicle.getID() ) != null );
-		testInterface.removeVehicle( vehicle.getID() );
+		testInterface.removeVehicle( vehicle );
 	}
 
-	@Test
-	public void testGetManFields() {
-		assertTrue( testInterface.getManFields() != null );
-	}
+//TODO: Add in manFields to DB
+//	@Test
+//	public void testGetManFields() {
+//		assertTrue( testInterface.getManFields() != null );
+//	}
 
 	@Test
 	public void testUpdateKm() {
 		testInterface.addVehicle( vehicle );
 		double result = testInterface.updateKm( vehicle.getID(), 100000, 10 );
 		assertTrue( result >= 0 );
-		testInterface.removeVehicle( vehicle.getID() );
+		testInterface.removeVehicle( vehicle );
 	}
 
 	@Test
 	public void testGetVehicles() {
 		testInterface.addVehicle(vehicle);
 		assertTrue( testInterface.getVehicles() != null );
-		testInterface.removeVehicle( vehicle.getID() );
+		testInterface.removeVehicle( vehicle );
 	}
 
 }
