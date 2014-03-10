@@ -282,8 +282,11 @@ Sunday, March 9th, 2014
 Delroy Hiebert
 	1 hour - Added integration test for HSQLDB
 	
-Sunday, March 9th/10th, 2014
+Sunday, March 9th, 2014
 Cody Edwards
-	5 hours - Added Daily Tasks and now appropriate buttons are disabled when not selected
-		- Fixed bug where it wouldn't remove parts with service items
-		
+	4 hours - Added Daily Tasks and now appropriate buttons are disabled when not selected.
+	
+Monday, March 10th, 2014
+Cody Edwards
+	1 hour - Fixed bug where it wouldn't remove parts with service items.
+
