@@ -785,6 +785,26 @@ public class CMMS{
                 currDisplay.dispose();
             }
         });
+        
+        dataTable.addSelectionListener(new SelectionAdapter() {
+        	@Override
+        	public void widgetSelected(SelectionEvent e) {
+        		if(dataTable.getSelectionCount() == 0) {
+        			removeVehicleButton.setEnabled(false);
+	        		editVehicleButton.setEnabled(false);
+	        		viewVehicleButton.setEnabled(false);
+	        		updateKmsButton.setEnabled(false);
+	        		addServiceButton.setEnabled(false);
+        		}
+        		else {
+	        		removeVehicleButton.setEnabled(true);
+	        		editVehicleButton.setEnabled(true);
+	        		viewVehicleButton.setEnabled(true);
+	        		updateKmsButton.setEnabled(true);
+	        		addServiceButton.setEnabled(true);
+        		}
+        	}
+        });
         gridData = new GridData();
         gridData.grabExcessVerticalSpace = false;
         gridData.horizontalAlignment = SWT.FILL;
