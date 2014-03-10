@@ -77,7 +77,6 @@ public class AddVehicle {
         Display display = Display.getDefault();
         accessFields = new AccessManFields();
         manFields = accessFields.getManFields();
-        //manFields = dbInterface.getManFields();
         createContents();
         shell.open();
         shell.layout();
@@ -386,10 +385,9 @@ public class AddVehicle {
         	lblVehicleIDWarning.setText("Vehicle ID is a required field");
         } else if (!isValid) {
             lblVehicleIDWarning.setText("Vehicle ID can only include numbers and letters and no spaces");
-        //} else if(input.equals(dbInterface.searchByID(input))) {
-//        } else if( input.equals(accessVehicle.searchByID(input))) {
-//            lblVehicleIDWarning.setText("This vehicle already exists");
-//            isValid = false;
+        } else if( input.equals(accessVehicle.getVehicle(input).getID())) {
+            lblVehicleIDWarning.setText("This vehicle already exists");
+            isValid = false;
         } else {
             lblVehicleIDWarning.setText("");
         }

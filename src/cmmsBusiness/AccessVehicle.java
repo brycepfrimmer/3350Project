@@ -74,22 +74,32 @@ public class AccessVehicle {
 		return null;
 	}
 	
-	public String updateVehicle( Vehicle v )
+	public void updateVehicle( Vehicle v )
 	{
 		try {
-			dataAccess.removeVehicle(v);
+			dataAccess.updateVehicle(v);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
 	}
 	
-	/*
-	public String searchByID( String ID )
+
+	public Vehicle searchByID( String ID )
 	{
-		return dataAccess.searchByID( ID );
+	    Vehicle[] vehicles = null;
+	    try {
+            vehicles = dataAccess.getVehicles("ID", ID);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+	    
+	    if (vehicles != null && vehicles.length >= 1) {
+	        return vehicles[0];
+	    } else {
+	        return null;
+	    }
 	}
-	*/
+
 	public ArrayList<Vehicle> getAllVehicles()
 	{
 		ArrayList<Vehicle> list = null;
@@ -149,32 +159,38 @@ public class AccessVehicle {
 			dataAccess.updateVehicle(vehicle);
 		}
 		catch (SQLException e) {
-			
+			e.printStackTrace();
 		}
 		
 		return null;
 	}
-	/*
+
 	public ArrayList<Part> getPartsList( String ID )
 	{
-		return dataAccess.getVehicle(ID).getPartsList();
+	    Vehicle[] vehicles = null;
+		try {
+            vehicles = dataAccess.getVehicles("ID", ID);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+		
+		if (vehicles != null && vehicles.length >= 1) {
+		    return vehicles[0].getPartsList();
+		} else {
+		    return null;
+		}
 	}
 	
 	public void removePart(Vehicle vehicle, String part)
 	{
 		vehicle.removePart(part);
-		dataAccess.updateVehicle(vehicle);
+		updateVehicle(vehicle);
 	}
 	
 	public String addServiceEvent( Vehicle vehicle, ServiceItem i, Part p )
 	{
 		vehicle.addServiceEvent(i, p);
-		dataAccess.updateVehicle( vehicle );
+		updateVehicle(vehicle);
 		return null;
 	}
-
-	public Vehicle getVehicle() {
-		return dataAccess.getVehicle();
-	}
-	*/
 }//End AccessVehicle Class
