@@ -29,12 +29,7 @@ public class Interface {
     }
     
     public Vehicle[] search(String field, String key) {
-    	if (key.contains("*")) {
-    		return database.search(field, key.substring(0, key.indexOf('*')));
-    	}
-    	else {
     		return database.search(field, key);
-    	}
     }
     
     public String searchByID(String id){

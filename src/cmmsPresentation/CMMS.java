@@ -78,7 +78,7 @@ public class CMMS{
 
     private static Label searchLabel;
 
-    private static Button searchButton;
+    private static Button clearButton;
     private static Button addVehicleButton;
     private static Button removeVehicleButton;
     private static Button editVehicleButton;
@@ -108,6 +108,8 @@ public class CMMS{
     
     private static AccessVehicle accessVehicle;
     
+    private static ArrayList<Vehicle> searchList;
+    
     private static String[] columnHeaders = {
     	"ID",
         "Type",
@@ -125,26 +127,12 @@ public class CMMS{
         "Fuel Economy (L/100km)"
     };
 
-   /* public static void main(String[] args) {
-        try{
-            CreateWindow();
-            OnLoad();
-            Open();
-            //vehicles = null;
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-        
-    }*/
-
     public CMMS()
     {
         CreateWindow();
         OnLoad();
         Open();
-        //vechicles = null;
     }
-
 
     private static void OnLoad() {
         // Read existing database vehicles
@@ -254,6 +242,13 @@ public class CMMS{
         searchLabel.setText("Search:");
         
         searchCombo = new Combo(mainWindow, SWT.NONE);
+        searchCombo.addFocusListener(new FocusAdapter() {
+        	@Override
+        	public void focusGained(FocusEvent e) {
+        		if (searchCombo.getText() != "")
+        			searchCombo.setText("");
+        	}
+        });
         for (String s : columnHeaders)
         	searchCombo.add(s);
         
@@ -274,16 +269,29 @@ public class CMMS{
         });
         searchText.addKeyListener(new KeyAdapter() {
         	@Override
-        	public void keyPressed(KeyEvent e) {
-        		if (e.keyCode == SWT.CR) {
-        			if (searching && searchText.getText().compareTo("") != 0) {
-        				searchButton.notifyListeners(SWT.Selection, null);
-        			}
+        	public void keyPressed(KeyEvent e) {        		
+        		// This way we fill the table with table items
+        		if (!searching)
+        			searching = true;
+        		
+        		// Search for Stuff
+        		String searchVal = null;
+        		if (e.keyCode >= 97 && e.keyCode <= 122 ||
+        			e.keyCode >= 48 && e.keyCode <= 57)
+        			searchVal = searchText.getText() + e.character;
+        		else if (e.keyCode == SWT.BS && searchText.getText().length() > 0)
+        			searchVal = searchText.getText().substring(0, searchText.getText().length() - 1);
+        		
+        		if (searchVal != null) {
+        			Vehicle[] accessReturn = accessVehicle.getVehicles(searchCombo.getText(), searchVal);
+                
+	        		searchList = new ArrayList<Vehicle>();
+	        		for (Vehicle v : accessReturn) {
+	        			searchList.add(v);
+	        		}
+	        		
+	        		UpdateList();
         		}
-    			else {
-    				if (searchText.getText().compareTo(SEARCH_TEXT_DEFAULT) == 0)
-    					searchText.setText("");
-    			}
         	}
         });
         gridData = new GridData();
@@ -292,22 +300,19 @@ public class CMMS{
         searchText.setLayoutData(gridData);
         searchText.setText(SEARCH_TEXT_DEFAULT);
         
-        searchButton = new Button(mainWindow, SWT.NONE); 
-        searchButton.addSelectionListener(new SelectionAdapter() {
+        clearButton = new Button(mainWindow, SWT.NONE); 
+        clearButton.addSelectionListener(new SelectionAdapter() {
         	@Override
         	public void widgetSelected(SelectionEvent e) {
-        		// Search for Stuff
-        		Vehicle[] v = accessVehicle.getVehicles(searchCombo.getText(), searchText.getText() );
-        		//Vehicle[] v = dbInterface.search(searchCombo.getText(), searchText.getText());
-                ViewVehicle viewWindow = new ViewVehicle();
-                viewWindow.open(v);
-        		// Display Search Results
             	searchText.setText(SEARCH_TEXT_DEFAULT);
+            	searching = false;
+            	UpdateList();
         	}
         });
         gridData = new GridData();
         gridData.horizontalAlignment = SWT.FILL;
-        searchButton.setLayoutData(gridData); searchButton.setText("Search");
+        clearButton.setLayoutData(gridData); 
+        clearButton.setText("Clear");
 
         dataTable = new Table(mainWindow, SWT.FULL_SELECTION | SWT.MULTI
                 | SWT.BORDER);
@@ -367,8 +372,6 @@ public class CMMS{
                         for (int i = 0; i < selected; i++)
                         	accessVehicle.removeVehicle(dataTable.getItem(
                         			selections[i]).getText(0));
-                            //dbInterface.removeVehicle(dataTable.getItem(
-                                    //selections[i]).getText(0));
 
                         // Update list with the new Vehicles
                         UpdateList();
@@ -385,9 +388,6 @@ public class CMMS{
                         // Should only have one item selected
                     	accessVehicle.removeVehicle(dataTable.getItem(
                     			dataTable.getSelectionIndex()).getText(VehicleFields.ID.ordinal()));
-                        //dbInterface.removeVehicle(dataTable.getItem(
-                        //        dataTable.getSelectionIndex()).getText(
-                        //        VehicleFields.ID.ordinal()));
                         // Update list with the new Vehicles
                         UpdateList();
                     }
@@ -418,9 +418,6 @@ public class CMMS{
                 	Vehicle v = accessVehicle.getVehicle(dataTable.getItem(
                 			dataTable.getSelectionIndex()).getText(
                     		VehicleFields.ID.ordinal()));
-                    //Vehicle v = dbInterface.getVehicle(dataTable.getItem(
-                    //        dataTable.getSelectionIndex()).getText(
-                    //        VehicleFields.ID.ordinal()));
                     EditVehicle editWindow = new EditVehicle();
                     editWindow.open(v);
 
@@ -459,9 +456,6 @@ public class CMMS{
                 	Vehicle v = accessVehicle.getVehicle(dataTable.getItem(
                 			dataTable.getSelectionIndex()).getText(
                 			VehicleFields.ID.ordinal()));
-                    //Vehicle v = dbInterface.getVehicle(dataTable.getItem(
-                    //        dataTable.getSelectionIndex()).getText(
-                    //        VehicleFields.ID.ordinal()));
                     ViewVehicle viewWindow = new ViewVehicle();
                     viewWindow.open(v);
                 } else {
@@ -472,9 +466,6 @@ public class CMMS{
                     	v[i] = accessVehicle.getVehicle(dataTable.getItem(
                     			selections[i]).getText(
                     					VehicleFields.ID.ordinal()));
-                        //v[i] = dbInterface.getVehicle(dataTable.getItem(
-                         //       selections[i]).getText(
-                         //       VehicleFields.ID.ordinal()));
                     ViewVehicle viewWindow = new ViewVehicle();
                     viewWindow.open(v);
                 }
@@ -504,9 +495,6 @@ public class CMMS{
                 	Vehicle v = accessVehicle.getVehicle(dataTable.getItem(
                 			dataTable.getSelectionIndex()).getText(
                     		VehicleFields.ID.ordinal()));
-                    //Vehicle v = dbInterface.getVehicle(dataTable.getItem(
-                    //        dataTable.getSelectionIndex()).getText(
-                    //        VehicleFields.ID.ordinal()));
                     UpdateKilometers updateKms = new UpdateKilometers();
                     updateKms.open(v);
 
@@ -546,9 +534,6 @@ public class CMMS{
                 	Vehicle v = accessVehicle.getVehicle(dataTable.getItem(
                 			dataTable.getSelectionIndex()).getText(
                 					VehicleFields.ID.ordinal()));
-                    //Vehicle v = dbInterface.getVehicle(dataTable.getItem(
-                    //        dataTable.getSelectionIndex()).getText(
-                    //        VEHICLE_FIELDS.ID.ordinal()));
                 	if(v.partsListIsEmpty()) {
                 		MessageBox mb = new MessageBox(mainWindow, SWT.ICON_ERROR | SWT.OK);
                 		mb.setMessage("Error: " + v.getID() + " does not have any parts");
@@ -559,7 +544,6 @@ public class CMMS{
                 		AddServiceEvent addse = new AddServiceEvent();
                 		addse.open(v);
                 	}
-                    //        VehicleFields.ID.ordinal()));
                     // Update list with the new Vehicles
                     UpdateList();
                 } else {
@@ -599,10 +583,12 @@ public class CMMS{
     private static void UpdateList() {
         TableItem ti; // Table item for adding vehicles to the table
         accessVehicle = new AccessVehicle();
-        //ArrayList<Vehicle> list = i.getVehicles();
-        //accessVehicle.getVehicles();
-        //ArrayList<Vehicle> list = dbInterface.getVehicles();
-        ArrayList<Vehicle> list = accessVehicle.getAllVehicles();
+        
+        ArrayList<Vehicle> list;
+        if (!searching)
+        	list = accessVehicle.getAllVehicles();
+        else
+        	list = searchList; 
 
         // Stop Drawing Table, Empty Table, Rebuild Table, Start Drawing Table
         dataTable.setRedraw(false);

@@ -92,73 +92,75 @@ public class StubDB {
     	return temp;
     }
     
-    public Vehicle[] search(String field, String key) {
+    public Vehicle[] search(String field, String searchKey) {
     	ArrayList<Vehicle> found = new ArrayList<Vehicle>();
+    	
+    	String key = searchKey.toLowerCase();
     	
     	for (Vehicle v : vehicles) {
     		if (v != null) {
     			if (field.equals("ID")) {
-    				if (v.getID().startsWith(key)) {
+    				if (v.getID().toLowerCase().startsWith(key)) {
     					found.add(v);
     				}
     			}
 	        	else if (field.equals("Type")) {
-	    			if (v.getType().startsWith(key)) {
+	    			if (v.getType().toLowerCase().startsWith(key)) {
 	    				found.add(v);
 	    			}
 	        	}
 		    	else if (field.equals("Manufacturer")) {
-	    			if (v.getManufacturer().startsWith(key)) {
+	    			if (v.getManufacturer().toLowerCase().startsWith(key)) {
 	    				found.add(v);
 	    			}
 		    	}
 	        	else if (field.equals("Model")) {
-	        		if (v.getModel().startsWith(key)) {
+	        		if (v.getModel().toLowerCase().startsWith(key)) {
 	        			found.add(v);
 	        		}
 	        	}
 	        	else if (field.equals("Year")) {
-	        		if (new Integer(v.getYear()).toString().startsWith(key)) {
+	        		if (new Integer(v.getYear()).toString().toLowerCase().startsWith(key)) {
 	        			found.add(v);
 	        		}
 	        	}
 	        	else if (field.equals("Kilometers")) {
-	        		if (new Integer(v.getKmDriven()).toString().startsWith(key)) {
+	        		if (new Integer(v.getKmDriven()).toString().toLowerCase().startsWith(key)) {
 	        			found.add(v);
 	        		}
 	        	}
 	        	else if (field.equals("Last service (KM)")) {
-	        		if (new Integer(v.getKmLastServiced()).toString().startsWith(key)) {
+	        		if (new Integer(v.getKmLastServiced()).toString().toLowerCase().startsWith(key)) {
 	        			found.add(v);
 	        		}
 	        	}
 	        	else if (field.equals("Is Roadworthy")) {
-	        		if (new Boolean(v.isRoadWorthy()).toString().startsWith(key)) {
+	        		if (new Boolean(v.isRoadWorthy()).toString().toLowerCase().startsWith(key)) {
 	        			found.add(v);
 	        		}
 	        	}
 	        	else if (field.equals("License Plate")) {
-	        		if (v.getLicensePlate().startsWith(key)) {
+	        		if (v.getLicensePlate().toLowerCase().startsWith(key)) {
 	        			found.add(v);
 	        		}
 	        	}
 	        	else if (field.equals("Insurance Policy Number")) {
-	        		if (v.getInsurance().getPolicyNum().startsWith(key)) {
+	        		if (v.getInsurance().getPolicyNum().toLowerCase().startsWith(key)) {
 	        			found.add(v);
 	        		}
 	        	}
 	        	else if (field.equals("Insurance Policy Type")) {
-	        		if (v.getInsurance().getType().startsWith(key)) {
+	        		if (v.getInsurance().getType().toLowerCase().startsWith(key)) {
 	        			found.add(v);
 	        		}
 	        	}
 	        	else if (field.equals("Is Operational")) {
-	        		if (new Boolean(v.isOperational()).toString().startsWith(key)) {
+	        		if (new Boolean(v.isOperational()).toString().toLowerCase().startsWith(key)) {
 	        			found.add(v);
 	        		}
 	        	}
 	        	else if (field.equals("Fuel Economy (L/100km)")) {
-	        		if (new Double(v.getFuelEcon()).toString().startsWith(key)) {
+	        		if (new Double(v.getFuelEcon()).toString().toLowerCase().startsWith(key)) {
 	        			found.add(v);
 	        		}
 	        	}
