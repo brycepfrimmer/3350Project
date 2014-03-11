@@ -17,7 +17,7 @@ public class AccessVehicle {
 	public AccessVehicle()
 	{
 		vehicle = null;
-		dataAccess = new DataAccessObject("Vehicles");
+		dataAccess = new DataAccessObject("Vehicles", "ManFields");
 		dataAccess.open("Vehicles");
 	}
 	

@@ -8,11 +8,11 @@ public class Services
 {
 	private static DataAccessObject dataAccessService = null;
 
-	public static DataAccessObject createDataAccess(String dbName)
+	public static DataAccessObject createDataAccess(String dbName, String db2Name)
 	{
 		if (dataAccessService == null)
 		{
-			dataAccessService = new DataAccessObject(dbName);
+			dataAccessService = new DataAccessObject(dbName, db2Name);
 			try {
 				dataAccessService.create(Main.dbName);
 			} catch (SQLException e) {

@@ -26,7 +26,7 @@ public class IntegrationHSQLTest extends TestCase
 
 		System.out.println("\nStarting Integration test of HSQLDB");
 
-		Services.createDataAccess(Main.dbName);
+		Services.createDataAccess(Main.dbName, Main.db2Name);
 
 		vehicle = new Vehicle();
 
