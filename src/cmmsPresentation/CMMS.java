@@ -843,13 +843,14 @@ public class CMMS{
             dataTable.remove(0, dataTable.getItemCount() - 1);
 
         dataTable.setRedraw(true);
-
+        
         for (Vehicle v : list) {
         	if (v != null) {
 	            ti = new TableItem(dataTable, SWT.NONE);
 	            if (v.checkRequiresService()) {
 	            	ti.setBackground(SWTResourceManager.getColor(SWT.COLOR_RED));
 	            }
+	            System.out.println("Vehicles: " + v.ToStrings());
 	            ti.setText(v.ToStrings());
         	}
         }
@@ -987,8 +988,8 @@ public class CMMS{
         
         ArrayList<Vehicle> list;
         list = accessVehicle.getAllVehicles();
-//        DailyTasks tasks = new DailyTasks();
-//        tasks.open(list);
+        DailyTasks tasks = new DailyTasks();
+        tasks.open(list);
     }
 
     private static void Open() {
