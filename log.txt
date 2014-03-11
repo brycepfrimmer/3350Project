@@ -241,7 +241,7 @@ Darwin Froese
 		  
 Sunday, March 2nd, 2014
 Bryce Pfrimmer
-	3.5 Hours - worked on adding time/usage based tracking (BUG - UpdateList() called from CMMS main GUI makes the list "shake" && we shouldn't
+	3.5 Hours - worked on adding time/usage based tracking ( UpdateList() called from CMMS main GUI makes the list "shake" && we shouldn't
 	be able to add duplicate parts to the "PartsList" && kmLastServiced 2 places)
 
 Monday, March 3rd, 2014
@@ -294,7 +294,7 @@ Bryce Pfrimmer
 =======
 END OF ITERATION 2 SUMMARY:
 Developer Task List - Iteration 2
-1 - Completed Task - Implement HSQLDB - 3 days - Zac
+1 - Partially Completed Task - Implement HSQLDB - 3 days - *Zac - now absent* Darwin & Bryce took over
 2 - Completed Task - Implement integration tests and expanding unit tests - 4 days - Delroy
 3 - Completed Task - Add in time or usage based tracking - 5 days - Bryce
 4 - Completed Task - Add in search functionality - 3 days - Darwin
@@ -305,6 +305,19 @@ Developer Task List - Iteration 2
 
 BUGS
 No detected bugs.
+
+******NOTE******
+DURING ITR 2
+Due to a team member suddenly and unexpectedly leaving the group with the bulk of the HSQL code, we were forced to complete
+almost all of our HSQL integration within 24 hours of the deadline. We were unable to get HSQL completely integrated due to
+the way we were physically getting the data from the database.
+
+For this reason we created a new branch in our GitHub repository. **Itr2WorkingFunctionality**
+At this point in master we had all of our functionality working for our Iteration 3 stories, just without the HSQL DB.
+To checkout our functionality please see this branch, re-running Compile.bat and Run.bat.
+
+I've also included a subfolder in the submission called Itr2WorkingFunctionality which contains the code to do this.
+
 =======
 "Big" User Stories for Iteration 3:
 Supply list for maintenance - as maintenance personnel I want to have access to a list of supplies I need for maintenance - 4 days
