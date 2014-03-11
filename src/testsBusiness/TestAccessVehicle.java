@@ -5,7 +5,6 @@ import junit.framework.TestCase;
 import cmmsApplication.Services;
 import cmmsBusiness.AccessVehicle;
 import cmmsObjects.Vehicle;
-import cmmsObjects.VehicleInfo;
 
 public class TestAccessVehicle extends TestCase{
 

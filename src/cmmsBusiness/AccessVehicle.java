@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import cmmsObjects.Part;
 import cmmsObjects.ServiceItem;
 import cmmsObjects.Vehicle;
-import cmmsObjects.VehicleInfo;
 import cmmsPersistence.DataAccessObject;
 
 public class AccessVehicle {
@@ -21,22 +20,8 @@ public class AccessVehicle {
 		dataAccess.open("Vehicles");
 	}
 	
-	public String addVehicle(VehicleInfo info)
-	{
-		vehicle = new Vehicle();
-		vehicle.setID( info.getID() );
-		vehicle.setType( info.getType() );
-		vehicle.setManufacturer( info.getManufacturer() );
-		vehicle.setModel( info.getModel() );
-		vehicle.setRoadWorthy( info.isRoadWorthy() );
-		vehicle.setLicensePlate( info.getLicensePlate() );
-		vehicle.setOperational( info.isOperational() );
-		vehicle.setInsurance( info.getInsurance() );
-		vehicle.setYear( info.getYear() );
-		vehicle.setKmDriven( info.getKmDriven() );
-		vehicle.setKmLastServiced( info.getKmLastServiced() );
-		vehicle.setDateLastServiced( info.getDateLastServiced() );
-		
+	public String addVehicle(Vehicle vehicle)
+	{		
 		try {
 			dataAccess.addVehicle(vehicle);
 		} catch (SQLException e) {

@@ -18,7 +18,6 @@ import cmmsBusiness.AccessManFields;
 import cmmsBusiness.AccessVehicle;
 import cmmsObjects.ManFields;
 import cmmsObjects.Vehicle;
-import cmmsObjects.VehicleInfo;
 
 import java.sql.Date;
 
@@ -54,7 +53,6 @@ public class AddVehicle {
     private Label lblDateTimeWarning;
     
     private AccessVehicle accessVehicle;
-    private VehicleInfo infoObject;
     private AccessManFields accessFields;
 
     /**
@@ -216,8 +214,9 @@ public class AddVehicle {
                 String kms = textKms.getText();
                 String kmsLS = textKmsLS.getText();
                 if (good) {
-                	
                 	accessVehicle = new AccessVehicle();
+                	/*
+                	
                 	infoObject = new VehicleInfo();
                 	infoObject.setID(textVehicleID.getText());
                 	infoObject.setType(textType.getText());
@@ -239,7 +238,7 @@ public class AddVehicle {
                     infoObject.setDateLastServiced(Date.valueOf(dateTime.getYear() + "-" + (dateTime.getMonth()+1) + "-" + dateTime.getDay()));
                     
                 	accessVehicle.addVehicle(infoObject);
-               /*
+               */
                     Vehicle newVehicle = new Vehicle();
                     newVehicle.setID(textVehicleID.getText());
                     newVehicle.setType(textType.getText()); 
@@ -261,7 +260,7 @@ public class AddVehicle {
                     newVehicle.setDateLastServiced(Date.valueOf(dateTime.getYear() + "-" + (dateTime.getMonth()+1) + "-" + dateTime.getDay()));
                     // Interface temp = new Interface();
                     // temp.addVehicle(newVehicle);
-                    dbInterface.addVehicle(newVehicle);*/
+                    accessVehicle.addVehicle(newVehicle);
                     shell.close();
                 } else {
                     // display message explaining to user what is wrong with

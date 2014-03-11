@@ -1,6 +1,5 @@
 package cmmsPresentation;
 
-
 import java.sql.Date;
 
 import org.eclipse.swt.widgets.DateTime;
@@ -18,7 +17,6 @@ import org.eclipse.swt.events.KeyEvent;
 
 import cmmsBusiness.AccessVehicle;
 import cmmsObjects.Vehicle;
-import cmmsObjects.VehicleInfo;
 
 
 public class EditVehicle {
@@ -52,7 +50,6 @@ public class EditVehicle {
     private Vehicle currVehicle;
     private Button btnEditPartsList;
     
-    private VehicleInfo info;
     private AccessVehicle accessVehicle;
 
     /**
@@ -312,24 +309,7 @@ public class EditVehicle {
     }
 
     private void SetFields() {
-    	
-//    	info = new VehicleInfo();
-//    	accessVehicle = new AccessVehicle();
-//    	info.setID(textVehicleID.getText());
-//        info.setType(textType.getText());
-//        info.setManufacturer(textManufacturer.getText());
-//        info.setModel(textModel.getText());
-//        info.setYear(new Integer(textYear.getText()));
-//        info.setRoadWorthy(btnRoadworthy.getSelection());
-//        info.setLicensePlate(textLPN.getText());
-//        info.setOperational(btnOperational.getSelection());
-//        info.setInsurance(textInsPolNum.getText(), textInsType.getText());
-//        info.setKmDriven(new Integer(textKms.getText()));
-//        info.setKmLastServiced(new Integer(textKmsLS.getText()));
-//        info.setDateLastServiced(Date.valueOf(dateTime.getYear() + "-" + (dateTime.getMonth()+1) + "-" + dateTime.getDay()));
-//        accessVehicle.updateVehicle( currVehicle.getID(), info );
-//        currVehicle = accessVehicle.getVehicle( textVehicleID.getText());
-    	
+    	accessVehicle = new AccessVehicle();    	
         currVehicle.setID(textVehicleID.getText());
         currVehicle.setType(textType.getText());
         currVehicle.setManufacturer(textManufacturer.getText());
@@ -341,6 +321,7 @@ public class EditVehicle {
         currVehicle.setInsurance(textInsPolNum.getText(), textInsType.getText());
         currVehicle.setKmDriven(new Integer(textKms.getText()));
         currVehicle.setKmLastServiced(new Integer(textKmsLS.getText()));
+        accessVehicle.updateVehicle( currVehicle );   
     }
 
     private boolean checkFields() {
