@@ -23,6 +23,18 @@ public class ManFields {
 		this.year = true;
 	}
 	
+	public ManFields(boolean a, boolean b, boolean c, boolean d, boolean e, boolean f, boolean g, boolean h, boolean i) {
+	    this.id = a;
+        this.type = b;
+        this.manufacturer = c;
+        this.model = d;
+        this.kmsDriven = e;
+        this.kmsLastServiced = f;
+        this.dateLastServiced = g;
+        this.insInfo = h;
+        this.year = i;
+	}
+	
 	public boolean getId() {
 		return id;
 	}

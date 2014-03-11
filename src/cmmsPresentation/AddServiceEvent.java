@@ -74,8 +74,7 @@ public class AddServiceEvent {
         partsComboBox = new Combo(shell, SWT.NONE);
         partsComboBox.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
         new Label(shell, SWT.NONE);
-//        partsList = accessVehicle.getPartsList( v.getID() );
-        //partsList = v.getPartsList();
+        partsList = accessVehicle.getPartsList( v.getID() );
         for (int i = 0; i < partsList.size(); i++) {
             partsComboBox.add(partsList.get(i).getPartDesc());
         }

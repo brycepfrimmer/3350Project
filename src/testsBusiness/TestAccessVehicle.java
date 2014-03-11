@@ -36,7 +36,7 @@ private static String db2Name = cmmsApplication.Main.db2Name;
 		assertNotNull(vehicle);
 		assertTrue( "3692481".equals(vehicle.getID() ) );
 		
-		/*
+		/* Test to change Vehicle ID TODO: for Itr 3
 		VehicleInfo info = new VehicleInfo();
 		info.setID("ABC");
 		String oldID = vehicle.getID();

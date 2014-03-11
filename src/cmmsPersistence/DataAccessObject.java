@@ -298,11 +298,11 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
 		add = conn.createStatement();
 		
 		String addCommand = "INSERT INTO Vehicles("
-				+ columns[0] + columns[1] + columns[2]
-				+ columns[3] + columns[4] + columns[5]
-				+ columns[6] + columns[7] + columns[8]
-				+ columns[9] + columns[10] + columns[11]
-				+ columns[12] + columns[13] + ") VALUES('"
+				+ columns[0] + " " + columns[1] + " " + columns[2]
+				+ " " + columns[3] + " " + columns[4] + " " + columns[5]
+				+ " " + columns[6] + " " + columns[7] + " " + columns[8]
+				+ " " + columns[9] + " " + columns[10] + " " + columns[11]
+				+ " " + columns[12] + " " + columns[13] + ") VALUES('"
 				+ vehicle.getID() + "', '"
 				+ vehicle.getType() + "', '" + vehicle.getManufacturer() + "', '"
 		        + vehicle.getModel() + "', '" + new Integer(vehicle.getYear()).toString() + "', '"
@@ -419,7 +419,7 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
 	
     public ManFields getManFields() throws SQLException
     {
-        ManFields[] mand = null;
+        ManFields mand = null;
         
         Statement query = null;
         ResultSet searchResult = null;
@@ -428,11 +428,15 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
         searchResult = query.executeQuery("SELECT * FROM ManFields");
         
         Object[] objects = ProcessSearch(searchResult);
-        mand = new ManFields[objects.length];
-
+        mand = new ManFields((boolean) objects[1], (boolean) objects[2],
+                (boolean) objects[3], (boolean) objects[4],
+                (boolean) objects[5], (boolean) objects[6],
+                (boolean) objects[7], (boolean) objects[8],
+                (boolean) objects[9]);
+        
         query.close();
 
-        return mand[0];
+        return mand;
     }
 	
 }//End DataAccessObject Class
