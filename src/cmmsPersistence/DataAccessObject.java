@@ -286,11 +286,16 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
 		Object[] objects = ProcessSearch(searchResult);
 		vehicles = new Vehicle[objects.length];
 		
-		for (int i = 0, j = 0; i < objects.length / (columns.length) ; i++, j+=columns.length+1) {
+		System.out.println(objects.length);
+		
+		for (int i = 0, j = 0; i < objects.length / (columns.length) && objects[0] != null; i++, j+=columns.length+1) {
+			DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
 			Date date = null;
+			
 			try {
-				date = Date.valueOf(objects[j + 7].toString());
-			} catch (Exception e) {
+				date = (Date)df.parse(objects[j + 7].toString());
+			} catch (java.text.ParseException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
