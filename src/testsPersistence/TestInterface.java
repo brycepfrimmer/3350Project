@@ -1,5 +1,7 @@
 package testsPersistence;
 
+import java.sql.Date;
+
 import junit.framework.TestCase;
 
 import org.junit.Before;
@@ -17,6 +19,7 @@ public class TestInterface extends TestCase {
 		testInterface = new Interface();
 		vehicle = new Vehicle();
 		vehicle.setID("444444444");
+		vehicle.setDateLastServiced(Date.valueOf("2014-01-23"));
 	}
 
 	@Test
@@ -48,19 +51,18 @@ public class TestInterface extends TestCase {
 		testInterface.removeVehicle( vehicle );
 	}
 
-//TODO: Add in manFields to DB
-//	@Test
-//	public void testGetManFields() {
-//		assertTrue( testInterface.getManFields() != null );
-//	}
-
 	@Test
-	public void testUpdateKm() {
-		testInterface.addVehicle( vehicle );
-		double result = testInterface.updateKm( vehicle.getID(), 100000, 10 );
-		assertTrue( result >= 0 );
-		testInterface.removeVehicle( vehicle );
+	public void testGetManFields() {
+		assertTrue( testInterface.getManFields() != null );
 	}
+
+//	@Test
+//	public void testUpdateKm() {
+//		testInterface.addVehicle( vehicle );
+//		double result = testInterface.updateKm( vehicle.getID(), 100000, 10 );
+//		assertTrue( result >= 0 );
+//		testInterface.removeVehicle( vehicle );
+//	}
 
 	@Test
 	public void testGetVehicles() {

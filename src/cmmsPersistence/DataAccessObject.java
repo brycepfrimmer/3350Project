@@ -287,13 +287,10 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
 		vehicles = new Vehicle[objects.length];
 		
 		for (int i = 0, j = 0; i < objects.length / (columns.length) ; i++, j+=columns.length+1) {
-			DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
 			Date date = null;
-			
 			try {
-				date = (Date)df.parse(objects[j + 7].toString());
-			} catch (java.text.ParseException e) {
-				// TODO Auto-generated catch block
+				date = Date.valueOf(objects[j + 7].toString());
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			
@@ -339,7 +336,7 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
 		        + vehicle.getModel() + "', '" + new Integer(vehicle.getYear()).toString() + "', '"
 		        + new Integer(vehicle.getKmDriven()).toString() + "', '" 
 		        + new Integer(vehicle.getKmLastServiced()).toString() + "', '"
-		        + "temp', '" //vehicle.getDateLastServiced().toString() + "', '"
+		        + vehicle.getDateLastServiced().toString() + "', '"
 		        + new Boolean(vehicle.isRoadWorthy()).toString() + "', '"
 		        + vehicle.getLicensePlate() + "', '" + vehicle.getInsurance().getPolicyNum() + "', '" 
 		        + vehicle.getInsurance().getType() + "', '" 

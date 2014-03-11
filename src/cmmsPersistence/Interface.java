@@ -76,14 +76,23 @@ public class Interface {
     	return ID;
     }
     
-//    public ManFields getManFields(){
-//    	return database.getManFields();
-//    }
-//    
-//    public void updateManFields( ManFields fields )
-//    {
-//    	database.setManFields( fields );
-//    }
+    public ManFields getManFields(){
+    	try {
+            return database.getManFields();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    public void updateManFields( ManFields fields )
+    {
+    	try {
+            database.updateManFields( fields );
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public double updateKm(String id, int km, double fuel) {
         double fuelEcon = 0.0;
