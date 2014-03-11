@@ -16,6 +16,31 @@ public final class Part {
         return true;
     }
     
+    public boolean removeServiceItem(String desc) {
+    	boolean retVal = false;
+    	desc = desc.replaceAll("\\s", "");
+    	for(int i = 0; i < serviceIList.size(); i++) {
+    		if(desc.equals(serviceIList.get(i).getDescription().replaceAll("\\s", ""))) {
+    			serviceIList.remove(i);
+    			retVal = true;
+    			i = serviceIList.size();
+    		}
+    	}
+    	return retVal;
+    }
+    
+    public String getTodaysTasks(int kmDriven) {
+    	String tasks = "";
+    	
+    	for(int i = 0; i < serviceIList.size(); i++) {
+    		if(checkNeedsService(kmDriven)) {
+    			tasks = tasks.concat("\n\t" + serviceIList.get(i).getDescription() + " " + partDesc);
+    		}
+    	}
+    		
+    	return tasks;
+    }
+    
     public String getPartDesc() {
         return partDesc;
     }
@@ -25,11 +50,11 @@ public final class Part {
         String returnString = "\n\t\t\t" + partDesc;
         if (serviceIList != null && !serviceIList.isEmpty()) {
             for (int i = 0; i < serviceIList.size(); i++) {
-                returnString = returnString + "\n\t\t\t - " + serviceIList.get(i).getDescription();
+                returnString = returnString + "\n\t\t\t | " + serviceIList.get(i).getDescription();
                 if (serviceIList.get(i).getServiceTime() != 0) {
                     returnString = returnString + " every " + serviceIList.get(i).getServiceTime() + " days";
                 } else if (serviceIList.get(i).getServiceKm() != 0) {
-                    returnString = returnString + " every " + serviceIList.get(i).getServiceTime() + " kilometers";
+                    returnString = returnString + " every " + serviceIList.get(i).getServiceKm() + " kilometers";
                 } else {
                     System.err.println("IMPROPERLY ASSIGNED ServiceItem.");
                 }

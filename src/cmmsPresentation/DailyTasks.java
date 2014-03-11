@@ -78,10 +78,15 @@ public class DailyTasks {
         	hdr = "";
         	count++;
         }
-        else {
+        else if(vehicleSel == 0){
             hdr = info.getID() + ": "
                     + info.getManufacturer() + " "
                     + info.getModel();
+        }
+        else {
+        	 hdr = "\n" + info.getID() + ": "
+                     + info.getManufacturer() + " "
+                     + info.getModel();
         }
         
         if(count == vehicleList.size()) {
@@ -106,6 +111,7 @@ public class DailyTasks {
         mainLayout = new GridLayout();
 
         tasksWindow = new Shell();
+        tasksWindow.setText("Today's Tasks");
         tasksWindow.setLayout(mainLayout);
         tasksWindow.setMinimumSize(MIN_WINDOW_WIDTH, MIN_WINDOW_HEIGHT);
         tasksWindow.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
