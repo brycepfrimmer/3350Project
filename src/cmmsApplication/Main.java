@@ -4,7 +4,8 @@ import cmmsPresentation.CMMS;
 
 public class Main
 {
-	public static final String dbName="Stub";
+	public static final String dbName="Vehicles";
+	public static final String dbName2="ManFields";
 
 	public static void main(String[] args)
 	{
@@ -16,7 +17,7 @@ public class Main
 
 	public static void startUp()
 	{
-		Services.createDataAccess(dbName);
+		Services.createDataAccess(dbName, dbName2);
 	}
 
 	public static void shutDown()

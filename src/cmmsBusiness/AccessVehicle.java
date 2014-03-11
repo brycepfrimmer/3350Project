@@ -1,5 +1,6 @@
 package cmmsBusiness;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import cmmsObjects.Part;
@@ -16,7 +17,8 @@ public class AccessVehicle {
 	public AccessVehicle()
 	{
 		vehicle = null;
-		dataAccess = new DataAccessObject();
+		dataAccess = new DataAccessObject("Vehicles");
+		dataAccess.open("Vehicles");
 	}
 	
 	public String addVehicle(VehicleInfo info)
@@ -34,77 +36,161 @@ public class AccessVehicle {
 		vehicle.setKmDriven( info.getKmDriven() );
 		vehicle.setKmLastServiced( info.getKmLastServiced() );
 		vehicle.setDateLastServiced( info.getDateLastServiced() );
-		dataAccess.addVehicle(vehicle);
+		
+		try {
+			dataAccess.addVehicle(vehicle);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		return null;
 	}
 	
 	public Vehicle getVehicle(String ID )
-	{return dataAccess.getVehicle(ID);}
+	{
+		Vehicle v;
+		
+		try {
+			v = dataAccess.getVehicles("ID", ID)[0];
+		} catch (SQLException e) {
+			e.printStackTrace();
+			v = null;
+		}
+		
+		return v;
+	}
 	
 	public String addPart( String ID, String part )
 	{
-		vehicle = dataAccess.getVehicle( ID );
-		vehicle.getPartsList().add(new Part(part));
-		dataAccess.updateVehicle(vehicle);
+		try {
+			vehicle = dataAccess.getVehicles("ID",ID)[0];
+			vehicle.getPartsList().add(new Part(part));
+			dataAccess.updateVehicle(vehicle);
+		}
+		catch (SQLException e) {
+			
+		}
+		
 		return null;
 	}
 	
-	public String updateVehicle( String ID, VehicleInfo info )
+	public void updateVehicle( Vehicle v )
 	{
-		dataAccess.removeVehicle(ID);
-		addVehicle(info);
-		return null;
+		try {
+			dataAccess.updateVehicle(v);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
-	public String searchByID( String ID )
+
+	public Vehicle searchByID( String ID )
 	{
-		return dataAccess.searchByID( ID );
+	    Vehicle[] vehicles = null;
+	    try {
+            vehicles = dataAccess.getVehicles("ID", ID);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+	    
+	    if (vehicles != null && vehicles.length >= 1) {
+	        return vehicles[0];
+	    } else {
+	        return null;
+	    }
 	}
-	
+
 	public ArrayList<Vehicle> getAllVehicles()
-	{return dataAccess.getAllVehicles();}
+	{
+		ArrayList<Vehicle> list = null;
+		try {
+			Vehicle[] vehicles = dataAccess.getAllVehicles();
+			
+			list = new ArrayList<Vehicle>();
+			for (Vehicle v : vehicles)
+				list.add(v);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 	
 	public Vehicle[] getVehicles(String field, String key)
-	{return dataAccess.getVehicles(field, key);}
-	
-	public String removeVehicle(String id)
 	{
-		dataAccess.removeVehicle(id);
+		Vehicle[] vehicles;
+		try {
+			vehicles = dataAccess.getVehicles(field, key);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			vehicles = null;
+		}
+		
+		return vehicles;
+	}
+	
+	public String removeVehicle(Vehicle v)
+	{
+		try {
+			dataAccess.removeVehicle(v);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
 	public String setPartsList(String id, ArrayList<Part> list) {
-		vehicle = dataAccess.getVehicle( id );
-		vehicle.setPartsList( list );
-		dataAccess.updateVehicle(vehicle);
+		try {
+			vehicle = dataAccess.getVehicles("ID", id)[0];
+			vehicle.setPartsList( list );
+			dataAccess.updateVehicle(vehicle);
+		}
+		catch (SQLException e) {
+			
+		}
 		return null;
 	}
 
 	public String updateKm(String ID, Integer km, Double fuel)
 	{
-		vehicle = dataAccess.getVehicle(ID);
-		vehicle.updateKm(km, fuel);
-		dataAccess.updateVehicle(vehicle);
+		try {
+			vehicle = dataAccess.getVehicles("ID", ID)[0];
+			vehicle.updateKm(km, fuel);
+			dataAccess.updateVehicle(vehicle);
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		return null;
 	}
-	
+
 	public ArrayList<Part> getPartsList( String ID )
-	{return dataAccess.getVehicle(ID).getPartsList();}
+	{
+	    Vehicle[] vehicles = null;
+		try {
+            vehicles = dataAccess.getVehicles("ID", ID);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+		
+		if (vehicles != null && vehicles.length >= 1) {
+		    return vehicles[0].getPartsList();
+		} else {
+		    return null;
+		}
+	}
 	
 	public void removePart(Vehicle vehicle, String part)
 	{
 		vehicle.removePart(part);
-		dataAccess.updateVehicle(vehicle);
+		updateVehicle(vehicle);
 	}
 	
 	public String addServiceEvent( Vehicle vehicle, ServiceItem i, Part p )
 	{
 		vehicle.addServiceEvent(i, p);
-		dataAccess.updateVehicle( vehicle );
+		updateVehicle(vehicle);
 		return null;
-	}
-
-	public Vehicle getVehicle() {
-		return dataAccess.getVehicle();
 	}
 }//End AccessVehicle Class

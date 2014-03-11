@@ -17,6 +17,7 @@ import org.eclipse.swt.widgets.DateTime;
 import cmmsBusiness.AccessManFields;
 import cmmsBusiness.AccessVehicle;
 import cmmsObjects.ManFields;
+import cmmsObjects.Vehicle;
 import cmmsObjects.VehicleInfo;
 
 import java.sql.Date;
@@ -77,7 +78,6 @@ public class AddVehicle {
         Display display = Display.getDefault();
         accessFields = new AccessManFields();
         manFields = accessFields.getManFields();
-        //manFields = dbInterface.getManFields();
         createContents();
         shell.open();
         shell.layout();
@@ -386,8 +386,9 @@ public class AddVehicle {
         	lblVehicleIDWarning.setText("Vehicle ID is a required field");
         } else if (!isValid) {
             lblVehicleIDWarning.setText("Vehicle ID can only include numbers and letters and no spaces");
-        //} else if(input.equals(dbInterface.searchByID(input))) {
-        } else if( input.equals(accessVehicle.searchByID(input))) {
+        }
+        Vehicle tempp = accessVehicle.getVehicle(input);
+        if( tempp != null && input.equals(tempp.getID())) {
             lblVehicleIDWarning.setText("This vehicle already exists");
             isValid = false;
         } else {
@@ -408,12 +409,12 @@ public class AddVehicle {
         else{
         	isValid = true;
         }
-        if(mand && input == ""){
+        if(mand && input == "") {
         	lblTypeWarning.setText("Vehicle type is a required field");
         }
         else if (!isValid) {
             lblTypeWarning.setText("Type can only include numbers and letters");
-        } 
+        }
         else {
             lblTypeWarning.setText("");
         }
