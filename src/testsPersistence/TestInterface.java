@@ -16,6 +16,7 @@ public class TestInterface extends TestCase {
 	public void setUp() throws Exception {
 		testInterface = new Interface();
 		vehicle = new Vehicle();
+		vehicle.setID("444444444");
 	}
 
 	@Test

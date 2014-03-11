@@ -26,15 +26,13 @@ public class IntegrationHSQLTest extends TestCase
 
 		System.out.println("\nStarting Integration test of HSQLDB");
 
-		Services.createDataAccess(Main.dbName, Main.db2Name);
+		Services.createDataAccess(Main.dbName);
 
 		vehicle = new Vehicle();
 
 		access = new AccessVehicle();
 
-		//vehicle = access.getSequential();
 		assertNotNull(vehicle);
-		assertTrue("abc123".equals(vehicle.getID()));
 
 		//vehicle = access.getSequential();
 		assertNotNull(vehicle);

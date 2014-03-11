@@ -10,7 +10,7 @@ public class AccessManFields {
 	private DataAccessObject accessObject;
 	
 	public AccessManFields() {
-	    accessObject = new DataAccessObject("Vehicles", "ManFields");
+	    accessObject = new DataAccessObject("Vehicles");
 	    accessObject.open2("ManFields");
 	    try {
             accessObject.updateManFields(new ManFields());

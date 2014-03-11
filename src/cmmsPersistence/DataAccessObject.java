@@ -48,9 +48,8 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
 	    "year"
 	};
 	
-	public DataAccessObject(String dbName, String db2Name) {
+	public DataAccessObject(String dbName) {
 		this.dbName = dbName;
-		this.db2Name = db2Name;
 	}
 	
 	public void create(String dbName) throws SQLException
