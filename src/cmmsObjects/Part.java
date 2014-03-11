@@ -16,6 +16,19 @@ public final class Part {
         return true;
     }
     
+    public boolean removeServiceItem(String desc) {
+    	boolean retVal = false;
+    	desc = desc.replaceAll("\\s", "");
+    	for(int i = 0; i < serviceIList.size(); i++) {
+    		if(desc.equals(serviceIList.get(i).getDescription().replaceAll("\\s", ""))) {
+    			serviceIList.remove(i);
+    			retVal = true;
+    			i = serviceIList.size();
+    		}
+    	}
+    	return retVal;
+    }
+    
     public String getTodaysTasks(int kmDriven) {
     	String tasks = "";
     	
