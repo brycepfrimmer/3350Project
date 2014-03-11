@@ -107,11 +107,8 @@ public class AccessVehicle {
 			Vehicle[] vehicles = dataAccess.getAllVehicles();
 			
 			list = new ArrayList<Vehicle>();
-			for (Vehicle v : vehicles) {
+			for (Vehicle v : vehicles)
 				list.add(v);
-				if (v == null)
-					System.out.println("ERRRRRR");
-			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
