@@ -14,7 +14,7 @@ public class Interface {
 
     public Interface()
     {
-        database = Services.getDataAccess(Main.dbName);
+        database = Services.getDataAccess(Main.dbName, Main.dbName2);
     }
 
     public boolean addVehicle(Vehicle vehicle) {

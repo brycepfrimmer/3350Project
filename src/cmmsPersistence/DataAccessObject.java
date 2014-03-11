@@ -110,7 +110,6 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
 		try {
 			System.out.println("Creating Vehicles Table");
 			int i = create.executeUpdate(createTable);
-			System.out.println("Creating ManFields Table");
 			
 			if (i == -1) {
 				System.out.println("Error creating Vehicles Database.");
