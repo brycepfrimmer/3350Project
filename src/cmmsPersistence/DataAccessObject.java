@@ -1,5 +1,6 @@
 package cmmsPersistence;
 
+import java.sql.Date;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -7,9 +8,12 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.DriverManager;
 import java.sql.SQLWarning;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import cmmsBusiness.DBInterface;
+import cmmsBusiness.VehicleFields;
 import cmmsObjects.ManFields;
 import cmmsObjects.Vehicle;
 
@@ -249,8 +253,22 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
 		Object[] objects = ProcessSearch(searchResult);
 		v = new Vehicle[objects.length];
 		
-		for (int i = 0; i < objects.length; i++) {
-			v[i] = (Vehicle)objects[i];
+		for (int i = 0, j = 0; i < objects.length / (columns.length + 1) ; i++, j+=columns.length+1) {
+			DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+			Date date = null;
+			
+			try {
+				date = (Date)df.parse(objects[j + 7].toString());
+			} catch (java.text.ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			v[i] = new Vehicle((String)objects[j + 0], (String)objects[j + 1], (String)objects[j + 2],
+									  (String)objects[j + 3], new Integer(objects[j + 4].toString()), new Boolean(objects[j + 8].toString()),
+									  (String)objects[j + 9], new Boolean(objects[j + 12].toString()), (String)objects[j + 10],
+									  (String)objects[j + 11], new Integer(objects[j + 5].toString()), new Integer(objects[j + 6].toString()),
+									  date);
 		}
 		
 		return v;
@@ -269,8 +287,22 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
 		Object[] objects = ProcessSearch(searchResult);
 		vehicles = new Vehicle[objects.length];
 		
-		for (int i = 0; i < objects.length; i++) {
-			vehicles[i] = (Vehicle)objects[i];
+		for (int i = 0, j = 0; i < objects.length / (columns.length) ; i++, j+=columns.length+1) {
+			DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+			Date date = null;
+			
+			try {
+				date = (Date)df.parse(objects[j + 7].toString());
+			} catch (java.text.ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			vehicles[i] = new Vehicle((String)objects[j + 0], (String)objects[j + 1], (String)objects[j + 2],
+									  (String)objects[j + 3], new Integer(objects[j + 4].toString()), new Boolean(objects[j + 8].toString()),
+									  (String)objects[j + 9], new Boolean(objects[j + 12].toString()), (String)objects[j + 10],
+									  (String)objects[j + 11], new Integer(objects[j + 5].toString()), new Integer(objects[j + 6].toString()),
+									  date);
 		}
 		
 		query.close();
@@ -298,17 +330,17 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
 		add = conn.createStatement();
 		
 		String addCommand = "INSERT INTO Vehicles("
-				+ columns[0] + " " + columns[1] + " " + columns[2]
-				+ " " + columns[3] + " " + columns[4] + " " + columns[5]
-				+ " " + columns[6] + " " + columns[7] + " " + columns[8]
-				+ " " + columns[9] + " " + columns[10] + " " + columns[11]
-				+ " " + columns[12] + " " + columns[13] + ") VALUES('"
+				+ columns[0] + ", " + columns[1] + ", " + columns[2]
+				+ ", " + columns[3] + ", " + columns[4] + ", " + columns[5]
+				+ ", " + columns[6] + ", " + columns[7] + ", " + columns[8]
+				+ ", " + columns[9] + ", " + columns[10] + ", " + columns[11]
+				+ ", " + columns[12] + ", " + columns[13] + ") VALUES('"
 				+ vehicle.getID() + "', '"
 				+ vehicle.getType() + "', '" + vehicle.getManufacturer() + "', '"
 		        + vehicle.getModel() + "', '" + new Integer(vehicle.getYear()).toString() + "', '"
 		        + new Integer(vehicle.getKmDriven()).toString() + "', '" 
 		        + new Integer(vehicle.getKmLastServiced()).toString() + "', '"
-		        + vehicle.getDateLastServiced().toString() + "', '"
+		        + "temp', '" //vehicle.getDateLastServiced().toString() + "', '"
 		        + new Boolean(vehicle.isRoadWorthy()).toString() + "', '"
 		        + vehicle.getLicensePlate() + "', '" + vehicle.getInsurance().getPolicyNum() + "', '" 
 		        + vehicle.getInsurance().getType() + "', '" 
@@ -428,12 +460,12 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
         searchResult = query.executeQuery("SELECT * FROM ManFields");
         
         Object[] objects = ProcessSearch(searchResult);
-        mand = new ManFields((boolean) objects[1], (boolean) objects[2],
-                (boolean) objects[3], (boolean) objects[4],
-                (boolean) objects[5], (boolean) objects[6],
-                (boolean) objects[7], (boolean) objects[8],
-                (boolean) objects[9]);
-        
+        mand = new ManFields(new Boolean(objects[1].toString()), new Boolean(objects[2].toString()),
+        		new Boolean(objects[3].toString()), new Boolean(objects[4].toString()),
+        		new Boolean(objects[5].toString()), new Boolean(objects[6].toString()),
+        		new Boolean(objects[7].toString()), new Boolean(objects[8].toString()),
+        		new Boolean(objects[9].toString()));
+            
         query.close();
 
         return mand;
