@@ -15,6 +15,8 @@ public class Services
 			dataAccessService = new DataAccessObject(dbName, db2Name);
 			try {
 				dataAccessService.create(Main.dbName);
+				System.out.println("Creating table: " + db2Name);
+				dataAccessService.create(Main.db2Name);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

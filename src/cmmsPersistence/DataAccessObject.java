@@ -17,6 +17,7 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
 	String dbName;
 	String db2Name;
 	private Connection conn;
+	private Connection conn2;
 	
 	private static String[] columns = {
     	"ID",
@@ -54,19 +55,17 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
 	
 	public void create(String dbName) throws SQLException
 	{		
-		// Setup for HSQLDB
-		try {
-			Class.forName("org.hsqldb.jdbcDriver");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			return;
+		if (dbName.equals("Vehicles"))
+			CreateVehiclesTable();
+		else if (dbName.equals("ManFields"))
+			CreateManFieldsTable();
+		else {
+			System.out.println("Error creating tables.");
+			System.exit(-1);
 		}
-		String url = "jdbc:hsqldb:file:Vehicles"; // stored on disk mode
-		conn = DriverManager.getConnection(url, "SA", "");
-		
-		Statement create = null;
-		create = conn.createStatement();
-		
+	}
+	
+	private void CreateVehiclesTable() {
 		String createTable = "CREATE TABLE Vehicles ( "
 				+ columns[0] + " VARCHAR(1024), "
 				+ columns[1] + " VARCHAR(1024), "
@@ -84,8 +83,45 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
 				+ columns[13] + " VARCHAR(1024) "
 				+ " )";
 		
+		// Setup for HSQLDB
+		try {
+			Class.forName("org.hsqldb.jdbcDriver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			return;
+		}
+		String url = "jdbc:hsqldb:file:databases/Vehicles/Vehicles;ifexists=false"; // stored on disk mode
+		try {
+			conn = DriverManager.getConnection(url, "SA", "");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		Statement create = null;
+		try {
+			create = conn.createStatement();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			System.out.println("Creating Vehicles Table");
+			int i = create.executeUpdate(createTable);
+			System.out.println("Creating ManFields Table");
+			
+			if (i == -1) {
+				System.out.println("Error creating Vehicles Database.");
+				System.exit(-1);
+			}
+		}
+		catch (SQLException e) {
+			System.out.println("** ERROR: " + e);
+		}
+	}
+	
+	private void CreateManFieldsTable() {
 		String createTable2 = "CREATE TABLE ManFields ( "
-		        + "TYPE VARCHAR(1024), "
+		        + "TYPE_KEY VARCHAR(1024), "
 		        + columns2[0] + " BOOLEAN DEFAULT FALSE NOT NULL, "
 		        + columns2[1] + " BOOLEAN DEFAULT FALSE NOT NULL, "
 		        + columns2[2] + " BOOLEAN DEFAULT FALSE NOT NULL, "
@@ -94,24 +130,42 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
 		        + columns2[5] + " BOOLEAN DEFAULT FALSE NOT NULL, "
 		        + columns2[6] + " BOOLEAN DEFAULT FALSE NOT NULL, "
 		        + columns2[7] + " BOOLEAN DEFAULT FALSE NOT NULL, "
-		        + columns2[8] + " BOOLEAN DEFAULT FALSE NOT NULL, "
+		        + columns2[8] + " BOOLEAN DEFAULT FALSE NOT NULL "
 		        + " )";
 		
+		// Setup for HSQLDB
 		try {
-			int i = create.executeUpdate(createTable);
+			Class.forName("org.hsqldb.jdbcDriver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			return;
+		}
+		String url = "jdbc:hsqldb:file:databases/ManFields/ManFields;ifexists=false"; // stored on disk mode
+		try {
+			conn2 = DriverManager.getConnection(url, "SA", "");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		Statement create = null;
+		try {
+			create = conn2.createStatement();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			System.out.println("Creating ManFields Table");
 			int j = create.executeUpdate(createTable2);
+			System.out.println("Finished Creating Tables");
 			
-			if (i == -1) {
-				System.out.println("Error creating Vehicles Database.");
-				System.exit(-1);
-			}
 			if (j == -1) {
 			    System.out.println("Error create ManFields Database.");
 			    System.exit(-1);
 			}
 		}
 		catch (SQLException e) {
-			
+			System.out.println("** ERROR: " + e);
 		}
 	}
 	
@@ -122,7 +176,7 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
 		{
 			// Setup for HSQLDB
 			Class.forName("org.hsqldb.jdbcDriver").newInstance();
-			url = "jdbc:hsqldb:Vehicles;ifexists=true"; // stored on disk mode
+			url = "jdbc:hsqldb:file:databases/" + dbName + "/" + dbName + ";ifexists=true"; // stored on disk mode
 			conn = DriverManager.getConnection(url, "SA", "");
 		}
 		catch (Exception e) {
@@ -130,6 +184,20 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
 		}
 	}
 
+	public void open2(String dbName) {
+		String url;
+		try
+		{
+			// Setup for HSQLDB
+			Class.forName("org.hsqldb.jdbcDriver").newInstance();
+			url = "jdbc:hsqldb:file:databases/" + dbName + "/" + dbName + ";ifexists=true"; // stored on disk mode
+			conn2 = DriverManager.getConnection(url, "SA", "");
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void close()
 	{
 		try
@@ -137,6 +205,10 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
 			Statement shutdown = conn.createStatement();
 			shutdown.execute("SHUTDOWN");
 			conn.close();
+			
+			Statement shutdown2 = conn2.createStatement();
+			shutdown2.execute("SHUTDOWN");
+			conn2.close();
 		}
 		catch (Exception e)
 		{
@@ -272,7 +344,7 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
 		        + columns[10] + "='" + vehicle.getInsurance().getPolicyNum() + "', " 
 		        + columns[11] + "='" + vehicle.getInsurance().getType() + "', " 
 		        + columns[12] + "='" + new Boolean(vehicle.isOperational()).toString() + "', "
-		        + columns[13] + "+'" + new Double(vehicle.getFuelEcon()).toString()
+		        + columns[13] + "='" + new Double(vehicle.getFuelEcon()).toString()
 				+ "' WHERE " + columns[0] + "='" + vehicle.getID() + "'";
 		
 		int i = update.executeUpdate(updateCommand);
@@ -302,13 +374,13 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
 	private void addManFields() throws SQLException
 	{
         Statement add = null;
-        add = conn.createStatement();
+        add = conn2.createStatement();
         
         String addCommand = "INSERT INTO ManFields("
-                + "TYPE"
-                + columns[0] + columns[1] + columns[2]
-                + columns[3] + columns[4] + columns[5]
-                + columns[6] + columns[7] + columns[8]
+                + "TYPE_KEY, "
+                + columns2[0] + ", " + columns2[1] + ", " + columns2[2] + ", "
+                + columns2[3] + ", " + columns2[4] + ", " + columns2[5] + ", "
+                + columns2[6] + ", " + columns2[7] + ", " + columns2[8]
                 + ") VALUES('MAN', "
                 + false + ", " + false + ", " + false + ", " + false + ", " + false + ", " + false + ", "
                 + false + ", " + false + ", " + false
@@ -324,19 +396,19 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
 	{
 	    addManFields();
         Statement update = null;
-        update = conn.createStatement();
+        update = conn2.createStatement();
         
         String updateCommand = "UPDATE ManFields SET "
-                + columns[0] + "=" + m.getId() + ", "
-                + columns[1] + "=" + m.getType() + ", "
-                + columns[2] + "=" + m.getManufacturer() + ", "
-                + columns[3] + "=" + m.getModel() + ", "
-                + columns[4] + "=" + m.getKmsDriven() + ", " 
-                + columns[5] + "=" + m.getKmsLastServiced() + ", "
-                + columns[6] + "=" + m.getDateLastServiced() + ", "
-                + columns[7] + "=" + m.getInsInfo() + ", "
-                + columns[8] + "=" + m.getYear() + ", "
-                + " WHERE " + "TYPE" + "='MAN'";
+                + columns2[0] + "=" + m.getId() + ", "
+                + columns2[1] + "=" + m.getType() + ", "
+                + columns2[2] + "=" + m.getManufacturer() + ", "
+                + columns2[3] + "=" + m.getModel() + ", "
+                + columns2[4] + "=" + m.getKmsDriven() + ", " 
+                + columns2[5] + "=" + m.getKmsLastServiced() + ", "
+                + columns2[6] + "=" + m.getDateLastServiced() + ", "
+                + columns2[7] + "=" + m.getInsInfo() + ", "
+                + columns2[8] + "=" + m.getYear()
+                + " WHERE TYPE_KEY='MAN'";
         
         int i = update.executeUpdate(updateCommand);
         
@@ -352,7 +424,7 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
         Statement query = null;
         ResultSet searchResult = null;
         
-        query = conn.createStatement();
+        query = conn2.createStatement();
         searchResult = query.executeQuery("SELECT * FROM ManFields");
         
         Object[] objects = ProcessSearch(searchResult);

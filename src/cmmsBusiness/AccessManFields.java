@@ -11,7 +11,7 @@ public class AccessManFields {
 	
 	public AccessManFields() {
 	    accessObject = new DataAccessObject("Vehicles", "ManFields");
-	    accessObject.open("ManFields");
+	    accessObject.open2("ManFields");
 	    try {
             accessObject.updateManFields(new ManFields());
         } catch (SQLException e) {
