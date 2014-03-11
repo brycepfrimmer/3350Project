@@ -22,8 +22,6 @@ public class IntegrationHSQLTest extends TestCase
 		AccessVehicle access;
 		Vehicle vehicle;
 
-		Services.closeDataAccess();
-
 		System.out.println("\nStarting Integration test of HSQLDB");
 
 		Services.createDataAccess(Main.dbName, Main.dbName2);
@@ -37,7 +35,7 @@ public class IntegrationHSQLTest extends TestCase
 		//vehicle = access.getSequential();
 		assertNotNull(vehicle);
 
-		Services.closeDataAccess();
+		//Services.closeDataAccess();
 
 		System.out.println("Finished Integration test of HSQLDB");
 	}

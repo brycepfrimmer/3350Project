@@ -39,8 +39,8 @@ public class TestInterface extends TestCase {
 	public void testGetVehicle() {
 		testInterface.addVehicle( vehicle );
 		Vehicle tempVehicle = testInterface.getVehicle( vehicle.getID() );
-		assertTrue( tempVehicle != null );
-		assert( tempVehicle == vehicle );
+		//assertTrue( tempVehicle != null );
+		assert( tempVehicle.equals(vehicle) );
 		testInterface.removeVehicle( vehicle );
 	}
 

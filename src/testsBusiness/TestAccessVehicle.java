@@ -22,8 +22,6 @@ private static String dbName2 = cmmsApplication.Main.dbName2;
 		AccessVehicle access;
 		Vehicle vehicle;
 
-		Services.closeDataAccess();
-
 		System.out.println("\nStarting test AccessVehicle");
 
 		Services.createDataAccess( dbName, dbName2 );
@@ -46,7 +44,7 @@ private static String dbName2 = cmmsApplication.Main.dbName2;
 		assertTrue( access.getVehicle("ABC").getID() == "ABC" );
 		*/
 
-		Services.closeDataAccess();
+		//Services.closeDataAccess();
 
 		System.out.println("Finished test AccessManFields");
 	}

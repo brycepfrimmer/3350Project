@@ -22,8 +22,6 @@ public class TestAccessManFields extends TestCase{
 		AccessManFields access;
 		ManFields fields;
 
-		Services.closeDataAccess();
-
 		System.out.println("\nStarting test AccessManFields");
 
 		Services.createDataAccess( dbName, dbName2 );
@@ -36,7 +34,7 @@ public class TestAccessManFields extends TestCase{
 		assertNotNull(fields);
 		assertTrue(fields.getId());
 
-		Services.closeDataAccess();
+		//Services.closeDataAccess();
 
 		System.out.println("Finished test AccessManFields");
 	}

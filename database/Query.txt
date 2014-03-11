@@ -1,2 +1,0 @@
-select vehicle.ID
-        from vehicles
