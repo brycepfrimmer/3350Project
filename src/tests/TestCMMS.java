@@ -32,7 +32,7 @@ public class TestCMMS {
         suite.addTestSuite(TestAccessVehicle.class);
         
         //Test Persistence classes
-        //suite.addTestSuite(TestInterface.class);
+        suite.addTestSuite(TestInterface.class);
 
         return suite;
     }

@@ -602,9 +602,10 @@ public class CMMS{
 
                     if (response == SWT.YES) {
                         int[] selections = dataTable.getSelectionIndices();
-                        for (int i = 0; i < selected; i++)
-                        	accessVehicle.removeVehicle(dataTable.getItem(
-                        			selections[i]).getText(0));
+                        for (int i = 0; i < selected; i++) {
+//                        	accessVehicle.removeVehicle(dataTable.getItem(
+//                        			selections[i]).getText(0));
+                        }
 
                         // Update list with the new Vehicles
                         UpdateList();
@@ -619,8 +620,8 @@ public class CMMS{
 
                     if (response == SWT.YES) {
                         // Should only have one item selected
-                    	accessVehicle.removeVehicle(dataTable.getItem(
-                    			dataTable.getSelectionIndex()).getText(VehicleFields.ID.ordinal()));
+//                    	accessVehicle.removeVehicle(dataTable.getItem(
+//                    			dataTable.getSelectionIndex()).getText(VehicleFields.ID.ordinal()));
                         // Update list with the new Vehicles
                         UpdateList();
                     }
@@ -842,13 +843,16 @@ public class CMMS{
             dataTable.remove(0, dataTable.getItemCount() - 1);
 
         dataTable.setRedraw(true);
-
+        
         for (Vehicle v : list) {
-            ti = new TableItem(dataTable, SWT.NONE);
-            if (v.checkRequiresService()) {
-            	ti.setBackground(SWTResourceManager.getColor(SWT.COLOR_RED));
-            }
-            ti.setText(v.ToStrings());
+        	if (v != null) {
+	            ti = new TableItem(dataTable, SWT.NONE);
+	            if (v.checkRequiresService()) {
+	            	ti.setBackground(SWTResourceManager.getColor(SWT.COLOR_RED));
+	            }
+	            System.out.println("Vehicles: " + v.ToStrings());
+	            ti.setText(v.ToStrings());
+        	}
         }
         
         PackColumns();
@@ -994,7 +998,7 @@ public class CMMS{
 
         mainWindow.open();
         
-        openDailyTasks();
+        //openDailyTasks();
 
         while (!mainWindow.isDisposed()) {
             try {

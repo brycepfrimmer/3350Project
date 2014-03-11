@@ -1,27 +1,34 @@
 package cmmsApplication;
 
-import cmmsPersistence.StubDB;
+import java.sql.SQLException;
+
+import cmmsPersistence.DataAccessObject;;
 
 public class Services
 {
-	private static StubDB dataAccessService = null;
+	private static DataAccessObject dataAccessService = null;
 
-	public static StubDB createDataAccess(String dbName)
+	public static DataAccessObject createDataAccess(String dbName, String dbName2)
 	{
 		if (dataAccessService == null)
 		{
-			dataAccessService = new StubDB(dbName);
-			dataAccessService.open(Main.dbName);
+			dataAccessService = new DataAccessObject(dbName);
+			try {
+				dataAccessService.create(dbName);
+				dataAccessService.create(dbName2);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return dataAccessService;
 	}
 
-	public static StubDB getDataAccess(String dbName)
+	public static DataAccessObject getDataAccess(String dbName, String dbName2)
 	{
 		if (dataAccessService == null)
 		{
 			System.out.println("Connection to data access has not been established.");
-			System.exit(1);
+			createDataAccess(dbName, dbName2);
 		}
 		return dataAccessService;
 	}

@@ -227,10 +227,7 @@ Developer Task List - Iteration 2
 5 - Include modification of vehicle addition criteria - 5 days - Cody
 6 - Fix small issues from Iteration 1 (see BUGS section in Iteration 1 Summary) - 1 day - Darwin
 7 - Look into hiding/displaying certain columns in the main GUI list view - 1 day - Darwin
-8 - 
-9 - 
-10- 
-11- Create test classes for project - on going - ALL
+8- Create test classes for project - on going - ALL
 
 Friday, February 28th, 2014
 Cody Edwards
@@ -289,4 +286,35 @@ Cody Edwards
 Monday, March 10th, 2014
 Cody Edwards
 	1 hour - Fixed bug where it wouldn't remove parts with service items.
+	
+Monday, March 10th, 2014
+Bryce Pfrimmer
+	4 hours - Integrating HSQLDB
 
+=======
+END OF ITERATION 2 SUMMARY:
+Developer Task List - Iteration 2
+1 - Completed Task - Implement HSQLDB - 3 days - Zac
+2 - Completed Task - Implement integration tests and expanding unit tests - 4 days - Delroy
+3 - Completed Task - Add in time or usage based tracking - 5 days - Bryce
+4 - Completed Task - Add in search functionality - 3 days - Darwin
+5 - Completed Task - Include modification of vehicle addition criteria - 5 days - Cody
+6 - Completed Task - Fix small issues from Iteration 1 (see BUGS section in Iteration 1 Summary) - 1 day - Darwin
+7 - Completed Task - Look into hiding/displaying certain columns in the main GUI list view - 1 day - Darwin
+8- Create test classes for project - on going - ALL
+
+BUGS
+No detected bugs.
+=======
+"Big" User Stories for Iteration 3:
+Supply list for maintenance - as maintenance personnel I want to have access to a list of supplies I need for maintenance - 4 days
+Category Views - as a user I want to be able to break down the list of vehicles into categorized views - 4 days
+Batch Editing - as a user I should be able to edit fields that are common to multiple vehicles at the same time - 3 days
+Printing - as a user I need to be able to print information and details about a vehicle - 4 days
+
+Other Tasks for Iteration 3:
+Acceptance Tests
+
+The four Big user stories listed above are the next four in our list and are the four that we intended to implement in iteration 3.
+As of right now our initial plan hasn't changed at all. This might be different over this next iteration.
+=======

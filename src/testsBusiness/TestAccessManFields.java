@@ -10,7 +10,8 @@ import cmmsObjects.ManFields;
 public class TestAccessManFields extends TestCase{
 	
 	private static String dbName = cmmsApplication.Main.dbName;
-	
+	private static String dbName2 = cmmsApplication.Main.dbName2;
+
 	public TestAccessManFields(String arg0)
 	{
 		super(arg0);
@@ -25,7 +26,7 @@ public class TestAccessManFields extends TestCase{
 
 		System.out.println("\nStarting test AccessManFields");
 
-		Services.createDataAccess( dbName );
+		Services.createDataAccess( dbName, dbName2 );
 
 		fields = new ManFields();
 
