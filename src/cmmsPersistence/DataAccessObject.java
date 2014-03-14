@@ -167,7 +167,7 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
 			}
 		}
 		catch (SQLException e) {
-			System.out.println("** ERROR: " + e);
+			
 		}
 	}
 	
@@ -205,11 +205,11 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
 		try
 		{
 			Statement shutdown = conn.createStatement();
-			shutdown.execute("SHUTDOWN");
+			shutdown.execute("SHUTDOWN COMPACT");
 			conn.close();
 			
 			Statement shutdown2 = conn2.createStatement();
-			shutdown2.execute("SHUTDOWN");
+			shutdown2.execute("SHUTDOWN COMPACT");
 			conn2.close();
 		}
 		catch (Exception e)
@@ -248,23 +248,14 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
 		query = conn.createStatement();
 		searchResult = query.executeQuery("SELECT * FROM Vehicles WHERE " + fieldMod + "='" + key + "'");
 		
-		Object[] objects = ProcessSearch(searchResult);
-		v = new Vehicle[objects.length];
+		Object[] objects = ProcessVehicleSearch(searchResult);
+		v = new Vehicle[objects.length];		
 		
-		for (int i = 0, j = 0; i < objects.length / (columns.length + 1) ; i++, j+=columns.length+1) {
-			Date date = null;			
-			try {
-				date = Date.valueOf(objects[j + 7].toString());
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-			v[i] = new Vehicle((String)objects[j + 0], (String)objects[j + 1], (String)objects[j + 2],
-									  (String)objects[j + 3], new Integer(objects[j + 4].toString()), new Boolean(objects[j + 8].toString()),
-									  (String)objects[j + 9], new Boolean(objects[j + 12].toString()), (String)objects[j + 10],
-									  (String)objects[j + 11], new Integer(objects[j + 5].toString()), new Integer(objects[j + 6].toString()),
-									  date);
-		}
+		for (int i = 0; i < objects.length; i++)
+			v[i] = (Vehicle)objects[i];
+		
+		searchResult.close();
+		query.close();
 		
 		return v;
 	}
@@ -279,42 +270,39 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
 		query = conn.createStatement();
 		searchResult = query.executeQuery("SELECT * FROM Vehicles");
 		
-		Object[] objects = ProcessSearch(searchResult);
-		vehicles = new Vehicle[objects.length];
+		Object[] objects = ProcessVehicleSearch(searchResult);
+		vehicles = new Vehicle[objects.length];		
 		
-		System.out.println(objects.length);
+		for (int i = 0; i < objects.length; i++)
+			vehicles[i] = (Vehicle)objects[i];
 		
-		for (int i = 0, j = 0; i < objects.length / (columns.length) && objects[0] != null; i++, j+=columns.length+1) {
-			Date date = null;			
-			try {
-				date = Date.valueOf(objects[j + 7].toString());
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-			vehicles[i] = new Vehicle((String)objects[j + 0], (String)objects[j + 1], (String)objects[j + 2],
-									  (String)objects[j + 3], new Integer(objects[j + 4].toString()), new Boolean(objects[j + 8].toString()),
-									  (String)objects[j + 9], new Boolean(objects[j + 12].toString()), (String)objects[j + 10],
-									  (String)objects[j + 11], new Integer(objects[j + 5].toString()), new Integer(objects[j + 6].toString()),
-									  date);
-		}
-		
+		searchResult.close();
 		query.close();
 		
 		return vehicles;
 	}
 	
-	private Object[] ProcessSearch(ResultSet rs) throws SQLException {
-		ResultSetMetaData meta = rs.getMetaData();
-		int numColumns = meta.getColumnCount();
-		Object[] objects = new Object[numColumns];		
+	private Object[] ProcessVehicleSearch(ResultSet rs) throws SQLException {
+		ArrayList<Object> list = new ArrayList<Object>();
 		
-		for (; rs.next(); ) {
-			for (int i = 1; i <= numColumns; i++) {
-				objects[i-1] = rs.getObject(i);
+		while(rs.next()) {
+			Date date = null;			
+			try {
+				date = Date.valueOf(rs.getObject(8).toString());
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
+			
+			Vehicle v = new Vehicle((String)rs.getObject(1), (String)rs.getObject(2), (String)rs.getObject(3),
+									  (String)rs.getObject(4), new Integer(rs.getObject(5).toString()), new Boolean(rs.getObject(9).toString()),
+									  (String)rs.getObject(10), new Boolean(rs.getObject(13).toString()), (String)rs.getObject(11),
+									  (String)rs.getObject(12), new Integer(rs.getObject(6).toString()), new Integer(rs.getObject(7).toString()),
+									  date);
+			list.add(v);
 		}
 		
+		Object[] objects = new Object[list.size()];
+		list.toArray(objects);
 		return objects;
 	}
 	
@@ -453,16 +441,30 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
         query = conn2.createStatement();
         searchResult = query.executeQuery("SELECT * FROM ManFields");
         
-        Object[] objects = ProcessSearch(searchResult);
-        mand = new ManFields(new Boolean(objects[1].toString()), new Boolean(objects[2].toString()),
-        		new Boolean(objects[3].toString()), new Boolean(objects[4].toString()),
-        		new Boolean(objects[5].toString()), new Boolean(objects[6].toString()),
-        		new Boolean(objects[7].toString()), new Boolean(objects[8].toString()),
-        		new Boolean(objects[9].toString()));
+        Object[] objects = ProcessManFieldSearch(searchResult);
+        
+        mand = (ManFields)objects[0];
             
         query.close();
 
         return mand;
     }
+
+	private Object[] ProcessManFieldSearch(ResultSet rs) throws SQLException {
+		ArrayList<Object> list = new ArrayList<Object>();
+		
+		while(rs.next()) {
+			ManFields mand = new ManFields(new Boolean(rs.getObject(1).toString()), new Boolean(rs.getObject(2).toString()),
+	        		new Boolean(rs.getObject(3).toString()), new Boolean(rs.getObject(4).toString()),
+	        		new Boolean(rs.getObject(5).toString()), new Boolean(rs.getObject(6).toString()),
+	        		new Boolean(rs.getObject(7).toString()), new Boolean(rs.getObject(8).toString()),
+	        		new Boolean(rs.getObject(9).toString()));
+			list.add(mand);
+		}
+		
+		Object[] objects = new Object[list.size()];
+		list.toArray(objects);
+		return objects;
+	}
 	
 }//End DataAccessObject Class

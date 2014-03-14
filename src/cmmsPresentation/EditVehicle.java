@@ -309,7 +309,12 @@ public class EditVehicle {
     }
 
     private void SetFields() {
-    	accessVehicle = new AccessVehicle();    	
+    	accessVehicle = new AccessVehicle();  
+    	
+    	if (currVehicle == null) {
+    		System.out.println("currVehicle is null");
+    	}
+    	
         currVehicle.setID(textVehicleID.getText());
         currVehicle.setType(textType.getText());
         currVehicle.setManufacturer(textManufacturer.getText());

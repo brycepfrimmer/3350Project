@@ -215,30 +215,7 @@ public class AddVehicle {
                 String kmsLS = textKmsLS.getText();
                 if (good) {
                 	accessVehicle = new AccessVehicle();
-                	/*
                 	
-                	infoObject = new VehicleInfo();
-                	infoObject.setID(textVehicleID.getText());
-                	infoObject.setType(textType.getText());
-                	infoObject.setManufacturer(textManufacturer.getText());
-                	infoObject.setModel(textModel.getText());
-                	if(year != ""){
-                    	infoObject.setYear(new Integer(year));
-                    }
-                	infoObject.setRoadWorthy(btnRoadworthy.getSelection());
-                    infoObject.setLicensePlate(textLPN.getText());
-                    infoObject.setOperational(btnOperational.getSelection()); 
-                    infoObject.setInsurance(textInsPolNum.getText(), textInsType.getText());
-                    if(kms != ""){
-                    	infoObject.setKmDriven(new Integer(textKms.getText()));
-                    }
-                    if(kmsLS != ""){
-                    	infoObject.setKmLastServiced(new Integer(textKmsLS.getText()));
-                    }
-                    infoObject.setDateLastServiced(Date.valueOf(dateTime.getYear() + "-" + (dateTime.getMonth()+1) + "-" + dateTime.getDay()));
-                    
-                	accessVehicle.addVehicle(infoObject);
-               */
                     Vehicle newVehicle = new Vehicle();
                     newVehicle.setID(textVehicleID.getText());
                     newVehicle.setType(textType.getText()); 
@@ -258,8 +235,6 @@ public class AddVehicle {
                     	newVehicle.setKmLastServiced(new Integer(textKmsLS.getText()));
                     }
                     newVehicle.setDateLastServiced(Date.valueOf(dateTime.getYear() + "-" + (dateTime.getMonth()+1) + "-" + dateTime.getDay()));
-                    // Interface temp = new Interface();
-                    // temp.addVehicle(newVehicle);
                     accessVehicle.addVehicle(newVehicle);
                     shell.close();
                 } else {

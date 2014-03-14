@@ -34,9 +34,12 @@ public class AccessVehicle {
 	public Vehicle getVehicle(String ID )
 	{
 		Vehicle v;
-		
+	
 		try {
-			v = dataAccess.getVehicles("ID", ID)[0];
+			if (dataAccess.getVehicles("ID",ID).length > 0)
+				v = dataAccess.getVehicles("ID", ID)[0];
+			else
+				v = null;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			v = null;

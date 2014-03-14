@@ -169,6 +169,7 @@ public class CMMS{
     
     public CMMS()
     {
+    	accessVehicle = new AccessVehicle();
         CreateWindow();
         OnLoad();
         Open();
@@ -653,6 +654,10 @@ public class CMMS{
                 			dataTable.getSelectionIndex()).getText(
                     		VehicleFields.ID.ordinal()));
                     EditVehicle editWindow = new EditVehicle();
+                    
+                    if (v == null)
+                    	System.out.println("Vehicle == null");
+                    
                     editWindow.open(v);
 
                     // Update list with the new Vehicles
@@ -828,7 +833,6 @@ public class CMMS{
     
     private static void UpdateList() {
         TableItem ti; // Table item for adding vehicles to the table
-        accessVehicle = new AccessVehicle();
         
         ArrayList<Vehicle> list;
         if (!searching)
@@ -850,7 +854,6 @@ public class CMMS{
 	            if (v.checkRequiresService()) {
 	            	ti.setBackground(SWTResourceManager.getColor(SWT.COLOR_RED));
 	            }
-	            System.out.println("Vehicles: " + v.ToStrings());
 	            ti.setText(v.ToStrings());
         	}
         }
@@ -984,8 +987,6 @@ public class CMMS{
     } 
     
     private static void openDailyTasks(){
-    	accessVehicle = new AccessVehicle();
-        
         ArrayList<Vehicle> list;
         list = accessVehicle.getAllVehicles();
         DailyTasks tasks = new DailyTasks();

@@ -4,6 +4,7 @@ CREATE USER SA PASSWORD ""
 GRANT DBA TO SA
 SET WRITE_DELAY 20
 SET SCHEMA PUBLIC
-INSERT INTO VEHICLES VALUES('123456','Truck','Ford','F150','2009','65000','63000','2013-02-10','true','EGR567','egjsfig98ru89g98','Commuter','true','0.0')
 INSERT INTO VEHICLES VALUES('12','12','12','12','12','12','12','2014-03-11','false',' ','1222222','13213','true','0.0')
-INSERT INTO VEHICLES VALUES('new','new','new','new','3','3','3','2014-03-11','false',' ','3','3','true','0.0')
+INSERT INTO VEHICLES VALUES('1234','1234','1234','1234','3','3','3','2014-03-11','false',' ','3','3','true','0.0')
+INSERT INTO VEHICLES VALUES('12356','Was Truck','Ford','F150','2009','65000','63000','2013-02-10','true','EGR567','egjsfig98ru89g98','Commuter','true','0.0')
+INSERT INTO VEHICLES VALUES('0000001','Car','Neandrathal Manufacturing','N2 Speed Demon','1','1000000000','0','3914-02-01','true','IAMAWESOME','1234567890','IDontNeedInsurance','true','0.0')
