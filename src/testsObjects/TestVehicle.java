@@ -1,6 +1,7 @@
 package testsObjects;
 
 import java.sql.Date;
+import java.util.GregorianCalendar;
 
 import junit.framework.TestCase;
 
@@ -15,8 +16,10 @@ public class TestVehicle extends TestCase {
     
     @Before
 	public void setUp() throws Exception {
+    	GregorianCalendar date = new GregorianCalendar();
+    	date.setTime(Date.valueOf("2014-01-23"));
     	vehicle = new Vehicle("vin236", "car", "Dodge", "Viper", 2004,
-                true, "ADN 518", true, "Policy one", "General", 155000, 1200, Date.valueOf("2014-01-23"));
+                true, "ADN 518", true, "Policy one", "General", 155000, 1200, date);
 	}
     
     @Test
@@ -27,9 +30,11 @@ public class TestVehicle extends TestCase {
 
     @Test
     public void testVehicleParams() {
+    	GregorianCalendar date = new GregorianCalendar();
+    	date.setTime(Date.valueOf("2014-01-23"));
         Vehicle vehicle1 = new Vehicle("vin278", "truck", "Chev", "Colorado",
                 2003, false, "GSL 269", true, "Policy two", "Rec", 150000,
-                120000, Date.valueOf("2014-01-23"));
+                120000, date);
         assertTrue(vehicle1 != null);
     }
 

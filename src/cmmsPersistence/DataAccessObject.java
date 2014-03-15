@@ -1,6 +1,7 @@
 package cmmsPersistence;
 
 import java.sql.Date;
+import java.util.GregorianCalendar;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -286,9 +287,13 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
 		ArrayList<Object> list = new ArrayList<Object>();
 		
 		while(rs.next()) {
-			Date date = null;			
+			Date date = null;	
+			GregorianCalendar cal = null;
 			try {
 				date = Date.valueOf(rs.getObject(8).toString());
+				cal = new GregorianCalendar();
+				cal.setTime(date);
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -297,7 +302,7 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
 									  (String)rs.getObject(4), new Integer(rs.getObject(5).toString()), new Boolean(rs.getObject(9).toString()),
 									  (String)rs.getObject(10), new Boolean(rs.getObject(13).toString()), (String)rs.getObject(11),
 									  (String)rs.getObject(12), new Integer(rs.getObject(6).toString()), new Integer(rs.getObject(7).toString()),
-									  date);
+									  cal);
 			list.add(v);
 		}
 		

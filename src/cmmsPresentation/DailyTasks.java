@@ -14,7 +14,6 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-import java.util.ArrayList;
 
 import cmmsBusiness.VehicleFields;
 import cmmsObjects.Part;

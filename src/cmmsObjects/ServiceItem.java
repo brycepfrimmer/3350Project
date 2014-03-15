@@ -1,15 +1,17 @@
 package cmmsObjects;
 
-import java.util.Date;
+import java.sql.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class ServiceItem {
     private final String description;
     private long serviceTime;
     private int serviceKm;
-    private Date dateLastServiced;
+    private Calendar dateLastServiced;
     private int kmLastServiced;
     
-    public ServiceItem(String d, long serviceTime, Date dateLastServiced) {
+    public ServiceItem(String d, long serviceTime, GregorianCalendar dateLastServiced) {
         this.description = d;
         this.serviceTime = serviceTime;
         this.setDateLastServiced(dateLastServiced);
@@ -32,8 +34,10 @@ public class ServiceItem {
                 retVal = true;
             }
         } else if (dateLastServiced != null) {
-            Date tempDate = new Date();
-            if (dateLastServiced.getTime()+serviceTime <= tempDate.getTime()) {
+        	Date date = new Date(Calendar.getInstance().getTimeInMillis());
+        	GregorianCalendar tempDate = new GregorianCalendar();
+        	tempDate.setTime(date);
+            if (dateLastServiced.getTimeInMillis()+serviceTime <= tempDate.getTimeInMillis()) {
                 retVal = true;
             }
         } else {
@@ -54,11 +58,11 @@ public class ServiceItem {
         return serviceTime;
     }
 
-    public Date getDateLastServiced() {
+    public Calendar getDateLastServiced() {
         return dateLastServiced;
     }
 
-    public void setDateLastServiced(Date dateLastServiced) {
+    public void setDateLastServiced(GregorianCalendar dateLastServiced) {
         this.dateLastServiced = dateLastServiced;
     }
 

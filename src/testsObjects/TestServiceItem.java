@@ -1,6 +1,7 @@
 package testsObjects;
 
-import java.util.Date;
+import java.sql.Date;
+import java.util.GregorianCalendar;
 
 import junit.framework.TestCase;
 import cmmsObjects.ServiceItem;
@@ -15,13 +16,13 @@ public class TestServiceItem extends TestCase{
 	
 	@Before
 	public void setUp() throws Exception {
-		item1 = new ServiceItem("one", (long) 1.0, new Date() );
+		item1 = new ServiceItem("one", (long) 1.0, new GregorianCalendar() );
 		item2 = new ServiceItem("two", 10, 5 );
 	}
 	
 	@Test
 	public void testServiceItem1() {
-		ServiceItem item = new ServiceItem("item", (long)1.0, new Date());
+		ServiceItem item = new ServiceItem("item", (long)1.0, new GregorianCalendar());
 		assertTrue( item != null );
 	}
 
@@ -59,9 +60,9 @@ public class TestServiceItem extends TestCase{
 
 	@Test
 	public void testGetDateLastServiced() {
-		Date date = item1.getDateLastServiced();
+		GregorianCalendar date = (GregorianCalendar) item1.getDateLastServiced();
 		assertTrue( date != null );
-		date = item2.getDateLastServiced();
+		date = (GregorianCalendar) item2.getDateLastServiced();
 		assertTrue( date == null );
 	}
 

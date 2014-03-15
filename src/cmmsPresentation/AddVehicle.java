@@ -20,6 +20,7 @@ import cmmsObjects.ManFields;
 import cmmsObjects.Vehicle;
 
 import java.sql.Date;
+import java.util.GregorianCalendar;
 
 
 public class AddVehicle {
@@ -213,6 +214,7 @@ public class AddVehicle {
                 String year = textYear.getText();
                 String kms = textKms.getText();
                 String kmsLS = textKmsLS.getText();
+                GregorianCalendar date = new GregorianCalendar();
                 if (good) {
                 	accessVehicle = new AccessVehicle();
                 	
@@ -234,7 +236,8 @@ public class AddVehicle {
                     if(kmsLS != ""){
                     	newVehicle.setKmLastServiced(new Integer(textKmsLS.getText()));
                     }
-                    newVehicle.setDateLastServiced(Date.valueOf(dateTime.getYear() + "-" + (dateTime.getMonth()+1) + "-" + dateTime.getDay()));
+                    date.setTime(Date.valueOf(dateTime.getYear() + "-" + (dateTime.getMonth()+1) + "-" + dateTime.getDay()));
+                    newVehicle.setDateLastServiced(date);
                     accessVehicle.addVehicle(newVehicle);
                     shell.close();
                 } else {

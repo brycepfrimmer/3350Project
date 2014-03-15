@@ -1,7 +1,9 @@
 package cmmsObjects;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.sql.Date;
+import java.util.GregorianCalendar;
 
 import cmmsBusiness.VehicleFields;
 
@@ -36,7 +38,7 @@ public class Vehicle {
     /* OptionalFields */
     private int kmDriven;
     private int kmLastServiced;
-    private Date dateLastServiced;
+    private GregorianCalendar dateLastServiced;
     private ArrayList<Part> partsList;
 
     /* Calculated fields */
@@ -65,7 +67,7 @@ public class Vehicle {
 
     public Vehicle(String ID, String type, String man, String model, int year,
             boolean roadWorthy, String LPN, boolean op, String policyNum,
-            String policyType, int km, int kmLS, Date dls) {
+            String policyType, int km, int kmLS, GregorianCalendar dls) {
         this.ID = ID;
         this.type = type;
         this.manufacturer = man;
@@ -84,6 +86,7 @@ public class Vehicle {
 
     public String[] ToStrings() {
         String[] vehicle = new String[14];
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
         vehicle[VehicleFields.ID.ordinal()] = ID;
         vehicle[VehicleFields.TYPE.ordinal()] = type;
@@ -110,7 +113,7 @@ public class Vehicle {
         if (dateLastServiced == null) {
             vehicle[VehicleFields.DATE_LAST_SERVICE.ordinal()] = " ";
         } else {
-            vehicle[VehicleFields.DATE_LAST_SERVICE.ordinal()] = dateLastServiced.toString();
+            vehicle[VehicleFields.DATE_LAST_SERVICE.ordinal()] = format.format(dateLastServiced.getTime());
         }
         if (roadWorthy) {
             vehicle[VehicleFields.ROADWORTHY.ordinal()] = "Yes";
@@ -413,11 +416,11 @@ public class Vehicle {
         return fuelEcon;
     }
 
-    public Date getDateLastServiced() {
+    public GregorianCalendar getDateLastServiced() {
         return dateLastServiced;
     }
 
-    public void setDateLastServiced(Date dateLastServiced) {
+    public void setDateLastServiced(GregorianCalendar dateLastServiced) {
         this.dateLastServiced = dateLastServiced;
     }
     

@@ -1,6 +1,7 @@
 package cmmsPresentation;
 
 import java.sql.Date;
+import java.util.GregorianCalendar;
 
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Display;
@@ -315,6 +316,7 @@ public class EditVehicle {
     		System.out.println("currVehicle is null");
     	}
     	
+    	GregorianCalendar date = new GregorianCalendar();
         currVehicle.setID(textVehicleID.getText());
         currVehicle.setType(textType.getText());
         currVehicle.setManufacturer(textManufacturer.getText());
@@ -326,6 +328,8 @@ public class EditVehicle {
         currVehicle.setInsurance(textInsPolNum.getText(), textInsType.getText());
         currVehicle.setKmDriven(new Integer(textKms.getText()));
         currVehicle.setKmLastServiced(new Integer(textKmsLS.getText()));
+        date.setTime(Date.valueOf(dateTime.getYear() + "-" + (dateTime.getMonth()+1) + "-" + dateTime.getDay()));
+        currVehicle.setDateLastServiced(date);
         accessVehicle.updateVehicle( currVehicle );   
     }
 

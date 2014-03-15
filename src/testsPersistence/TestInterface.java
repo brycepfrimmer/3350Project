@@ -1,6 +1,7 @@
 package testsPersistence;
 
 import java.sql.Date;
+import java.util.GregorianCalendar;
 
 import junit.framework.TestCase;
 
@@ -17,9 +18,11 @@ public class TestInterface extends TestCase {
 	@Before
 	public void setUp() throws Exception {
 		testInterface = new Interface();
+		GregorianCalendar date = new GregorianCalendar();
+		date.setTime(Date.valueOf("2014-01-23"));
 		vehicle = new Vehicle();
 		vehicle.setID("444444444");
-		vehicle.setDateLastServiced(Date.valueOf("2014-01-23"));
+		vehicle.setDateLastServiced(date);
 	}
 
 	@Test
