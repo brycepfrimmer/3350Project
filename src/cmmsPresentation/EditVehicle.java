@@ -16,7 +16,9 @@ import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
 
+import cmmsBusiness.AccessManFields;
 import cmmsBusiness.AccessVehicle;
+import cmmsObjects.ManFields;
 import cmmsObjects.Vehicle;
 
 
@@ -37,27 +39,31 @@ public class EditVehicle {
     private Button btnRoadworthy;
     private DateTime dateTime;
     
-    private Text textVehicleIDWarning;
-    private Text textTypeWarning;
-    private Text textManufacturerWarning;
-    private Text textModelWarning;
-    private Text textYearWarning;
-    private Text textKmsWarning;
-    private Text textKmsLSWarning;
+    private Label lblVehicleIDWarning;
+    private Label lblTypeWarning;
+    private Label lblManufacturerWarning;
+    private Label lblModelWarning;
+    private Label lblYearWarning;
+    private Label lblKmsWarning;
+    private Label lblKmsLSWarning;
     private Label lblLPNWarning;
-    private Text textInsPolNumWarning;
-    private Text textInsTypeWarning;
+    private Label lblInsPolNumWarning;
+    private Label lblInsTypeWarning;
 
     private Vehicle currVehicle;
     private Button btnEditPartsList;
     
     private AccessVehicle accessVehicle;
+    private ManFields manFields;
+    private AccessManFields accessFields;
 
     /**
      * Open the window.
      */
     public void open(Vehicle v) {
         Display display = Display.getDefault();
+        accessFields = new AccessManFields();
+        manFields = accessFields.getManFields();
         createContents();
         currVehicle = v;
         FillFields();
@@ -235,63 +241,54 @@ public class EditVehicle {
         btnCancel.setBounds(180, 412, 75, 25);
         btnCancel.setText("Cancel");
 
-        textVehicleIDWarning = new Text(shlEditVehicle, SWT.NONE);
-        textVehicleIDWarning.setForeground(SWTResourceManager
+        lblVehicleIDWarning = new Label(shlEditVehicle, SWT.NONE);
+        lblVehicleIDWarning.setForeground(SWTResourceManager
                 .getColor(SWT.COLOR_RED));
-        textVehicleIDWarning.setEditable(false);
-        textVehicleIDWarning.setBounds(179, 7, 360, 21);
+        lblVehicleIDWarning.setBounds(179, 7, 360, 21);
 
-        textTypeWarning = new Text(shlEditVehicle, SWT.NONE);
-        textTypeWarning.setForeground(SWTResourceManager
+        lblTypeWarning = new Label(shlEditVehicle, SWT.NONE);
+        lblTypeWarning.setForeground(SWTResourceManager
                 .getColor(SWT.COLOR_RED));
-        textTypeWarning.setEditable(false);
-        textTypeWarning.setBounds(312, 35, 280, 21);
+        lblTypeWarning.setBounds(312, 35, 280, 21);
 
-        textManufacturerWarning = new Text(shlEditVehicle, SWT.NONE);
-        textManufacturerWarning.setForeground(SWTResourceManager
+        lblManufacturerWarning = new Label(shlEditVehicle, SWT.NONE);
+        lblManufacturerWarning.setForeground(SWTResourceManager
                 .getColor(SWT.COLOR_RED));
-        textManufacturerWarning.setEditable(false);
-        textManufacturerWarning.setBounds(180, 66, 359, 21);
+        lblManufacturerWarning.setBounds(180, 66, 359, 21);
 
-        textModelWarning = new Text(shlEditVehicle, SWT.NONE);
-        textModelWarning.setForeground(SWTResourceManager
+        lblModelWarning = new Label(shlEditVehicle, SWT.NONE);
+        lblModelWarning.setForeground(SWTResourceManager
                 .getColor(SWT.COLOR_RED));
-        textModelWarning.setEditable(false);
-        textModelWarning.setBounds(180, 97, 313, 21);
+        lblModelWarning.setBounds(180, 97, 313, 21);
 
-        textYearWarning = new Text(shlEditVehicle, SWT.NONE);
-        textYearWarning.setForeground(SWTResourceManager
+        lblYearWarning = new Label(shlEditVehicle, SWT.NONE);
+        lblYearWarning.setForeground(SWTResourceManager
                 .getColor(SWT.COLOR_RED));
-        textYearWarning.setEditable(false);
-        textYearWarning.setBounds(180, 128, 388, 21);
+        lblYearWarning.setBounds(180, 128, 388, 21);
 
-        textKmsWarning = new Text(shlEditVehicle, SWT.NONE);
-        textKmsWarning.setEditable(false);
-        textKmsWarning
+        lblKmsWarning = new Label(shlEditVehicle, SWT.NONE);
+        lblKmsWarning
                 .setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
-        textKmsWarning.setBounds(179, 157, 377, 21);
+        lblKmsWarning.setBounds(179, 157, 377, 21);
 
-        textKmsLSWarning = new Text(shlEditVehicle, SWT.NONE);
-        textKmsLSWarning.setForeground(SWTResourceManager
+        lblKmsLSWarning = new Label(shlEditVehicle, SWT.NONE);
+        lblKmsLSWarning.setForeground(SWTResourceManager
                 .getColor(SWT.COLOR_RED));
-        textKmsLSWarning.setEditable(false);
-        textKmsLSWarning.setBounds(180, 193, 313, 21);
+        lblKmsLSWarning.setBounds(180, 193, 313, 21);
 
         lblLPNWarning = new Label(shlEditVehicle, SWT.WRAP);
         lblLPNWarning.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
         lblLPNWarning.setBounds(370, 307, 201, 15);
 
-        textInsPolNumWarning = new Text(shlEditVehicle, SWT.NONE);
-        textInsPolNumWarning.setForeground(SWTResourceManager
+        lblInsPolNumWarning = new Label(shlEditVehicle, SWT.NONE);
+        lblInsPolNumWarning.setForeground(SWTResourceManager
                 .getColor(SWT.COLOR_RED));
-        textInsPolNumWarning.setEditable(false);
-        textInsPolNumWarning.setBounds(156, 379, 189, 21);
+        lblInsPolNumWarning.setBounds(156, 379, 189, 21);
 
-        textInsTypeWarning = new Text(shlEditVehicle, SWT.NONE);
-        textInsTypeWarning.setEditable(false);
-        textInsTypeWarning.setForeground(SWTResourceManager
+        lblInsTypeWarning = new Label(shlEditVehicle, SWT.NONE);
+        lblInsTypeWarning.setForeground(SWTResourceManager
                 .getColor(SWT.COLOR_RED));
-        textInsTypeWarning.setBounds(399, 381, 193, 21);
+        lblInsTypeWarning.setBounds(399, 381, 193, 21);
 
         btnEditPartsList = new Button(shlEditVehicle, SWT.NONE);
         btnEditPartsList.addSelectionListener(new SelectionAdapter() {
@@ -345,73 +342,126 @@ public class EditVehicle {
 
     private boolean checkID() {
         boolean isValid = false;
+        boolean mand = manFields.getId();
+        accessVehicle = new AccessVehicle();
         String input = textVehicleID.getText();
-        isValid = input.matches("[0-9a-zA-Z]+");
-        if (!isValid) {
-            textVehicleIDWarning
-                    .setText("Vehicle ID can only include numbers or letter and no spaces");
+        if (mand) {
+        	isValid = input.matches("[0-9a-zA-Z]+");
         } else {
-            textVehicleIDWarning.setText("");
+        	isValid = true;
         }
+
+        if (mand && input == ""){
+        	lblVehicleIDWarning.setText("Vehicle ID is a required field");
+        } else if (!isValid) {
+            lblVehicleIDWarning.setText("Vehicle ID can only include numbers and letters and no spaces");
+        }
+        Vehicle tempp = accessVehicle.getVehicle(input);
+        if( tempp != null && !currVehicle.getID().equals(tempp.getID()) && input.equals(tempp.getID())) {
+            lblVehicleIDWarning.setText("This vehicle already exists");
+            isValid = false;
+        } 
+        else {
+            lblVehicleIDWarning.setText("");
+        }
+
+        lblVehicleIDWarning.pack();
         return isValid;
     }
 
     private boolean checkType() {
-        boolean isValid = false;
+    	boolean isValid = false;
+        boolean mand = manFields.getType();
         String input = textType.getText();
-        isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+")
-                && !input.trim().isEmpty();
-        if (!isValid) {
-            textTypeWarning
-                    .setText("Type can only include numbers and letters");
-        } else {
-            textTypeWarning.setText("");
+        if(mand){
+        	isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+") && !input.trim().isEmpty();
         }
+        else{
+        	isValid = true;
+        }
+        if(mand && input == "") {
+        	lblTypeWarning.setText("Vehicle type is a required field");
+        }
+        else if (!isValid) {
+            lblTypeWarning.setText("Type can only include numbers and letters");
+        }
+        else {
+            lblTypeWarning.setText("");
+        }
+        lblTypeWarning.pack();
         return isValid;
     }
 
     private boolean checkManufacturer() {
-        boolean isValid = false;
-        String input = textManufacturer.getText();
-        isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+")
-                && !input.trim().isEmpty();
-        if (!isValid) {
-            textManufacturerWarning
-                    .setText("Manufacturer can only include numbers and letters");
-        } else {
-            textManufacturerWarning.setText("");
-        }
-        return isValid;
+    	 boolean isValid = false;
+         boolean mand = manFields.getManufacturer();
+         String input = textManufacturer.getText();
+         if(mand){
+         	isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+") && !input.trim().isEmpty();
+         }
+         else{
+         	isValid = true;
+         }
+         if(mand && input == ""){
+         	lblManufacturerWarning.setText("Manufacturer is a required field");
+         }
+         else if (!isValid) {
+             lblManufacturerWarning.setText("Manufacturer can only include numbers and letters");
+         } 
+         else {
+             lblManufacturerWarning.setText("");
+         }
+         lblManufacturerWarning.pack();
+         return isValid;
     }
 
     private boolean checkModel() {
-        boolean isValid = false;
-        String input = textModel.getText();
-        isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+")
-                && !input.trim().isEmpty();
-        if (!isValid) {
-            textModelWarning
-                    .setText("Model can only include numbers or letter");
-        } else {
-            textModelWarning.setText("");
-        }
-        return isValid;
+    	 boolean isValid = false;
+         boolean mand = manFields.getModel();
+         String input = textModel.getText();
+         if(mand){
+         	isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+") && !input.trim().isEmpty();
+         }
+         else{
+         	isValid = true;
+         }
+         if (mand && input == ""){
+         	lblModelWarning.setText("Vehicle Model is a required field");
+         }
+         else if (!isValid) {
+             lblModelWarning
+                     .setText("Model can only include numbers and letters");
+         } else {
+             lblModelWarning.setText("");
+         }
+         lblModelWarning.pack();
+         return isValid;
     }
 
     private boolean checkYear() {
-        boolean isValid = false;
+    	boolean isValid = false;
+        boolean mand = manFields.getYear();
         String input = textYear.getText();
-        isValid = input.matches("[0-9]+") && input.matches("[0-9]*");
-        if (!isValid) {
-            textYearWarning.setText("Years only have numbers in them");
-        } else {
-            textYearWarning.setText("");
+        if(mand){
+        	isValid = input.matches("[0-9]+") && input.matches("[0-9]*");
         }
+        else{
+        	isValid = true;
+        }
+        if(mand && input == ""){
+        	lblYearWarning.setText("Year is a required field");
+        }
+        else if (!isValid) {
+            lblYearWarning.setText("Years can only be represented by a number");
+        } else {
+            lblYearWarning.setText("");
+        }
+        lblYearWarning.pack();
         return isValid;
     }
 
     private boolean checkLPN() {
-        boolean isValid = false;
+    	boolean isValid = false;
         String input = textLPN.getText();
         isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+")
                 && !input.trim().isEmpty();
@@ -420,7 +470,7 @@ public class EditVehicle {
             lblLPNWarning
                     .setText("If a vehicle is road worthy, it must also have a license plate #");
             isValid = false;
-        } else if (!btnRoadworthy.getSelection() && input == "") {
+        } else if (!btnRoadworthy.getSelection()) {
             isValid = true;
         } else if (!isValid) {
             lblLPNWarning
@@ -433,55 +483,93 @@ public class EditVehicle {
     }
 
     private boolean checkInsPolNum() {
-        boolean isValid = false;
+    	boolean isValid = false;
+        boolean mand = manFields.getInsInfo();
         String input = textInsPolNum.getText();
-        isValid = input.matches("[0-9a-zA-Z]+");
-        if (!isValid) {
-            textInsPolNumWarning
-                    .setText("Insurance policy number can only include numbers or letter");
-        } else {
-            textInsPolNumWarning.setText("");
+        if(mand){
+        	isValid = input.matches("[0-9a-zA-Z]+");
         }
+        else{
+        	isValid = true;
+        }
+        if(mand && input == "")
+        {
+        	lblInsPolNumWarning.setText("Insurance policy number is a required field");
+        }
+        else if (!isValid) {
+            lblInsPolNumWarning.setText("Insurance policy number can only include numbers and letters");
+        } 
+        else {
+            lblInsPolNumWarning.setText("");
+        }
+        lblInsPolNumWarning.pack();
         return isValid;
     }
 
     private boolean checkInsType() {
-        boolean isValid = false;
+    	boolean isValid = false;
+        boolean mand = manFields.getInsInfo();
         String input = textInsType.getText();
-        isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+")
-                && !input.trim().isEmpty();
-        if (!isValid) {
-            textInsTypeWarning
-                    .setText("Insurance type can only include numbers or letters");
-        } else {
-            textInsTypeWarning.setText("");
+        if(mand){
+        	isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+") && !input.trim().isEmpty();
         }
+        else{
+        	isValid = true;
+        }
+        if(mand && input == ""){
+        	lblInsTypeWarning.setText("Insurance type is a required field");
+        }
+        else if (!isValid) {
+            lblInsTypeWarning.setText("Insurance type can only include numbers and letters");
+        } else {
+            lblInsTypeWarning.setText("");
+        }
+        lblInsTypeWarning.pack();
         return isValid;
     }
 
     private boolean checkKms() {
-        boolean isValid = false;
-        String input = textKms.getText();
-        isValid = input.matches("[0-9]+") && input.matches("[0-9]*");
-        if (!isValid) {
-            textKmsWarning
-                    .setText("Kilometers can only be expressed by numbers");
-        } else {
-            textKmsWarning.setText("");
-        }
-        return isValid;
+    	 boolean isValid = false;
+         boolean mand = manFields.getKmsDriven();
+         String input = textKms.getText();
+         if(mand){
+         	isValid = input.matches("[0-9]+") && input.matches("[0-9]*");
+         }
+         else{
+         	isValid = true;
+         }
+         if (mand && input == ""){
+         	lblKmsWarning.setText("Kilometers is a required field");
+         }
+         else if (!isValid) {
+             lblKmsWarning.setText("Kilometers can only be represented by numbers");
+         } else {
+             lblKmsWarning.setText("");
+         }
+         lblKmsWarning.pack();
+         return isValid;
     }
 
     private boolean checkKmsLS() {
-        boolean isValid = false;
+    	boolean isValid = false;
+        boolean mand = manFields.getKmsLastServiced();
         String input = textKmsLS.getText();
-        isValid = input.matches("[0-9]+") && input.matches("[0-9]*");
-        if (!isValid) {
-            textKmsLSWarning
-                    .setText("Kilometers last serviced can only be expressed by numbers");
-        } else {
-            textKmsLSWarning.setText("");
+        if(mand){
+        	isValid = input.matches("[0-9]+") && input.matches("[0-9]*");
         }
+        else{
+        	isValid = true;
+        }
+        if(mand && input == ""){
+        	lblKmsLSWarning.setText("Kilometers last serviced is a required field");
+        }
+        else if (!isValid) {
+            lblKmsLSWarning
+                    .setText("Kilometers last serviced can only be represented by numbers");
+        } else {
+            lblKmsLSWarning.setText("");
+        }
+        lblKmsLSWarning.pack();
         return isValid;
     }
 }
