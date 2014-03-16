@@ -356,8 +356,8 @@ public class EditVehicle {
         } else if (!isValid) {
             lblVehicleIDWarning.setText("Vehicle ID can only include numbers and letters and no spaces");
         }
-        Vehicle tempp = accessVehicle.getVehicle(input);
-        if( tempp != null && !currVehicle.getID().equals(tempp.getID()) && input.equals(tempp.getID())) {
+        Vehicle temp = accessVehicle.getVehicle(input);
+        if( temp != null && !currVehicle.getID().equals(temp.getID()) && input.equals(temp.getID())) {
             lblVehicleIDWarning.setText("This vehicle already exists");
             isValid = false;
         } 
