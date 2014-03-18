@@ -2,6 +2,7 @@ package cmmsPersistence;
 
 import java.sql.Date;
 import java.util.GregorianCalendar;
+import java.text.SimpleDateFormat;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -315,6 +316,7 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
 	{
 		Statement add = null;
 		add = conn.createStatement();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		
 		String addCommand = "INSERT INTO Vehicles("
 				+ columns[0] + ", " + columns[1] + ", " + columns[2]
@@ -327,7 +329,7 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
 		        + vehicle.getModel() + "', '" + new Integer(vehicle.getYear()).toString() + "', '"
 		        + new Integer(vehicle.getKmDriven()).toString() + "', '" 
 		        + new Integer(vehicle.getKmLastServiced()).toString() + "', '"
-		        + vehicle.getDateLastServiced().toString() + "', '"
+		        + format.format(vehicle.getDateLastServiced().getTime()) + "', '"
 		        + new Boolean(vehicle.isRoadWorthy()).toString() + "', '"
 		        + vehicle.getLicensePlate() + "', '" + vehicle.getInsurance().getPolicyNum() + "', '" 
 		        + vehicle.getInsurance().getType() + "', '" 
@@ -349,6 +351,7 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
 	{
 		Statement update = null;
 		update = conn.createStatement();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		
 		String updateCommand = "UPDATE Vehicles SET "
 				+ columns[1] + "='" + vehicle.getType() + "', "
@@ -357,7 +360,7 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
 				+ columns[4] + "=" + vehicle.getYear() + ", "
 				+ columns[5] + "=" + vehicle.getKmDriven() + ", " 
 				+ columns[6] + "=" + vehicle.getKmLastServiced() + ", "
-		        + columns[7] + "='" + vehicle.getDateLastServiced().toString() + "', "
+		        + columns[7] + "='" + format.format(vehicle.getDateLastServiced().getTime()) + "', "
 		        + columns[8] + "='" + new Boolean(vehicle.isRoadWorthy()).toString() + "', "
 		        + columns[9] + "='" + vehicle.getLicensePlate() + "', "
 		        + columns[10] + "='" + vehicle.getInsurance().getPolicyNum() + "', " 
