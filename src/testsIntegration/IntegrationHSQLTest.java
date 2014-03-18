@@ -1,12 +1,16 @@
 package testsIntegration;
 
+import java.util.ArrayList;
+
 import junit.framework.TestCase;
+
 import org.junit.Test;
+
 import cmmsApplication.Services;
 import cmmsApplication.Main;
-
+import cmmsBusiness.AccessManFields;
 import cmmsBusiness.AccessVehicle;
-
+import cmmsObjects.ManFields;
 import cmmsObjects.Vehicle;
 
 public class IntegrationHSQLTest extends TestCase
@@ -17,26 +21,53 @@ public class IntegrationHSQLTest extends TestCase
 	}
 
 	@Test
-	public void test()
+	public void testVehicle()
 	{
 		AccessVehicle access;
 		Vehicle vehicle;
+		ArrayList<Vehicle> vehicles;
 
-		System.out.println("\nStarting Integration test of HSQLDB");
-
+		Services.closeDataAccess();
+		
+		System.out.println("\nStarting Integration test of HSQLDB Vehicles");
+		
 		Services.createDataAccess(Main.dbName, Main.dbName2);
-
-		vehicle = new Vehicle();
 
 		access = new AccessVehicle();
 
+		vehicles = access.getAllVehicles();
+		
+		assertNotNull(vehicles);
+		
+		vehicle = vehicles.get(0);
+		
 		assertNotNull(vehicle);
 
-		//vehicle = access.getSequential();
-		assertNotNull(vehicle);
+		Services.closeDataAccess();
 
-		//Services.closeDataAccess();
+		System.out.println("Finished Integration test of HSQLDB Vehicles");
+	}
+	
+	@Test
+	public void testManFields()
+	{
+		AccessManFields access;
+		ManFields fields;
 
-		System.out.println("Finished Integration test of HSQLDB");
+		Services.closeDataAccess();
+		
+		System.out.println("\nStarting Integration test of HSQLDB ManFields");
+		
+		Services.createDataAccess(Main.dbName, Main.dbName2);
+
+		access = new AccessManFields();
+
+		fields = access.getManFields();
+		
+		assertNotNull(fields);
+
+		Services.closeDataAccess();
+
+		System.out.println("Finished Integration test of HSQLDB ManFields");
 	}
 }
