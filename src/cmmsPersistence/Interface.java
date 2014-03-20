@@ -30,7 +30,7 @@ public class Interface {
     public boolean removeVehicle(Vehicle v) {
         boolean retBool = false;
         try {
-            retBool = database.removeVehicle(v);
+            retBool = database.removeVehicle(v.getID());
         } catch (SQLException e) {
             e.printStackTrace();
         }

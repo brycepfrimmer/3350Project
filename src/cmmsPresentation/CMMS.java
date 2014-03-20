@@ -44,10 +44,8 @@ public class CMMS{
     private static final Point MIN_WINDOW_SIZE = new Point(800, 600);
     private static final String WINDOW_TITLE = "Computerized Maintenance Management System";
     private static final String SEARCH_TEXT_DEFAULT = "Search For...";
-    private static final int LAYOUT_COL_COUNT = 4;
     private static final int DEFAULT_TABLE_COL_WIDTH = 100;
     private static final int TABLE_WIDTH = 3;
-    private static final int TABLE_HEIGHT = 7;
     private static final int TABLE_COL_COUNT = 14;
 
     private static int currentVehicleCount = 0;
@@ -458,12 +456,20 @@ public class CMMS{
         searchCombo.addFocusListener(new FocusAdapter() {
         	@Override
         	public void focusGained(FocusEvent e) {
-        		if (searchCombo.getText() != "")
+        		if (!searchCombo.getText().equals(""))
         			searchCombo.setText("");
+        	}
+        	
+        	@Override
+        	public void focusLost(FocusEvent e) {
+        		if (searchCombo.getText().equals("")) {
+        			searchCombo.setText(VehicleFields.ID.toString());
+        		}
         	}
         });
         for (String s : columnHeaders)
         	searchCombo.add(s);
+        searchCombo.setText(VehicleFields.ID.toString());
         
         searchText = new Text(mainWindow, SWT.BORDER); 
         searchText.addFocusListener(new FocusAdapter() {
@@ -604,8 +610,8 @@ public class CMMS{
                     if (response == SWT.YES) {
                         int[] selections = dataTable.getSelectionIndices();
                         for (int i = 0; i < selected; i++) {
-//                        	accessVehicle.removeVehicle(dataTable.getItem(
-//                        			selections[i]).getText(0));
+                        	accessVehicle.removeVehicle(dataTable.getItem(
+                        			selections[i]).getText(0));
                         }
 
                         // Update list with the new Vehicles
@@ -621,8 +627,8 @@ public class CMMS{
 
                     if (response == SWT.YES) {
                         // Should only have one item selected
-//                    	accessVehicle.removeVehicle(dataTable.getItem(
-//                    			dataTable.getSelectionIndex()).getText(VehicleFields.ID.ordinal()));
+                    	accessVehicle.removeVehicle(dataTable.getItem(
+                    			dataTable.getSelectionIndex()).getText(VehicleFields.ID.ordinal()));
                         // Update list with the new Vehicles
                         UpdateList();
                     }

@@ -9,13 +9,13 @@ import cmmsObjects.Vehicle;
 import cmmsPersistence.DataAccessObject;
 
 public class AccessVehicle {
+	private static ArrayList<Vehicle> dbVehicles = new ArrayList<Vehicle>();
 	
 	private Vehicle vehicle;
 	private DataAccessObject dataAccess;
 	
 	public AccessVehicle()
 	{
-		vehicle = null;
 		dataAccess = new DataAccessObject("Vehicles");
 		dataAccess.open("Vehicles");
 	}
@@ -24,6 +24,7 @@ public class AccessVehicle {
 	{		
 		try {
 			dataAccess.addVehicle(vehicle);
+			dbVehicles.add(vehicle);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -33,16 +34,11 @@ public class AccessVehicle {
 	
 	public Vehicle getVehicle(String ID )
 	{
-		Vehicle v;
+		Vehicle v = null;
 	
-		try {
-			if (dataAccess.getVehicles("ID",ID).length > 0)
-				v = dataAccess.getVehicles("ID", ID)[0];
-			else
-				v = null;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			v = null;
+		for (Vehicle vIter : dbVehicles) {
+			if (vIter.getID().equals(ID))
+				v = vIter;
 		}
 		
 		return v;
@@ -117,10 +113,17 @@ public class AccessVehicle {
 		return vehicles;
 	}
 	
-	public String removeVehicle(Vehicle v)
+	public String removeVehicle(String ID)
 	{
 		try {
-			dataAccess.removeVehicle(v);
+			dataAccess.removeVehicle(ID);
+			
+			for (Vehicle v : dbVehicles) {
+				if (v.getID().equals(ID)) {
+					int id = dbVehicles.indexOf(v);
+					dbVehicles.remove(id);
+				}
+			}			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
