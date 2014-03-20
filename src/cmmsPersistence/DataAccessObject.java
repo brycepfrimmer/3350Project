@@ -3,23 +3,17 @@ package cmmsPersistence;
 import java.sql.Date;
 import java.util.GregorianCalendar;
 import java.text.SimpleDateFormat;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.DriverManager;
-import java.sql.SQLWarning;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import cmmsBusiness.DBInterface;
-import cmmsBusiness.VehicleFields;
 import cmmsObjects.ManFields;
 import cmmsObjects.Vehicle;
 
-public class DataAccessObject implements DBInterface/*DataAccess*/ {
+public class DataAccessObject/*DataAccess*/ {
 	String dbName;
 	String db2Name;
 	private Connection conn;
@@ -304,6 +298,7 @@ public class DataAccessObject implements DBInterface/*DataAccess*/ {
 									  (String)rs.getObject(10), new Boolean(rs.getObject(13).toString()), (String)rs.getObject(11),
 									  (String)rs.getObject(12), new Integer(rs.getObject(6).toString()), new Integer(rs.getObject(7).toString()),
 									  cal);
+			v.setFuelEcon(new Double(rs.getObject(14).toString()));
 			list.add(v);
 		}
 		

@@ -70,23 +70,6 @@ public class AccessVehicle {
 			e.printStackTrace();
 		}
 	}
-	
-
-	public Vehicle searchByID( String ID )
-	{
-	    Vehicle[] vehicles = null;
-	    try {
-            vehicles = dataAccess.getVehicles("ID", ID);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-	    
-	    if (vehicles != null && vehicles.length >= 1) {
-	        return vehicles[0];
-	    } else {
-	        return null;
-	    }
-	}
 
 	public ArrayList<Vehicle> getAllVehicles()
 	{

@@ -54,7 +54,7 @@ public class Vehicle {
         this.model = " ";
         this.kmDriven = 0;
         this.kmLastServiced = 0;
-        this.setDateLastServiced(null);
+        this.setDateLastServiced(new GregorianCalendar());
         this.partsList = null;
         insurance = new InsurancePolicy();
         this.fuelEcon = 0.0;
@@ -351,6 +351,12 @@ public class Vehicle {
             isValid = false;
         }
         return isValid;
+    }
+    
+    public boolean setFuelEcon( double fuel )
+    {
+    	this.fuelEcon = fuel;
+    	return true;
     }
     
     private void setPartsList() {
