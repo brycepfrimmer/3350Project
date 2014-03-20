@@ -4,13 +4,27 @@ import java.util.ArrayList;
 
 
 
+
+
+
+
+
+
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.GC;
+import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.printing.PrintDialog;
+import org.eclipse.swt.printing.Printer;
+import org.eclipse.swt.printing.PrinterData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
@@ -18,6 +32,8 @@ import org.eclipse.swt.widgets.Shell;
 import cmmsBusiness.VehicleFields;
 import cmmsObjects.Part;
 import cmmsObjects.Vehicle;
+
+import org.eclipse.swt.widgets.Label;
 
 
 public class ViewVehicle {
@@ -30,12 +46,20 @@ public class ViewVehicle {
     private Shell viewWindow;
     private GridLayout mainLayout;
     private Button closeButton;
+    private Button btnPrint;
+    
+    private PrintDialog printDialog;
+    private PrinterData printerData;
+    private Printer printer;
+
 
     private StyledText textDisplay;
+
 
     private int currTextLocation = 0;
 
     private Vehicle[] vehicleList = null;
+    
 
     /* Passing in one vehicle */
     public void open(Vehicle v) {
@@ -150,8 +174,12 @@ public class ViewVehicle {
         currTextLocation += partsHdr.length() + parts.length();
     }
 
+    /**
+     * @wbp.parser.entryPoint
+     */
     private void CreateControls() {
         mainLayout = new GridLayout();
+        mainLayout.numColumns = 2;
 
         viewWindow = new Shell();
         viewWindow.setLayout(mainLayout);
@@ -161,11 +189,21 @@ public class ViewVehicle {
         textDisplay = new StyledText(viewWindow, SWT.BORDER | SWT.V_SCROLL
                 | SWT.H_SCROLL | SWT.READ_ONLY);
         GridData gd = new GridData();
+        gd.horizontalSpan = 2;
         gd.horizontalAlignment = SWT.FILL;
         gd.verticalAlignment = SWT.FILL;
         gd.grabExcessHorizontalSpace = true;
         gd.grabExcessVerticalSpace = true;
         textDisplay.setLayoutData(gd);
+        
+        btnPrint = new Button(viewWindow, SWT.NONE);
+        btnPrint.setText("Print");
+        btnPrint.addSelectionListener(new SelectionAdapter() {
+        	@Override
+        	public void widgetSelected(SelectionEvent e) {
+        		printVehicle();
+        	}
+        });
         
         closeButton = new Button(viewWindow,SWT.NONE);
         closeButton.addSelectionListener(new SelectionAdapter() {
@@ -179,4 +217,23 @@ public class ViewVehicle {
         closeButton.setText("Close");
         closeButton.setLayoutData(gd);
     }
+    
+    private void printVehicle() {
+    	printDialog = new PrintDialog(viewWindow, SWT.NONE);
+    	printerData = printDialog.open();
+    	printer = new Printer(printerData);
+    	
+    	if(printerData == null) return;
+    	if(printerData.printToFile) {
+    		printerData.fileName = "print.out";
+    	}
+    	
+    	if(printer != null) {
+    	
+    		textDisplay.print(printer).run();
+    	}
+    	
+    	printer.dispose();
+    }
+    
 }
