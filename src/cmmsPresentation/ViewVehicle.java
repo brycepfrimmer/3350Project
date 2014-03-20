@@ -1,25 +1,11 @@
 package cmmsPresentation;
 
 import java.util.ArrayList;
-
-
-
-
-
-
-
-
-
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.graphics.Font;
-import org.eclipse.swt.graphics.GC;
-import org.eclipse.swt.graphics.Point;
-import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.printing.PrintDialog;
@@ -33,7 +19,6 @@ import cmmsBusiness.VehicleFields;
 import cmmsObjects.Part;
 import cmmsObjects.Vehicle;
 
-import org.eclipse.swt.widgets.Label;
 
 
 public class ViewVehicle {
@@ -185,6 +170,7 @@ public class ViewVehicle {
         viewWindow.setLayout(mainLayout);
         viewWindow.setMinimumSize(MIN_WINDOW_WIDTH, MIN_WINDOW_HEIGHT);
         viewWindow.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        viewWindow.setText("View Vehicle");
         
         textDisplay = new StyledText(viewWindow, SWT.BORDER | SWT.V_SCROLL
                 | SWT.H_SCROLL | SWT.READ_ONLY);
@@ -223,17 +209,18 @@ public class ViewVehicle {
     	printerData = printDialog.open();
     	printer = new Printer(printerData);
     	
-    	if(printerData == null) return;
-    	if(printerData.printToFile) {
-    		printerData.fileName = "print.out";
+    	if(printerData != null) {
+	    	if(printerData.printToFile) {
+	    		printerData.fileName = "print.out";
+	    	}
+	    	
+	    	if(printer != null) {
+	    	
+	    		textDisplay.print(printer).run();
+	    	}
+	    	
+	    	printer.dispose();
     	}
-    	
-    	if(printer != null) {
-    	
-    		textDisplay.print(printer).run();
-    	}
-    	
-    	printer.dispose();
     }
     
 }
