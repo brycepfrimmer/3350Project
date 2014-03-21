@@ -42,16 +42,25 @@ public class AccessVehicle {
 		}
 	}
 	
-	public String addVehicle(Vehicle vehicle)
+	public boolean addVehicle(Vehicle vehicle)
 	{		
-		try {
-			dataAccess.addVehicle(vehicle);
+		boolean insert = true;
+		
+		for (Vehicle v : dbVehicles) {
+			if (v.getID().equals(vehicle.getID())) {
+				insert = false;
+			}
+		}
+		if (insert) {
+			try {
+				dataAccess.addVehicle(vehicle);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 			dbVehicles.add(vehicle);
-		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		
-		return null;
+		return insert;
 	}
 	
 	public void sortList(String field) {
@@ -117,17 +126,22 @@ public class AccessVehicle {
 	
 	public void updateVehicle( Vehicle v )
 	{
+		int id = -1;
 		try {
 			dataAccess.updateVehicle(v);
 			
 			for (Vehicle vIter : dbVehicles) {
 				if (vIter.getID().equals(v.getID())) {
-					dbVehicles.remove(vIter);
+					id = dbVehicles.indexOf(vIter);
 				}
 			}
-			dbVehicles.add(v);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+		
+		if (id >=0) {
+			dbVehicles.add(v);
+			dbVehicles.remove(id);
 		}
 	}
 
@@ -207,18 +221,22 @@ public class AccessVehicle {
 	
 	public String removeVehicle(String ID)
 	{
+		int id = -1;
 		try {
 			dataAccess.removeVehicle(ID);
 			
 			for (Vehicle v : dbVehicles) {
 				if (v.getID().equals(ID)) {
-					int id = dbVehicles.indexOf(v);
-					dbVehicles.remove(id);
+					id = dbVehicles.indexOf(v);
 				}
 			}			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		if (id >= 0)
+			 dbVehicles.remove(id);
+		
 		return null;
 	}
 
@@ -250,7 +268,7 @@ public class AccessVehicle {
 			}
 			vehicle = dataAccess.getVehicles("ID", ID)[0];
 			vehicle.updateKm(km, fuel);
-			dataAccess.updateVehicle(vehicle);
+			updateVehicle(vehicle);
 		}
 		catch (SQLException e) {
 			e.printStackTrace();

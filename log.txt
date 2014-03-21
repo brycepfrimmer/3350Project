@@ -343,3 +343,12 @@ March 20 - 2014
 		* Refactored some strings from Lists to Maps
 		* Added individual Comparator classes for each vehicle
 		field to aid in sorting ArrayLists
+March 21 - 2014
+	Darwin Froese - 1 Hour
+		* AccessVehicle.addVehicle modified to only insert
+		if the ID has not been used returns a boolean for
+		success/fail
+		* Fixed the database so all tests pass. Cannot
+		remove element from a list while iterating through
+		a list and changed UpdateKM to call UpdateVehicle
+		so that the update code is only written once

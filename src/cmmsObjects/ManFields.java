@@ -91,7 +91,5 @@ public class ManFields {
 
     public void setDateLastServiced(boolean dateLastServiced) {
         this.dateLastServiced = dateLastServiced;
-    }
-	
-	
+    }	
 }

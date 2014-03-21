@@ -63,7 +63,7 @@ public class IntegrationHSQLTest extends TestCase
 	public void tearDown() throws Exception {
 		
 		accessVehicle.removeVehicle( vehicle.getID() );
-		Services.closeDataAccess();
+ 		Services.closeDataAccess();
 		
 		System.out.println("Finished Integration test of HSQLDB");
 	}

@@ -31,7 +31,7 @@ public class TestAccessManFields extends TestCase{
 		access = new AccessManFields();
 
 		fields = access.getManFields();
-		assertNotNull(fields);
+		assertNotNull(fields);	
 		assertTrue(fields.getId());
 
 		//Services.closeDataAccess();
