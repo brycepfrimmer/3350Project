@@ -14,7 +14,7 @@ import org.eclipse.swt.widgets.Table;
 
 import cmmsBusiness.AccessVehicle;
 import cmmsObjects.Part;
-import cmmsObjects.Vehicle;
+import cmmsObjects.Vehicle.Vehicle;
 
 
 public class EditPartsList {
@@ -38,7 +38,7 @@ public class EditPartsList {
         accessVehicle = new AccessVehicle();
         currVehicle = v;
 //        list = accessVehicle.getPartsList(v.getID());
-        //list = currVehicle.getPartsList();
+//        list = currVehicle.getPartsList();
         if (!list.isEmpty()) {
             updateList();
         }

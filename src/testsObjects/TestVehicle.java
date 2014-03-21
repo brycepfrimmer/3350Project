@@ -8,7 +8,7 @@ import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
-import cmmsObjects.Vehicle;
+import cmmsObjects.Vehicle.Vehicle;
 
 
 public class TestVehicle extends TestCase {

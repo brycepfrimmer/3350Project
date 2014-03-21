@@ -9,32 +9,15 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.DriverManager;
 import java.util.ArrayList;
-
 import cmmsObjects.ManFields;
-import cmmsObjects.Vehicle;
+import cmmsObjects.Vehicle.Vehicle;
+import cmmsObjects.Vehicle.VehicleFields;
 
 public class DataAccessObject/*DataAccess*/ {
 	String dbName;
 	String db2Name;
 	private Connection conn;
 	private Connection conn2;
-	
-	private static String[] columns = {
-    	"ID",
-        "Type",
-        "Manufacturer",
-        "Model",
-        "Year",
-        "Kilometers",
-        "LastServiceKM",
-        "DateLastServiced",
-        "IsRoadworthy",
-        "LicensePlate",
-        "InsurancePolicyNumber",
-        "InsurancePolicyType",
-        "IsOperational",
-        "FuelEconomy"
-    };
 	
 	private static String[] columns2 = {
 	    "id",
@@ -66,20 +49,20 @@ public class DataAccessObject/*DataAccess*/ {
 	
 	private void CreateVehiclesTable() {
 		String createTable = "CREATE TABLE Vehicles ( "
-				+ columns[0] + " VARCHAR(1024), "
-				+ columns[1] + " VARCHAR(1024), "
-				+ columns[2] + " VARCHAR(1024), "
-				+ columns[3] + " VARCHAR(1024), "
-				+ columns[4] + " VARCHAR(1024), "
-				+ columns[5] + " VARCHAR(1024), "
-				+ columns[6] + " VARCHAR(1024), "
-				+ columns[7] + " VARCHAR(1024), "
-				+ columns[8] + " VARCHAR(1024), "
-				+ columns[9] + " VARCHAR(1024), "
-				+ columns[10] + " VARCHAR(1024), "
-				+ columns[11] + " VARCHAR(1024), "
-				+ columns[12] + " VARCHAR(1024), "
-				+ columns[13] + " VARCHAR(1024) "
+				+ VehicleFields.ID.toString() + " VARCHAR(1024), "
+				+ VehicleFields.TYPE.toString() + " VARCHAR(1024), "
+				+ VehicleFields.MANUFACTURER.toString() + " VARCHAR(1024), "
+				+ VehicleFields.MODEL.toString() + " VARCHAR(1024), "
+				+ VehicleFields.YEAR.toString() + " VARCHAR(1024), "
+				+ VehicleFields.KM_DRIVEN.toString() + " VARCHAR(1024), "
+				+ VehicleFields.KM_LAST_SERVICE.toString() + " VARCHAR(1024), "
+				+ VehicleFields.DATE_LAST_SERVICE.toString() + " VARCHAR(1024), "
+				+ VehicleFields.ROADWORTHY.toString() + " VARCHAR(1024), "
+				+ VehicleFields.LICENSE_PLATE.toString() + " VARCHAR(1024), "
+				+ VehicleFields.POLICY_NUMBER.toString() + " VARCHAR(1024), "
+				+ VehicleFields.POLICY_TYPE.toString() + " VARCHAR(1024), "
+				+ VehicleFields.OPERATIONAL.toString() + " VARCHAR(1024), "
+				+ VehicleFields.FUEL_ECON.toString() + " VARCHAR(1024) "
 				+ " )";
 		
 		// Setup for HSQLDB
@@ -104,7 +87,6 @@ public class DataAccessObject/*DataAccess*/ {
 		}
 		
 		try {
-			System.out.println("Creating Vehicles Table");
 			int i = create.executeUpdate(createTable);
 			
 			if (i == -1) {
@@ -113,7 +95,6 @@ public class DataAccessObject/*DataAccess*/ {
 			}
 		}
 		catch (SQLException e) {
-			System.out.println("** ERROR: " + e);
 		}
 	}
 	
@@ -153,9 +134,7 @@ public class DataAccessObject/*DataAccess*/ {
 		}
 		
 		try {
-			System.out.println("Creating ManFields Table");
 			int j = create.executeUpdate(createTable2);
-			System.out.println("Finished Creating Tables");
 			
 			if (j == -1) {
 			    System.out.println("Error create ManFields Database.");
@@ -218,31 +197,10 @@ public class DataAccessObject/*DataAccess*/ {
 		Vehicle[] v = null;
 		
 		Statement query = null;
-		ResultSet searchResult = null;
-		String fieldMod = "";
-		
-		if (field.equals("Last Service (KM)"))
-			fieldMod = "LastServiceKM";
-		else if (field.equals("Date Last Serviced"))
-			fieldMod = "DateLastServiced";
-		else if (field.equals("Is Roadworthy"))
-			fieldMod = "IsRoadworthy";
-		else if (field.equals("License Plate"))
-			fieldMod = "LicensePlate";
-		else if (field.equals("Insurance Policy Number"))
-			fieldMod = "InsurancePolicyNumber";
-		else if (field.equals("Insurance Policy Type"))
-			fieldMod = "InsurancePolicyType";
-		else if (field.equals("Is Operational"))
-			fieldMod = "IsOperational";
-		else if (field.equals("Fuel Economy (L/100km)"))
-			fieldMod = "FuelEconomy";
-		else
-			fieldMod = field;
-			
+		ResultSet searchResult = null;			
 		
 		query = conn.createStatement();
-		searchResult = query.executeQuery("SELECT * FROM Vehicles WHERE " + fieldMod + "='" + key + "'");
+		searchResult = query.executeQuery("SELECT * FROM Vehicles WHERE " + field + "='" + key + "'");
 		
 		Object[] objects = ProcessVehicleSearch(searchResult);
 		v = new Vehicle[objects.length];		
@@ -314,11 +272,20 @@ public class DataAccessObject/*DataAccess*/ {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		
 		String addCommand = "INSERT INTO Vehicles("
-				+ columns[0] + ", " + columns[1] + ", " + columns[2]
-				+ ", " + columns[3] + ", " + columns[4] + ", " + columns[5]
-				+ ", " + columns[6] + ", " + columns[7] + ", " + columns[8]
-				+ ", " + columns[9] + ", " + columns[10] + ", " + columns[11]
-				+ ", " + columns[12] + ", " + columns[13] + ") VALUES('"
+				+ VehicleFields.ID.toString() + ", "
+				+ VehicleFields.TYPE.toString() + ", " 
+				+ VehicleFields.MANUFACTURER.toString()	+ ", "
+				+ VehicleFields.MODEL.toString() + ", "
+				+ VehicleFields.YEAR.toString() + ", "
+				+ VehicleFields.KM_DRIVEN.toString() + ", "
+				+ VehicleFields.KM_LAST_SERVICE.toString() + ", "
+				+ VehicleFields.DATE_LAST_SERVICE.toString() + ", "
+				+ VehicleFields.ROADWORTHY.toString() + ", "
+				+ VehicleFields.LICENSE_PLATE.toString() + ", "
+				+ VehicleFields.POLICY_NUMBER.toString() + ", "
+				+ VehicleFields.POLICY_TYPE.toString() + ", "
+				+ VehicleFields.OPERATIONAL.toString() + ", "
+				+ VehicleFields.FUEL_ECON.toString() + ") VALUES('"
 				+ vehicle.getID() + "', '"
 				+ vehicle.getType() + "', '" + vehicle.getManufacturer() + "', '"
 		        + vehicle.getModel() + "', '" + new Integer(vehicle.getYear()).toString() + "', '"
@@ -349,20 +316,20 @@ public class DataAccessObject/*DataAccess*/ {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		
 		String updateCommand = "UPDATE Vehicles SET "
-				+ columns[1] + "='" + vehicle.getType() + "', "
-				+ columns[2] + "='" + vehicle.getManufacturer() + "', "
-		        + columns[3] + "='" + vehicle.getModel() + "', "
-				+ columns[4] + "=" + vehicle.getYear() + ", "
-				+ columns[5] + "=" + vehicle.getKmDriven() + ", " 
-				+ columns[6] + "=" + vehicle.getKmLastServiced() + ", "
-		        + columns[7] + "='" + format.format(vehicle.getDateLastServiced().getTime()) + "', "
-		        + columns[8] + "='" + new Boolean(vehicle.isRoadWorthy()).toString() + "', "
-		        + columns[9] + "='" + vehicle.getLicensePlate() + "', "
-		        + columns[10] + "='" + vehicle.getInsurance().getPolicyNum() + "', " 
-		        + columns[11] + "='" + vehicle.getInsurance().getType() + "', " 
-		        + columns[12] + "='" + new Boolean(vehicle.isOperational()).toString() + "', "
-		        + columns[13] + "='" + new Double(vehicle.getFuelEcon()).toString()
-				+ "' WHERE " + columns[0] + "='" + vehicle.getID() + "'";
+				+ VehicleFields.TYPE.toString() + "='" + vehicle.getType() + "', "
+				+ VehicleFields.MANUFACTURER.toString() + "='" + vehicle.getManufacturer() + "', "
+		        + VehicleFields.MODEL.toString() + "='" + vehicle.getModel() + "', "
+				+ VehicleFields.YEAR.toString() + "=" + vehicle.getYear() + ", "
+				+ VehicleFields.KM_DRIVEN.toString() + "=" + vehicle.getKmDriven() + ", " 
+				+ VehicleFields.KM_LAST_SERVICE.toString() + "=" + vehicle.getKmLastServiced() + ", "
+		        + VehicleFields.DATE_LAST_SERVICE.toString() + "='" + format.format(vehicle.getDateLastServiced().getTime()) + "', "
+		        + VehicleFields.ROADWORTHY.toString() + "='" + new Boolean(vehicle.isRoadWorthy()).toString() + "', "
+		        + VehicleFields.LICENSE_PLATE.toString() + "='" + vehicle.getLicensePlate() + "', "
+		        + VehicleFields.POLICY_NUMBER.toString() + "='" + vehicle.getInsurance().getPolicyNum() + "', " 
+		        + VehicleFields.POLICY_TYPE.toString() + "='" + vehicle.getInsurance().getType() + "', " 
+		        + VehicleFields.OPERATIONAL.toString() + "='" + new Boolean(vehicle.isOperational()).toString() + "', "
+		        + VehicleFields.FUEL_ECON.toString() + "='" + new Double(vehicle.getFuelEcon()).toString()
+				+ "' WHERE " + VehicleFields.ID.toString() + "='" + vehicle.getID() + "'";
 		
 		int i = update.executeUpdate(updateCommand);
 		
@@ -371,17 +338,17 @@ public class DataAccessObject/*DataAccess*/ {
 		}
 	}
 	
-	public boolean removeVehicle(Vehicle v) throws SQLException
+	public boolean removeVehicle(String ID) throws SQLException
 	{
 		Statement delete = null;
 		delete = conn.createStatement();
 		
-		String deleteCommand = "DELETE from Vehicles WHERE " + columns[0] + "='" + v.getID() + "'";
+		String deleteCommand = "DELETE from Vehicles WHERE " + VehicleFields.ID.toString() + "='" + ID + "'";
 		
 		int i = delete.executeUpdate(deleteCommand);
 		
 		if (i == -1) {
-			System.out.println("Error removing database entry " + v.getID());
+			System.out.println("Error removing database entry " + ID);
 			return false;
 		}
 		

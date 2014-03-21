@@ -1,11 +1,14 @@
-package cmmsObjects;
+package cmmsObjects.Vehicle;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.sql.Date;
 import java.util.GregorianCalendar;
 
-import cmmsBusiness.VehicleFields;
+import cmmsObjects.InsurancePolicy;
+import cmmsObjects.Part;
+import cmmsObjects.ServiceItem;
 
 
 /*
@@ -369,7 +372,7 @@ public class Vehicle {
     
     // ***End of set methods***//
 
-    // ***get data methods***//
+    // ***get data methods***//    
     public String getID() {
         return ID;
     }

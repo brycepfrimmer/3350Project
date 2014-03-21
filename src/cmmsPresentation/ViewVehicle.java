@@ -1,6 +1,7 @@
 package cmmsPresentation;
 
 import java.util.ArrayList;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;
@@ -15,9 +16,9 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
-import cmmsBusiness.VehicleFields;
 import cmmsObjects.Part;
-import cmmsObjects.Vehicle;
+import cmmsObjects.Vehicle.Vehicle;
+import cmmsObjects.Vehicle.VehicleFields;
 
 
 

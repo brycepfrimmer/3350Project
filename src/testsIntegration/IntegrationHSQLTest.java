@@ -15,9 +15,9 @@ import cmmsApplication.Main;
 import cmmsBusiness.AccessManFields;
 import cmmsBusiness.AccessVehicle;
 import cmmsObjects.ManFields;
-import cmmsObjects.Part;
 import cmmsObjects.ServiceItem;
-import cmmsObjects.Vehicle;
+import cmmsObjects.Part;
+import cmmsObjects.Vehicle.Vehicle;
 
 public class IntegrationHSQLTest extends TestCase
 {
@@ -62,7 +62,7 @@ public class IntegrationHSQLTest extends TestCase
 	@After
 	public void tearDown() throws Exception {
 		
-		accessVehicle.removeVehicle( vehicle );
+		accessVehicle.removeVehicle( vehicle.getID() );
 		Services.closeDataAccess();
 		
 		System.out.println("Finished Integration test of HSQLDB");
@@ -93,7 +93,7 @@ public class IntegrationHSQLTest extends TestCase
 		accessVehicle.addVehicle(vehicle);
 		vehicle = accessVehicle.getVehicle("TEST");
 		assertNotNull( vehicle );
-		accessVehicle.removeVehicle(vehicle);
+		accessVehicle.removeVehicle(vehicle.getID());
 	}
 
 	@Test
@@ -138,7 +138,7 @@ public class IntegrationHSQLTest extends TestCase
 		Vehicle testVehicle = vehicle;
 		testVehicle.setID("Test");
 		accessVehicle.addVehicle(testVehicle);
-		accessVehicle.removeVehicle(testVehicle);
+		accessVehicle.removeVehicle(testVehicle.getID());
 		testVehicle = accessVehicle.getVehicle("Test");
 		assertNull( testVehicle );
 	}

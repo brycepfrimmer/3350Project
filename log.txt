@@ -331,3 +331,15 @@ Acceptance Tests
 The four Big user stories listed above are the next four in our list and are the four that we intended to implement in iteration 3.
 As of right now our initial plan hasn't changed at all. This might be different over this next iteration.
 =======
+March 14 - 2014
+	Darwin Froese - 2 Hours
+		Finished Implementing HSQLDB
+March 20 - 2014
+	Darwin Froese - 6 Hours
+		* Refactored interacting with vehicles in database
+		for searching and sorting purposes
+		* Re-Implemented searchig
+		* Implemented table sorting
+		* Refactored some strings from Lists to Maps
+		* Added individual Comparator classes for each vehicle
+		field to aid in sorting ArrayLists

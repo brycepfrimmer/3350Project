@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import cmmsObjects.ManFields;
-import cmmsObjects.Vehicle;
+import cmmsObjects.Vehicle.Vehicle;
 import cmmsApplication.Services;
 import cmmsApplication.Main;
 
@@ -30,7 +30,7 @@ public class Interface {
     public boolean removeVehicle(Vehicle v) {
         boolean retBool = false;
         try {
-            retBool = database.removeVehicle(v);
+            retBool = database.removeVehicle(v.getID());
         } catch (SQLException e) {
             e.printStackTrace();
         }

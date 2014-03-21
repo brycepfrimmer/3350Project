@@ -17,7 +17,7 @@ import org.eclipse.swt.widgets.DateTime;
 import cmmsBusiness.AccessManFields;
 import cmmsBusiness.AccessVehicle;
 import cmmsObjects.ManFields;
-import cmmsObjects.Vehicle;
+import cmmsObjects.Vehicle.Vehicle;
 
 import java.sql.Date;
 import java.util.GregorianCalendar;
