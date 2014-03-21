@@ -11,7 +11,7 @@ import cmmsApplication.Main;
 import cmmsBusiness.AccessManFields;
 import cmmsBusiness.AccessVehicle;
 import cmmsObjects.ManFields;
-import cmmsObjects.Vehicle;
+import cmmsObjects.Vehicle.Vehicle;
 
 public class IntegrationHSQLTest extends TestCase
 {

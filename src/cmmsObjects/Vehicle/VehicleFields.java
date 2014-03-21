@@ -1,4 +1,4 @@
-package cmmsBusiness;
+package cmmsObjects.Vehicle;
 
 public enum VehicleFields {
 	ID, 

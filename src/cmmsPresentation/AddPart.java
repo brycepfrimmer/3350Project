@@ -13,7 +13,7 @@ import org.eclipse.wb.swt.SWTResourceManager;
 
 import cmmsBusiness.AccessVehicle;
 import cmmsObjects.Part;
-import cmmsObjects.Vehicle;
+import cmmsObjects.Vehicle.Vehicle;
 
 
 public class AddPart {

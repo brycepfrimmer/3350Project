@@ -2,7 +2,7 @@ package cmmsPersistence;
 
 import java.util.ArrayList;
 
-import cmmsObjects.Vehicle;
+import cmmsObjects.Vehicle.Vehicle;
 import cmmsApplication.Services;
 import cmmsApplication.Main;
 

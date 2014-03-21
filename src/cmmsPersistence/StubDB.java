@@ -7,7 +7,7 @@ import java.util.GregorianCalendar;
 import cmmsObjects.ManFields;
 import cmmsObjects.Part;
 import cmmsObjects.ServiceItem;
-import cmmsObjects.Vehicle;
+import cmmsObjects.Vehicle.Vehicle;
 import cmmsApplication.Main;
 
 public class StubDB {

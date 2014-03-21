@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import cmmsObjects.ManFields;
-import cmmsObjects.Vehicle;
+import cmmsObjects.Vehicle.Vehicle;
 import cmmsApplication.Services;
 import cmmsApplication.Main;
 

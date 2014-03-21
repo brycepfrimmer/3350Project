@@ -5,6 +5,7 @@ package cmmsPresentation;
 
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.ControlAdapter;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.KeyAdapter;
@@ -15,6 +16,8 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Text;
@@ -30,14 +33,38 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.wb.swt.SWTResourceManager;
 
 
+
+
+
+
+
+
+
+
+
+
+
 import cmmsBusiness.AccessVehicle;
-import cmmsBusiness.VehicleFields;
-import cmmsObjects.Vehicle;
 
 
 
+
+
+
+
+
+
+
+
+
+import cmmsObjects.Vehicle.Vehicle;
+import cmmsObjects.Vehicle.VehicleFields;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class CMMS{
     /* Interface Constants */
@@ -129,23 +156,8 @@ public class CMMS{
     
     private static ArrayList<Vehicle> searchList;
     
-    private static String[] columnHeaders = {
-    	"ID",
-        "Type",
-        "Manufacturer",
-        "Model",
-        "Year",
-        "Kilometers",
-        "Last service (KM)",
-        "Date Last Serviced",
-        "Is Roadworthy",
-        "License Plate",
-        "Insurance Policy Number",
-        "Insurance Policy Type",
-        "Is Operational",
-        "Fuel Economy (L/100km)"
-    };
-    
+    private static Map<String, String> columnHeaders = new HashMap<String, String>();
+
     private static boolean[] columnVisibility = {
     	true,
     	true,
@@ -167,12 +179,30 @@ public class CMMS{
     
     public CMMS()
     {
+    	CreateHashMap();
     	accessVehicle = new AccessVehicle();
         CreateWindow();
         OnLoad();
         Open();
     }
 
+    private static void CreateHashMap() {
+    	columnHeaders.put(VehicleFields.ID.toString(),"ID");
+        columnHeaders.put(VehicleFields.TYPE.toString(), "Type");
+        columnHeaders.put(VehicleFields.MANUFACTURER.toString(), "Manufacturer");
+        columnHeaders.put(VehicleFields.MODEL.toString(), "Model");
+        columnHeaders.put(VehicleFields.YEAR.toString(), "Year");
+        columnHeaders.put(VehicleFields.KM_DRIVEN.toString(), "Kilometers");
+        columnHeaders.put(VehicleFields.KM_LAST_SERVICE.toString(), "Last service (KM)");
+        columnHeaders.put(VehicleFields.DATE_LAST_SERVICE.toString(), "Date Last Serviced");
+        columnHeaders.put(VehicleFields.ROADWORTHY.toString(), "Is Roadworthy");
+        columnHeaders.put(VehicleFields.LICENSE_PLATE.toString(), "License Plate");
+        columnHeaders.put(VehicleFields.POLICY_NUMBER.toString(), "Insurance Policy Number");
+        columnHeaders.put(VehicleFields.POLICY_TYPE.toString(), "Insurance Policy Type");
+        columnHeaders.put(VehicleFields.OPERATIONAL.toString(), "Is Operational");
+        columnHeaders.put(VehicleFields.FUEL_ECON.toString(), "Fuel Economy (L/100km)");
+    }
+    
     private static void OnLoad() {
         // Read existing database vehicles
         UpdateList();
@@ -467,8 +497,13 @@ public class CMMS{
         		}
         	}
         });
-        for (String s : columnHeaders)
-        	searchCombo.add(s);
+        @SuppressWarnings("rawtypes")
+		Iterator it = columnHeaders.entrySet().iterator();
+        while (it.hasNext()) {
+        	@SuppressWarnings("unchecked")
+			Map.Entry<String, String> pairs= (Entry<String, String>)it.next();
+        	searchCombo.add(pairs.getValue());
+        }        
         searchCombo.setText(VehicleFields.ID.toString());
         
         searchText = new Text(mainWindow, SWT.BORDER); 
@@ -502,7 +537,16 @@ public class CMMS{
         			searchVal = searchText.getText().substring(0, searchText.getText().length() - 1);
         		
         		if (searchVal != null) {
-        			Vehicle[] accessReturn = accessVehicle.getVehicles(searchCombo.getText(), searchVal);
+        			String searchField = VehicleFields.ID.toString();
+        			@SuppressWarnings("rawtypes")
+        			Iterator it = columnHeaders.entrySet().iterator();
+        	        while (it.hasNext()) {
+        	        	@SuppressWarnings("unchecked")
+        				Map.Entry<String, String> pairs= (Entry<String, String>)it.next();
+        	        	if (pairs.getValue().equals(searchCombo.getText()))
+        	        		searchField = pairs.getKey();
+        	        }
+        			Vehicle[] accessReturn = accessVehicle.getVehicles(searchField, searchVal);
                 
 	        		searchList = new ArrayList<Vehicle>();
 	        		for (Vehicle v : accessReturn) {
@@ -901,86 +945,120 @@ public class CMMS{
     }
     
     private static void CreateColumns() {
+    	Listener sortListener = new Listener() {
+    		String sortString = null;
+			@Override
+			public void handleEvent(Event event) {
+				TableColumn col = (TableColumn)event.widget;
+				
+				@SuppressWarnings("rawtypes")
+    			Iterator it = columnHeaders.entrySet().iterator();
+    	        while (it.hasNext()) {
+    	        	@SuppressWarnings("unchecked")
+    				Map.Entry<String, String> pairs= (Entry<String, String>)it.next();
+    	        	if (pairs.getValue().equals(col.getText()))
+    	        		sortString = pairs.getKey();
+    	        }
+				
+				accessVehicle.sortList(sortString);
+				UpdateList();
+			}
+    	};
+    	
         vehicleIDCol = new TableColumn(dataTable, SWT.BORDER);
-        vehicleIDCol.setText(columnHeaders[0]);
+        vehicleIDCol.addListener(SWT.Selection, sortListener);
+        vehicleIDCol.setText(columnHeaders.get(VehicleFields.ID.toString()));
         vehicleIDCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
         vehicleIDCol.setMoveable(true);
         vehicleIDCol.setResizable(true);
 
         vehicleTypeCol = new TableColumn(dataTable, SWT.BORDER);
-        vehicleTypeCol.setText(columnHeaders[1]);
+        vehicleTypeCol.addListener(SWT.Selection, sortListener);
+        vehicleTypeCol.setText(columnHeaders.get(VehicleFields.TYPE.toString()));
         vehicleTypeCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
         vehicleTypeCol.setMoveable(true);
         vehicleTypeCol.setResizable(true);
 
         vehicleManufacturerCol = new TableColumn(dataTable, SWT.BORDER);
-        vehicleManufacturerCol.setText(columnHeaders[2]);
+        vehicleManufacturerCol.addListener(SWT.Selection, sortListener);
+        vehicleManufacturerCol.setText(columnHeaders.get(VehicleFields.MANUFACTURER.toString()));
         vehicleManufacturerCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
         vehicleManufacturerCol.setMoveable(true);
         vehicleManufacturerCol.setResizable(true);
 
         vehicleModelCol = new TableColumn(dataTable, SWT.BORDER);
-        vehicleModelCol.setText(columnHeaders[3]);
+        vehicleModelCol.addListener(SWT.Selection, sortListener);
+        vehicleModelCol.setText(columnHeaders.get(VehicleFields.MODEL.toString()));
         vehicleModelCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
         vehicleModelCol.setMoveable(true);
         vehicleModelCol.setResizable(true);
 
         vehicleYearCol = new TableColumn(dataTable, SWT.BORDER);
-        vehicleYearCol.setText(columnHeaders[4]);
+        vehicleYearCol.addListener(SWT.Selection, sortListener);
+        vehicleYearCol.setText(columnHeaders.get(VehicleFields.YEAR.toString()));
         vehicleYearCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
         vehicleYearCol.setMoveable(true);
         vehicleYearCol.setResizable(true);
 
         vehicleKMCol = new TableColumn(dataTable, SWT.BORDER);
-        vehicleKMCol.setText(columnHeaders[5]);
+        vehicleKMCol.addListener(SWT.Selection, sortListener);
+        vehicleKMCol.setText(columnHeaders.get(VehicleFields.KM_DRIVEN.toString()));
         vehicleKMCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
         vehicleKMCol.setMoveable(true);
         vehicleKMCol.setResizable(true);
 
         vehicleKMLastServiceCol = new TableColumn(dataTable, SWT.BORDER);
-        vehicleKMLastServiceCol.setText(columnHeaders[6]);
+        vehicleKMLastServiceCol.addListener(SWT.Selection, sortListener);
+        vehicleKMLastServiceCol.setText(columnHeaders.get(VehicleFields.KM_LAST_SERVICE.toString()));
         vehicleKMLastServiceCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
         vehicleKMLastServiceCol.setMoveable(true);
         vehicleKMLastServiceCol.setResizable(true);
 
         vehicleDateLastServicedCol = new TableColumn(dataTable, SWT.BORDER);
-        vehicleDateLastServicedCol.setText(columnHeaders[7]);
+        vehicleDateLastServicedCol.addListener(SWT.Selection, sortListener);
+        vehicleDateLastServicedCol.setText(columnHeaders.get(VehicleFields.DATE_LAST_SERVICE.toString()));
         vehicleDateLastServicedCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
         vehicleDateLastServicedCol.setMoveable(true);
         vehicleDateLastServicedCol.setResizable(true);
         
         vehicleRoadWorthyCol = new TableColumn(dataTable, SWT.BORDER);
-        vehicleRoadWorthyCol.setText(columnHeaders[8]);
+        vehicleRoadWorthyCol.addListener(SWT.Selection, sortListener);
+        vehicleRoadWorthyCol.setText(columnHeaders.get(VehicleFields.ROADWORTHY.toString()));
         vehicleRoadWorthyCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
         vehicleRoadWorthyCol.setMoveable(true);
         vehicleRoadWorthyCol.setResizable(true);
 
         vehicleLicensePlateCol = new TableColumn(dataTable, SWT.BORDER);
-        vehicleLicensePlateCol.setText(columnHeaders[9]);
+        vehicleLicensePlateCol.addListener(SWT.Selection, sortListener);
+        vehicleLicensePlateCol.setText(columnHeaders.get(VehicleFields.LICENSE_PLATE.toString()));
         vehicleLicensePlateCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
         vehicleLicensePlateCol.setMoveable(true);
         vehicleLicensePlateCol.setResizable(true);
 
         vehiclePolicyCol = new TableColumn(dataTable, SWT.BORDER);
-        vehiclePolicyCol.setText(columnHeaders[10]);
+        vehiclePolicyCol.addListener(SWT.Selection, sortListener);
+        vehiclePolicyCol.setText(columnHeaders.get(VehicleFields.POLICY_NUMBER.toString()));
         vehiclePolicyCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
         vehiclePolicyCol.setMoveable(true);
         vehiclePolicyCol.setResizable(true);
 
         vehicleInsTypeCol = new TableColumn(dataTable, SWT.BORDER);
-        vehicleInsTypeCol.setText(columnHeaders[11]);
+        vehicleInsTypeCol.addListener(SWT.Selection, sortListener);
+        vehicleInsTypeCol.setText(columnHeaders.get(VehicleFields.POLICY_TYPE.toString()));
         vehicleInsTypeCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
         vehicleInsTypeCol.setMoveable(true);
         vehicleInsTypeCol.setResizable(true);
 
         vehicleOperationalCol = new TableColumn(dataTable, SWT.BORDER);
-        vehicleOperationalCol.setText(columnHeaders[12]);
+        vehicleOperationalCol.addListener(SWT.Selection, sortListener);
+        vehicleOperationalCol.setText(columnHeaders.get(VehicleFields.OPERATIONAL.toString()));
         vehicleOperationalCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
         vehicleOperationalCol.setMoveable(true);
         vehicleOperationalCol.setResizable(true);
 
         vehicleFuelEconCol = new TableColumn(dataTable, SWT.BORDER);
-        vehicleFuelEconCol.setText(columnHeaders[13]);
+        vehicleFuelEconCol.addListener(SWT.Selection, sortListener);
+        vehicleFuelEconCol.setText(columnHeaders.get(VehicleFields.FUEL_ECON.toString()));
         vehicleFuelEconCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
         vehicleFuelEconCol.setMoveable(true);
         vehicleFuelEconCol.setResizable(true);
@@ -990,7 +1068,7 @@ public class CMMS{
     	
     	// resize the columns to fit the header text
         PackColumns();
-    } 
+    }
     
     private static void openDailyTasks(){
         ArrayList<Vehicle> list;

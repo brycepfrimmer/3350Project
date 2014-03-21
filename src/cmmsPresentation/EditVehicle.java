@@ -19,7 +19,7 @@ import org.eclipse.swt.events.KeyEvent;
 import cmmsBusiness.AccessManFields;
 import cmmsBusiness.AccessVehicle;
 import cmmsObjects.ManFields;
-import cmmsObjects.Vehicle;
+import cmmsObjects.Vehicle.Vehicle;
 
 
 public class EditVehicle {

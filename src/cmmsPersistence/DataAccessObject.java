@@ -14,9 +14,9 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 
 import cmmsBusiness.DBInterface;
-import cmmsBusiness.VehicleFields;
 import cmmsObjects.ManFields;
-import cmmsObjects.Vehicle;
+import cmmsObjects.Vehicle.Vehicle;
+import cmmsObjects.Vehicle.VehicleFields;
 
 public class DataAccessObject implements DBInterface/*DataAccess*/ {
 	String dbName;

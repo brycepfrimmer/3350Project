@@ -12,7 +12,7 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.wb.swt.SWTResourceManager;
 
 import cmmsBusiness.AccessVehicle;
-import cmmsObjects.Vehicle;
+import cmmsObjects.Vehicle.Vehicle;
 
 
 public class UpdateKilometers {

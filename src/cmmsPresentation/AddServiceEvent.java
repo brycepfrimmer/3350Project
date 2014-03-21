@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 
 
+
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
@@ -24,7 +25,7 @@ import org.eclipse.swt.widgets.Combo;
 import cmmsBusiness.AccessVehicle;
 import cmmsObjects.Part;
 import cmmsObjects.ServiceItem;
-import cmmsObjects.Vehicle;
+import cmmsObjects.Vehicle.Vehicle;
 
 public class AddServiceEvent {
 

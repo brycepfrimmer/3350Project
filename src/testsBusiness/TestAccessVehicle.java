@@ -1,10 +1,9 @@
 package testsBusiness;
 
 import junit.framework.TestCase;
-
 import cmmsApplication.Services;
 import cmmsBusiness.AccessVehicle;
-import cmmsObjects.Vehicle;
+import cmmsObjects.Vehicle.Vehicle;
 
 public class TestAccessVehicle extends TestCase{
 
