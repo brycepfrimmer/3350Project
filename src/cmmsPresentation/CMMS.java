@@ -129,7 +129,6 @@ public class CMMS{
     private static Button editVehicleButton;
     private static Button viewVehicleButton;
     private static Button updateKmsButton;
-    private static Button addServiceButton;
     private static Button btnTodaysTasks;
     private static Button quitButton;
 
@@ -590,14 +589,12 @@ public class CMMS{
 	        		editVehicleButton.setEnabled(false);
 	        		viewVehicleButton.setEnabled(false);
 	        		updateKmsButton.setEnabled(false);
-	        		addServiceButton.setEnabled(false);
         		}
         		else {
 	        		removeVehicleButton.setEnabled(true);
 	        		editVehicleButton.setEnabled(true);
 	        		viewVehicleButton.setEnabled(true);
 	        		updateKmsButton.setEnabled(true);
-	        		addServiceButton.setEnabled(true);
         		}
         	}
         });
@@ -806,51 +803,11 @@ public class CMMS{
         updateKmsButton.setLayoutData(gridData);
         updateKmsButton.setText("Update Kilometers");
         
-        addServiceButton = new Button(mainWindow, SWT.NONE);
-        addServiceButton.addSelectionListener(new SelectionAdapter() {
-            @Override
-            public void widgetSelected(SelectionEvent e) {
-                int selected = dataTable.getSelectionCount();
-                if (selected == 0) {
-                    // Display no selection error
-                    MessageBox mb = new MessageBox(mainWindow, SWT.ICON_ERROR
-                            | SWT.OK);
-                    mb.setMessage("Error: You have not selected a Vehicle to update.");
-                    mb.setText("Add Service Event");
-                    mb.open();
-                } else if (selected == 1) {
-                    // Display UpdateKilometers form
-                	Vehicle v = accessVehicle.getVehicle(dataTable.getItem(
-                			dataTable.getSelectionIndex()).getText(
-                					VehicleFields.ID.ordinal()));
-                	if(v.partsListIsEmpty()) {
-                		MessageBox mb = new MessageBox(mainWindow, SWT.ICON_ERROR | SWT.OK);
-                		mb.setMessage("Error: " + v.getID() + " does not have any parts");
-                		mb.setText("Add Service Event");
-                		mb.open();
-                	}
-                	else {
-                		AddServiceEvent addse = new AddServiceEvent();
-                		addse.open(v);
-                	}
-                    // Update list with the new Vehicles
-                    UpdateList();
-                } else {
-                    // Display multiple selection error
-                    MessageBox mb = new MessageBox(mainWindow, SWT.ICON_ERROR
-                            | SWT.OK);
-                    mb.setMessage("Error: You have selected too many Vehicles to update.");
-                    mb.setText("Add Service Event");
-                    mb.open();
-                }
-            }
-        });
+
         gridData = new GridData();
         gridData.grabExcessVerticalSpace = false;
         gridData.horizontalAlignment = SWT.FILL;
         gridData.verticalAlignment = SWT.BOTTOM;
-        addServiceButton.setLayoutData(gridData);
-        addServiceButton.setText("Add Service Event");
         
         btnTodaysTasks = new Button(mainWindow, SWT.NONE);
         btnTodaysTasks.addSelectionListener(new SelectionAdapter() {
@@ -885,6 +842,7 @@ public class CMMS{
         TableItem ti; // Table item for adding vehicles to the table
         
         ArrayList<Vehicle> list;
+        
         if (!searching)
         	list = accessVehicle.getAllVehicles();
         else

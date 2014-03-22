@@ -412,6 +412,18 @@ public class Vehicle {
     public ArrayList<Part> getPartsList() {
         return partsList;
     }
+    
+    public Part getPart(String p) {
+    	p.replaceAll("\\s", "");
+    	Part part = null;
+    	for(int i = 0; i < partsList.size(); i++) {
+    		if(p == partsList.get(i).getPartDesc().replaceAll("\\s", "")) {
+    			part = partsList.get(i);
+    			i = partsList.size();
+    		}
+    	}
+    	return part;
+    }
 
     public boolean isOperational() {
         return operational;

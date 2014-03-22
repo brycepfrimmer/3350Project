@@ -1,6 +1,56 @@
-.........................................
-........
-Time: 0.021
+.
+Starting Integration test of HSQLDB
+E.
+Starting Integration test of HSQLDB
+E.
+Starting Integration test of HSQLDB
+E.
+Starting Integration test of HSQLDB
+E.
+Starting Integration test of HSQLDB
+E.
+Starting Integration test of HSQLDB
+E.
+Starting Integration test of HSQLDB
+E
+Time: 0.274
+There were 7 errors:
+1) testAdd(testsIntegration.IntegrationHSQLTest)java.lang.NullPointerException
+	at cmmsPersistence.DataAccessObject.CreateVehiclesTable(DataAccessObject.java:84)
+	at cmmsPersistence.DataAccessObject.create(DataAccessObject.java:41)
+	at cmmsApplication.Services.createDataAccess(Services.java:17)
+	at testsIntegration.IntegrationHSQLTest.setUp(IntegrationHSQLTest.java:44)
+2) testUpdateKM(testsIntegration.IntegrationHSQLTest)java.lang.NullPointerException
+	at cmmsPersistence.DataAccessObject.CreateVehiclesTable(DataAccessObject.java:84)
+	at cmmsPersistence.DataAccessObject.create(DataAccessObject.java:41)
+	at cmmsApplication.Services.createDataAccess(Services.java:17)
+	at testsIntegration.IntegrationHSQLTest.setUp(IntegrationHSQLTest.java:44)
+3) testRemove(testsIntegration.IntegrationHSQLTest)java.lang.NullPointerException
+	at cmmsPersistence.DataAccessObject.CreateVehiclesTable(DataAccessObject.java:84)
+	at cmmsPersistence.DataAccessObject.create(DataAccessObject.java:41)
+	at cmmsApplication.Services.createDataAccess(Services.java:17)
+	at testsIntegration.IntegrationHSQLTest.setUp(IntegrationHSQLTest.java:44)
+4) testGetAll(testsIntegration.IntegrationHSQLTest)java.lang.NullPointerException
+	at cmmsPersistence.DataAccessObject.CreateVehiclesTable(DataAccessObject.java:84)
+	at cmmsPersistence.DataAccessObject.create(DataAccessObject.java:41)
+	at cmmsApplication.Services.createDataAccess(Services.java:17)
+	at testsIntegration.IntegrationHSQLTest.setUp(IntegrationHSQLTest.java:44)
+5) testUpdate(testsIntegration.IntegrationHSQLTest)java.lang.NullPointerException
+	at cmmsPersistence.DataAccessObject.CreateVehiclesTable(DataAccessObject.java:84)
+	at cmmsPersistence.DataAccessObject.create(DataAccessObject.java:41)
+	at cmmsApplication.Services.createDataAccess(Services.java:17)
+	at testsIntegration.IntegrationHSQLTest.setUp(IntegrationHSQLTest.java:44)
+6) testManFields(testsIntegration.IntegrationHSQLTest)java.lang.NullPointerException
+	at cmmsPersistence.DataAccessObject.CreateVehiclesTable(DataAccessObject.java:84)
+	at cmmsPersistence.DataAccessObject.create(DataAccessObject.java:41)
+	at cmmsApplication.Services.createDataAccess(Services.java:17)
+	at testsIntegration.IntegrationHSQLTest.setUp(IntegrationHSQLTest.java:44)
+7) testGetSingle(testsIntegration.IntegrationHSQLTest)java.lang.NullPointerException
+	at cmmsPersistence.DataAccessObject.CreateVehiclesTable(DataAccessObject.java:84)
+	at cmmsPersistence.DataAccessObject.create(DataAccessObject.java:41)
+	at cmmsApplication.Services.createDataAccess(Services.java:17)
+	at testsIntegration.IntegrationHSQLTest.setUp(IntegrationHSQLTest.java:44)
 
-OK (49 tests)
+FAILURES!!!
+Tests run: 7,  Failures: 0,  Errors: 7
 

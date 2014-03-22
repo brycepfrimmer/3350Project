@@ -34,17 +34,20 @@ public class AddServiceEvent {
     private Text serviceTime;
     private Text serviceKm;
     private Label errorLabel;
-    private Combo partsComboBox;
     private ArrayList<Part> partsList;
     
     private AccessVehicle accessVehicle;
+    private Vehicle currVehicle;
+    private Part part;
 
     /**
      * Open the window.
      */
-    public void open(Vehicle v) {
+    public void open(Vehicle v, Part p) {
         Display display = Display.getDefault();
-        createContents(v);
+        this.currVehicle = v;
+        this.part = p;
+        createContents();
         shell.open();
         shell.layout();
         while (!shell.isDisposed()) {
@@ -59,9 +62,9 @@ public class AddServiceEvent {
      * 
      * @wbp.parser.entryPoint
      */
-    protected void createContents(final Vehicle v) {
+    protected void createContents() {
         shell = new Shell();
-        shell.setSize(440, 340);
+        shell.setSize(440, 298);
         shell.setText("Add Service Event");
         accessVehicle = new AccessVehicle();
         GridLayout windowLayout = new GridLayout();
@@ -69,17 +72,7 @@ public class AddServiceEvent {
         shell.setLayout(windowLayout);
         
         Label infoLabel = new Label(shell, SWT.NONE);
-        infoLabel.setText("ID: "+v.getID()+" -- "+Integer.toString(v.getYear())+" "+v.getManufacturer()+" "+v.getModel());
-        new Label(shell, SWT.NONE);
-        
-        partsComboBox = new Combo(shell, SWT.NONE);
-        partsComboBox.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-        new Label(shell, SWT.NONE);
-        partsList = accessVehicle.getPartsList( v.getID() );
-        for (int i = 0; i < partsList.size(); i++) {
-            partsComboBox.add(partsList.get(i).getPartDesc());
-        }
-        partsComboBox.setText("Select a part to add a service event to");
+        infoLabel.setText("ID: " + part.getPartDesc());
         
         Label eventDescLabel = new Label(shell, SWT.NONE);
         eventDescLabel.setText("Enter service event description:");
@@ -87,13 +80,10 @@ public class AddServiceEvent {
         
         eventDesc = new Text(shell, SWT.BORDER);
         eventDesc.setLayoutData(new GridData(SWT.FILL, SWT.LEFT, true, false, 1, 1));
-        new Label(shell, SWT.NONE);
-        new Label(shell, SWT.NONE);
-        new Label(shell, SWT.NONE);
         
         Label serviceTimeLabel = new Label(shell, SWT.NONE);
         serviceTimeLabel.setText("Service every X amount of days:");
-        new Label(shell, SWT.NONE);
+
         
         serviceTime = new Text(shell, SWT.BORDER);
         serviceTime.addModifyListener(new ModifyListener() {
@@ -145,27 +135,23 @@ public class AddServiceEvent {
             @Override
             public void widgetSelected(SelectionEvent e) {
             	accessVehicle = new AccessVehicle();
-                if (serviceTime.getText() != "" && checkPartSelection() && checkDesc() && checkTime()) {
+                if (serviceTime.getText() != "" && checkDesc() && checkTime()) {
 //                	accessVehicle.addServiceEvent( v, new ServiceItem(eventDesc.getText(), Long.parseLong(serviceTime.getText()), v.getDateLastServiced()),
 //                                      new Part(partsComboBox.getItem(partsComboBox.getSelectionIndex())));
-                    v.addServiceEvent(new ServiceItem(eventDesc.getText(), Long.parseLong(serviceTime.getText()), v.getDateLastServiced()),
-                                      new Part(partsComboBox.getItem(partsComboBox.getSelectionIndex())));
+                    part.addServiceItem(new ServiceItem(eventDesc.getText(), Long.parseLong(serviceTime.getText()), currVehicle.getDateLastServiced()));
                     //access.updateVehicle();
                     shell.close();
-                } else if (serviceKm.getText() != "" && checkPartSelection() && checkDesc() && checkKilos()) {
+                } else if (serviceKm.getText() != "" && checkDesc() && checkKilos()) {
 //                	accessVehicle.addServiceEvent( v, new ServiceItem(eventDesc.getText(), Integer.parseInt(serviceKm.getText()), v.getKmLastServiced()),
 //                                      new Part(partsComboBox.getItem(partsComboBox.getSelectionIndex())));
-                    v.addServiceEvent(new ServiceItem(eventDesc.getText(), Integer.parseInt(serviceKm.getText()), v.getKmLastServiced()),
-                                      new Part(partsComboBox.getItem(partsComboBox.getSelectionIndex())));
+                    part.addServiceItem(new ServiceItem(eventDesc.getText(), Integer.parseInt(serviceKm.getText()), currVehicle.getKmLastServiced()));
                     //access.updateVehicle();
                     shell.close();
-                } else if (checkPartSelection() && checkDesc()) {
+                } else if (checkDesc()) {
                     errorLabel.setText("Please enter a valid time or kilometer service indicator.");
                     errorLabel.pack();
-                } else if (checkPartSelection()) {
-                    errorLabel.setText("Please enter an event description.");
-                    errorLabel.pack();
-                } else {
+                } 
+                else {
                     errorLabel.setText("Please select a part from the parts list.");
                     errorLabel.pack();
                 }
@@ -182,17 +168,6 @@ public class AddServiceEvent {
         });
     }
     
-    private boolean checkPartSelection() {
-        if (partsComboBox.getSelectionIndex() >= 0) {
-            if (partsList.contains(new Part(partsComboBox.getItem(partsComboBox.getSelectionIndex())))) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
     
     private boolean checkDesc() {
         if (eventDesc.getCharCount() > 0) {

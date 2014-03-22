@@ -15,6 +15,7 @@ import org.eclipse.swt.widgets.Table;
 import cmmsBusiness.AccessVehicle;
 import cmmsObjects.Part;
 import cmmsObjects.Vehicle.Vehicle;
+import cmmsObjects.Vehicle.VehicleFields;
 
 
 public class EditPartsList {
@@ -25,6 +26,7 @@ public class EditPartsList {
     private Button btnGoBack;
     private Button btnAdd;
     private Button btnRemove;
+    private Button btnAddServiceEvent;
     private Table partsListTable;
     private ArrayList<Part> list;
     
@@ -38,7 +40,7 @@ public class EditPartsList {
         accessVehicle = new AccessVehicle();
         currVehicle = v;
 //        list = accessVehicle.getPartsList(v.getID());
-//        list = currVehicle.getPartsList();
+        list = currVehicle.getPartsList();
         if (!list.isEmpty()) {
             updateList();
         }
@@ -59,7 +61,7 @@ public class EditPartsList {
     protected void createContents() {
         shlEditPartsList = new Shell();
         shlEditPartsList.setText("Parts List");
-        shlEditPartsList.setSize(689, 474);
+        shlEditPartsList.setSize(720, 474);
 
         btnGoBack = new Button(shlEditPartsList, SWT.NONE);
         btnGoBack.addSelectionListener(new SelectionAdapter() {
@@ -145,6 +147,40 @@ public class EditPartsList {
 
         btnRemove.setBounds(588, 74, 75, 25);
         btnRemove.setText("Remove");
+        
+        btnAddServiceEvent = new Button(shlEditPartsList, SWT.NONE);
+        btnAddServiceEvent.addSelectionListener(new SelectionAdapter() {
+            @Override
+            public void widgetSelected(SelectionEvent e) {
+                int selected = partsListTable.getSelectionCount();
+                if (selected == 0) {
+                    // Display no selection error
+                    MessageBox mb = new MessageBox(shlEditPartsList, SWT.ICON_ERROR
+                            | SWT.OK);
+                    mb.setMessage("Error: You have not selected a Vehicle to update.");
+                    mb.setText("Add Service Event");
+                    mb.open();
+                } else if (selected == 1) {
+                    // Display UpdateKilometers form
+                	
+            		AddServiceEvent addse = new AddServiceEvent();
+            		addse.open(currVehicle, currVehicle.getPart(partsListTable.getItem(partsListTable.getSelectionIndex()).getText()));
+                    // Update list with the new Vehicles
+                    updateList();
+                } else {
+                    // Display multiple selection error
+                    MessageBox mb = new MessageBox(shlEditPartsList, SWT.ICON_ERROR
+                            | SWT.OK);
+                    mb.setMessage("Error: You have selected too many Vehicles to update.");
+                    mb.setText("Add Service Event");
+                    mb.open();
+                }
+            }
+        });
+        btnAddServiceEvent.setBounds(588, 105, 75, 25);
+        btnAddServiceEvent.setText("Add Service Event");
+        
+        btnAddServiceEvent.pack();
 
         partsListTable = new Table(shlEditPartsList, SWT.BORDER
                 | SWT.FULL_SELECTION);
@@ -152,6 +188,7 @@ public class EditPartsList {
         partsListTable.setHeaderVisible(true);
         partsListTable.setLinesVisible(true);
     }
+   
 
     private void updateList() {
         TableItem ti; // Table item for adding parts to the table
