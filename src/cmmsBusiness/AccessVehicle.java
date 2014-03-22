@@ -33,12 +33,14 @@ public class AccessVehicle {
 		dataAccess = new DataAccessObject("Vehicles");
 		dataAccess.open("Vehicles");
 		
-		try {
-			Vehicle[] vList = dataAccess.getAllVehicles();
-			for (Vehicle v : vList)
-				dbVehicles.add(v);
-		} catch (SQLException e) {
-			
+		if (dbVehicles.size() == 0) {
+			try {
+				Vehicle[] vList = dataAccess.getAllVehicles();
+				for (Vehicle v : vList)
+					dbVehicles.add(v);
+			} catch (SQLException e) {
+				
+			}
 		}
 	}
 	
