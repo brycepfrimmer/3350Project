@@ -3,9 +3,7 @@
  */
 package cmmsPresentation;
 
-
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.ControlAdapter;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.KeyAdapter;
@@ -32,31 +30,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.wb.swt.SWTResourceManager;
 
-
-
-
-
-
-
-
-
-
-
-
-
 import cmmsBusiness.AccessVehicle;
-
-
-
-
-
-
-
-
-
-
-
-
 import cmmsObjects.Vehicle.Vehicle;
 import cmmsObjects.Vehicle.VehicleFields;
 

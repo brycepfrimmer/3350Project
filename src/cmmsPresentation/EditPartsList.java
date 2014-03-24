@@ -15,7 +15,6 @@ import org.eclipse.swt.widgets.Table;
 import cmmsBusiness.AccessVehicle;
 import cmmsObjects.Part;
 import cmmsObjects.Vehicle.Vehicle;
-import cmmsObjects.Vehicle.VehicleFields;
 
 
 public class EditPartsList {
@@ -109,14 +108,8 @@ public class EditPartsList {
                     if (response == SWT.YES) {
                         int[] selections = partsListTable.getSelectionIndices();
                         for (int i = 0; i < selected; i++) {
-                            //DELROY HAD
-                            //list.remove(new Part(partsListTable.getItem(
-                            //we want below for ensurance on duplicate or non-existent parts I assume
-                            //discuss with cody
-                            //currVehicle.removePart(partsListTable.getItem(
-                            //        selections[i]).getText(0));
-//                            accessVehicle.removePart( currVehicle, partsListTable.getItem(
-//                                    selections[i]).getText(0) );
+                            accessVehicle.removePart( currVehicle, partsListTable.getItem(
+                                    selections[i]).getText(0) );
                         }
 
                         // Update list with the new Vehicles
@@ -132,12 +125,8 @@ public class EditPartsList {
 
                     if (response == SWT.YES) {
                         // Should only have one item selected
-                        //list.remove(new Part(partsListTable.getItem(
-                        //see comment above <same situation>
-                        //currVehicle.removePart(partsListTable.getItem(
-                        //        partsListTable.getSelectionIndex()).getText());
-//                        accessVehicle.removePart( currVehicle, partsListTable.getItem(
-//                                 partsListTable.getSelectionIndex()).getText() );
+                        accessVehicle.removePart( currVehicle, partsListTable.getItem(
+                                 partsListTable.getSelectionIndex()).getText() );
                         // Update list with the new Vehicles
                         updateList();
                     }

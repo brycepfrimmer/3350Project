@@ -1,6 +1,5 @@
 package testsObjects;
 
-import java.sql.Date;
 import java.util.GregorianCalendar;
 
 import junit.framework.TestCase;

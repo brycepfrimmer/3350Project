@@ -12,7 +12,6 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.wb.swt.SWTResourceManager;
 
 import cmmsBusiness.AccessVehicle;
-import cmmsObjects.Part;
 import cmmsObjects.Vehicle.Vehicle;
 
 
@@ -97,7 +96,7 @@ public class AddPart {
     	String part = textPart.getText();
     	boolean isValid = !currVehicle.searchPartsList(part);
     	if(isValid) {
-    		currVehicle.getPartsList().add(new Part(part));
+    		//currVehicle.getPartsList().add(new Part(part));
     		accessVehicle.addPart(currVehicle.getID(), part);
     	}
         return isValid;

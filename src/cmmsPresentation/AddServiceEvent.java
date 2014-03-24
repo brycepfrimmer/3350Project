@@ -2,13 +2,8 @@ package cmmsPresentation;
 
 import java.util.ArrayList;
 
-
-
-
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-
-
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridLayout;
@@ -20,7 +15,6 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.wb.swt.SWTResourceManager;
-import org.eclipse.swt.widgets.Combo;
 
 import cmmsBusiness.AccessVehicle;
 import cmmsObjects.Part;

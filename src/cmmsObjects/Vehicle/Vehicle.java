@@ -2,8 +2,6 @@ package cmmsObjects.Vehicle;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.sql.Date;
 import java.util.GregorianCalendar;
 
 import cmmsObjects.InsurancePolicy;
