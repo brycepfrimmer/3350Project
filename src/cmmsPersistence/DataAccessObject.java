@@ -10,8 +10,10 @@ import java.sql.ResultSet;
 import java.sql.DriverManager;
 import java.util.ArrayList;
 import cmmsObjects.ManFields;
+import cmmsObjects.ServiceItem;
 import cmmsObjects.Vehicle.Vehicle;
 import cmmsObjects.Vehicle.VehicleFields;
+import cmmsObjects.Part;
 
 public class DataAccessObject/*DataAccess*/ {
 	String dbName;
@@ -37,11 +39,11 @@ public class DataAccessObject/*DataAccess*/ {
 	
 	public void create(String dbName) throws SQLException
 	{		
-		if (dbName.equals("Vehicles"))
+		if (dbName.equals("Vehicles")) {
 			CreateVehiclesTable();
-		else if (dbName.equals("ManFields"))
+		} else if (dbName.equals("ManFields")) {
 			CreateManFieldsTable();
-		else {
+		} else {
 			System.out.println("Error creating tables.");
 			System.exit(-1);
 		}
@@ -96,7 +98,65 @@ public class DataAccessObject/*DataAccess*/ {
 		}
 		catch (SQLException e) {
 		}
+
+        CreatePartsTable();
+        CreateServiceItemsTable();
 	}
+
+    private void CreatePartsTable() {
+        String createTable = "CREATE TABLE Parts ( "
+                + VehicleFields.ID.toString() + " VARCHAR(1024), "
+                + VehicleFields.PARTS_DESCRIPTION.toString() + " VARCHAR(1024) "
+                + " )";
+
+        Statement create = null;
+        try {
+            create = conn.createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        try {
+            int i = create.executeUpdate(createTable);
+            
+            if (i == -1) {
+                System.out.println("Error creating Parts Table.");
+                System.exit(-1);
+            }
+        }
+        catch (SQLException e) {
+        }
+    }
+    
+    private void CreateServiceItemsTable() {
+        String createTable = "CREATE TABLE ServiceItems ( "
+                + VehicleFields.ID.toString() + " VARCHAR(1024), "
+                + VehicleFields.PARTS_DESCRIPTION.toString() + " VARCHAR(1024), "
+                + VehicleFields.SI_DESCRIPTION.toString() + " VARCHAR(1024), "
+                + VehicleFields.SI_SERVICETIME.toString() + " VARCHAR(1024), "
+                + VehicleFields.SI_SERVICEKM.toString() + " VARCHAR(1024), "
+                + VehicleFields.SI_DATELASTSERVICED.toString() + " VARCHAR(1024), "
+                + VehicleFields.SI_KMLASTSERVICED.toString() + " VARCHAR(1024) "
+                + " )";
+
+        Statement create = null;
+        try {
+            create = conn.createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        try {
+            int i = create.executeUpdate(createTable);
+            
+            if (i == -1) {
+                System.out.println("Error creating ServiceItems Table.");
+                System.exit(-1);
+            }
+        }
+        catch (SQLException e) {
+        }
+    }
 	
 	private void CreateManFieldsTable() {
 		String createTable2 = "CREATE TABLE ManFields ( "
@@ -214,18 +274,12 @@ public class DataAccessObject/*DataAccess*/ {
 		return v;
 	}
 	
-	public Vehicle[] getAllVehicles() throws SQLException
-	{
-		Vehicle[] vehicles = null;
-		
-		Statement query = null;
-		ResultSet searchResult = null;
-		
-		query = conn.createStatement();
-		searchResult = query.executeQuery("SELECT * FROM Vehicles");
+	public Vehicle[] getAllVehicles() throws SQLException {
+		Statement query = conn.createStatement();
+		ResultSet searchResult = query.executeQuery("SELECT * FROM Vehicles");
 		
 		Object[] objects = ProcessVehicleSearch(searchResult);
-		vehicles = new Vehicle[objects.length];		
+		Vehicle[] vehicles = new Vehicle[objects.length];		
 		
 		for (int i = 0; i < objects.length; i++)
 			vehicles[i] = (Vehicle)objects[i];
@@ -257,6 +311,7 @@ public class DataAccessObject/*DataAccess*/ {
 									  (String)rs.getObject(12), new Integer(rs.getObject(6).toString()), new Integer(rs.getObject(7).toString()),
 									  cal);
 			v.setFuelEcon(new Double(rs.getObject(14).toString()));
+			v.setPartsList(getParts(v.getID()));
 			list.add(v);
 		}
 		
@@ -265,8 +320,62 @@ public class DataAccessObject/*DataAccess*/ {
 		return objects;
 	}
 	
-	public boolean addVehicle(Vehicle vehicle) throws SQLException
-	{
+	private ArrayList<Part> getParts(String vehicleID) throws SQLException {
+        ArrayList<Part> retList = new ArrayList<Part>();
+	    
+	    Statement query = conn.createStatement();
+        ResultSet res = query.executeQuery("SELECT * FROM Parts WHERE " + VehicleFields.ID.toString() + "='" + vehicleID + "'");
+        
+        while(res.next()) {
+            String partDesc = (String)res.getObject(2);
+            Part newP = new Part(partDesc);
+            newP.setServiceItems(getServiceItems(vehicleID, partDesc));
+            retList.add(newP);
+        }
+        
+        res.close();
+        query.close();
+	    return retList;
+	}
+	
+	private ArrayList<ServiceItem> getServiceItems(String vehicleID, String partDesc) throws SQLException {
+	    ArrayList<ServiceItem> retList = new ArrayList<ServiceItem>();
+        Statement query = conn.createStatement();
+        ResultSet r = query.executeQuery("SELECT * FROM ServiceItems WHERE "
+        + VehicleFields.ID.toString() + "='" + vehicleID + "' AND "
+        + VehicleFields.PARTS_DESCRIPTION.toString() + "='" + partDesc + "'");
+        
+        while (r.next()) {
+            ServiceItem si;
+            String sidesc = (String)r.getObject(3);
+            long serviceTime = new Long(r.getObject(4).toString());
+            int serviceKm = new Integer(r.getObject(5).toString());
+            String dsl = (String)r.getObject(6);
+            int kmls = new Integer(r.getObject(7).toString());
+            if (serviceKm == 0 && kmls == 0) {
+                try {
+                    Date tempDate = Date.valueOf(dsl);
+                    GregorianCalendar dslCal = new GregorianCalendar();
+                    dslCal.setTime(tempDate);
+                    si = new ServiceItem(sidesc, serviceTime, dslCal);
+                    retList.add(si);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else if (serviceTime == 0 && dsl == "") {
+                si = new ServiceItem(sidesc, serviceKm, kmls);
+                retList.add(si);
+            } else {
+                System.out.println("ERROR: stored Service Item does not conform.");
+            }
+        }
+        
+        r.close();
+        query.close();
+        return retList;
+    }
+
+    public void addVehicle(Vehicle vehicle) throws SQLException {
 		Statement add = null;
 		add = conn.createStatement();
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -302,17 +411,65 @@ public class DataAccessObject/*DataAccess*/ {
 		int i = add.executeUpdate(addCommand);
 		
 		if (i == -1) {
-			System.out.println("Error inserting into Vehilces Database.");
-			return false;
-		} else {
-		    return true;
+			System.out.println("Error inserting into Vehicles Table.");
 		}
+		
+		addParts(vehicle);
 	}
 
-	public void updateVehicle(Vehicle vehicle) throws SQLException
-	{
-		Statement update = null;
-		update = conn.createStatement();
+	private void addParts(Vehicle vehicle) throws SQLException {
+	    Statement add = conn.createStatement();
+        ArrayList<Part> temp = vehicle.getPartsList();
+        for (Part p : temp) {
+            String addCommand = "INSERT INTO Parts ("
+                    + VehicleFields.ID.toString() + ", "
+                    + VehicleFields.PARTS_DESCRIPTION.toString()
+                    + ") VALUES('"
+                    + vehicle.getID() + "', '"
+                    + p.getPartDesc() + "')";
+            int i = add.executeUpdate(addCommand);
+            if (i == -1) {
+                System.out.println("Error inserting into Parts Table.");
+            }
+            addServiceItems(vehicle, p);
+        }
+	}
+	
+	private void addServiceItems(Vehicle vehicle, Part p) throws SQLException {
+	    Statement add = conn.createStatement();
+	    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        ArrayList<ServiceItem> service = p.getServiceItems();
+        for (ServiceItem s : service) {
+            String d;
+            if (s.getDateLastServiced() != null) {
+                d = format.format(s.getDateLastServiced().getTime());
+            } else {
+                d = "";
+            }
+            String addCommand = "INSERT INTO ServiceItems ("
+                    + VehicleFields.ID.toString() + ", "
+                    + VehicleFields.PARTS_DESCRIPTION.toString() + ", "
+                    + VehicleFields.SI_DESCRIPTION.toString() + ", "
+                    + VehicleFields.SI_SERVICETIME.toString() + ", "
+                    + VehicleFields.SI_SERVICEKM.toString() + ", "
+                    + VehicleFields.SI_DATELASTSERVICED.toString() + ", "
+                    + VehicleFields.SI_KMLASTSERVICED.toString() + ") VALUES('"
+                    + vehicle.getID() + "', '"
+                    + p.getPartDesc() + "', '"
+                    + s.getDescription() + "', '"
+                    + new Long(s.getServiceTime()).toString() + "', '"
+                    + new Integer(s.getServiceKm()).toString() + "', '"
+                    + d + "', '"
+                    + new Integer(s.getKmLastServiced()).toString() + "')";
+            int i = add.executeUpdate(addCommand);
+            if (i == -1) {
+                System.out.println("Error inserting into ServiceItems Table.");
+            }
+        }
+	}
+	
+	public void updateVehicle(Vehicle vehicle) throws SQLException {
+		Statement update = conn.createStatement();
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		
 		String updateCommand = "UPDATE Vehicles SET "
@@ -336,12 +493,19 @@ public class DataAccessObject/*DataAccess*/ {
 		if (i == -1) {
 			System.out.println("Error updating database entry " + vehicle.getID());
 		}
+		
+		updateParts(vehicle);
 	}
 	
-	public boolean removeVehicle(String ID) throws SQLException
-	{
-		Statement delete = null;
-		delete = conn.createStatement();
+	private void updateParts(Vehicle vehicle) throws SQLException {
+        removeParts(vehicle.getID());
+        removeServiceItems(vehicle.getID());
+        
+        addParts(vehicle);
+	}
+
+	public boolean removeVehicle(String ID) throws SQLException {
+		Statement delete = conn.createStatement();
 		
 		String deleteCommand = "DELETE from Vehicles WHERE " + VehicleFields.ID.toString() + "='" + ID + "'";
 		
@@ -355,8 +519,27 @@ public class DataAccessObject/*DataAccess*/ {
 		return true;
 	}
 
-	private void addManFields() throws SQLException
-	{
+	private void removeParts(String ID) throws SQLException {
+	    Statement delete = conn.createStatement();
+        
+        String deleteCommand = "DELETE from Parts WHERE " + VehicleFields.ID.toString() + "='" + ID + "'";
+        int i = delete.executeUpdate(deleteCommand);
+        if (i == -1) {
+            System.out.println("Error removing Parts entry " + ID);
+        }
+	}
+	
+    private void removeServiceItems(String ID) throws SQLException {
+        Statement delete = conn.createStatement();
+        
+        String deleteCommand = "DELETE from ServiceItems WHERE " + VehicleFields.ID.toString() + "='" + ID + "'";
+        int i = delete.executeUpdate(deleteCommand);
+        if (i == -1) {
+            System.out.println("Error removing ServiceItems entry " + ID);
+        }
+    }
+	
+	private void addManFields() throws SQLException {
         Statement add = null;
         add = conn2.createStatement();
         

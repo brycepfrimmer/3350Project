@@ -18,13 +18,14 @@ public class Interface {
     }
 
     public boolean addVehicle(Vehicle vehicle) {
-        boolean retBool = false;
-        try {
-			retBool = database.addVehicle(vehicle);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-        return retBool;
+//        boolean retBool = false;
+//        try {
+//			retBool = database.addVehicle(vehicle);
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//        return retBool;
+        return true;
     }
 
     public boolean removeVehicle(Vehicle v) {

@@ -324,8 +324,7 @@ public class Vehicle {
         return isValid;
     }
     
-    public boolean setInsurance( InsurancePolicy policy )
-    {
+    public boolean setInsurance( InsurancePolicy policy ) {
     	this.insurance = policy;
     	return true;
     }

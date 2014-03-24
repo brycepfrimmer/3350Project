@@ -28,6 +28,10 @@ public final class Part {
     	}
     	return retVal;
     }
+
+    public void setServiceItems(ArrayList<ServiceItem> siList) {
+        this.serviceIList = siList;
+    }
     
     public String getTodaysTasks(int kmDriven) {
     	String tasks = "";
@@ -73,6 +77,10 @@ public final class Part {
             }
         }
         return retVal;
+    }
+    
+    public ArrayList<ServiceItem> getServiceItems() {
+        return serviceIList;
     }
     
     @Override
