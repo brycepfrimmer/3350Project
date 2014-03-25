@@ -9,7 +9,6 @@ import testsObjects.TestPart;
 import testsObjects.TestVehicle;
 import testsObjects.TestServiceItem;
 import testsObjects.TestManFields;
-import testsPersistence.TestInterface;
 
 public class TestCMMS {
 
@@ -28,9 +27,6 @@ public class TestCMMS {
         //Test Business classes
         suite.addTestSuite(TestAccessManFields.class);
         suite.addTestSuite(TestAccessVehicle.class);
-        
-        //Test Persistence classes
-        suite.addTestSuite(TestInterface.class);
 
         return suite;
     }

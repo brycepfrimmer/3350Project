@@ -1,6 +1,5 @@
 package cmmsPresentation;
 
-
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Label;
@@ -14,9 +13,7 @@ import org.eclipse.wb.swt.SWTResourceManager;
 import cmmsBusiness.AccessVehicle;
 import cmmsObjects.Vehicle.Vehicle;
 
-
 public class AddPart {
-
     protected Shell shlAddPart;
     private Text textPart;
 
@@ -96,7 +93,6 @@ public class AddPart {
     	String part = textPart.getText();
     	boolean isValid = !currVehicle.searchPartsList(part);
     	if(isValid) {
-    		//currVehicle.getPartsList().add(new Part(part));
     		accessVehicle.addPart(currVehicle.getID(), part);
     	}
         return isValid;

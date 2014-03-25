@@ -1,7 +1,5 @@
 package cmmsPresentation;
 
-import java.util.ArrayList;
-
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -28,7 +26,6 @@ public class AddServiceEvent {
     private Text serviceTime;
     private Text serviceKm;
     private Label errorLabel;
-    private ArrayList<Part> partsList;
     
     private AccessVehicle accessVehicle;
     private Vehicle currVehicle;
@@ -142,16 +139,10 @@ public class AddServiceEvent {
             public void widgetSelected(SelectionEvent e) {
             	accessVehicle = new AccessVehicle();
                 if (serviceTime.getText() != "" && checkDesc() && checkTime()) {
-//                	accessVehicle.addServiceEvent( v, new ServiceItem(eventDesc.getText(), Long.parseLong(serviceTime.getText()), v.getDateLastServiced()),
-//                                      new Part(partsComboBox.getItem(partsComboBox.getSelectionIndex())));
-                    part.addServiceItem(new ServiceItem(eventDesc.getText(), Long.parseLong(serviceTime.getText()), currVehicle.getDateLastServiced()));
-                    //access.updateVehicle();
+                    accessVehicle.addServiceEvent(currVehicle, new ServiceItem(eventDesc.getText(), Long.parseLong(serviceTime.getText()), currVehicle.getDateLastServiced()), part);
                     shell.close();
                 } else if (serviceKm.getText() != "" && checkDesc() && checkKilos()) {
-//                	accessVehicle.addServiceEvent( v, new ServiceItem(eventDesc.getText(), Integer.parseInt(serviceKm.getText()), v.getKmLastServiced()),
-//                                      new Part(partsComboBox.getItem(partsComboBox.getSelectionIndex())));
-                    part.addServiceItem(new ServiceItem(eventDesc.getText(), Integer.parseInt(serviceKm.getText()), currVehicle.getKmLastServiced()));
-                    //access.updateVehicle();
+                    accessVehicle.addServiceEvent(currVehicle, new ServiceItem(eventDesc.getText(), Integer.parseInt(serviceKm.getText()), currVehicle.getKmLastServiced()), part);
                     shell.close();
                 } else if (checkDesc()) {
                     errorLabel.setText("Please enter a valid time or kilometer service indicator.");

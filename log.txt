@@ -338,7 +338,7 @@ March 20 - 2014
 	Darwin Froese - 6 Hours
 		* Refactored interacting with vehicles in database
 		for searching and sorting purposes
-		* Re-Implemented searchig
+		* Re-Implemented searching
 		* Implemented table sorting
 		* Refactored some strings from Lists to Maps
 		* Added individual Comparator classes for each vehicle
@@ -352,3 +352,6 @@ March 21 - 2014
 		remove element from a list while iterating through
 		a list and changed UpdateKM to call UpdateVehicle
 		so that the update code is only written once
+March 24 - 2014
+	Bryce Pfrimmer - 3 Hours
+		Refactoring - Created new tables to more efficiently persist the Parts and Service Items of a Vehicle
