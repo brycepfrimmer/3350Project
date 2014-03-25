@@ -1018,7 +1018,7 @@ public class CMMS{
 
         mainWindow.open();
         
-        //openDailyTasks();
+        openDailyTasks();
 
         while (!mainWindow.isDisposed()) {
             try {
