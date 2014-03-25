@@ -199,12 +199,13 @@ public class CMMS{
     }
 
     private static void CreateWindow() {
-        mainWindow = new Shell(SWT.NO_TRIM | SWT.ON_TOP);
+        mainWindow = new Shell();
         mainWindow.setText(WINDOW_TITLE);
         mainWindow.setMinimumSize(MIN_WINDOW_SIZE);
+
+        mainWindow.setBounds(Display.getDefault().getPrimaryMonitor().getBounds());
         mainWindow.setMaximized(true);
         mainWindow.setFullScreen(true);
-        mainWindow.setBounds(Display.getDefault().getPrimaryMonitor().getBounds());
         mainWindow.setFocus();      
 
         mainLayout = new GridLayout();
