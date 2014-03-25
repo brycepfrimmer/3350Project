@@ -411,10 +411,10 @@ public class Vehicle {
     }
     
     public Part getPart(String p) {
-    	p.replaceAll("\\s", "");
     	Part part = null;
+    	p = p.replaceAll("\\s", "");
     	for(int i = 0; i < partsList.size(); i++) {
-    		if(p == partsList.get(i).getPartDesc().replaceAll("\\s", "")) {
+    		if(p.matches(partsList.get(i).getPartDesc().replaceAll("\\s", ""))) {
     			part = partsList.get(i);
     			i = partsList.size();
     		}

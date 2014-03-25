@@ -66,33 +66,36 @@ public class AddServiceEvent {
         shell.setLayout(windowLayout);
         
         Label infoLabel = new Label(shell, SWT.NONE);
+        infoLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
         infoLabel.setText("ID: " + part.getPartDesc());
+        new Label(shell, SWT.NONE);
+        new Label(shell, SWT.NONE);
         
         Label eventDescLabel = new Label(shell, SWT.NONE);
         eventDescLabel.setText("Enter service event description:");
-        new Label(shell, SWT.NONE);
         
         eventDesc = new Text(shell, SWT.BORDER);
         eventDesc.setLayoutData(new GridData(SWT.FILL, SWT.LEFT, true, false, 1, 1));
+        new Label(shell, SWT.NONE);
+        new Label(shell, SWT.NONE);
         
         Label serviceTimeLabel = new Label(shell, SWT.NONE);
         serviceTimeLabel.setText("Service every X amount of days:");
-
         
-        serviceTime = new Text(shell, SWT.BORDER);
-        serviceTime.addModifyListener(new ModifyListener() {
-            public void modifyText(ModifyEvent arg0) {
-                if (serviceTime.getCharCount() <= 0) {
-                    serviceKm.setEnabled(true);
-                    serviceKm.setEditable(true);
-                } else {
-                    serviceKm.setEnabled(false);
-                    serviceKm.setEditable(false);
-                }
-            }
-        });
-        serviceTime.setLayoutData(new GridData(SWT.FILL, SWT.LEFT, true, false, 1, 1));
-        new Label(shell, SWT.NONE);
+                
+                serviceTime = new Text(shell, SWT.BORDER);
+                serviceTime.addModifyListener(new ModifyListener() {
+                    public void modifyText(ModifyEvent arg0) {
+                        if (serviceTime.getCharCount() <= 0) {
+                            serviceKm.setEnabled(true);
+                            serviceKm.setEditable(true);
+                        } else {
+                            serviceKm.setEnabled(false);
+                            serviceKm.setEditable(false);
+                        }
+                    }
+                });
+                serviceTime.setLayoutData(new GridData(SWT.FILL, SWT.LEFT, true, false, 1, 1));
         
         Label orLabel = new Label(shell, SWT.NONE);
         orLabel.setText("OR");
@@ -100,7 +103,6 @@ public class AddServiceEvent {
         
         Label serviceKmLabel = new Label(shell, SWT.NONE);
         serviceKmLabel.setText("Service every X kilometers:");
-        new Label(shell, SWT.NONE);
         
         serviceKm = new Text(shell, SWT.BORDER);
         serviceKm.addModifyListener(new ModifyListener() {
@@ -122,6 +124,18 @@ public class AddServiceEvent {
                 .getColor(SWT.COLOR_RED));
         errorLabel.setText("");
         new Label(shell, SWT.NONE);
+        new Label(shell, SWT.NONE);
+        new Label(shell, SWT.NONE);
+        new Label(shell, SWT.NONE);
+        
+        Button cancelButton = new Button(shell, SWT.NONE);
+        cancelButton.setText("Cancel");
+        cancelButton.addSelectionListener(new SelectionAdapter() {
+            @Override
+            public void widgetSelected(SelectionEvent e) {
+                shell.close();
+            }
+        });
         
         Button addButton = new Button(shell, SWT.NONE);
         addButton.setText("Add Event");
@@ -149,15 +163,6 @@ public class AddServiceEvent {
                     errorLabel.setText("Please select a part from the parts list.");
                     errorLabel.pack();
                 }
-            }
-        });
-        
-        Button cancelButton = new Button(shell, SWT.NONE);
-        cancelButton.setText("Cancel");
-        cancelButton.addSelectionListener(new SelectionAdapter() {
-            @Override
-            public void widgetSelected(SelectionEvent e) {
-                shell.close();
             }
         });
     }

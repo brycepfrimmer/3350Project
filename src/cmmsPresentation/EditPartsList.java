@@ -160,7 +160,7 @@ public class EditPartsList {
                     // Display multiple selection error
                     MessageBox mb = new MessageBox(shlEditPartsList, SWT.ICON_ERROR
                             | SWT.OK);
-                    mb.setMessage("Error: You have selected too many Vehicles to update.");
+                    mb.setMessage("Error: You have selected too many Parts to update.");
                     mb.setText("Add Service Event");
                     mb.open();
                 }
@@ -176,6 +176,19 @@ public class EditPartsList {
         partsListTable.setBounds(10, 10, 568, 416);
         partsListTable.setHeaderVisible(true);
         partsListTable.setLinesVisible(true);
+        partsListTable.addSelectionListener(new SelectionAdapter() {
+        	@Override
+        	public void widgetSelected(SelectionEvent e) {
+        		if(partsListTable.getSelectionCount() == 0) {
+        			btnAddServiceEvent.setEnabled(false);
+	        		btnRemove.setEnabled(false);
+        		}
+        		else {
+	        		btnAddServiceEvent.setEnabled(true);
+	        		btnRemove.setEnabled(true);
+        		}
+        	}
+        });
     }
    
 
