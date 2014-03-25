@@ -22,7 +22,7 @@ public class EditPartsList {
     protected Shell shlEditPartsList;
 
     private Vehicle currVehicle;
-    private Button btnGoBack;
+    private Button btnSave;
     private Button btnAdd;
     private Button btnRemove;
     private Button btnAddServiceEvent;
@@ -62,15 +62,15 @@ public class EditPartsList {
         shlEditPartsList.setText("Parts List");
         shlEditPartsList.setSize(720, 474);
 
-        btnGoBack = new Button(shlEditPartsList, SWT.NONE);
-        btnGoBack.addSelectionListener(new SelectionAdapter() {
+        btnSave = new Button(shlEditPartsList, SWT.NONE);
+        btnSave.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
                 shlEditPartsList.close();
             }
         });
-        btnGoBack.setBounds(588, 401, 75, 25);
-        btnGoBack.setText("Go Back");
+        btnSave.setBounds(588, 401, 75, 25);
+        btnSave.setText("Save");
 
         btnAdd = new Button(shlEditPartsList, SWT.NONE);
         btnAdd.addSelectionListener(new SelectionAdapter() {
@@ -153,7 +153,17 @@ public class EditPartsList {
                     // Display UpdateKilometers form
                 	
             		AddServiceEvent addse = new AddServiceEvent();
-            		addse.open(currVehicle, currVehicle.getPart(partsListTable.getItem(partsListTable.getSelectionIndex()).getText()));
+            		String searchPart = "";
+            		String part = partsListTable.getItem(partsListTable.getSelectionIndex()).getText();
+            		for(int i = 0; i < part.length(); i++) {
+                		if(part.charAt(i) != '|') {
+                			searchPart += part.charAt(i);
+                		}
+                		else {
+                			i = part.length();
+                		}
+                	}
+            		addse.open(currVehicle, currVehicle.getPart(searchPart));
                     // Update list with the new Vehicles
                     updateList();
                 } else {

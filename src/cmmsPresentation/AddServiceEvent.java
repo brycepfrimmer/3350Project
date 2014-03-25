@@ -68,8 +68,6 @@ public class AddServiceEvent {
         Label infoLabel = new Label(shell, SWT.NONE);
         infoLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
         infoLabel.setText("ID: " + part.getPartDesc());
-        new Label(shell, SWT.NONE);
-        new Label(shell, SWT.NONE);
         
         Label eventDescLabel = new Label(shell, SWT.NONE);
         eventDescLabel.setText("Enter service event description:");
