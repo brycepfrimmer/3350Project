@@ -202,10 +202,7 @@ public class CMMS{
         mainWindow = new Shell();
         mainWindow.setText(WINDOW_TITLE);
         mainWindow.setMinimumSize(MIN_WINDOW_SIZE);
-
         mainWindow.setBounds(Display.getDefault().getPrimaryMonitor().getBounds());
-        mainWindow.setMaximized(true);
-        mainWindow.setFullScreen(true);
         mainWindow.setFocus();      
 
         mainLayout = new GridLayout();
@@ -781,11 +778,6 @@ public class CMMS{
         updateKmsButton.setLayoutData(gridData);
         updateKmsButton.setText("Update Kilometers");
         
-
-        gridData = new GridData();
-        gridData.grabExcessVerticalSpace = false;
-        gridData.horizontalAlignment = SWT.FILL;
-        gridData.verticalAlignment = SWT.BOTTOM;
         
         btnTodaysTasks = new Button(mainWindow, SWT.NONE);
         btnTodaysTasks.addSelectionListener(new SelectionAdapter() {
@@ -809,7 +801,7 @@ public class CMMS{
         
 
         gridData = new GridData();
-        gridData.grabExcessVerticalSpace = false;
+        gridData.grabExcessVerticalSpace = true;
         gridData.horizontalAlignment = SWT.FILL;
         gridData.verticalAlignment = SWT.BOTTOM;
         quitButton.setLayoutData(gridData);
