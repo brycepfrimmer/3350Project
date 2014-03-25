@@ -362,7 +362,7 @@ public class DataAccessObject/*DataAccess*/ {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            } else if (serviceTime == 0 && dsl == "") {
+            } else if (serviceTime == 0 && dsl.isEmpty()) {
                 si = new ServiceItem(sidesc, serviceKm, kmls);
                 retList.add(si);
             } else {
