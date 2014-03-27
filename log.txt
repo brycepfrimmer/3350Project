@@ -343,6 +343,11 @@ March 20 - 2014
 		* Refactored some strings from Lists to Maps
 		* Added individual Comparator classes for each vehicle
 		field to aid in sorting ArrayLists
+March 20 - 2014
+	Delroy Hiebert - 5 Hours
+		-Update integration tests
+			-More thorough and covers much more area
+		-Fixed bug - system did not update fuel economy from database
 March 21 - 2014
 	Darwin Froese - 1 Hour
 		* AccessVehicle.addVehicle modified to only insert
@@ -355,3 +360,24 @@ March 21 - 2014
 March 24 - 2014
 	Bryce Pfrimmer - 3 Hours
 		Refactoring - Created new tables to more efficiently persist the Parts and Service Items of a Vehicle
+		
+March 24 - 2014
+	Delroy Hiebert 2 - Hours
+		Started to figure out how atr acceptance testing works
+			-Started making basic changes to project
+		
+March 25 - 2014
+	Delroy Hiebert - 3 Hours
+		-Began developing acceptance tests
+		-Continued learning how atr works - slow process
+		
+March 27 - 2014
+	Delroy Hiebert - 10 Hours
+		-Minor refactoring throughout project
+			-Changed some variable names to be standard throughout the project
+				-Mainly shell and display
+		-Completed acceptance tests for 5 major user stories
+			-Add, view, edit, update fuel economy, delete
+		-Started search, requires some work still
+		-Still need acceptance tests for a few other user stories
+		
