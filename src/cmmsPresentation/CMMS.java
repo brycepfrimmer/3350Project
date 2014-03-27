@@ -1015,17 +1015,19 @@ public class CMMS{
         shell.open();
         
         //openDailyTasks();
-
-        while (!shell.isDisposed()) {
-            try {
-                if (!display.readAndDispatch()) {
-                    display.sleep();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                System.out.println(e.getMessage());
-                System.out.println(e.toString());
-            }
+        if (EventLoop.isEnabled()) 
+        {
+	        while (!shell.isDisposed()) {
+	            try {
+	                if (!display.readAndDispatch()) {
+	                    display.sleep();
+	                }
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	                System.out.println(e.getMessage());
+	                System.out.println(e.toString());
+	            }
+	        }
         }
     }
 
