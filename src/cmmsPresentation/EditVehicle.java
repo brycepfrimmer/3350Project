@@ -21,10 +21,12 @@ import cmmsBusiness.AccessVehicle;
 import cmmsObjects.ManFields;
 import cmmsObjects.Vehicle.Vehicle;
 
+import acceptanceTests.Register; 
+import acceptanceTests.EventLoop;
 
 public class EditVehicle {
 
-    protected Shell shlEditVehicle;
+    protected Shell shell;
     private Text textVehicleID;
     private Text textType;
     private Text textManufacturer;
@@ -53,6 +55,8 @@ public class EditVehicle {
     private Vehicle currVehicle;
     private Button btnEditPartsList;
     
+    private Button btnUpdate;
+    
     private AccessVehicle accessVehicle;
     private ManFields manFields;
     private AccessManFields accessFields;
@@ -62,17 +66,21 @@ public class EditVehicle {
      */
     public void open(Vehicle v) {
         Display display = Display.getDefault();
+        Register.newWindow(this);
         accessFields = new AccessManFields();
         manFields = accessFields.getManFields();
         createContents();
         currVehicle = v;
         FillFields();
-        shlEditVehicle.open();
-        shlEditVehicle.layout();
-        while (!shlEditVehicle.isDisposed()) {
-            if (!display.readAndDispatch()) {
-                display.sleep();
-            }
+        shell.open();
+        shell.layout();
+        if( EventLoop.isEnabled() )
+        {
+	        while (!shell.isDisposed()) {
+	            if (!display.readAndDispatch()) {
+	                display.sleep();
+	            }
+	        }
         }
     }
 
@@ -80,7 +88,7 @@ public class EditVehicle {
     // vehicle we were passed in
     private void FillFields() {
         textVehicleID.setText(currVehicle.getID());
-        shlEditVehicle.setText("Edit " + currVehicle.getID());
+        shell.setText("Edit " + currVehicle.getID());
         textType.setText(currVehicle.getType());
         textManufacturer.setText(currVehicle.getManufacturer());
         textModel.setText(currVehicle.getModel());
@@ -101,67 +109,67 @@ public class EditVehicle {
      * @wbp.parser.entryPoint
      */
     protected void createContents() {
-        shlEditVehicle = new Shell();
-        shlEditVehicle.setText("Edit Vehicle");
-        shlEditVehicle.setSize(660, 485);
+        shell = new Shell();
+        shell.setText("Edit Vehicle");
+        shell.setSize(660, 485);
 
-        Label lblVehicleId = new Label(shlEditVehicle, SWT.NONE);
+        Label lblVehicleId = new Label(shell, SWT.NONE);
         lblVehicleId.setBounds(10, 10, 55, 15);
         lblVehicleId.setText("Vehicle ID");
 
-        textVehicleID = new Text(shlEditVehicle, SWT.BORDER);
+        textVehicleID = new Text(shell, SWT.BORDER);
         textVehicleID.setBounds(98, 7, 76, 21);
 
-        Label lblType = new Label(shlEditVehicle, SWT.NONE);
+        Label lblType = new Label(shell, SWT.NONE);
         lblType.setBounds(10, 41, 55, 15);
         lblType.setText("Type");
 
-        textType = new Text(shlEditVehicle, SWT.BORDER);
+        textType = new Text(shell, SWT.BORDER);
         textType.setBounds(98, 37, 76, 21);
 
-        Label lblieCarTruck = new Label(shlEditVehicle, SWT.NONE);
+        Label lblieCarTruck = new Label(shell, SWT.NONE);
         lblieCarTruck.setBounds(180, 41, 126, 15);
         lblieCarTruck.setText("(ie. Car, Truck, Forklift)");
 
-        Label lblManufacturer = new Label(shlEditVehicle, SWT.NONE);
+        Label lblManufacturer = new Label(shell, SWT.NONE);
         lblManufacturer.setBounds(10, 72, 76, 15);
         lblManufacturer.setText("Manufacturer");
 
-        textManufacturer = new Text(shlEditVehicle, SWT.BORDER);
+        textManufacturer = new Text(shell, SWT.BORDER);
         textManufacturer.setBounds(98, 66, 76, 21);
 
-        Label lblModel = new Label(shlEditVehicle, SWT.NONE);
+        Label lblModel = new Label(shell, SWT.NONE);
         lblModel.setBounds(10, 103, 55, 15);
         lblModel.setText("Model");
 
-        textModel = new Text(shlEditVehicle, SWT.BORDER);
+        textModel = new Text(shell, SWT.BORDER);
         textModel.setBounds(98, 97, 76, 21);
 
-        Label lblYear = new Label(shlEditVehicle, SWT.NONE);
+        Label lblYear = new Label(shell, SWT.NONE);
         lblYear.setBounds(10, 134, 55, 15);
         lblYear.setText("Year");
 
-        textYear = new Text(shlEditVehicle, SWT.BORDER);
+        textYear = new Text(shell, SWT.BORDER);
         textYear.setBounds(98, 128, 76, 21);
 
-        Label lblKilometers = new Label(shlEditVehicle, SWT.NONE);
+        Label lblKilometers = new Label(shell, SWT.NONE);
         lblKilometers.setBounds(10, 163, 55, 15);
         lblKilometers.setText("Kilometers");
 
-        textKms = new Text(shlEditVehicle, SWT.BORDER);
+        textKms = new Text(shell, SWT.BORDER);
         textKms.setBounds(98, 157, 76, 21);
 
-        Label lblKilometers_1 = new Label(shlEditVehicle, SWT.NONE);
+        Label lblKilometers_1 = new Label(shell, SWT.NONE);
         lblKilometers_1.setBounds(10, 184, 76, 30);
         lblKilometers_1.setText("Kilometers\nLast Serviced");
 
-        textKmsLS = new Text(shlEditVehicle, SWT.BORDER);
+        textKmsLS = new Text(shell, SWT.BORDER);
         textKmsLS.setBounds(98, 193, 76, 21);
         
-        dateTime = new DateTime(shlEditVehicle, SWT.BORDER);
+        dateTime = new DateTime(shell, SWT.BORDER);
         dateTime.setBounds(98, 236, 80, 24);
 
-        btnRoadworthy = new Button(shlEditVehicle, SWT.CHECK);
+        btnRoadworthy = new Button(shell, SWT.CHECK);
         btnRoadworthy.setBounds(10, 306, 113, 16);
         btnRoadworthy.setText("Roadworthy");
         btnRoadworthy.addKeyListener(new KeyAdapter() {
@@ -173,35 +181,35 @@ public class EditVehicle {
             }
         });
 
-        Label lblLicensePlateNumber = new Label(shlEditVehicle, SWT.NONE);
+        Label lblLicensePlateNumber = new Label(shell, SWT.NONE);
         lblLicensePlateNumber.setBounds(129, 307, 126, 15);
         lblLicensePlateNumber.setText("License Plate Number");
 
-        textLPN = new Text(shlEditVehicle, SWT.BORDER);
+        textLPN = new Text(shell, SWT.BORDER);
         textLPN.setBounds(261, 304, 103, 21);
 
-        Label lblInsurancePolicyNumber = new Label(shlEditVehicle, SWT.NONE);
+        Label lblInsurancePolicyNumber = new Label(shell, SWT.NONE);
         lblInsurancePolicyNumber.setBounds(10, 357, 140, 15);
         lblInsurancePolicyNumber.setText("Insurance Policy Number");
 
-        textInsPolNum = new Text(shlEditVehicle, SWT.BORDER);
+        textInsPolNum = new Text(shell, SWT.BORDER);
         textInsPolNum.setBounds(156, 354, 150, 21);
 
-        Label lblInsuranceType = new Label(shlEditVehicle, SWT.NONE);
+        Label lblInsuranceType = new Label(shell, SWT.NONE);
         lblInsuranceType.setBounds(322, 357, 89, 15);
         lblInsuranceType.setText("Insurance Type");
 
-        textInsType = new Text(shlEditVehicle, SWT.BORDER);
+        textInsType = new Text(shell, SWT.BORDER);
         textInsType.setBounds(418, 354, 150, 21);
 
-        Label label = new Label(shlEditVehicle, SWT.SEPARATOR | SWT.HORIZONTAL);
+        Label label = new Label(shell, SWT.SEPARATOR | SWT.HORIZONTAL);
         label.setBounds(10, 342, 625, 2);
 
-        Label label_1 = new Label(shlEditVehicle, SWT.SEPARATOR
+        Label label_1 = new Label(shell, SWT.SEPARATOR
                 | SWT.HORIZONTAL);
         label_1.setBounds(10, 288, 625, 2);
 
-        btnOperational = new Button(shlEditVehicle, SWT.CHECK);
+        btnOperational = new Button(shell, SWT.CHECK);
         btnOperational.setBounds(10, 378, 93, 16);
         btnOperational.setText("Operational");
         btnOperational.addKeyListener(new KeyAdapter() {
@@ -213,7 +221,7 @@ public class EditVehicle {
             }
         });
 
-        Button btnUpdate = new Button(shlEditVehicle, SWT.NONE);
+        btnUpdate = new Button(shell, SWT.NONE);
         btnUpdate.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
@@ -221,7 +229,7 @@ public class EditVehicle {
                 if (good) {
                     SetFields();
 
-                    shlEditVehicle.close();
+                    shell.close();
                 } else {
                     // display message explaining to user what is wrong with
                     // their input
@@ -231,66 +239,66 @@ public class EditVehicle {
         btnUpdate.setBounds(98, 412, 75, 25);
         btnUpdate.setText("Update");
 
-        Button btnCancel = new Button(shlEditVehicle, SWT.NONE);
+        Button btnCancel = new Button(shell, SWT.NONE);
         btnCancel.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
-                shlEditVehicle.close();
+                shell.close();
             }
         });
         btnCancel.setBounds(180, 412, 75, 25);
         btnCancel.setText("Cancel");
 
-        lblVehicleIDWarning = new Label(shlEditVehicle, SWT.NONE);
+        lblVehicleIDWarning = new Label(shell, SWT.NONE);
         lblVehicleIDWarning.setForeground(SWTResourceManager
                 .getColor(SWT.COLOR_RED));
         lblVehicleIDWarning.setBounds(179, 7, 360, 21);
 
-        lblTypeWarning = new Label(shlEditVehicle, SWT.NONE);
+        lblTypeWarning = new Label(shell, SWT.NONE);
         lblTypeWarning.setForeground(SWTResourceManager
                 .getColor(SWT.COLOR_RED));
         lblTypeWarning.setBounds(312, 35, 280, 21);
 
-        lblManufacturerWarning = new Label(shlEditVehicle, SWT.NONE);
+        lblManufacturerWarning = new Label(shell, SWT.NONE);
         lblManufacturerWarning.setForeground(SWTResourceManager
                 .getColor(SWT.COLOR_RED));
         lblManufacturerWarning.setBounds(180, 66, 359, 21);
 
-        lblModelWarning = new Label(shlEditVehicle, SWT.NONE);
+        lblModelWarning = new Label(shell, SWT.NONE);
         lblModelWarning.setForeground(SWTResourceManager
                 .getColor(SWT.COLOR_RED));
         lblModelWarning.setBounds(180, 97, 313, 21);
 
-        lblYearWarning = new Label(shlEditVehicle, SWT.NONE);
+        lblYearWarning = new Label(shell, SWT.NONE);
         lblYearWarning.setForeground(SWTResourceManager
                 .getColor(SWT.COLOR_RED));
         lblYearWarning.setBounds(180, 128, 388, 21);
 
-        lblKmsWarning = new Label(shlEditVehicle, SWT.NONE);
+        lblKmsWarning = new Label(shell, SWT.NONE);
         lblKmsWarning
                 .setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
         lblKmsWarning.setBounds(179, 157, 377, 21);
 
-        lblKmsLSWarning = new Label(shlEditVehicle, SWT.NONE);
+        lblKmsLSWarning = new Label(shell, SWT.NONE);
         lblKmsLSWarning.setForeground(SWTResourceManager
                 .getColor(SWT.COLOR_RED));
         lblKmsLSWarning.setBounds(180, 193, 313, 21);
 
-        lblLPNWarning = new Label(shlEditVehicle, SWT.WRAP);
+        lblLPNWarning = new Label(shell, SWT.WRAP);
         lblLPNWarning.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
         lblLPNWarning.setBounds(370, 307, 201, 15);
 
-        lblInsPolNumWarning = new Label(shlEditVehicle, SWT.NONE);
+        lblInsPolNumWarning = new Label(shell, SWT.NONE);
         lblInsPolNumWarning.setForeground(SWTResourceManager
                 .getColor(SWT.COLOR_RED));
         lblInsPolNumWarning.setBounds(156, 379, 189, 21);
 
-        lblInsTypeWarning = new Label(shlEditVehicle, SWT.NONE);
+        lblInsTypeWarning = new Label(shell, SWT.NONE);
         lblInsTypeWarning.setForeground(SWTResourceManager
                 .getColor(SWT.COLOR_RED));
         lblInsTypeWarning.setBounds(399, 381, 193, 21);
 
-        btnEditPartsList = new Button(shlEditVehicle, SWT.NONE);
+        btnEditPartsList = new Button(shell, SWT.NONE);
         btnEditPartsList.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
@@ -301,7 +309,7 @@ public class EditVehicle {
         btnEditPartsList.setBounds(10, 412, 82, 25);
         btnEditPartsList.setText("Edit Parts List");
         
-        Label lblNewLabel = new Label(shlEditVehicle, SWT.WRAP);
+        Label lblNewLabel = new Label(shell, SWT.WRAP);
         lblNewLabel.setBounds(10, 236, 76, 46);
         lblNewLabel.setText("Date Last Serviced");
     }

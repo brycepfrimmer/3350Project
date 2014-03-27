@@ -18,7 +18,8 @@ import cmmsBusiness.AccessVehicle;
 import cmmsObjects.Part;
 import cmmsObjects.ServiceItem;
 import cmmsObjects.Vehicle.Vehicle;
-
+import acceptanceTests.Register; 
+import acceptanceTests.EventLoop;
 public class AddServiceEvent {
 
     protected Shell shell;
@@ -36,15 +37,19 @@ public class AddServiceEvent {
      */
     public void open(Vehicle v, Part p) {
         Display display = Display.getDefault();
+        Register.newWindow(this);
         this.currVehicle = v;
         this.part = p;
         createContents();
         shell.open();
         shell.layout();
-        while (!shell.isDisposed()) {
-            if (!display.readAndDispatch()) {
-                display.sleep();
-            }
+        if( EventLoop.isEnabled() )
+        {
+	        while (!shell.isDisposed()) {
+	            if (!display.readAndDispatch()) {
+	                display.sleep();
+	            }
+	        }
         }
     }
 

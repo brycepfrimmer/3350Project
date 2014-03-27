@@ -22,10 +22,16 @@ import cmmsObjects.Vehicle.Vehicle;
 import java.sql.Date;
 import java.util.GregorianCalendar;
 
+import acceptanceTests.Register; 
+import acceptanceTests.EventLoop;
 
 public class AddVehicle {
 
     protected Shell shell;
+    
+    private Button btnCreate;
+    private Button btnCancel;
+    
     private Text textVehicleID;
     private Text textType;
     private Text textManufacturer;
@@ -75,15 +81,19 @@ public class AddVehicle {
      */
     public void open() {
         Display display = Display.getDefault();
+        Register.newWindow(this);
         accessFields = new AccessManFields();
         manFields = accessFields.getManFields();
         createContents();
         shell.open();
         shell.layout();
-        while (!shell.isDisposed()) {
-            if (!display.readAndDispatch()) {
-                display.sleep();
-            }
+        if( EventLoop.isEnabled() )
+        {
+	        while (!shell.isDisposed()) {
+	            if (!display.readAndDispatch()) {
+	                display.sleep();
+	            }
+	        }
         }
     }
 
@@ -206,7 +216,7 @@ public class AddVehicle {
         btnOperational.setBounds(10, 378, 93, 16);
         btnOperational.setText("Operational");
 
-        Button btnCreate = new Button(shell, SWT.NONE);
+        btnCreate = new Button(shell, SWT.NONE);
         btnCreate.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
@@ -249,7 +259,7 @@ public class AddVehicle {
         btnCreate.setBounds(10, 412, 75, 25);
         btnCreate.setText("Create");
 
-        Button btnCancel = new Button(shell, SWT.NONE);
+        btnCancel = new Button(shell, SWT.NONE);
         btnCancel.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {

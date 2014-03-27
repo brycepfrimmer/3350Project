@@ -1,0 +1,36 @@
+Package                 cmmsPresentation
+
+InvokeMethod            cmmsApplication.Main              	startUp
+
+SelectTableByRowIndex	CMMS								dataTable			1
+Click					CMMS								editVehicleButton
+	
+Set						EditVehicle							textType			"truck"
+Set						EditVehicle							textManufacturer	"Dodge"
+Set						EditVehicle							textModel			"Ram"
+Set						EditVehicle							textYear			"2014"
+Set						EditVehicle							textLPN				"GSL 269"
+Set						EditVehicle							textInsPolNum		"Ins6969"
+Set						EditVehicle							textInsType			"Storage"
+Set						EditVehicle							textKms				"250000"
+Set						EditVehicle							textKmsLS			"200000"
+Click					EditVehicle							btnUpdate
+
+InvokeMethod			CMMS								UpdateList
+
+SelectTableByRowIndex	CMMS								dataTable			1
+TestTableByColumnIndex	CMMS								dataTable			1				"truck"
+TestTableByColumnIndex	CMMS								dataTable			2				"Dodge"
+TestTableByColumnIndex	CMMS								dataTable			3				"Ram"
+TestTableByColumnIndex	CMMS								dataTable			4				"2014"
+TestTableByColumnIndex	CMMS								dataTable			5				"250000"
+TestTableByColumnIndex	CMMS								dataTable			6				"200000"
+TestTableByColumnIndex	CMMS								dataTable			9				"GSL 269"
+TestTableByColumnIndex	CMMS								dataTable			10				"Ins6969"
+TestTableByColumnIndex	CMMS								dataTable			11				"Storage"
+TestTableByColumnIndex	CMMS								dataTable			13				"0"
+
+Click					CMMS								quitButton
+
+InvokeMethod            cmmsApplication.Main          	    shutDown
+

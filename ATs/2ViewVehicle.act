@@ -1,0 +1,12 @@
+Package                 cmmsPresentation
+
+InvokeMethod            cmmsApplication.Main              	startUp
+
+SelectTableByRowIndex	CMMS								dataTable				0
+Click					CMMS								viewVehicleButton
+Click					ViewVehicle							closeButton
+
+Click					CMMS								quitButton
+
+InvokeMethod            cmmsApplication.Main          	    shutDown
+

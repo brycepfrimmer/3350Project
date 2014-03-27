@@ -1,0 +1,70 @@
+Package                 cmmsPresentation
+
+InvokeMethod            cmmsApplication.Main              	startUp
+
+Click					CMMS								addVehicleButton
+
+Set						AddVehicle							textVehicleID		"ABC"
+Set						AddVehicle							textType			"Car"
+Set						AddVehicle							textManufacturer	"Saturn"
+Set						AddVehicle							textModel			"Ion"
+Set						AddVehicle							textYear			"2004"
+Set						AddVehicle							textLPN				"GVL 843"
+Set						AddVehicle							textInsPolNum		"ABC123"
+Set						AddVehicle							textInsType			"Recreational"
+Set						AddVehicle							textKms				"155000"
+Set						AddVehicle							textKmsLS			"145000"
+Click					AddVehicle							btnCancel
+
+Click					CMMS								addVehicleButton
+
+Set						AddVehicle							textVehicleID		"ABC"
+Set						AddVehicle							textType			"Car"
+Set						AddVehicle							textManufacturer	"Saturn"
+Set						AddVehicle							textModel			"Ion"
+Set						AddVehicle							textYear			"2004"
+Set						AddVehicle							textLPN				"GVL 843"
+Set						AddVehicle							textInsPolNum		"ABC123"
+Set						AddVehicle							textInsType			"Recreational"
+Set						AddVehicle							textKms				"155000"
+Set						AddVehicle							textKmsLS			"145000"
+Click					AddVehicle							btnCreate
+
+InvokeMethod			CMMS								UpdateList
+
+SelectTableByRowIndex	CMMS								dataTable			1
+TestTableByColumnIndex	CMMS								dataTable			0				"ABC"
+
+SelectTableByRowIndex	CMMS								dataTable			1
+TestTableByColumnIndex	CMMS								dataTable			1				"Car"
+
+SelectTableByRowIndex	CMMS								dataTable			1
+TestTableByColumnIndex	CMMS								dataTable			2				"Saturn"
+
+SelectTableByRowIndex	CMMS								dataTable			1
+TestTableByColumnIndex	CMMS								dataTable			3				"Ion"
+
+SelectTableByRowIndex	CMMS								dataTable			1
+TestTableByColumnIndex	CMMS								dataTable			4				"2004"
+
+SelectTableByRowIndex	CMMS								dataTable			1
+TestTableByColumnIndex	CMMS								dataTable			5				"155000"
+
+SelectTableByRowIndex	CMMS								dataTable			1
+TestTableByColumnIndex	CMMS								dataTable			6				"145000"
+
+SelectTableByRowIndex	CMMS								dataTable			1
+TestTableByColumnIndex	CMMS								dataTable			9				"GVL 843"
+
+SelectTableByRowIndex	CMMS								dataTable			1
+TestTableByColumnIndex	CMMS								dataTable			10				"ABC123"
+
+SelectTableByRowIndex	CMMS								dataTable			1
+TestTableByColumnIndex	CMMS								dataTable			11				"Recreational"
+
+SelectTableByRowIndex	CMMS								dataTable			1
+TestTableByColumnIndex	CMMS								dataTable			13				"0"
+Click					CMMS								quitButton
+
+InvokeMethod            cmmsApplication.Main          	    shutDown
+

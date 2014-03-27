@@ -1,0 +1,19 @@
+Package                 cmmsPresentation
+
+InvokeMethod            cmmsApplication.Main              	startUp
+
+SelectTableByRowIndex	CMMS								dataTable			0
+TestTableByColumnIndex	CMMS								dataTable			0				"1234"
+
+Click					CMMS								clearButton
+Set						CMMS								searchText			"ABC"
+
+SelectTableByRowIndex	CMMS								dataTable			0
+TestTableByColumnIndex	CMMS								dataTable			0				"ABC"
+
+Click					CMMS								clearButton
+
+Click					CMMS								quitButton
+
+InvokeMethod            cmmsApplication.Main          	    shutDown
+

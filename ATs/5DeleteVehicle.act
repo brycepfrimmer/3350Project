@@ -1,0 +1,22 @@
+Package                 cmmsPresentation
+
+InvokeMethod            cmmsApplication.Main              	startUp
+
+SelectTableByRowIndex	CMMS								dataTable			0
+TestTableByColumnIndex	CMMS								dataTable			0				"1234"
+
+SelectTableByRowIndex	CMMS								dataTable			0
+InvokeMethod			CMMS								testRemove
+
+InvokeMethod			CMMS								UpdateList
+
+SelectTableByRowIndex	CMMS								dataTable			0
+TestTableByColumnIndex	CMMS								dataTable			0				"ABC"
+
+SelectTableByRowIndex	CMMS								dataTable			0
+InvokeMethod			CMMS								testRemove
+
+Click 					CMMS								quitButton
+
+InvokeMethod            cmmsApplication.Main          	    shutDown
+

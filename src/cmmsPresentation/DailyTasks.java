@@ -15,6 +15,8 @@ import org.eclipse.swt.widgets.Shell;
 
 import cmmsObjects.Vehicle.Vehicle;
 
+import acceptanceTests.Register; 
+import acceptanceTests.EventLoop;
 
 public class DailyTasks {
     private final int WINDOW_WIDTH = 800;
@@ -22,8 +24,8 @@ public class DailyTasks {
     private final int MIN_WINDOW_WIDTH = 200;
     private final int MIN_WINDOW_HEIGHT = 200;
 
-    private Display currDisplay;
-    private Shell tasksWindow;
+    private Display display;
+    private Shell shell;
     private GridLayout mainLayout;
     private Button closeButton;
 
@@ -36,24 +38,28 @@ public class DailyTasks {
 
 
     public void open(ArrayList<Vehicle> v) {
-        currDisplay = Display.getDefault();
+        display = Display.getDefault();
+        Register.newWindow(this);
         vehicleList = v;
 
         CreateControls();
         FillHandler();
 
-        tasksWindow.open();
-
-        while (!tasksWindow.isDisposed()) {
-            try {
-                if (!currDisplay.readAndDispatch()) {
-                    currDisplay.sleep();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                System.out.println(e.getMessage());
-                System.out.println(e.toString());
-            }
+        shell.open();
+        
+        if( EventLoop.isEnabled() )
+        {
+	        while (!shell.isDisposed()) {
+	            try {
+	                if (!display.readAndDispatch()) {
+	                    display.sleep();
+	                }
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	                System.out.println(e.getMessage());
+	                System.out.println(e.toString());
+	            }
+	        }
         }
     }
 
@@ -105,13 +111,13 @@ public class DailyTasks {
     private void CreateControls() {
         mainLayout = new GridLayout();
 
-        tasksWindow = new Shell();
-        tasksWindow.setText("Today's Tasks");
-        tasksWindow.setLayout(mainLayout);
-        tasksWindow.setMinimumSize(MIN_WINDOW_WIDTH, MIN_WINDOW_HEIGHT);
-        tasksWindow.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        shell = new Shell();
+        shell.setText("Today's Tasks");
+        shell.setLayout(mainLayout);
+        shell.setMinimumSize(MIN_WINDOW_WIDTH, MIN_WINDOW_HEIGHT);
+        shell.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         
-        textDisplay = new StyledText(tasksWindow, SWT.BORDER | SWT.V_SCROLL
+        textDisplay = new StyledText(shell, SWT.BORDER | SWT.V_SCROLL
                 | SWT.H_SCROLL | SWT.READ_ONLY);
         GridData gd = new GridData();
         gd.horizontalAlignment = SWT.FILL;
@@ -120,11 +126,11 @@ public class DailyTasks {
         gd.grabExcessVerticalSpace = true;
         textDisplay.setLayoutData(gd);
         
-        closeButton = new Button(tasksWindow,SWT.NONE);
+        closeButton = new Button(shell,SWT.NONE);
         closeButton.addSelectionListener(new SelectionAdapter() {
         	@Override
         	public void widgetSelected(SelectionEvent e) {
-        		tasksWindow.close();
+        		shell.close();
         	}
         });
         gd = new GridData();

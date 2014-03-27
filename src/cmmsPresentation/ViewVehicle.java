@@ -20,7 +20,8 @@ import cmmsObjects.Part;
 import cmmsObjects.Vehicle.Vehicle;
 import cmmsObjects.Vehicle.VehicleFields;
 
-
+import acceptanceTests.Register; 
+import acceptanceTests.EventLoop;
 
 public class ViewVehicle {
     private final int WINDOW_WIDTH = 800;
@@ -28,8 +29,8 @@ public class ViewVehicle {
     private final int MIN_WINDOW_WIDTH = 200;
     private final int MIN_WINDOW_HEIGHT = 200;
 
-    private Display currDisplay;
-    private Shell viewWindow;
+    private Display display;
+    private Shell shell;
     private GridLayout mainLayout;
     private Button closeButton;
     private Button btnPrint;
@@ -49,48 +50,54 @@ public class ViewVehicle {
 
     /* Passing in one vehicle */
     public void open(Vehicle v) {
-        currDisplay = Display.getDefault();
+        display = Display.getDefault();
+        Register.newWindow(this);
         vehicleList = new Vehicle[1];
         vehicleList[0] = v;
 
         CreateControls();
         FillHandler();
 
-        viewWindow.open();
-
-        while (!viewWindow.isDisposed()) {
-            try {
-                if (!currDisplay.readAndDispatch()) {
-                    currDisplay.sleep();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                System.out.println(e.getMessage());
-                System.out.println(e.toString());
-            }
+        shell.open();
+        if( EventLoop.isEnabled() )
+        {
+	        while (!shell.isDisposed()) {
+	            try {
+	                if (!display.readAndDispatch()) {
+	                    display.sleep();
+	                }
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	                System.out.println(e.getMessage());
+	                System.out.println(e.toString());
+	            }
+	        }
         }
     }
 
     /* Passing in multiple vehicles */
     public void open(Vehicle[] v) {
-        currDisplay = Display.getDefault();
+        display = Display.getDefault();
         vehicleList = v;
 
         CreateControls();
         FillHandler();
 
-        viewWindow.open();
-
-        while (!viewWindow.isDisposed()) {
-            try {
-                if (!currDisplay.readAndDispatch()) {
-                    currDisplay.sleep();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                System.out.println(e.getMessage());
-                System.out.println(e.toString());
-            }
+        shell.open();
+        
+        if( EventLoop.isEnabled() )
+        {
+	        while (!shell.isDisposed()) {
+	            try {
+	                if (!display.readAndDispatch()) {
+	                    display.sleep();
+	                }
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	                System.out.println(e.getMessage());
+	                System.out.println(e.toString());
+	            }
+	        }
         }
     }
 
@@ -167,13 +174,13 @@ public class ViewVehicle {
         mainLayout = new GridLayout();
         mainLayout.numColumns = 2;
 
-        viewWindow = new Shell();
-        viewWindow.setLayout(mainLayout);
-        viewWindow.setMinimumSize(MIN_WINDOW_WIDTH, MIN_WINDOW_HEIGHT);
-        viewWindow.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-        viewWindow.setText("View Vehicle");
+        shell = new Shell();
+        shell.setLayout(mainLayout);
+        shell.setMinimumSize(MIN_WINDOW_WIDTH, MIN_WINDOW_HEIGHT);
+        shell.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        shell.setText("View Vehicle");
         
-        textDisplay = new StyledText(viewWindow, SWT.BORDER | SWT.V_SCROLL
+        textDisplay = new StyledText(shell, SWT.BORDER | SWT.V_SCROLL
                 | SWT.H_SCROLL | SWT.READ_ONLY);
         GridData gd = new GridData();
         gd.horizontalSpan = 2;
@@ -183,7 +190,7 @@ public class ViewVehicle {
         gd.grabExcessVerticalSpace = true;
         textDisplay.setLayoutData(gd);
         
-        btnPrint = new Button(viewWindow, SWT.NONE);
+        btnPrint = new Button(shell, SWT.NONE);
         btnPrint.setText("Print");
         btnPrint.addSelectionListener(new SelectionAdapter() {
         	@Override
@@ -192,11 +199,11 @@ public class ViewVehicle {
         	}
         });
         
-        closeButton = new Button(viewWindow,SWT.NONE);
+        closeButton = new Button(shell,SWT.NONE);
         closeButton.addSelectionListener(new SelectionAdapter() {
         	@Override
         	public void widgetSelected(SelectionEvent e) {
-        		viewWindow.close();
+        		shell.close();
         	}
         });
         gd = new GridData();
@@ -206,7 +213,7 @@ public class ViewVehicle {
     }
     
     private void printVehicle() {
-    	printDialog = new PrintDialog(viewWindow, SWT.NONE);
+    	printDialog = new PrintDialog(shell, SWT.NONE);
     	printerData = printDialog.open();
     	printer = new Printer(printerData);
     	

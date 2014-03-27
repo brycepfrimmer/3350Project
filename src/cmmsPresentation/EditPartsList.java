@@ -16,13 +16,15 @@ import cmmsBusiness.AccessVehicle;
 import cmmsObjects.Part;
 import cmmsObjects.Vehicle.Vehicle;
 
+import acceptanceTests.Register; 
+import acceptanceTests.EventLoop;
 
 public class EditPartsList {
 
-    protected Shell shlEditPartsList;
+    protected Shell shell;
 
     private Vehicle currVehicle;
-    private Button btnSave;
+    private Button btnGoBack;
     private Button btnAdd;
     private Button btnRemove;
     private Button btnAddServiceEvent;
@@ -35,6 +37,7 @@ public class EditPartsList {
      */
     public void open(Vehicle v) {
         Display display = Display.getDefault();
+        Register.newWindow(this);
         createContents();
         accessVehicle = new AccessVehicle();
         currVehicle = v;
@@ -43,12 +46,15 @@ public class EditPartsList {
         if (!list.isEmpty()) {
             updateList();
         }
-        shlEditPartsList.open();
-        shlEditPartsList.layout();
-        while (!shlEditPartsList.isDisposed()) {
-            if (!display.readAndDispatch()) {
-                display.sleep();
-            }
+        shell.open();
+        shell.layout();
+        if( EventLoop.isEnabled() )
+        {
+	        while (!shell.isDisposed()) {
+	            if (!display.readAndDispatch()) {
+	                display.sleep();
+	            }
+	        }
         }
     }
 
@@ -58,21 +64,21 @@ public class EditPartsList {
      * @wbp.parser.entryPoint
      */
     protected void createContents() {
-        shlEditPartsList = new Shell();
-        shlEditPartsList.setText("Parts List");
-        shlEditPartsList.setSize(720, 474);
+        shell = new Shell();
+        shell.setText("Parts List");
+        shell.setSize(720, 474);
 
-        btnSave = new Button(shlEditPartsList, SWT.NONE);
-        btnSave.addSelectionListener(new SelectionAdapter() {
+        btnGoBack = new Button(shell, SWT.NONE);
+        btnGoBack.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
-                shlEditPartsList.close();
+                shell.close();
             }
         });
-        btnSave.setBounds(588, 401, 75, 25);
-        btnSave.setText("Save");
+        btnGoBack.setBounds(588, 401, 75, 25);
+        btnGoBack.setText("Go Back");
 
-        btnAdd = new Button(shlEditPartsList, SWT.NONE);
+        btnAdd = new Button(shell, SWT.NONE);
         btnAdd.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
@@ -84,7 +90,7 @@ public class EditPartsList {
         btnAdd.setBounds(588, 43, 75, 25);
         btnAdd.setText("Add");
 
-        btnRemove = new Button(shlEditPartsList, SWT.NONE);
+        btnRemove = new Button(shell, SWT.NONE);
         btnRemove.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
@@ -92,14 +98,14 @@ public class EditPartsList {
                 accessVehicle = new AccessVehicle();
                 if (selected == 0) {
                     // Display no selection error
-                    MessageBox mb = new MessageBox(shlEditPartsList,
+                    MessageBox mb = new MessageBox(shell,
                             SWT.ICON_ERROR | SWT.OK);
                     mb.setMessage("Error: You have not selected any vehicles to remove");
                     mb.setText("Removing Vehicles");
                     mb.open();
                 } else if (selected > 1) {
                     // Display multiple selection error
-                    MessageBox mb = new MessageBox(shlEditPartsList,
+                    MessageBox mb = new MessageBox(shell,
                             SWT.ICON_WARNING | SWT.YES | SWT.NO);
                     mb.setMessage("Warning: You have selected multiple vehicles.\nDo you wish to continue?");
                     mb.setText("Removing Vehicles");
@@ -117,7 +123,7 @@ public class EditPartsList {
                     }
                 } else {
                     // Display multiple selection error
-                    MessageBox mb = new MessageBox(shlEditPartsList,
+                    MessageBox mb = new MessageBox(shell,
                             SWT.ICON_WARNING | SWT.YES | SWT.NO);
                     mb.setMessage("Warning: Do you want to delete the selected object?");
                     mb.setText("Removing Vehicles");
@@ -137,14 +143,14 @@ public class EditPartsList {
         btnRemove.setBounds(588, 74, 75, 25);
         btnRemove.setText("Remove");
         
-        btnAddServiceEvent = new Button(shlEditPartsList, SWT.NONE);
+        btnAddServiceEvent = new Button(shell, SWT.NONE);
         btnAddServiceEvent.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
                 int selected = partsListTable.getSelectionCount();
                 if (selected == 0) {
                     // Display no selection error
-                    MessageBox mb = new MessageBox(shlEditPartsList, SWT.ICON_ERROR
+                    MessageBox mb = new MessageBox(shell, SWT.ICON_ERROR
                             | SWT.OK);
                     mb.setMessage("Error: You have not selected a Vehicle to update.");
                     mb.setText("Add Service Event");
@@ -153,22 +159,12 @@ public class EditPartsList {
                     // Display UpdateKilometers form
                 	
             		AddServiceEvent addse = new AddServiceEvent();
-            		String searchPart = "";
-            		String part = partsListTable.getItem(partsListTable.getSelectionIndex()).getText();
-            		for(int i = 0; i < part.length(); i++) {
-                		if(part.charAt(i) != '|') {
-                			searchPart += part.charAt(i);
-                		}
-                		else {
-                			i = part.length();
-                		}
-                	}
-            		addse.open(currVehicle, currVehicle.getPart(searchPart));
+            		addse.open(currVehicle, currVehicle.getPart(partsListTable.getItem(partsListTable.getSelectionIndex()).getText()));
                     // Update list with the new Vehicles
                     updateList();
                 } else {
                     // Display multiple selection error
-                    MessageBox mb = new MessageBox(shlEditPartsList, SWT.ICON_ERROR
+                    MessageBox mb = new MessageBox(shell, SWT.ICON_ERROR
                             | SWT.OK);
                     mb.setMessage("Error: You have selected too many Parts to update.");
                     mb.setText("Add Service Event");
@@ -181,7 +177,7 @@ public class EditPartsList {
         
         btnAddServiceEvent.pack();
 
-        partsListTable = new Table(shlEditPartsList, SWT.BORDER
+        partsListTable = new Table(shell, SWT.BORDER
                 | SWT.FULL_SELECTION);
         partsListTable.setBounds(10, 10, 568, 416);
         partsListTable.setHeaderVisible(true);

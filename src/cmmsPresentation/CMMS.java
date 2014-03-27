@@ -30,6 +30,8 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.wb.swt.SWTResourceManager;
 
+import acceptanceTests.EventLoop;
+import acceptanceTests.Register;
 import cmmsBusiness.AccessVehicle;
 import cmmsObjects.Vehicle.Vehicle;
 import cmmsObjects.Vehicle.VehicleFields;
@@ -52,8 +54,8 @@ public class CMMS{
     private static int currentVehicleCount = 0;
     private static boolean searching = false;
 
-    private static Display currDisplay;
-    private static Shell mainWindow;
+    private static Display display;
+    private static Shell shell;
     private static GridLayout mainLayout;
     private static GridData gridData;
 
@@ -151,8 +153,9 @@ public class CMMS{
     private static TableColumn[] tableCols = new TableColumn[TABLE_COL_COUNT];
     
     public CMMS()
-    {
+    {	
     	CreateHashMap();
+    	Register.newWindow(this);
     	accessVehicle = new AccessVehicle();
         CreateWindow();
         OnLoad();
@@ -199,16 +202,16 @@ public class CMMS{
     }
 
     private static void CreateWindow() {
-        mainWindow = new Shell();
-        mainWindow.setText(WINDOW_TITLE);
-        mainWindow.setMinimumSize(MIN_WINDOW_SIZE);
-        mainWindow.setBounds(Display.getDefault().getPrimaryMonitor().getBounds());
-        mainWindow.setFocus();      
+        shell = new Shell();
+        shell.setText(WINDOW_TITLE);
+        shell.setMinimumSize(MIN_WINDOW_SIZE);
+        shell.setBounds(Display.getDefault().getPrimaryMonitor().getBounds());
+        shell.setFocus();      
 
         mainLayout = new GridLayout();
         mainLayout.numColumns = 4;
 
-        currDisplay = Display.getDefault();
+        display = Display.getDefault();
         
         CreateMenus();
         CreateControls();
@@ -216,7 +219,7 @@ public class CMMS{
     }
 
     private static void CreateMenus() {
-        mainMenu = new Menu(mainWindow, SWT.BAR);
+        mainMenu = new Menu(shell, SWT.BAR);
 
         CreateFileMenu();
         CreateVehicleMenu();
@@ -224,14 +227,14 @@ public class CMMS{
         CreateViewMenu();
         CreateHelpMenu();
 
-        mainWindow.setMenuBar(mainMenu);
+        shell.setMenuBar(mainMenu);
     }
 
     private static void CreateFileMenu() {
         fileMenuHdr = new MenuItem(mainMenu, SWT.CASCADE);
         fileMenuHdr.setText("&File");
 
-        fileMenu = new Menu(mainWindow, SWT.DROP_DOWN);
+        fileMenu = new Menu(shell, SWT.DROP_DOWN);
         fileMenuHdr.setMenu(fileMenu);
 
         filePrintItem = new MenuItem(fileMenu, SWT.PUSH);
@@ -246,7 +249,7 @@ public class CMMS{
         vehicleMenuHdr = new MenuItem(mainMenu, SWT.CASCADE);
         vehicleMenuHdr.setText("&Vehicle");
 
-        vehicleMenu = new Menu(mainWindow, SWT.DROP_DOWN);
+        vehicleMenu = new Menu(shell, SWT.DROP_DOWN);
         vehicleMenuHdr.setMenu(vehicleMenu);
 
         vehicleAddItem = new MenuItem(vehicleMenu, SWT.PUSH);
@@ -436,7 +439,7 @@ public class CMMS{
         helpMenuHdr = new MenuItem(mainMenu, SWT.CASCADE);
         helpMenuHdr.setText("&Help");
 
-        helpMenu = new Menu(mainWindow, SWT.DROP_DOWN);
+        helpMenu = new Menu(shell, SWT.DROP_DOWN);
         helpMenuHdr.setMenu(helpMenu);
 
         helpAboutItem = new MenuItem(helpMenu, SWT.PUSH);
@@ -453,10 +456,10 @@ public class CMMS{
      * less for the row spanning, "extra" buttons would start in the next row.
      ***************************************/
     private static void CreateControls() {
-        searchLabel = new Label(mainWindow, SWT.NONE);
+        searchLabel = new Label(shell, SWT.NONE);
         searchLabel.setText("Search:");
         
-        searchCombo = new Combo(mainWindow, SWT.NONE);
+        searchCombo = new Combo(shell, SWT.NONE);
         searchCombo.addFocusListener(new FocusAdapter() {
         	@Override
         	public void focusGained(FocusEvent e) {
@@ -480,7 +483,7 @@ public class CMMS{
         }        
         searchCombo.setText(VehicleFields.ID.toString());
         
-        searchText = new Text(mainWindow, SWT.BORDER); 
+        searchText = new Text(shell, SWT.BORDER); 
         searchText.addFocusListener(new FocusAdapter() {
         	@Override
         	public void focusGained(FocusEvent e) {
@@ -537,7 +540,7 @@ public class CMMS{
         searchText.setLayoutData(gridData);
         searchText.setText(SEARCH_TEXT_DEFAULT);
         
-        clearButton = new Button(mainWindow, SWT.NONE); 
+        clearButton = new Button(shell, SWT.NONE); 
         clearButton.addSelectionListener(new SelectionAdapter() {
         	@Override
         	public void widgetSelected(SelectionEvent e) {
@@ -551,7 +554,7 @@ public class CMMS{
         clearButton.setLayoutData(gridData); 
         clearButton.setText("Clear");
 
-        dataTable = new Table(mainWindow, SWT.FULL_SELECTION | SWT.MULTI
+        dataTable = new Table(shell, SWT.FULL_SELECTION | SWT.MULTI
                 | SWT.BORDER);
         dataTable.setItemCount(currentVehicleCount);
         dataTable.setHeaderVisible(true);
@@ -583,7 +586,7 @@ public class CMMS{
         gridData.grabExcessVerticalSpace = true;
         dataTable.setLayoutData(gridData);
 
-        addVehicleButton = new Button(mainWindow, SWT.NONE);
+        addVehicleButton = new Button(shell, SWT.NONE);
         addVehicleButton.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {            	
@@ -602,22 +605,22 @@ public class CMMS{
         gridData.verticalAlignment = SWT.CENTER;
         addVehicleButton.setLayoutData(gridData);
         addVehicleButton.setText("Add Vehicle");
-
-        removeVehicleButton = new Button(mainWindow, SWT.NONE);
+        
+        removeVehicleButton = new Button(shell, SWT.NONE);
         removeVehicleButton.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
                 int selected = dataTable.getSelectionCount();
                 if (selected == 0) {
                     // Display no selection error
-                    MessageBox mb = new MessageBox(mainWindow, SWT.ICON_ERROR
+                    MessageBox mb = new MessageBox(shell, SWT.ICON_ERROR
                             | SWT.OK);
                     mb.setMessage("Error: You have not selected any vehicles to remove");
                     mb.setText("Removing Vehicles");
                     mb.open();
                 } else if (selected > 1) {
                     // Display multiple selection error
-                    MessageBox mb = new MessageBox(mainWindow, SWT.ICON_WARNING
+                    MessageBox mb = new MessageBox(shell, SWT.ICON_WARNING
                             | SWT.YES | SWT.NO);
                     mb.setMessage("Warning: You have selected multiple vehicles.\nDo you wish to continue?");
                     mb.setText("Removing Vehicles");
@@ -635,7 +638,7 @@ public class CMMS{
                     }
                 } else {
                     // Display multiple selection error
-                    MessageBox mb = new MessageBox(mainWindow, SWT.ICON_WARNING
+                    MessageBox mb = new MessageBox(shell, SWT.ICON_WARNING
                             | SWT.YES | SWT.NO);
                     mb.setMessage("Warning: Do you want to delete the selected object?");
                     mb.setText("Removing Vehicles");
@@ -658,14 +661,14 @@ public class CMMS{
         removeVehicleButton.setLayoutData(gridData);
         removeVehicleButton.setText("Remove Vehicle");
 
-        editVehicleButton = new Button(mainWindow, SWT.NONE);
+        editVehicleButton = new Button(shell, SWT.NONE);
         editVehicleButton.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
                 int selected = dataTable.getSelectionCount();
                 if (selected == 0) {
                     // Display no selection error
-                    MessageBox mb = new MessageBox(mainWindow, SWT.ICON_ERROR
+                    MessageBox mb = new MessageBox(shell, SWT.ICON_ERROR
                             | SWT.OK);
                     mb.setMessage("Error: You have not selected a Vehicle to edit.");
                     mb.setText("Editing Vehicles");
@@ -686,7 +689,7 @@ public class CMMS{
                     UpdateList();
                 } else {
                     // Display multiple selection error
-                    MessageBox mb = new MessageBox(mainWindow, SWT.ICON_ERROR
+                    MessageBox mb = new MessageBox(shell, SWT.ICON_ERROR
                             | SWT.OK);
                     mb.setMessage("Error: You have selected too many Vehicles to edit.");
                     mb.setText("Editing Vehicles");
@@ -701,14 +704,14 @@ public class CMMS{
         editVehicleButton.setLayoutData(gridData);
         editVehicleButton.setText("Edit Vehicle");
 
-        viewVehicleButton = new Button(mainWindow, SWT.NONE);
+        viewVehicleButton = new Button(shell, SWT.NONE);
         viewVehicleButton.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
                 int selected = dataTable.getSelectionCount();
                 if (selected == 0) {
                     // Display no selection error
-                    MessageBox mb = new MessageBox(mainWindow, SWT.ICON_ERROR
+                    MessageBox mb = new MessageBox(shell, SWT.ICON_ERROR
                             | SWT.OK);
                     mb.setMessage("Error: You have not selected any Vehicles to view.");
                     mb.setText("Viewing Vehicles");
@@ -739,14 +742,14 @@ public class CMMS{
         viewVehicleButton.setLayoutData(gridData);
         viewVehicleButton.setText("View Vehicle");
 
-        updateKmsButton = new Button(mainWindow, SWT.NONE);
+        updateKmsButton = new Button(shell, SWT.NONE);
         updateKmsButton.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
                 int selected = dataTable.getSelectionCount();
                 if (selected == 0) {
                     // Display no selection error
-                    MessageBox mb = new MessageBox(mainWindow, SWT.ICON_ERROR
+                    MessageBox mb = new MessageBox(shell, SWT.ICON_ERROR
                             | SWT.OK);
                     mb.setMessage("Error: You have not selected a Vehicle to update.");
                     mb.setText("Updating Kilometers");
@@ -763,7 +766,7 @@ public class CMMS{
                     UpdateList();
                 } else {
                     // Display multiple selection error
-                    MessageBox mb = new MessageBox(mainWindow, SWT.ICON_ERROR
+                    MessageBox mb = new MessageBox(shell, SWT.ICON_ERROR
                             | SWT.OK);
                     mb.setMessage("Error: You have selected too many Vehicles to update.");
                     mb.setText("Updating Vehicles");
@@ -779,7 +782,7 @@ public class CMMS{
         updateKmsButton.setText("Update Kilometers");
         
         
-        btnTodaysTasks = new Button(mainWindow, SWT.NONE);
+        btnTodaysTasks = new Button(shell, SWT.NONE);
         btnTodaysTasks.addSelectionListener(new SelectionAdapter() {
         	@Override
         	public void widgetSelected(SelectionEvent arg0) {
@@ -790,12 +793,12 @@ public class CMMS{
         btnTodaysTasks.setText("Today's Tasks");
         
         
-        quitButton = new Button(mainWindow, SWT.NONE);
+        quitButton = new Button(shell, SWT.NONE);
         quitButton.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
-                mainWindow.close();
-                currDisplay.dispose();
+                shell.dispose();
+                display.dispose();
             }
         });
         
@@ -1006,17 +1009,17 @@ public class CMMS{
     }
 
     private static void Open() {
-        mainWindow.setLayout(mainLayout);
-        mainWindow.pack();
+        shell.setLayout(mainLayout);
+        shell.pack();
 
-        mainWindow.open();
+        shell.open();
         
-        openDailyTasks();
+        //openDailyTasks();
 
-        while (!mainWindow.isDisposed()) {
+        while (!shell.isDisposed()) {
             try {
-                if (!currDisplay.readAndDispatch()) {
-                    currDisplay.sleep();
+                if (!display.readAndDispatch()) {
+                    display.sleep();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -1028,13 +1031,20 @@ public class CMMS{
 
     private static class FileExitListener implements SelectionListener {
         public void widgetDefaultSelected(SelectionEvent event) {
-            mainWindow.close();
-            currDisplay.dispose();
+            shell.close();
+            display.dispose();
         }
 
         public void widgetSelected(SelectionEvent event) {
-            mainWindow.close();
-            currDisplay.dispose();
+            shell.close();
+            display.dispose();
         }
     }
+    
+    public static void testRemove()
+    {
+    	accessVehicle.removeVehicle(dataTable.getItem(0).getText(0));
+    	UpdateList();
+    }
+    
 }
