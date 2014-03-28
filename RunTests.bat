@@ -2,11 +2,24 @@ REM @echo off
 
 call SetClasspath
 
+cd databases\
+
+Call ClearDB.bat
+
+cd ..
+
 REM @echo off
 
-rm -rf databases\Vehicles\Vehicles.lck
-rm -rf databases\ManFields\ManFields.lck
-java junit.textui.TestRunner tests.TestCMMS > AllTests.txt
-rm -rf databases\Vehicles\Vehicles.lck
-rm -rf databases\ManFields\ManFields.lck
-java junit.textui.TestRunner tests.IntegrationTests > AllTests.txt
+del -rf databases\Vehicles\Vehicles.lck
+del -rf databases\ManFields\ManFields.lck
+java junit.textui.TestRunner echo tests.TestCMMS > AllTests.txt
+pause
+del -rf databases\Vehicles\Vehicles.lck
+del -rf databases\ManFields\ManFields.lck
+java junit.textui.TestRunner echo tests.IntegrationTests >> AllTests.txt
+
+cd databases\
+
+Call RestoreDB.bat
+
+pause

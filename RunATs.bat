@@ -11,7 +11,7 @@ Call ClearDB.bat
 cd ..
 
 set SLEEP=1
-java -cp %CLASSPATH% acceptanceTests.TestRunner %SLEEP%
+java -cp %CLASSPATH% acceptanceTests.TestRunner %SLEEP% >> AllTests.txt
 
 cd databases\
 

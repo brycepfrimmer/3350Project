@@ -161,7 +161,6 @@ public class EditPartsList {
                     // Display UpdateKilometers form
                 	
             		AddServiceEvent addse = new AddServiceEvent();
-            		addse.open(currVehicle, currVehicle.getPart(partsListTable.getItem(partsListTable.getSelectionIndex()).getText()));
             		String searchPart = "";
 	        		String part = partsListTable.getItem(partsListTable.getSelectionIndex()).getText();
              		for(int i = 0; i < part.length(); i++) {
