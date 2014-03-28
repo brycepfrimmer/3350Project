@@ -403,7 +403,7 @@ March 25 - 2014
 		CMMS is now fullscreen on startup
 		moved Quit button in CMMS to the bottom
 		
-March 27 - 2014
+March 26 - 2014
 	Delroy Hiebert - 10 Hours
 		-Minor refactoring throughout project
 			-Changed some variable names to be standard throughout the project
@@ -417,4 +417,12 @@ March 27 - 2014
 	Cody Edwards - 2 Hours
 		Adding or editing vehicles doesn't let input anything that isn't between 1900-currentYear+2 and years are now in a drop down menu
 		Edit vehicle now displays that proper date
+		
+March 27 - 2014
+	Delroy Hiebert - 6 Hours
+		Typed up Retrospective Activity
+		Completed searching acceptance test
+			-Tried to interact with widget, ended up doing a bypass
+		Changed test .bat files to clear the database before running and restoring the database afterwards
+		Fixed minor issues with previous push (accidently eliminated 2 small pieces of code)
 		
