@@ -2,6 +2,8 @@ Package                 cmmsPresentation
 
 InvokeMethod            cmmsApplication.Main              	startUp
 
+Click					DailyTasks							closeButton
+
 Click					CMMS								addVehicleButton
 
 Set						AddVehicle							textVehicleID		"ABC"

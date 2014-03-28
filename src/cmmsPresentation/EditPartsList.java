@@ -160,7 +160,18 @@ public class EditPartsList {
                 	
             		AddServiceEvent addse = new AddServiceEvent();
             		addse.open(currVehicle, currVehicle.getPart(partsListTable.getItem(partsListTable.getSelectionIndex()).getText()));
-                    // Update list with the new Vehicles
+            		String searchPart = "";
+	        		String part = partsListTable.getItem(partsListTable.getSelectionIndex()).getText();
+	             		for(int i = 0; i < part.length(); i++) {
+	                 		if(part.charAt(i) != '|') {
+	                 			searchPart += part.charAt(i);
+	                 		}
+	                 		else {
+	                 			i = part.length();
+	                 		}
+	                 	}
+	             		addse.open(currVehicle, currVehicle.getPart(searchPart));
+        		// Update list with the new Vehicles
                     updateList();
                 } else {
                     // Display multiple selection error

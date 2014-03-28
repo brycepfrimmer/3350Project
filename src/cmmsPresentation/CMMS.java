@@ -1015,7 +1015,7 @@ public class CMMS{
 
         shell.open();
         
-        //openDailyTasks();
+        openDailyTasks();
         if (EventLoop.isEnabled()) 
         {
 	        while (!shell.isDisposed()) {
@@ -1044,21 +1044,15 @@ public class CMMS{
         }
     }
     
-    public static void testRemove()
+    private static void testRemove()
     {
     	accessVehicle.removeVehicle(dataTable.getItem(0).getText(0));
     	UpdateList();
     }
     
     
-    public static void testSearch()
+    private static void testSearch()
     {
-    	try
-    	{
-	    	Robot r = new Robot();
-	    	r.keyPress(SWT.TAB);
-	    	r.keyPress(SWT.TAB);
-	        
 			Vehicle[] accessReturn = accessVehicle.getVehicles("ID", "ABC");
         
     		searchList = new ArrayList<Vehicle>();
@@ -1067,11 +1061,6 @@ public class CMMS{
     		}
     		searching = true;
     		UpdateList();
-	    	}
-    	catch( Exception e )
-    	{
-    		
-    	}
     }
     
 }

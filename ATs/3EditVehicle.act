@@ -2,6 +2,8 @@ Package                 cmmsPresentation
 
 InvokeMethod            cmmsApplication.Main              	startUp
 
+Click					DailyTasks							closeButton
+
 SelectTableByRowIndex	CMMS								dataTable			1
 Click					CMMS								editVehicleButton
 	
