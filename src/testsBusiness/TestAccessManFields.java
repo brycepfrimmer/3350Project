@@ -32,9 +32,10 @@ public class TestAccessManFields extends TestCase{
 
 		fields = access.getManFields();
 		assertNotNull(fields);	
-		assertTrue(fields.getId());
+		assertTrue(fields.getManufacturer());
+		assertTrue(fields.getType());
 
-		//Services.closeDataAccess();
+		Services.closeDataAccess();
 
 		System.out.println("Finished test AccessManFields");
 	}

@@ -1,5 +1,7 @@
 package testsBusiness;
 
+import java.util.ArrayList;
+
 import junit.framework.TestCase;
 import cmmsApplication.Services;
 import cmmsBusiness.AccessVehicle;
@@ -19,6 +21,7 @@ private static String dbName2 = cmmsApplication.Main.dbName2;
 	{
 		AccessVehicle access;
 		Vehicle vehicle;
+		ArrayList<Vehicle> vehicles = null;
 
 		System.out.println("\nStarting test AccessVehicle");
 
@@ -28,21 +31,20 @@ private static String dbName2 = cmmsApplication.Main.dbName2;
 
 		access = new AccessVehicle();
 
-		//vehicle = access.getVehicle();
+		vehicles = access.getAllVehicles();
+		vehicle = vehicles.get(0);
 		assertNotNull(vehicle);
-		//assertTrue( "3692481".equals(vehicle.getID() ) );
+		assertTrue( "1234".equals(vehicle.getID() ) );
 		
-		/* Test to change Vehicle ID TODO: for Itr 3
-		VehicleInfo info = new VehicleInfo();
-		info.setID("ABC");
-		String oldID = vehicle.getID();
-		access.updateVehicle( oldID , info );
-		assertTrue( access.getVehicle(oldID) == null );
+		vehicle.setID("ABC");
+		access.updateVehicle( vehicle );
+		vehicle = access.getVehicle("ABC");
+		assertTrue( access.getVehicle("1234") == null );
 		assertTrue( access.getVehicle("ABC") != null );
 		assertTrue( access.getVehicle("ABC").getID() == "ABC" );
-		*/
+		
 
-		//Services.closeDataAccess();
+		Services.closeDataAccess();
 
 		System.out.println("Finished test AccessManFields");
 	}

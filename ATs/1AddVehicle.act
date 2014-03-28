@@ -18,6 +18,20 @@ Click					AddVehicle							btnCancel
 
 Click					CMMS								addVehicleButton
 
+Set						AddVehicle							textVehicleID		"1234"
+Set						AddVehicle							textType			"Truck"
+Set						AddVehicle							textManufacturer	"Ford"
+Set						AddVehicle							textModel			"Raptor"
+Set						AddVehicle							textYear			"2014"
+Set						AddVehicle							textLPN				"ADN 518"
+Set						AddVehicle							textInsPolNum		"POLICYNUM"
+Set						AddVehicle							textInsType			"Commuter"
+Set						AddVehicle							textKms				"72500"
+Set						AddVehicle							textKmsLS			"71000"
+Click					AddVehicle							btnCreate
+
+Click 					CMMS								addVehicleButton
+
 Set						AddVehicle							textVehicleID		"ABC"
 Set						AddVehicle							textType			"Car"
 Set						AddVehicle							textManufacturer	"Saturn"

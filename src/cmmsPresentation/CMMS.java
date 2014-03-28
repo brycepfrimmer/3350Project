@@ -36,6 +36,7 @@ import cmmsBusiness.AccessVehicle;
 import cmmsObjects.Vehicle.Vehicle;
 import cmmsObjects.Vehicle.VehicleFields;
 
+import java.awt.Robot;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -1047,6 +1048,30 @@ public class CMMS{
     {
     	accessVehicle.removeVehicle(dataTable.getItem(0).getText(0));
     	UpdateList();
+    }
+    
+    
+    public static void testSearch()
+    {
+    	try
+    	{
+	    	Robot r = new Robot();
+	    	r.keyPress(SWT.TAB);
+	    	r.keyPress(SWT.TAB);
+	        
+			Vehicle[] accessReturn = accessVehicle.getVehicles("ID", "ABC");
+        
+    		searchList = new ArrayList<Vehicle>();
+    		for (Vehicle v : accessReturn) {
+    			searchList.add(v);
+    		}
+    		searching = true;
+    		UpdateList();
+	    	}
+    	catch( Exception e )
+    	{
+    		
+    	}
     }
     
 }
