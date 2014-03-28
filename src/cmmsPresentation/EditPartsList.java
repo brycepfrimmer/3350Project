@@ -46,6 +46,8 @@ public class EditPartsList {
         if (!list.isEmpty()) {
             updateList();
         }
+        btnRemove.setEnabled(false);
+        btnAddServiceEvent.setEnabled(false);
         shell.open();
         shell.layout();
         if( EventLoop.isEnabled() )
@@ -100,14 +102,14 @@ public class EditPartsList {
                     // Display no selection error
                     MessageBox mb = new MessageBox(shell,
                             SWT.ICON_ERROR | SWT.OK);
-                    mb.setMessage("Error: You have not selected any vehicles to remove");
+                    mb.setMessage("Error: You have not selected any parts to remove");
                     mb.setText("Removing Vehicles");
                     mb.open();
                 } else if (selected > 1) {
                     // Display multiple selection error
                     MessageBox mb = new MessageBox(shell,
                             SWT.ICON_WARNING | SWT.YES | SWT.NO);
-                    mb.setMessage("Warning: You have selected multiple vehicles.\nDo you wish to continue?");
+                    mb.setMessage("Warning: You have selected multiple parts.\nDo you wish to continue?");
                     mb.setText("Removing Vehicles");
                     int response = mb.open();
 
@@ -152,7 +154,7 @@ public class EditPartsList {
                     // Display no selection error
                     MessageBox mb = new MessageBox(shell, SWT.ICON_ERROR
                             | SWT.OK);
-                    mb.setMessage("Error: You have not selected a Vehicle to update.");
+                    mb.setMessage("Error: You have not selected a Part to update.");
                     mb.setText("Add Service Event");
                     mb.open();
                 } else if (selected == 1) {
@@ -162,15 +164,15 @@ public class EditPartsList {
             		addse.open(currVehicle, currVehicle.getPart(partsListTable.getItem(partsListTable.getSelectionIndex()).getText()));
             		String searchPart = "";
 	        		String part = partsListTable.getItem(partsListTable.getSelectionIndex()).getText();
-	             		for(int i = 0; i < part.length(); i++) {
-	                 		if(part.charAt(i) != '|') {
-	                 			searchPart += part.charAt(i);
-	                 		}
-	                 		else {
-	                 			i = part.length();
-	                 		}
-	                 	}
-	             		addse.open(currVehicle, currVehicle.getPart(searchPart));
+             		for(int i = 0; i < part.length(); i++) {
+                 		if(part.charAt(i) != '|') {
+                 			searchPart += part.charAt(i);
+                 		}
+                 		else {
+                 			i = part.length();
+                 		}
+                 	}
+             		addse.open(currVehicle, currVehicle.getPart(searchPart));
         		// Update list with the new Vehicles
                     updateList();
                 } else {
@@ -188,19 +190,18 @@ public class EditPartsList {
         
         btnAddServiceEvent.pack();
 
-        partsListTable = new Table(shell, SWT.BORDER
-                | SWT.FULL_SELECTION);
+        partsListTable = new Table(shell, SWT.FULL_SELECTION | SWT.MULTI
+                | SWT.BORDER);
         partsListTable.setBounds(10, 10, 568, 416);
         partsListTable.setHeaderVisible(true);
         partsListTable.setLinesVisible(true);
         partsListTable.addSelectionListener(new SelectionAdapter() {
         	@Override
         	public void widgetSelected(SelectionEvent e) {
-        		if(partsListTable.getSelectionCount() == 0) {
+        		if (partsListTable.getSelectionCount() <= 0) {
         			btnAddServiceEvent.setEnabled(false);
 	        		btnRemove.setEnabled(false);
-        		}
-        		else {
+        		} else {
 	        		btnAddServiceEvent.setEnabled(true);
 	        		btnRemove.setEnabled(true);
         		}
