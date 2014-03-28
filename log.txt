@@ -319,40 +319,57 @@ To checkout our functionality please see this branch, re-running Compile.bat and
 I've also included a sub-folder in the submission called Itr2WorkingFunctionality which contains the code to do this.
 
 =======
-"Big" User Stories for Iteration 3:
+User Stories for Iteration 3:
 Supply list for maintenance - as maintenance personnel I want to have access to a list of supplies I need for maintenance - 4 days
 Category Views - as a user I want to be able to break down the list of vehicles into categorized views - 4 days
 Batch Editing - as a user I should be able to edit fields that are common to multiple vehicles at the same time - 3 days
 Printing - as a user I need to be able to print information and details about a vehicle - 4 days
 
 Other Tasks for Iteration 3:
+Finish Implementing the database integration - 3 days - MUST BE DONE FIRST
 Acceptance Tests - 4 days
+Re-factoring Requirements - ? days
 
 The four Big user stories listed above are the next four in our list and are the four that we intended to implement in iteration 3.
 As of right now our initial plan hasn't changed at all. This might be different over this next iteration.
 =======
-
 ITERATION 3
 
-March 14 - 2014
+As we met up as a group to discuss Iteration 3 we decided not to implement two of our User Stories from this iteration.
+A) Supply list for maintenance - as maintenance personnel I want to have access to a list of supplies I need for maintenance - 4 days
+	Reason: We underestimated the amount of effort required for this story. We still would want to implement this but it would be in another iteration.
+	The Database situation also set us back slightly.
+B) Category Views - as a user I want to be able to break down the list of vehicles into categorized views - 4 days
+	Reason: We sidelined this as after implementing the search and organizing functionality of the main table we classified it as a "nice to have" feature.
+	The table can now be ordered by various fields so to have a category view that organized the vehicles by Car/Truck/etc. would have been repetitive.
+
+Developer Task List - Iteration 3
+1 - Persist all parts of the vehicle list in the integrated Database - 2 days
+2 - Re-factoring - clean up Database set-up, eliminate repetitive database - 2 days
+3 - Enable batch editing in the CMMS vehicle list (editing more than one vehicle at a time) - 3 days
+4 - Enable the user to print off vehicle information from the "view" screen - 4 days
+5 - Figure out the set-up of the ATR and change presentation classes to accommodate the acceptance tests - 2 days
+6 - Write and test acceptance scripts - 2 days
+
+March 14, 2014
 Darwin Froese - 2 Hours
 	Finished Implementing HSQLDB
 Cody Edwards - 1.5 Hours
 	Changed all date objects to Gregorian calendar objects
 
-March 16 - 2014
+March 16, 2014
 Cody Edwards - 2 Hours
 	Changed edit vehicles window to also take into account mandatory fields
 
-March 18 - 2014
+March 18, 2014
 Cody Edwards - 1 Hour
 	Fixed issues with calendar not working with the database
 
-March 19 -2014
+March 19, 2014
 Cody Edwards - 1.5 Hours
 	Added printing to the viewVehicle window
 
-March 20 - 2014
+March 20, 2014
 Darwin Froese - 6 Hours
 	Refactored interacting with vehicles in database for searching and sorting purposes
 	Re-Implemented searching
@@ -363,17 +380,17 @@ Delroy Hiebert - 5 Hours
 	Update integration tests - More thorough and covers much more area
 	Fixed bug - system did not update fuel economy from database
 
-March 21 - 2014
+March 21, 2014
 Darwin Froese - 1 Hour
 	AccessVehicle.addVehicle modified to only insert if the ID has not been used returns a boolean for success/fail
 	* Fixed the database so all tests pass. Cannot remove element from a list while iterating through
 	a list and changed UpdateKM to call UpdateVehicle so that the update code is only written once
 
-March 22 - 2014
+March 22, 2014
 Cody Edwards - 1.5 Hours
 	Moved addServiceButton from main CMMS window to the editParts window. - not fully functional yet
 
-March 24 - 2014
+March 24, 2014
 Bryce Pfrimmer - 3 Hours
 	Re-factoring - Created new tables to more efficiently persist the Parts and Service Items of a Vehicle
 	Fixed duplicate Parts bug
@@ -383,7 +400,7 @@ Cody Edwards - 2.5 Hours
 	Add service button should now work in the edit parts window
 	Fixed bug in dataAccessObject where it thought valid service items with km service items were invalid
 			
-March 25 - 2014
+March 25, 2014
 Team Meeting - 1.5 Hours
 	Discussed progress on user stories for iteration 3 - decided not to implement Category Views or Supply Lists for Maintenance
 	Ensured everyone team member is on the same page before the iteration wraps up
@@ -402,14 +419,14 @@ Bryce Pfrimmer - 3 Hours
 	Small bug fixes with Cody
 	Changed the AddParts and AddServiceItems to immediately save to the DB
 		
-March 26 - 2014
+March 26, 2014
 Delroy Hiebert - 10 Hours
 	Minor re-factoring throughout project - Changed some variable names to be standard throughout the project
 	Completed acceptance tests for 5 major user stories - Add, view, edit, update fuel economy, delete
 	Started search, requires some work still
 	Still need acceptance tests for a few other user stories
 		
-March 27 - 2014
+March 27, 2014
 Cody Edwards - 2 Hours
 	Adding or editing vehicles doesn't let input anything that isn't between 1900-currentYear+2 and years are now in a drop down menu
 	Edit vehicle now displays that proper date
@@ -431,21 +448,33 @@ Bryce Pfrimmer - 3 Hours
 	Format log, check project (make sure everything is in order for submission), & package up for submission
 	
 =======
-END OF ITERATION 2 SUMMARY:
+END OF ITERATION 3 SUMMARY:
 User Stories - Iteration 3
 1 - Completed - Batch Editing - 3 days
 2 - Completed - Printing - 4 days
 3 - Completed - Acceptance tests - 4 days
 
+Developer Task List - Iteration 3
+1 - Completed - Persist all parts of the vehicle list in the integrated Database - 2 days
+2 - Completed - Re-factoring - clean up Database set-up, eliminate repetitive database - 2 days
+3 - Completed - Enable batch editing in the CMMS vehicle list (editing more than one vehicle at a time) - 3 days
+4 - Completed - Enable the user to print off vehicle information from the "view" screen - 2 days (initially our User story estimated this at 4 days, a pre-existing interface
+	allowed us to implement it a lot quicker)
+5 - Completed - Figure out the set-up of the ATR and change presentation classes to accommodate the acceptance tests - 2 days
+6 - Completed - Write and test acceptance scripts - 2 days
+
 Creating tests for the application - on going
 
-BUGS / ISSUES
+To see a more detailed account of the re-factoring that was done please see "Itr3Refactoring.txt"
+
+BUGS / ISSUES / CHANGES IN PLANS
 The clone vehicle capability currently does not display an error if the new ID entered is not unique. It does not add a vehicle with
 the non-unique ID but it doesn't let the user know that the clone failed.
 
 We decided not to implement two of our User Stories from this iteration.
 A) Supply list for maintenance - as maintenance personnel I want to have access to a list of supplies I need for maintenance - 4 days
-	- We underestimated the amount of effort required for this story. We still would want to implement this but it would be in another iteration.
+	Reason: We underestimated the amount of effort required for this story. We still would want to implement this but it would be in another iteration.
+	The Database situation also set us back slightly.
 B) Category Views - as a user I want to be able to break down the list of vehicles into categorized views - 4 days
-	- We sidelined this as after implementing the search and organizing functionality of the main table we classified it as a "nice to have" feature.
+	Reason: We sidelined this as after implementing the search and organizing functionality of the main table we classified it as a "nice to have" feature.
 	The table can now be ordered by various fields so to have a category view that organized the vehicles by Car/Truck/etc. would have been repetitive.

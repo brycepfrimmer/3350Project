@@ -1,0 +1,20 @@
+Re-factoring in Iteration 3 of Project
+
+1) Originally we had two databases. One for the vehicle information and one for the mandatory fields that were required.
+As development progressed we realized that this was unnecessary. It involved a lot of duplicate code that didn't need to
+exist. We could just move the ManFields table over to the Vehicles database and thus clean up our code and remove a lot
+of duplicate code. Too see the changes please see the Git commit tagged "Stash pop conflicts". (An unfortunate name for
+the commit due to a merge)
+
+2) We were using a lot similar variables in our cmmsPresentation classes. A 'Shell' object and 'Display' object were two
+that were used in every GUI window. However, because we all had played a part in putting together the GUI these objects
+had different names in the different windows. This made changing anything in the separate windows difficult. To help ease
+this we standardized the names we used for certain objects in the GUI's. Again the two most popular ones, Shell & Display
+were named shell and display rather than addPartWindowS & addPartWindowMainDisplay.
+
+3) At the beginning of Iteration 3 we were using comma separate values to store the parts and service item events in the
+"vehicles" table in the vehicles database. We were having a couple problems with this and there were a few bugs and while
+we were looking at ways to solve the issues we came to the conclusion that we should re-factor, create two more tables
+and store the part and service item information in those two tables. Then to identify which part went with what vehicle
+we tied each part to the vehicle ID and to identify which serviceItem went with which part we tied it to the part and to
+the vehicle ID to ensure no errors.
