@@ -8,14 +8,13 @@ public class Services
 {
 	private static DataAccessObject dataAccessService = null;
 
-	public static DataAccessObject createDataAccess(String dbName, String dbName2)
+	public static DataAccessObject createDataAccess(String dbName)
 	{
 		if (dataAccessService == null)
 		{
 			dataAccessService = new DataAccessObject(dbName);
 			try {
-				dataAccessService.create(dbName);
-				dataAccessService.create(dbName2);
+				dataAccessService.create();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -28,7 +27,7 @@ public class Services
 		if (dataAccessService == null)
 		{
 			System.out.println("Connection to data access has not been established.");
-			createDataAccess(dbName, dbName2);
+			createDataAccess(dbName);
 		}
 		return dataAccessService;
 	}

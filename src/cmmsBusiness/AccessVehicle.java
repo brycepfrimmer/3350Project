@@ -31,7 +31,7 @@ public class AccessVehicle {
 	public AccessVehicle()
 	{
 		dataAccess = new DataAccessObject("Vehicles");
-		dataAccess.open("Vehicles");
+		dataAccess.open();
 		
 		if (dbVehicles.size() == 0) {
 			try {

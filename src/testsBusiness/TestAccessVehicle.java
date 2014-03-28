@@ -10,7 +10,6 @@ import cmmsObjects.Vehicle.Vehicle;
 public class TestAccessVehicle extends TestCase{
 
 private static String dbName = cmmsApplication.Main.dbName;
-private static String dbName2 = cmmsApplication.Main.dbName2;
 	
 	public TestAccessVehicle(String arg0)
 	{
@@ -25,7 +24,7 @@ private static String dbName2 = cmmsApplication.Main.dbName2;
 
 		System.out.println("\nStarting test AccessVehicle");
 
-		Services.createDataAccess( dbName, dbName2 );
+		Services.createDataAccess( dbName );
 
 		vehicle = new Vehicle();
 

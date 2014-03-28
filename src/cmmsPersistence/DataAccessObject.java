@@ -17,9 +17,7 @@ import cmmsObjects.Part;
 
 public class DataAccessObject/*DataAccess*/ {
 	String dbName;
-	String db2Name;
 	private Connection conn;
-	private Connection conn2;
 	
 	private static String[] columns2 = {
 	    "id",
@@ -37,16 +35,12 @@ public class DataAccessObject/*DataAccess*/ {
 		this.dbName = dbName;
 	}
 	
-	public void create(String dbName) throws SQLException
+	public void create() throws SQLException
 	{		
-		if (dbName.equals("Vehicles")) {
-			CreateVehiclesTable();
-		} else if (dbName.equals("ManFields")) {
-			CreateManFieldsTable();
-		} else {
-			System.out.println("Error creating tables.");
-			System.exit(-1);
-		}
+		CreateVehiclesTable();
+        CreatePartsTable();
+        CreateServiceItemsTable();
+		CreateManFieldsTable();
 	}
 	
 	private void CreateVehiclesTable() {
@@ -98,9 +92,6 @@ public class DataAccessObject/*DataAccess*/ {
 		}
 		catch (SQLException e) {
 		}
-
-        CreatePartsTable();
-        CreateServiceItemsTable();
 	}
 
     private void CreatePartsTable() {
@@ -172,23 +163,9 @@ public class DataAccessObject/*DataAccess*/ {
 		        + columns2[8] + " BOOLEAN DEFAULT FALSE NOT NULL "
 		        + " )";
 		
-		// Setup for HSQLDB
-		try {
-			Class.forName("org.hsqldb.jdbcDriver");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			return;
-		}
-		String url = "jdbc:hsqldb:file:databases/ManFields/ManFields;ifexists=false"; // stored on disk mode
-		try {
-			conn2 = DriverManager.getConnection(url, "SA", "");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
 		Statement create = null;
 		try {
-			create = conn2.createStatement();
+			create = conn.createStatement();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -197,7 +174,7 @@ public class DataAccessObject/*DataAccess*/ {
 			int j = create.executeUpdate(createTable2);
 			
 			if (j == -1) {
-			    System.out.println("Error create ManFields Database.");
+			    System.out.println("Error create ManFields Table.");
 			    System.exit(-1);
 			}
 		}
@@ -206,7 +183,7 @@ public class DataAccessObject/*DataAccess*/ {
 		}
 	}
 	
-	public void open(String dbName)
+	public void open()
 	{
 		String url;
 		try
@@ -221,20 +198,6 @@ public class DataAccessObject/*DataAccess*/ {
 		}
 	}
 
-	public void open2(String dbName) {
-		String url;
-		try
-		{
-			// Setup for HSQLDB
-			Class.forName("org.hsqldb.jdbcDriver").newInstance();
-			url = "jdbc:hsqldb:file:databases/" + dbName + "/" + dbName + ";ifexists=true"; // stored on disk mode
-			conn2 = DriverManager.getConnection(url, "SA", "");
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
 	public void close()
 	{
 		try
@@ -242,10 +205,6 @@ public class DataAccessObject/*DataAccess*/ {
 			Statement shutdown = conn.createStatement();
 			shutdown.execute("SHUTDOWN COMPACT");
 			conn.close();
-			
-			Statement shutdown2 = conn2.createStatement();
-			shutdown2.execute("SHUTDOWN COMPACT");
-			conn2.close();
 		}
 		catch (Exception e)
 		{
@@ -541,7 +500,7 @@ public class DataAccessObject/*DataAccess*/ {
 	
 	private void addManFields() throws SQLException {
         Statement add = null;
-        add = conn2.createStatement();
+        add = conn.createStatement();
         
         String addCommand = "INSERT INTO ManFields("
                 + "TYPE_KEY, "
@@ -563,7 +522,7 @@ public class DataAccessObject/*DataAccess*/ {
 	{
 	    addManFields();
         Statement update = null;
-        update = conn2.createStatement();
+        update = conn.createStatement();
         
         String updateCommand = "UPDATE ManFields SET "
                 + columns2[0] + "=" + m.getId() + ", "
@@ -591,7 +550,7 @@ public class DataAccessObject/*DataAccess*/ {
         Statement query = null;
         ResultSet searchResult = null;
         
-        query = conn2.createStatement();
+        query = conn.createStatement();
         searchResult = query.executeQuery("SELECT * FROM ManFields");
         
         Object[] objects = ProcessManFieldSearch(searchResult);

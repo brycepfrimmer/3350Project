@@ -6,9 +6,13 @@ CREATE USER SA PASSWORD ""
 GRANT DBA TO SA
 SET WRITE_DELAY 20
 SET SCHEMA PUBLIC
-INSERT INTO VEHICLES VALUES('1234','Truck','Ford','F150','2014','72500','71000','2014-03-25','true','EFG 123','fdj2398gfjdsk','Commuter','true','0.0')
-INSERT INTO PARTS VALUES('1234','Synthetic 5W20 Oil')
-INSERT INTO PARTS VALUES('1234','Air Filter')
-INSERT INTO SERVICEITEMS VALUES('1234','Synthetic 5W20 Oil','Rejigger','10','0','2014-03-24','0')
-INSERT INTO SERVICEITEMS VALUES('1234','Synthetic 5W20 Oil','Change Oil','0','3000','','71000')
-INSERT INTO SERVICEITEMS VALUES('1234','Air Filter','Change','0','1000','','71000')
+INSERT INTO VEHICLES VALUES('2','SUV','Escalade','ESV Platinum','2008','105000','104000','2013-10-25','true','EPH124','fjgidosap0q098gf90a','Farm','true','0.0')
+INSERT INTO VEHICLES VALUES('3','Car','Volkswagon','Jetta TDI','2008','120000','118000','2013-09-22','true','EPH125','fjakds98saf87b','Commuter','true','0.0')
+INSERT INTO VEHICLES VALUES('5','Car','Volkswagon','Jetta TDI','2012','89000','88000','2014-03-27','true','EPH127','fja8fdsnbyxu98yu','Commuter','true','0.0')
+INSERT INTO VEHICLES VALUES('4','Truck','GMC','Denali','2009','102000','100000','2014-03-27','true','EPH126','jfdka0asd9g09as09','Farm','true','0.0')
+INSERT INTO VEHICLES VALUES('1','Truck','Ford','F150','2009','73500','73000','2014-03-27','true','EPH123','fjk2098dfau92020jf','Commuter','true','0.0')
+INSERT INTO VEHICLES VALUES('6','Car','Ford','Shelby GT500','2007','35000','34000','2014-03-27','true','EPH128','jfkladfg90fu7b098','Summer','true','0.0')
+INSERT INTO PARTS VALUES('1','Synthetic Oil')
+INSERT INTO PARTS VALUES('6','Full Synthetic Oil')
+INSERT INTO SERVICEITEMS VALUES('1','Synthetic Oil','change oil','0','5000','','73000')
+INSERT INTO SERVICEITEMS VALUES('6','Full Synthetic Oil','Change Oil','0','5000','','34000')
