@@ -17,7 +17,7 @@ Meeting 1: ~1.5 hours Brainstorming project ideas. Decided upon a Vehicle manage
 Meeting 2: ~2 hours Began to come up with some possible user stories.
 
 Zac Medeiros - 1 hour
-	- wrote up the inital draft of the Vision statement
+	- wrote up the initial draft of the Vision statement
 Bryce Pfrimmer - 1 hour
 	- kept track of the initial draft of the user stories
 
@@ -49,7 +49,7 @@ discussed and required. We also set up our Developer task list for the work to b
 This included a rough shot at who was to be in charge of what. Our task list was comprised entirely of smaller parts of
 our user stories and assumed that the project was already set up on Git and was at a place that work could be contributed.
 TODO
-- set up Git - get Github accounts and email/FB/Text Bryce username
+- set up Git - get GitHub accounts and email/FB/Text Bryce user-name
 - learn to use Git
 - learn to use SWT & Windows Builder
 - set up base code - Main Screen (GUI), classes/objects, readme of all contents for submission
@@ -95,7 +95,7 @@ Met and continue to work on our class structure. To clarify ideas we drafted a r
 classes. Breaking off into a few smaller groups we then also began working on creating a stub database and
 continued our work on the main GUI. At this point we needed to decide exactly how our GUI was going to tie into
 the structure our Vehicles. We considered a few different ways of displaying the information (Blocks in a grid,
-labeled by ID) but decided upon a list view where each aspect of the vehicle was listed horizontally beside the
+labelled by ID) but decided upon a list view where each aspect of the vehicle was listed horizontally beside the
 vehicle ID. After about 2 hours we called the meeting for the night and set the next meeting for next week Tuesday.
 NOTE: between people's scheduling and the state that our project was at we decided that a meeting wouldn't be
 required. We continued to work communicating through our group chat.
@@ -106,7 +106,7 @@ Friday, February 7, 2014
 Delroy Hiebert - 2.5 hours
 	- Set up initial Vehicle class (Task 1)
 	- Optimized vehicle class with specific methods
-	- Improved reusability
+	- Improved re-usability
 	- Cleaned up code
 
 Saturday, February 8, 2014
@@ -161,9 +161,9 @@ Zac Medeiros - 5 hours
 	- adjusting test cases to work with bat's
 Cody Edwards Feb 13, 2014 - 7 hours
 	- Cleaned code up
-	- Added overlooked things ie. toggling check boxes with the enter key
+	- Added overlooked things IE. toggling check boxes with the enter key
 	- Added fuel economy tracking
-	- Linked fuel economy to gui
+	- Linked fuel economy to GUI
 	- Separate parts list class out of vehicle
 	- Parts list now modifiable
 
@@ -201,7 +201,7 @@ Searching - 3 days
 Modifying Vehicle adding criteria - 5 days
 Daily Tasks - 3 days
 
-For more detail please see "User Stories.pdf"
+For more details please see "User Stories.pdf"
 
 Other Tasks for Iteration 2:
 - Implement SQL database - 3 days
@@ -266,13 +266,13 @@ Cody Edwards
 	
 Saturday, March 8th, 2014
 Delroy Hiebert
-	1 hour - refactored some parts of project. Eliminated vehicle interface and replaced it with enum
+	1 hour - re-factored some parts of project. Eliminated vehicle interface and replaced it with an enumerated value
 
 Sunday, March 9th, 2014
 Darwin Froese
-	3 Hours - Time based tracking changes background color instead of foreground color
+	3 Hours - Time based tracking changes background colour instead of foreground colour
 		- Searching updates main table and resets upon adding vehicle or clear button being clicked
-		- Changed searching backend to compare lower case search key and lower case data
+		- Changed searching back-end to compare lower case search key and lower case data
 		- Table headers can be shown or hidden using the view menu
 		
 Sunday, March 9th, 2014
@@ -316,7 +316,7 @@ For this reason we created a new branch in our GitHub repository. **Itr2WorkingF
 At this point in master we had all of our functionality working for our Iteration 3 stories, just without the HSQL DB.
 To checkout our functionality please see this branch, re-running Compile.bat and Run.bat.
 
-I've also included a subfolder in the submission called Itr2WorkingFunctionality which contains the code to do this.
+I've also included a sub-folder in the submission called Itr2WorkingFunctionality which contains the code to do this.
 
 =======
 "Big" User Stories for Iteration 3:
@@ -326,106 +326,126 @@ Batch Editing - as a user I should be able to edit fields that are common to mul
 Printing - as a user I need to be able to print information and details about a vehicle - 4 days
 
 Other Tasks for Iteration 3:
-Acceptance Tests
+Acceptance Tests - 4 days
 
 The four Big user stories listed above are the next four in our list and are the four that we intended to implement in iteration 3.
 As of right now our initial plan hasn't changed at all. This might be different over this next iteration.
 =======
+
+ITERATION 3
+
 March 14 - 2014
-	Darwin Froese - 2 Hours
-		Finished Implementing HSQLDB
-March 14 - 2014
-	Cody Edwards - 1.5 Hours
-		Changed all date objects to gregorian calendar objects
+Darwin Froese - 2 Hours
+	Finished Implementing HSQLDB
+Cody Edwards - 1.5 Hours
+	Changed all date objects to Gregorian calendar objects
+
 March 16 - 2014
-	Cody Edwards - 2 Hours
-		Changed edit vehicles window to also take into account mandatory fields
+Cody Edwards - 2 Hours
+	Changed edit vehicles window to also take into account mandatory fields
+
 March 18 - 2014
-	Cody Edwards - 1 Hour
-		Fixed issues with calendar not working with the database
+Cody Edwards - 1 Hour
+	Fixed issues with calendar not working with the database
+
 March 19 -2014
-	Cody Edwards - 1.5 Hours
-		Added printing to the viewVehicle window
+Cody Edwards - 1.5 Hours
+	Added printing to the viewVehicle window
+
 March 20 - 2014
-	Darwin Froese - 6 Hours
-		* Refactored interacting with vehicles in database
-		for searching and sorting purposes
-		* Re-Implemented searching
-		* Implemented table sorting
-		* Refactored some strings from Lists to Maps
-		* Added individual Comparator classes for each vehicle
-		field to aid in sorting ArrayLists
-March 20 - 2014
-	Delroy Hiebert - 5 Hours
-		-Update integration tests
-			-More thorough and covers much more area
-		-Fixed bug - system did not update fuel economy from database
+Darwin Froese - 6 Hours
+	Refactored interacting with vehicles in database for searching and sorting purposes
+	Re-Implemented searching
+	Implemented table sorting
+	Refactored some strings from Lists to Maps
+	Added individual Comparator classes for each vehicle field to aid in sorting ArrayLists
+Delroy Hiebert - 5 Hours
+	Update integration tests - More thorough and covers much more area
+	Fixed bug - system did not update fuel economy from database
+
 March 21 - 2014
-	Darwin Froese - 1 Hour
-		* AccessVehicle.addVehicle modified to only insert
-		if the ID has not been used returns a boolean for
-		success/fail
-		* Fixed the database so all tests pass. Cannot
-		remove element from a list while iterating through
-		a list and changed UpdateKM to call UpdateVehicle
-		so that the update code is only written once
+Darwin Froese - 1 Hour
+	AccessVehicle.addVehicle modified to only insert if the ID has not been used returns a boolean for success/fail
+	* Fixed the database so all tests pass. Cannot remove element from a list while iterating through
+	a list and changed UpdateKM to call UpdateVehicle so that the update code is only written once
+
 March 22 - 2014
-	Cody Edwards - 1.5 Hours
-		Moved addServiceButton from main CMMS window to the editParts window. - not fully functional yet
+Cody Edwards - 1.5 Hours
+	Moved addServiceButton from main CMMS window to the editParts window. - not fully functional yet
+
 March 24 - 2014
-	Bryce Pfrimmer - 3 Hours
-		Refactoring - Created new tables to more efficiently persist the Parts and Service Items of a Vehicle
-		
-March 24 - 2014
-	Delroy Hiebert 2 - Hours
-		Started to figure out how atr acceptance testing works
-			-Started making basic changes to project
-March 24 - 2014
-	Cody Edwards - 2.5 Hours
-		Add service button should now work in the edit parts window
-		Fixed bug in dataAccessObject where it thought valid service items with kms service items were invalid
+Bryce Pfrimmer - 3 Hours
+	Re-factoring - Created new tables to more efficiently persist the Parts and Service Items of a Vehicle
+	Fixed duplicate Parts bug
+Delroy Hiebert - 2 Hours
+	Started to figure out how ATR acceptance testing works - Started making basic changes to project
+Cody Edwards - 2.5 Hours
+	Add service button should now work in the edit parts window
+	Fixed bug in dataAccessObject where it thought valid service items with km service items were invalid
 			
 March 25 - 2014
-	Team Meeting - 1.5 Hours
-		Discussed progress on user stories for iteration 3
-		Ensured everyone team member is on the same page before the iteration wraps up
-		Discussed team 'Retrospective Activity'
-		Goal: Be ready for submission by the 28th despite additional time given
-		
-March 25 - 2014
-	Delroy Hiebert - 3 Hours
-		-Began developing acceptance tests
-		-Continued learning how atr works - slow process
-March 25 - 2014
-	Cody Edwards- 2 Hours
-		Fixed bug that wouldn't let you add a service item to a part that already had a service item
-		Daily tasks now launches again on startup
-		CMMS is now fullscreen on startup
-		moved Quit button in CMMS to the bottom
+Team Meeting - 1.5 Hours
+	Discussed progress on user stories for iteration 3 - decided not to implement Category Views or Supply Lists for Maintenance
+	Ensured everyone team member is on the same page before the iteration wraps up
+	Discussed team 'Retrospective Activity'
+	Goal: Be ready for submission by the 28th despite additional time given
+	Discussed re-factoring issues that could be worked on.
+Delroy Hiebert - 3 Hours
+	Began developing acceptance tests
+	Continued learning how ATR works - slow process
+Cody Edwards- 2 Hours
+	Fixed bug that wouldn't let you add a service item to a part that already had a service item
+	Daily tasks now launches again on start-up
+	CMMS is now full-screen on start-up
+	moved Quit button in CMMS to the bottom
+Bryce Pfrimmer - 3 Hours
+	Small bug fixes with Cody
+	Changed the AddParts and AddServiceItems to immediately save to the DB
 		
 March 26 - 2014
-	Delroy Hiebert - 10 Hours
-		-Minor refactoring throughout project
-			-Changed some variable names to be standard throughout the project
-				-Mainly shell and display
-		-Completed acceptance tests for 5 major user stories
-			-Add, view, edit, update fuel economy, delete
-		-Started search, requires some work still
-		-Still need acceptance tests for a few other user stories
+Delroy Hiebert - 10 Hours
+	Minor re-factoring throughout project - Changed some variable names to be standard throughout the project
+	Completed acceptance tests for 5 major user stories - Add, view, edit, update fuel economy, delete
+	Started search, requires some work still
+	Still need acceptance tests for a few other user stories
 		
 March 27 - 2014
-	Cody Edwards - 2 Hours
-		Adding or editing vehicles doesn't let input anything that isn't between 1900-currentYear+2 and years are now in a drop down menu
-		Edit vehicle now displays that proper date
-		
-March 27 - 2014
-	Delroy Hiebert - 8 Hours
-		Typed up Retrospective Activity
-		Completed searching acceptance test
-			-Tried to interact with widget, ended up doing a bypass
-		Changed test .bat files to clear the database before running and restoring the database afterwards
-		Fixed minor issues with previous push (accidently eliminated 2 small pieces of code)
-		Ran tests multiple times, triple checked the system for handin readiness
-		Made a few minor last minute changes
-		All test batch files write to the same text file now
-		
+Cody Edwards - 2 Hours
+	Adding or editing vehicles doesn't let input anything that isn't between 1900-currentYear+2 and years are now in a drop down menu
+	Edit vehicle now displays that proper date
+Delroy Hiebert - 8 Hours
+	Typed up Retrospective Activity
+	Completed searching acceptance test - Tried to interact with widget, ended up doing a bypass
+	Changed test .bat files to clear the database before running and restoring the database afterwards
+	Fixed minor issues with previous push (accidentally eliminated 2 small pieces of code)
+	Ran tests multiple times, triple checked the system for hand-in readiness
+	Made a few minor last minute changes
+	All test batch files write to the same text file now
+Bryce Pfrimmer - 4 Hours
+	RE-FACTORING - moved ManFields table into the Vehicles database rather than maintaining a separate database for simply one table.
+	Checking program for functionality, manually testing, checking code commits for errors.
+	Disabled buttons in edit parts screen if a part was not selected.
+
+March 28, 2014
+Bryce Pfrimmer - 3 Hours
+	Format log, check project (make sure everything is in order for submission), & package up for submission
+	
+=======
+END OF ITERATION 2 SUMMARY:
+User Stories - Iteration 3
+1 - Completed - Batch Editing - 3 days
+2 - Completed - Printing - 4 days
+3 - Completed - Acceptance tests - 4 days
+
+Creating tests for the application - on going
+
+BUGS / ISSUES
+The clone vehicle capability currently does not display an error if the new ID entered is not unique. It does not add a vehicle with
+the non-unique ID but it doesn't let the user know that the clone failed.
+
+We decided not to implement two of our User Stories from this iteration.
+A) Supply list for maintenance - as maintenance personnel I want to have access to a list of supplies I need for maintenance - 4 days
+	- We underestimated the amount of effort required for this story. We still would want to implement this but it would be in another iteration.
+B) Category Views - as a user I want to be able to break down the list of vehicles into categorized views - 4 days
+	- We sidelined this as after implementing the search and organizing functionality of the main table we classified it as a "nice to have" feature.
+	The table can now be ordered by various fields so to have a category view that organized the vehicles by Car/Truck/etc. would have been repetitive.

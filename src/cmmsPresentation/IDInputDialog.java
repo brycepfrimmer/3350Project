@@ -20,7 +20,7 @@ public class IDInputDialog extends Dialog {
 	
 	public int open() {
 		Shell shell = new Shell(getParent());
-		shell.setText("Add Employee");
+		shell.setText("Clone Vehicle");
  
 		draw(shell); // Contents of Dialog
 		shell.pack();
@@ -40,7 +40,7 @@ public class IDInputDialog extends Dialog {
 		shell.setLayout(new GridLayout(2, true));
  
 		Label vehicleIDLabel = new Label(shell, SWT.HORIZONTAL | SWT.SHADOW_OUT);
-		vehicleIDLabel.setText("Vehicle ID:");
+		vehicleIDLabel.setText("New Vehicle ID:");
 		final Text vehicleIDText = new Text(shell, SWT.BORDER | SWT.LEFT);
  
 		final Button okButton = new Button(shell, SWT.NONE);
