@@ -419,10 +419,13 @@ March 27 - 2014
 		Edit vehicle now displays that proper date
 		
 March 27 - 2014
-	Delroy Hiebert - 6 Hours
+	Delroy Hiebert - 8 Hours
 		Typed up Retrospective Activity
 		Completed searching acceptance test
 			-Tried to interact with widget, ended up doing a bypass
 		Changed test .bat files to clear the database before running and restoring the database afterwards
 		Fixed minor issues with previous push (accidently eliminated 2 small pieces of code)
+		Ran tests multiple times, triple checked the system for handin readiness
+		Made a few minor last minute changes
+		All test batch files write to the same text file now
 		
