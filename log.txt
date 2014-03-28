@@ -365,6 +365,13 @@ March 24 - 2014
 	Delroy Hiebert 2 - Hours
 		Started to figure out how atr acceptance testing works
 			-Started making basic changes to project
+			
+March 25 - 2014
+	Team Meeting - 1.5 Hours
+		Discussed progress on user stories for iteration 3
+		Ensured everyone team member is on the same page before the iteration wraps up
+		Discussed team 'Retrospective Activity'
+		Goal: Be ready for submission by the 28th despite additional time given
 		
 March 25 - 2014
 	Delroy Hiebert - 3 Hours
