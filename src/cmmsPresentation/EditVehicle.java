@@ -1,6 +1,7 @@
 package cmmsPresentation;
 
 import java.sql.Date;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import org.eclipse.swt.widgets.DateTime;
@@ -20,9 +21,10 @@ import cmmsBusiness.AccessManFields;
 import cmmsBusiness.AccessVehicle;
 import cmmsObjects.ManFields;
 import cmmsObjects.Vehicle.Vehicle;
-
 import acceptanceTests.Register; 
 import acceptanceTests.EventLoop;
+
+import org.eclipse.swt.widgets.Combo;
 
 public class EditVehicle {
 
@@ -31,7 +33,7 @@ public class EditVehicle {
     private Text textType;
     private Text textManufacturer;
     private Text textModel;
-    private Text textYear;
+    private Combo comboYear;
     private Text textKms;
     private Text textKmsLS;
     private Text textLPN;
@@ -60,6 +62,7 @@ public class EditVehicle {
     private AccessVehicle accessVehicle;
     private ManFields manFields;
     private AccessManFields accessFields;
+    private int maxYear;
 
     /**
      * Open the window.
@@ -69,6 +72,7 @@ public class EditVehicle {
         Register.newWindow(this);
         accessFields = new AccessManFields();
         manFields = accessFields.getManFields();
+        maxYear = (Calendar.getInstance().get(Calendar.YEAR) + 2);
         createContents();
         currVehicle = v;
         FillFields();
@@ -92,7 +96,7 @@ public class EditVehicle {
         textType.setText(currVehicle.getType());
         textManufacturer.setText(currVehicle.getManufacturer());
         textModel.setText(currVehicle.getModel());
-        textYear.setText(Integer.toString(currVehicle.getYear()));
+        comboYear.setText(Integer.toString(currVehicle.getYear()));
         textKms.setText(Integer.toString(currVehicle.getKmDriven()));
         textKmsLS.setText(Integer.toString(currVehicle.getKmLastServiced()));
         btnRoadworthy.setSelection(currVehicle.isRoadWorthy());
@@ -149,8 +153,12 @@ public class EditVehicle {
         lblYear.setBounds(10, 134, 55, 15);
         lblYear.setText("Year");
 
-        textYear = new Text(shell, SWT.BORDER);
-        textYear.setBounds(98, 128, 76, 21);
+        comboYear = new Combo(shell, SWT.BORDER);
+        comboYear.setBounds(98, 128, 76, 21);
+        for(int i = maxYear, j = 0; j <= (maxYear - 1900); i--, j++) {
+        	comboYear.add(Integer.toString(i));
+        }
+        comboYear.setTextLimit(4);
 
         Label lblKilometers = new Label(shell, SWT.NONE);
         lblKilometers.setBounds(10, 163, 55, 15);
@@ -326,7 +334,7 @@ public class EditVehicle {
         currVehicle.setType(textType.getText());
         currVehicle.setManufacturer(textManufacturer.getText());
         currVehicle.setModel(textModel.getText());
-        currVehicle.setYear(new Integer(textYear.getText()));
+        currVehicle.setYear(new Integer(comboYear.getText()));
         currVehicle.setRoadWorthy(btnRoadworthy.getSelection());
         currVehicle.setLicensePlate(textLPN.getText());
         currVehicle.setOperational(btnOperational.getSelection());
@@ -449,7 +457,7 @@ public class EditVehicle {
     private boolean checkYear() {
     	boolean isValid = false;
         boolean mand = manFields.getYear();
-        String input = textYear.getText();
+        String input = comboYear.getText();
         if(mand){
         	isValid = input.matches("[0-9]+") && input.matches("[0-9]*");
         }
@@ -461,6 +469,10 @@ public class EditVehicle {
         }
         else if (!isValid) {
             lblYearWarning.setText("Years can only be represented by a number");
+        } 
+        else if(Integer.parseInt(input) > maxYear || Integer.parseInt(input) < 1900) {
+        	lblYearWarning.setText("Only years between 1900 and " + maxYear + " are allowed");
+        	isValid = false;
         } else {
             lblYearWarning.setText("");
         }

@@ -20,10 +20,13 @@ import cmmsObjects.ManFields;
 import cmmsObjects.Vehicle.Vehicle;
 
 import java.sql.Date;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import acceptanceTests.Register; 
 import acceptanceTests.EventLoop;
+
+import org.eclipse.swt.widgets.Combo;
 
 public class AddVehicle {
 
@@ -36,7 +39,7 @@ public class AddVehicle {
     private Text textType;
     private Text textManufacturer;
     private Text textModel;
-    private Text textYear;
+    private Combo comboYear;
     private Text textKms;
     private Text textKmsLS;
     private Text textLPN;
@@ -61,6 +64,7 @@ public class AddVehicle {
     
     private AccessVehicle accessVehicle;
     private AccessManFields accessFields;
+    private int maxYear;
 
     /**
      * Launch the application.
@@ -84,6 +88,7 @@ public class AddVehicle {
         Register.newWindow(this);
         accessFields = new AccessManFields();
         manFields = accessFields.getManFields();
+        maxYear = (Calendar.getInstance().get(Calendar.YEAR) + 2);
         createContents();
         shell.open();
         shell.layout();
@@ -141,8 +146,12 @@ public class AddVehicle {
         lblYear.setBounds(10, 134, 55, 15);
         lblYear.setText("Year");
 
-        textYear = new Text(shell, SWT.BORDER);
-        textYear.setBounds(98, 128, 76, 21);
+        comboYear = new Combo(shell, SWT.BORDER);
+        comboYear.setBounds(98, 128, 76, 21);
+        for(int i = maxYear, j = 0; j <= (maxYear - 1900); i--, j++) {
+        	comboYear.add(Integer.toString(i));
+        }
+        comboYear.setTextLimit(4);
 
         Label lblKilometers = new Label(shell, SWT.NONE);
         lblKilometers.setBounds(10, 163, 55, 15);
@@ -221,7 +230,7 @@ public class AddVehicle {
             @Override
             public void widgetSelected(SelectionEvent e) {
                 boolean good = checkFields();
-                String year = textYear.getText();
+                String year = comboYear.getText();
                 String kms = textKms.getText();
                 String kmsLS = textKmsLS.getText();
                 GregorianCalendar date = new GregorianCalendar();
@@ -458,7 +467,7 @@ public class AddVehicle {
     private boolean checkYear() {
         boolean isValid = false;
         boolean mand = manFields.getYear();
-        String input = textYear.getText();
+        String input = comboYear.getText();
         if(mand){
         	isValid = input.matches("[0-9]+") && input.matches("[0-9]*");
         }
@@ -470,7 +479,12 @@ public class AddVehicle {
         }
         else if (!isValid) {
             lblYearWarning.setText("Years can only be represented by a number");
-        } else {
+        } 
+        else if(Integer.parseInt(input) > maxYear || Integer.parseInt(input) < 1900) {
+        	lblYearWarning.setText("Only years between 1900 and " + maxYear + " are allowed");
+        	isValid = false;
+        }
+        else {
             lblYearWarning.setText("");
         }
         lblYearWarning.pack();
