@@ -101,6 +101,7 @@ public class CMMS{
 
     private static Button clearButton;
     private static Button addVehicleButton;
+    private static Button cloneVehicleButton;
     private static Button removeVehicleButton;
     private static Button editVehicleButton;
     private static Button viewVehicleButton;
@@ -126,6 +127,7 @@ public class CMMS{
     private static TableColumn vehicleOperationalCol;
     private static TableColumn vehicleRoadWorthyCol;
     private static TableColumn vehicleYearCol;
+    private static TableColumn sortingColumn;
     
     private static AccessVehicle accessVehicle;
     
@@ -563,12 +565,14 @@ public class CMMS{
         	@Override
         	public void widgetSelected(SelectionEvent e) {
         		if(dataTable.getSelectionCount() == 0) {
+        			cloneVehicleButton.setEnabled(false);
         			removeVehicleButton.setEnabled(false);
 	        		editVehicleButton.setEnabled(false);
 	        		viewVehicleButton.setEnabled(false);
 	        		updateKmsButton.setEnabled(false);
         		}
         		else {
+        			cloneVehicleButton.setEnabled(true);
 	        		removeVehicleButton.setEnabled(true);
 	        		editVehicleButton.setEnabled(true);
 	        		viewVehicleButton.setEnabled(true);
@@ -605,6 +609,45 @@ public class CMMS{
         gridData.verticalAlignment = SWT.CENTER;
         addVehicleButton.setLayoutData(gridData);
         addVehicleButton.setText("Add Vehicle");
+        
+        cloneVehicleButton = new Button(shell, SWT.NONE);
+        cloneVehicleButton.addSelectionListener(new SelectionAdapter() {
+            @Override
+            public void widgetSelected(SelectionEvent e) {
+                int selected = dataTable.getSelectionCount();
+                if (selected != 1) {
+                    // Display no selection error
+                    MessageBox mb = new MessageBox(shell, SWT.ICON_ERROR
+                            | SWT.OK);
+                    mb.setMessage("Error: You can only clone one vehicle");
+                    mb.setText("Cloning Vehicle");
+                    mb.open();
+                }
+                else {
+                	IDInputDialog idInput = new IDInputDialog(shell);
+                	int id = idInput.open();
+                	
+                	if (id != -1) {
+	                	Vehicle v = accessVehicle.getVehicle(dataTable.getItem(
+	                			dataTable.getSelectionIndex()).getText(
+	                    		VehicleFields.ID.ordinal()));
+	                	
+	                	Vehicle clonedVehicle = new Vehicle(v);
+	                	clonedVehicle.setID(new Integer(id).toString());
+	                	
+	                	AccessVehicle av = new AccessVehicle();	                	
+	                	av.addVehicle(clonedVehicle);
+	                	UpdateList();
+                	}
+                }
+            }
+        });
+        gridData = new GridData();
+        gridData.grabExcessVerticalSpace = false;
+        gridData.horizontalAlignment = SWT.FILL;
+        gridData.verticalAlignment = SWT.TOP;
+        cloneVehicleButton.setLayoutData(gridData);
+        cloneVehicleButton.setText("Clone Vehicle");
         
         removeVehicleButton = new Button(shell, SWT.NONE);
         removeVehicleButton.addSelectionListener(new SelectionAdapter() {
@@ -668,8 +711,8 @@ public class CMMS{
                 int selected = dataTable.getSelectionCount();
                 if (selected == 0) {
                     // Display no selection error
-                    MessageBox mb = new MessageBox(shell, SWT.ICON_ERROR
-                            | SWT.OK);
+                    MessageBox mb = new MessageBox(shell, SWT.ICON_WARNING
+                            | SWT.YES | SWT.NO);
                     mb.setMessage("Error: You have not selected a Vehicle to edit.");
                     mb.setText("Editing Vehicles");
                     mb.open();
@@ -689,11 +732,29 @@ public class CMMS{
                     UpdateList();
                 } else {
                     // Display multiple selection error
-                    MessageBox mb = new MessageBox(shell, SWT.ICON_ERROR
-                            | SWT.OK);
-                    mb.setMessage("Error: You have selected too many Vehicles to edit.");
+                    MessageBox mb = new MessageBox(shell, SWT.ICON_WARNING
+                            | SWT.YES | SWT.NO);
+                    mb.setMessage("Warning: You are about to edit multiple Vehicles.\nDo you wish to continue?.");
                     mb.setText("Editing Vehicles");
-                    mb.open();
+                    
+                    int response = mb.open();
+
+                    if (response == SWT.YES) {
+                        // Get all the selected vehicles
+                    	ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
+                    	 int[] selections = dataTable.getSelectionIndices();
+                         for (int i = 0; i < selected; i++) {
+                         	vehicles.add(accessVehicle.getVehicle((dataTable.getItem(
+                         			selections[i]).getText(0))));
+                         }
+
+                         // Open edit window with multiple vehicles
+                         EditVehicle editWindow = new EditVehicle();
+                         editWindow.open(vehicles);
+                         
+                         // Update list with the new Vehicles
+                         UpdateList();
+                    }
                 }
             }
         });
@@ -826,8 +887,21 @@ public class CMMS{
 
         if (dataTable.getItemCount() >= 1)
             dataTable.remove(0, dataTable.getItemCount() - 1);
-
+        
         dataTable.setRedraw(true);
+        
+        // Sort Data before updating the lists
+        String sortString = null;
+        @SuppressWarnings("rawtypes")
+		Iterator it = columnHeaders.entrySet().iterator();
+        while (it.hasNext()) {
+        	@SuppressWarnings("unchecked")
+			Map.Entry<String, String> pairs= (Entry<String, String>)it.next();
+        	if (pairs.getValue().equals(sortingColumn.getText()))
+        		sortString = pairs.getKey();
+        }
+		accessVehicle.sortList(sortString);
+		// Done Sorting
         
         for (Vehicle v : list) {
         	if (v != null) {
@@ -877,21 +951,11 @@ public class CMMS{
     
     private static void CreateColumns() {
     	Listener sortListener = new Listener() {
-    		String sortString = null;
 			@Override
 			public void handleEvent(Event event) {
 				TableColumn col = (TableColumn)event.widget;
+				sortingColumn = col;
 				
-				@SuppressWarnings("rawtypes")
-    			Iterator it = columnHeaders.entrySet().iterator();
-    	        while (it.hasNext()) {
-    	        	@SuppressWarnings("unchecked")
-    				Map.Entry<String, String> pairs= (Entry<String, String>)it.next();
-    	        	if (pairs.getValue().equals(col.getText()))
-    	        		sortString = pairs.getKey();
-    	        }
-				
-				accessVehicle.sortList(sortString);
 				UpdateList();
 			}
     	};
@@ -993,6 +1057,9 @@ public class CMMS{
         vehicleFuelEconCol.setWidth(DEFAULT_TABLE_COL_WIDTH);
         vehicleFuelEconCol.setMoveable(true);
         vehicleFuelEconCol.setResizable(true);
+        
+        // Sets default sorting column
+        sortingColumn = vehicleIDCol;
         
     	// avoids null pointer exceptions in packing
     	FillColArray();
