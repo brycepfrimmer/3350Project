@@ -334,6 +334,18 @@ As of right now our initial plan hasn't changed at all. This might be different 
 March 14 - 2014
 	Darwin Froese - 2 Hours
 		Finished Implementing HSQLDB
+March 14 - 2014
+	Cody Edwards - 1.5 Hours
+		Changed all date objects to gregorian calendar objects
+March 16 - 2014
+	Cody Edwards - 2 Hours
+		Changed edit vehicles window to also take into account mandatory fields
+March 18 - 2014
+	Cody Edwards - 1 Hour
+		Fixed issues with calendar not working with the database
+March 19 -2014
+	Cody Edwards - 1.5 Hours
+		Added printing to the viewVehicle window
 March 20 - 2014
 	Darwin Froese - 6 Hours
 		* Refactored interacting with vehicles in database
@@ -357,6 +369,9 @@ March 21 - 2014
 		remove element from a list while iterating through
 		a list and changed UpdateKM to call UpdateVehicle
 		so that the update code is only written once
+March 22 - 2014
+	Cody Edwards - 1.5 Hours
+		Moved addServiceButton from main CMMS window to the editParts window. - not fully functional yet
 March 24 - 2014
 	Bryce Pfrimmer - 3 Hours
 		Refactoring - Created new tables to more efficiently persist the Parts and Service Items of a Vehicle
@@ -365,6 +380,10 @@ March 24 - 2014
 	Delroy Hiebert 2 - Hours
 		Started to figure out how atr acceptance testing works
 			-Started making basic changes to project
+March 24 - 2014
+	Cody Edwards - 2.5 Hours
+		Add service button should now work in the edit parts window
+		Fixed bug in dataAccessObject where it thought valid service items with kms service items were invalid
 			
 March 25 - 2014
 	Team Meeting - 1.5 Hours
@@ -377,8 +396,14 @@ March 25 - 2014
 	Delroy Hiebert - 3 Hours
 		-Began developing acceptance tests
 		-Continued learning how atr works - slow process
+March 25 - 2014
+	Cody Edwards- 2 Hours
+		Fixed bug that wouldn't let you add a service item to a part that already had a service item
+		Daily tasks now launches again on startup
+		CMMS is now fullscreen on startup
+		moved Quit button in CMMS to the bottom
 		
-March 27 - 2014
+March 26 - 2014
 	Delroy Hiebert - 10 Hours
 		-Minor refactoring throughout project
 			-Changed some variable names to be standard throughout the project
@@ -387,4 +412,17 @@ March 27 - 2014
 			-Add, view, edit, update fuel economy, delete
 		-Started search, requires some work still
 		-Still need acceptance tests for a few other user stories
+		
+March 27 - 2014
+	Cody Edwards - 2 Hours
+		Adding or editing vehicles doesn't let input anything that isn't between 1900-currentYear+2 and years are now in a drop down menu
+		Edit vehicle now displays that proper date
+		
+March 27 - 2014
+	Delroy Hiebert - 6 Hours
+		Typed up Retrospective Activity
+		Completed searching acceptance test
+			-Tried to interact with widget, ended up doing a bypass
+		Changed test .bat files to clear the database before running and restoring the database afterwards
+		Fixed minor issues with previous push (accidently eliminated 2 small pieces of code)
 		
