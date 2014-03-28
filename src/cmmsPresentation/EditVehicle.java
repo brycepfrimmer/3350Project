@@ -104,7 +104,8 @@ public class EditVehicle {
         textInsPolNum.setText(currVehicle.getInsurance().getPolicyNum());
         textInsType.setText(currVehicle.getInsurance().getType());
         btnOperational.setSelection(currVehicle.isOperational());
-        dateTime.setData(currVehicle.getDateLastServiced());
+        dateTime.setDate(currVehicle.getDateLastServiced().get(Calendar.YEAR), 
+        		currVehicle.getDateLastServiced().get(Calendar.MONTH), currVehicle.getDateLastServiced().get(Calendar.DATE));
     }
 
     /**

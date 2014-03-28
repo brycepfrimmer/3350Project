@@ -414,6 +414,7 @@ March 27 - 2014
 		-Still need acceptance tests for a few other user stories
 		
 March 27 - 2014
-	Cody Edwards - 1.5 Hours
+	Cody Edwards - 2 Hours
 		Adding or editing vehicles doesn't let input anything that isn't between 1900-currentYear+2 and years are now in a drop down menu
+		Edit vehicle now displays that proper date
 		
