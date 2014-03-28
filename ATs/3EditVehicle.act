@@ -10,7 +10,7 @@ Click					CMMS								editVehicleButton
 Set						EditVehicle							textType			"truck"
 Set						EditVehicle							textManufacturer	"Dodge"
 Set						EditVehicle							textModel			"Ram"
-Set						EditVehicle							textYear			"2014"
+SetCombo				EditVehicle							comboYear			2014
 Set						EditVehicle							textLPN				"GSL 269"
 Set						EditVehicle							textInsPolNum		"Ins6969"
 Set						EditVehicle							textInsType			"Storage"
