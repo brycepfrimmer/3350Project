@@ -414,8 +414,9 @@ March 26 - 2014
 		-Still need acceptance tests for a few other user stories
 		
 March 27 - 2014
-	Cody Edwards - 1.5 Hours
+	Cody Edwards - 2 Hours
 		Adding or editing vehicles doesn't let input anything that isn't between 1900-currentYear+2 and years are now in a drop down menu
+		Edit vehicle now displays that proper date
 		
 March 27 - 2014
 	Delroy Hiebert - 6 Hours
@@ -424,5 +425,4 @@ March 27 - 2014
 			-Tried to interact with widget, ended up doing a bypass
 		Changed test .bat files to clear the database before running and restoring the database afterwards
 		Fixed minor issues with previous push (accidently eliminated 2 small pieces of code)
-		
 		
