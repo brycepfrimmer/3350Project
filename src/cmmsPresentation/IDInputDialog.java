@@ -8,8 +8,11 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Dialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+
+import cmmsBusiness.AccessVehicle;
  
 public class IDInputDialog extends Dialog {
 	private int vehicleID = -1;
@@ -50,7 +53,18 @@ public class IDInputDialog extends Dialog {
 				if (vehicleIDText.getText().matches("[0-9a-zA-Z]+"))
 					vehicleID = new Integer(vehicleIDText.getText());
 				
-				shell.dispose();
+				AccessVehicle av = new AccessVehicle();
+				if (!av.CheckID(vehicleIDText.getText())) {
+					shell.dispose();
+				}
+				else {
+	                // Display no selection error
+	                MessageBox mb = new MessageBox(shell, SWT.ICON_ERROR
+	                        | SWT.OK);
+	                mb.setMessage("Error: The ID you entered is invalid");
+	                mb.setText("Invalid ID");
+	                mb.open();
+				}
 			} 
 		});
 		okButton.setText("OK");

@@ -65,6 +65,17 @@ public class AccessVehicle {
 		return insert;
 	}
 	
+	public boolean CheckID(String ID) {
+		boolean used = false;
+		
+		for (Vehicle vIter : dbVehicles) {
+			if (vIter.getID().equals(ID))
+				used = true;
+		}
+		
+		return used;
+	}
+	
 	public void sortList(String field) {
 		if (field.equals(VehicleFields.ID.toString()))
 			Collections.sort(dbVehicles, new VehicleCompareID());

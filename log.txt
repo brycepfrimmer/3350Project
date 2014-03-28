@@ -442,6 +442,9 @@ Bryce Pfrimmer - 4 Hours
 	RE-FACTORING - moved ManFields table into the Vehicles database rather than maintaining a separate database for simply one table.
 	Checking program for functionality, manually testing, checking code commits for errors.
 	Disabled buttons in edit parts screen if a part was not selected.
+Darwin Froese - 2 Hours
+	Cloning Vehicles
+	Database is always sorted
 
 March 28, 2014
 Bryce Pfrimmer - 3 Hours
