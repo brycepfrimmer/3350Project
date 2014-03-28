@@ -84,6 +84,25 @@ public class Vehicle {
         this.year = year;
         setPartsList();
     }
+    // Copy Constructor
+    public Vehicle(Vehicle v) {
+        // Initially set everything to null
+        this.ID = v.getID();
+        this.type = v.getType();
+        this.manufacturer = v.getManufacturer();
+        this.model = v.getModel();
+        this.kmDriven = v.getKmDriven();
+        this.kmLastServiced = v.getKmLastServiced();
+        this.setDateLastServiced(v.getDateLastServiced());
+        this.partsList = v.getPartsList();
+        insurance = v.getInsurance();
+        this.fuelEcon = v.getFuelEcon();
+        this.roadWorthy = v.isRoadWorthy();
+        this.licensePlate = v.getLicensePlate();
+        this.operational = v.isOperational();
+        this.year = v.getYear();
+        setPartsList();
+    }// End vehicle()
 
     public String[] ToStrings() {
         String[] vehicle = new String[14];

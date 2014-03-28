@@ -2,6 +2,7 @@ package cmmsPresentation;
 
 import java.sql.Date;
 import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 import org.eclipse.swt.widgets.DateTime;
@@ -63,11 +64,15 @@ public class EditVehicle {
     private ManFields manFields;
     private AccessManFields accessFields;
     private int maxYear;
+    
+    private boolean multiEdit = false;
+    private ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
 
     /**
      * Open the window.
      */
     public void open(Vehicle v) {
+    	multiEdit = false;
         Display display = Display.getDefault();
         Register.newWindow(this);
         accessFields = new AccessManFields();
@@ -87,7 +92,34 @@ public class EditVehicle {
 	        }
         }
     }
+    
+    public void open(ArrayList<Vehicle> vehicles) {
+    	multiEdit = true;
+        Display display = Display.getDefault();
+        Register.newWindow(this);
+        this.vehicles = vehicles;
+        createContents();
+        MultiFilter();
+        shell.open();
+        shell.layout();
+        if( EventLoop.isEnabled() )
+        {
+	        while (!shell.isDisposed()) {
+	            if (!display.readAndDispatch()) {
+	                display.sleep();
+	            }
+	        }
+        }
+    }
 
+    private void MultiFilter() {
+    	textVehicleID.setEnabled(false);
+    	textLPN.setEnabled(false);
+    	textInsPolNum.setEnabled(false);
+    	textInsType.setEnabled(false);
+    	dateTime.setEnabled(false);
+    }
+    
     // Fill all the controls with the fields from the
     // vehicle we were passed in
     private void FillFields() {
@@ -233,16 +265,21 @@ public class EditVehicle {
         btnUpdate = new Button(shell, SWT.NONE);
         btnUpdate.addSelectionListener(new SelectionAdapter() {
             @Override
-            public void widgetSelected(SelectionEvent e) {
-                boolean good = checkFields();
-                if (good) {
-                    SetFields();
+            public void widgetSelected(SelectionEvent e) {                
+            	if (multiEdit) {
+            		SetMultiFields();
+            	}
+            	else {
+            		boolean good = checkFields();
+                    if (good) {
+                    	SetFields();
+                    } else {
+                    	// display message explaining to user what is wrong with
+                    	// their input
+                    }
+            	}
 
-                    shell.close();
-                } else {
-                    // display message explaining to user what is wrong with
-                    // their input
-                }
+                shell.close();
             }
         });
         btnUpdate.setBounds(98, 412, 75, 25);
@@ -347,18 +384,61 @@ public class EditVehicle {
         accessVehicle.updateVehicle( currVehicle );   
     }
 
+    private void SetMultiFields() {
+    	accessVehicle = new AccessVehicle();  
+    	
+    	for (Vehicle v : vehicles) {
+	    	if (!textType.getText().equals("")) {
+	    		if (textType.getText().matches("[0-9a-zA-Z.*\\s+.*]+"))
+	    			v.setType(textType.getText());
+	    	}
+	    	
+	    	if (!textManufacturer.getText().equals("")) {
+	    		if (textManufacturer.getText().matches("[0-9a-zA-Z.*\\s+.*]+"))
+	    			v.setManufacturer(textManufacturer.getText());
+	    	}
+	    	
+	    	if (!textModel.getText().equals("")) {
+	    		if (textModel.getText().matches("[0-9a-zA-Z.*\\s+.*]+"))
+	    			v.setModel(textModel.getText());
+	    	}
+	    	
+	    	if (!comboYear.getText().equals("")) {
+	    		if (comboYear.getText().matches("[0-9]+") && comboYear.getText().matches("[0-9]*"))
+	    			v.setYear(new Integer(comboYear.getText()));
+	    	}
+	    	
+	    	v.setRoadWorthy(btnRoadworthy.getSelection());
+	    	v.setOperational(btnOperational.getSelection());
+	    	
+	    	if (!textKms.getText().equals("")) {
+	    		if (textKms.getText().matches("[0-9]+") && textKms.getText().matches("[0-9]*"))
+	    			v.setKmDriven(new Integer(textKms.getText()));
+	    	}
+	    	
+	    	if (!textKmsLS.getText().equals("")) {
+	    		if(textKmsLS.getText().matches("[0-9]+") && textKmsLS.getText().matches("[0-9]*"))
+	    			v.setKmLastServiced(new Integer(textKmsLS.getText()));
+	    	}
+	    	
+	        accessVehicle.updateVehicle(v);
+    	}
+    }
+    
     private boolean checkFields() {
         // perform checks on all the fields to make sure they are good
         boolean fieldsOkay = false;
+        
         fieldsOkay = checkID() && checkType() && checkManufacturer()
                 && checkModel() && checkYear() && checkLPN()
                 && checkInsPolNum() && checkInsType() && checkKms()
                 && checkKmsLS();
+        
         return fieldsOkay;
     }
 
     private boolean checkID() {
-        boolean isValid = false;
+    	boolean isValid = false;
         boolean mand = manFields.getId();
         accessVehicle = new AccessVehicle();
         String input = textVehicleID.getText();
@@ -482,7 +562,7 @@ public class EditVehicle {
     }
 
     private boolean checkLPN() {
-    	boolean isValid = false;
+    	boolean isValid = false;    	
         String input = textLPN.getText();
         isValid = input.matches("[0-9a-zA-Z.*\\s+.*]+")
                 && !input.trim().isEmpty();
