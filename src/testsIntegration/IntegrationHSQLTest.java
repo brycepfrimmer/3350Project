@@ -105,11 +105,6 @@ public class IntegrationHSQLTest extends TestCase
 		assertNotNull(testVehicle);
 		testVehicle = accessVehicle.getVehicle( testVehicle.getID() );
 		assertNotNull( testVehicle );
-		
-		testVehicle = vehicles.get(1);
-		assertNotNull(testVehicle);
-		testVehicle = accessVehicle.getVehicle( testVehicle.getID() );
-		assertNotNull( testVehicle );
 	}
 	
 	@Test
