@@ -449,6 +449,9 @@ Darwin Froese - 2 Hours
 March 28, 2014
 Bryce Pfrimmer - 3 Hours
 	Format log, check project (make sure everything is in order for submission), & package up for submission
+Cody Edwards - 1/2 Hour
+	Fixed bug where you could set date last serviced to later than the current date
+	Fixed bug where you could set kilometers last serviced to larger than the current km
 	
 =======
 END OF ITERATION 3 SUMMARY:

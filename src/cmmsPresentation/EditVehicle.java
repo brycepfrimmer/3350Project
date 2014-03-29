@@ -54,6 +54,7 @@ public class EditVehicle {
     private Label lblLPNWarning;
     private Label lblInsPolNumWarning;
     private Label lblInsTypeWarning;
+    private Label lblDateTimeWarning;
 
     private Vehicle currVehicle;
     private Button btnEditPartsList;
@@ -273,13 +274,12 @@ public class EditVehicle {
             		boolean good = checkFields();
                     if (good) {
                     	SetFields();
+                    	shell.close();
                     } else {
                     	// display message explaining to user what is wrong with
                     	// their input
                     }
             	}
-
-                shell.close();
             }
         });
         btnUpdate.setBounds(98, 412, 75, 25);
@@ -358,6 +358,11 @@ public class EditVehicle {
         Label lblNewLabel = new Label(shell, SWT.WRAP);
         lblNewLabel.setBounds(10, 236, 76, 46);
         lblNewLabel.setText("Date Last Serviced");
+        
+        lblDateTimeWarning = new Label(shell, SWT.NONE);
+        lblDateTimeWarning.setForeground(SWTResourceManager
+                .getColor(SWT.COLOR_RED));
+        lblDateTimeWarning.setBounds(189, 236, 388, 24);
     }
 
     private void SetFields() {
@@ -432,9 +437,39 @@ public class EditVehicle {
         fieldsOkay = checkID() && checkType() && checkManufacturer()
                 && checkModel() && checkYear() && checkLPN()
                 && checkInsPolNum() && checkInsType() && checkKms()
-                && checkKmsLS();
+                && checkKmsLS() && checkDateTime();
         
         return fieldsOkay;
+    }
+    
+    private boolean checkDateTime() {
+        boolean isValid = false;
+        boolean mand = manFields.getDateLastServiced();
+        String input = dateTime.getYear() + "-" + (dateTime.getMonth()+1) + "-" + dateTime.getDay();
+        lblDateTimeWarning.setText("");
+        if(mand){
+            try {
+                @SuppressWarnings("unused")
+                Date temp = Date.valueOf(input);
+                isValid = true;
+            } catch (IllegalArgumentException e) {
+                lblDateTimeWarning.setText("Date Last Serviced is of improper format.");
+            }
+            if(Date.valueOf(input).getTime() > Calendar.getInstance().getTimeInMillis()) {
+            	lblDateTimeWarning.setText("Date Last Serviced can't be later than the current date");
+            	isValid = false;
+            }
+        } 
+        else {
+            isValid = true;
+        }
+        
+        if (mand && input == ""){
+            lblDateTimeWarning.setText("Date Last Serviced is a required field.");
+        }
+        
+        lblDateTimeWarning.pack();
+        return isValid;
     }
 
     private boolean checkID() {
@@ -667,7 +702,12 @@ public class EditVehicle {
         else if (!isValid) {
             lblKmsLSWarning
                     .setText("Kilometers last serviced can only be represented by numbers");
-        } else {
+        }
+        else if (Integer.parseInt(input) > Integer.parseInt(textKms.getText())) {
+        	lblKmsLSWarning.setText("Kilometers last serviced cannot be larger than Kilometers driven");
+        	isValid = false;
+        }
+        else {
             lblKmsLSWarning.setText("");
         }
         lblKmsLSWarning.pack();

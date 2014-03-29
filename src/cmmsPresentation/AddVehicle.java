@@ -355,7 +355,12 @@ public class AddVehicle {
             } catch (IllegalArgumentException e) {
                 lblDateTimeWarning.setText("Date Last Serviced is of improper format.");
             }
-        } else {
+            if(Date.valueOf(input).getTime() > Calendar.getInstance().getTimeInMillis()) {
+            	lblDateTimeWarning.setText("Date Last Serviced can't be later than the current date");
+            	isValid = false;
+            }
+        } 
+        else {
             isValid = true;
         }
         
@@ -597,7 +602,12 @@ public class AddVehicle {
         else if (!isValid) {
             lblKmsLSWarning
                     .setText("Kilometers last serviced can only be represented by numbers");
-        } else {
+        }
+        else if (Integer.parseInt(input) > Integer.parseInt(textKms.getText())) {
+        	lblKmsLSWarning.setText("Kilometers last serviced cannot be larger than Kilometers driven");
+        	isValid = false;
+        }
+        else {
             lblKmsLSWarning.setText("");
         }
         lblKmsLSWarning.pack();
