@@ -3,11 +3,13 @@ package cmmsBusiness;
 import java.sql.SQLException;
 
 import cmmsObjects.ManFields;
+import cmmsPersistence.DataAccessManFields;
 import cmmsPersistence.DataAccessObject;
+import cmmsPersistence.StubDataAccessObject;
 
-public class AccessManFields {
+public class AccessManFields implements DataAccessManFields {
 	
-	private DataAccessObject accessObject;
+	private DataAccessManFields accessObject;
 	
 	public AccessManFields() {
 	    accessObject = new DataAccessObject("Vehicles");
@@ -18,7 +20,14 @@ public class AccessManFields {
             e.printStackTrace();
         }
 	}
+	
+	public AccessManFields( DataAccessManFields object )
+	{
+		accessObject = (StubDataAccessObject) object;
+		accessObject.open();
+	}
 
+	@Override
 	public ManFields getManFields() {
 	    ManFields temp = null;
 	    try {
@@ -29,6 +38,7 @@ public class AccessManFields {
 	    return temp;
 	}
 	
+	@Override
 	public void updateManFields(ManFields fields) {
 	    try {
             accessObject.updateManFields(fields);
@@ -37,4 +47,9 @@ public class AccessManFields {
         }
 	}
 
+	@Override
+	public void open() {
+		// TODO Auto-generated method stub
+		
+	}
 }//End AccessManFields Class

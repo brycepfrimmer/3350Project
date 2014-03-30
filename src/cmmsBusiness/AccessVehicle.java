@@ -22,17 +22,34 @@ import cmmsObjects.Vehicle.VehicleCompareRoadworthy;
 import cmmsObjects.Vehicle.VehicleCompareType;
 import cmmsObjects.Vehicle.VehicleCompareYear;
 import cmmsObjects.Vehicle.VehicleFields;
+import cmmsPersistence.DataAccessVehicle;
 import cmmsPersistence.DataAccessObject;
+import cmmsPersistence.StubDataAccessObject;
 
 public class AccessVehicle {
 	private static ArrayList<Vehicle> dbVehicles = new ArrayList<Vehicle>();
-	private DataAccessObject dataAccess;
+	private DataAccessVehicle dataAccess;
 	
 	public AccessVehicle()
 	{
 		dataAccess = new DataAccessObject("Vehicles");
 		dataAccess.open();
 		
+		if (dbVehicles.size() == 0) {
+			try {
+				Vehicle[] vList = dataAccess.getAllVehicles();
+				for (Vehicle v : vList)
+					dbVehicles.add(v);
+			} catch (SQLException e) {
+				
+			}
+		}
+	}
+	
+	public AccessVehicle(DataAccessVehicle object)
+	{
+		this.dataAccess = (StubDataAccessObject) object;
+		dataAccess.open();
 		if (dbVehicles.size() == 0) {
 			try {
 				Vehicle[] vList = dataAccess.getAllVehicles();
@@ -232,8 +249,9 @@ public class AccessVehicle {
 		return vehicles;
 	}
 	
-	public String removeVehicle(String ID)
+	public boolean removeVehicle(String ID)
 	{
+		boolean success = false;
 		int id = -1;
 		try {
 			dataAccess.removeVehicle(ID);
@@ -247,10 +265,11 @@ public class AccessVehicle {
 			e.printStackTrace();
 		}
 		
-		if (id >= 0)
+		if (id >= 0){
 			 dbVehicles.remove(id);
+			 success = true;}
 		
-		return null;
+		return success;
 	}
 
 	public String setPartsList(String id, ArrayList<Part> list) {

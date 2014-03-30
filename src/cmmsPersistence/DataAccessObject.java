@@ -15,7 +15,7 @@ import cmmsObjects.Vehicle.Vehicle;
 import cmmsObjects.Vehicle.VehicleFields;
 import cmmsObjects.Part;
 
-public class DataAccessObject/*DataAccess*/ {
+public class DataAccessObject implements DataAccessVehicle, DataAccessManFields {
 	String dbName;
 	private Connection conn;
 	
@@ -233,6 +233,8 @@ public class DataAccessObject/*DataAccess*/ {
 		return v;
 	}
 	
+	
+	@Override
 	public Vehicle[] getAllVehicles() throws SQLException {
 		Statement query = conn.createStatement();
 		ResultSet searchResult = query.executeQuery("SELECT * FROM Vehicles");
@@ -334,7 +336,8 @@ public class DataAccessObject/*DataAccess*/ {
         return retList;
     }
 
-    public void addVehicle(Vehicle vehicle) throws SQLException {
+    public boolean addVehicle(Vehicle vehicle) throws SQLException {
+    	boolean success = true;
 		Statement add = null;
 		add = conn.createStatement();
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -371,10 +374,12 @@ public class DataAccessObject/*DataAccess*/ {
 		
 		if (i == -1) {
 			System.out.println("Error inserting into Vehicles Table.");
+			success = false;
 		}
 		
 		addParts(vehicle);
-	}
+		return success;
+    }
 
 	private void addParts(Vehicle vehicle) throws SQLException {
 	    Statement add = conn.createStatement();

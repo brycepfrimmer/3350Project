@@ -39,6 +39,7 @@ private static String dbName = cmmsApplication.Main.dbName;
 	
 	@After
 	public void tearDown() throws Exception {
+		access.removeVehicle("1234");
 		Services.closeDataAccess();
 		System.out.println("Finished test AccessManFields");
 	}
@@ -56,7 +57,7 @@ private static String dbName = cmmsApplication.Main.dbName;
 		vehicle.setID("ABC");
 		access.updateVehicle( vehicle );
 		vehicle = access.getVehicle("ABC");
-		assertTrue( access.getVehicle("1234") == null );
+		assertNull( access.getVehicle("1234") );
 		assertTrue( access.getVehicle("ABC") != null );
 		assertTrue( access.getVehicle("ABC").getID() == "ABC" );		
 	}

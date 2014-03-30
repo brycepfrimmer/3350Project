@@ -68,16 +68,6 @@ public class IntegrationHSQLTest extends TestCase
 		System.out.println("Finished Integration test of HSQLDB");
 	}
 	
-	/*
-	 * Test Add Part!!
-	 * Test set parts list
-	 * Test get parts list
-	 * Test remove part
-	 * Test add service event
-	 * Test get single vehicle
-	 * Test type search (Manufacturer, Saturn)
-	 */
-	
 	@Test
 	public void testGetSingle()
 	{
