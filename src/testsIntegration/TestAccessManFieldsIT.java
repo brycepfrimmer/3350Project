@@ -1,16 +1,12 @@
 package testsIntegration;
 
-import static org.junit.Assert.*;
 import junit.framework.TestCase;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import cmmsBusiness.AccessManFields;
-import cmmsBusiness.AccessVehicle;
 import cmmsObjects.ManFields;
-import cmmsObjects.Vehicle.Vehicle;
 import cmmsPersistence.StubDataAccessObject;
 
 public class TestAccessManFieldsIT extends TestCase{

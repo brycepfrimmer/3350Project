@@ -1110,14 +1110,16 @@ public class CMMS{
         }
     }
     
-    private static void testRemove()
+    @SuppressWarnings("unused")
+	private static void testRemove()
     {
     	accessVehicle.removeVehicle(dataTable.getItem(0).getText(0));
     	UpdateList();
     }
     
     
-    private static void testSearch()
+    @SuppressWarnings("unused")
+	private static void testSearch()
     {
 			Vehicle[] accessReturn = accessVehicle.getVehicles("ID", "ABC");
         
