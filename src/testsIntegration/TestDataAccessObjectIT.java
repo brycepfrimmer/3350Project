@@ -1,6 +1,6 @@
 package testsIntegration;
 
-import static org.junit.Assert.*;
+import junit.framework.TestCase;
 
 import org.junit.After;
 import org.junit.Before;
@@ -9,13 +9,13 @@ import org.junit.Test;
 import cmmsObjects.Vehicle.Vehicle;
 import cmmsPersistence.DataAccessObject;
 
-public class TestDataAccessObjectIT {
+public class TestDataAccessObjectIT extends TestCase {
 	DataAccessObject data;
 	Vehicle vehicle;
 
 	@Before
 	public void setUp() throws Exception {
-		data = new DataAccessObject( "StubVehicles" );
+		data = new DataAccessObject( "Stub" );
 		data.open();
 		vehicle  = new Vehicle();
 	}

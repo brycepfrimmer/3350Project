@@ -1,6 +1,6 @@
-copy OriginalStub.script Vehicles\Stub.script
+copy OriginalStub.script Stub\Stub.script
 
-copy OriginalStub.properties Vehicles\Stub.properties
+copy OriginalStub.propertiesStub\Stub.properties
 
 erase Vehicles\Stub.log
 

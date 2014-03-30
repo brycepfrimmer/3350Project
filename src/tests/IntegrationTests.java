@@ -3,6 +3,7 @@ package tests;
 import testsIntegration.IntegrationHSQLTest;
 import testsIntegration.TestAccessManFieldsIT;
 import testsIntegration.TestAccessVehicleIT;
+import testsIntegration.TestDataAccessObjectIT;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
@@ -15,6 +16,7 @@ public class IntegrationTests
         suite = new TestSuite("Integration tests");
         suite.addTestSuite(TestAccessVehicleIT.class);
         suite.addTestSuite(TestAccessManFieldsIT.class);
+        suite.addTestSuite(TestDataAccessObjectIT.class);
         suite.addTestSuite(IntegrationHSQLTest.class);
         return suite;
     }
