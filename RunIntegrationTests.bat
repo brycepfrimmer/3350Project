@@ -14,6 +14,7 @@ java junit.textui.TestRunner echo tests.IntegrationTests >> AllTests.txt
 cd databases\
 
 Call RestoreDB.bat
+Call RestoreStubDB.bat
 
 cd ..
 
