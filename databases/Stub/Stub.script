@@ -6,4 +6,3 @@ SET WRITE_DELAY 20
 SET SCHEMA PUBLIC
 INSERT INTO VEHICLES VALUES('ABC','SUV','Escalade','ESV Platinum','2008','105000','104000','2013-10-25','true','EPH124','fjgidosap0q098gf90a','Farm','true','0.0')
 INSERT INTO VEHICLES VALUES('XYZ','SUV','Escalade','ESV Platinum','2008','105000','104000','2013-10-25','true','EPH124','fjgidosap0q098gf90a','Farm','true','0.0')
-INSERT INTO VEHICLES VALUES('1234',' ',' ',' ','0','0','0','2014-03-29','false',' ',' ',' ','false','0.0')
