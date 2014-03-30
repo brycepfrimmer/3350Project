@@ -237,7 +237,7 @@ public class DataAccessObject implements DataAccessVehicle, DataAccessManFields 
 	@Override
 	public Vehicle[] getAllVehicles() throws SQLException {
 		Statement query = conn.createStatement();
-		ResultSet searchResult = query.executeQuery("SELECT * FROM Vehicles");
+		ResultSet searchResult = query.executeQuery("SELECT * FROM " + dbName);
 		
 		Object[] objects = ProcessVehicleSearch(searchResult);
 		Vehicle[] vehicles = new Vehicle[objects.length];		
