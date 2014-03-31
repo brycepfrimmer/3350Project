@@ -5,3 +5,5 @@ Batch Editing - as a user I should be able to edit fields that are common to mul
 Printing - as a user I need to be able to print information and details about a vehicle - 4 days
 
 Acceptance Tests - as a customer I want the system to be tested from end-to-end to ensure reliability - 4 days
+
+For more details on what User Stories were implemented for Iteration 3 as well as our Developer Task List please see "log.txt".
