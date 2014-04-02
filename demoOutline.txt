@@ -1,0 +1,35 @@
+Demonstration - SCRIPT
+
+Daily Tasks List
+	- what needs to be done today in terms of parts that need to be serviced
+	- DeLorean and KITT3 that needs attention
+	- NOTE: button on main screen to check daily tasks at any time
+CLOSE
+
+Search & Remove Vehicle
+	- Sold KITT5 to Scooby-Doo & the gang
+	- want to remove it, can't find it so we will search
+SEARCH FOR KITT5
+SELECT IT AND REMOVE
+
+Adding a new Vehicle
+	- new-found profits recently purchased Mr. Wayne's Batmobile
+ENTER INFO FOR BATMOBILE
+	- Mistake in the addition (date last serviced was off by a month)
+	- Show error checking - Type is blank MANDATORY FIELD
+	- Mention ManFields and the ability to select them
+Editing that Vehicle
+	- adjust the month
+	- Add part - Missile launcher
+		- Add a service Item to that part - Reload every 10km
+
+Clone
+	- Got a second Batmobile due to our continued success
+	- as long as we specify a new ID we can clone any vehicle
+
+Update KM's driven - Chased Joker half-way across Gotham
+
+---------------------------------------------------------------------------------
+
+Batch Editing
+	- time permitting, mention if not
