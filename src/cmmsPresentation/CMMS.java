@@ -935,6 +935,7 @@ public class CMMS{
     }
     
     private static void PackColumns() {
+    	dataTable.setRedraw(false);
     	UpdateVisibility();
     	
         for (int i = 0; i < TABLE_COL_COUNT; i++) {
@@ -947,6 +948,8 @@ public class CMMS{
         		tableCols[i].setResizable(false);
         	}
         }
+        
+        dataTable.setRedraw(true);
     }
     
     private static void CreateColumns() {
